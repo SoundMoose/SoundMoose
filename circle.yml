@@ -1,0 +1,14 @@
+machine:
+dependencies:
+  pre:
+    - npm install -g reactorcore/problemify
+    - git clone git@github.com:reactorcore/utils.scripts.git ../scripts
+test:
+  override:
+    - echo "skipping tests..."
+deployment:
+  master:
+    branch: master
+    commands:
+      # - ../scripts/circle-ci/deploy/checkout-latest-tag.sh
+      - ../scripts/circle-ci/deploy/publish-to-hackreactor.sh

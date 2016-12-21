@@ -1,0 +1,11 @@
+export BRANCH=course.thesis
+
+if [ -d ".git" ]; then
+  echo "Error: This folder has already been initialized as a git repository."
+  exit 1
+fi
+
+git init
+git add .
+git commit -m "First commit"
+git branch -m $BRANCH
