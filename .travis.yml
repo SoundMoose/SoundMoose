@@ -1,0 +1,10 @@
+# For Reference: https://docs.travis-ci.com/user/languages/javascript-with-nodejs
+
+language: node_js
+node_js:
+  - "6"
+  - "5.11"
+  - '0.8'
+  - '0.10'
+
+# Default Test Script: npm test, customize how to run in package.json
