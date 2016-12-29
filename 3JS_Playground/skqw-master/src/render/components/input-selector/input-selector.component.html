@@ -1,0 +1,9 @@
+<div class="control">
+    <div class="select">
+        <select (change)="inputChanged($event)">
+            <option *ngFor="let input of inputArray"
+                    [value]="input.id"
+                    [selected]="input.id === selectedId">{{ input.name }}</option>
+        </select>
+    </div>
+</div>

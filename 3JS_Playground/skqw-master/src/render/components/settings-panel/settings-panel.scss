@@ -1,0 +1,72 @@
+.panel-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: block;
+  width: 500px;
+  max-width: 90vw;
+  transform: translateX(450px);
+  z-index: 10;
+  transition: transform 0.2s, opacity 0.2s;
+  background-color: rgba(50, 50, 50, 0);
+  opacity: 0;
+
+  &.visible {
+    opacity: 1;
+  }
+
+  &.expanded {
+    background-color: rgba(10, 10, 10, 0.6);
+    border-left: 1px solid #252525;
+    transform: translateX(0px);
+    opacity: 1;
+  }
+
+  > .toggle-icon {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    svg {
+      fill: rgba(200, 200, 200, 0.3);
+      transition: fill 0.3s;
+      &:hover {
+        fill: rgba(200, 200, 200, 0.6);
+      }
+    }
+  }
+
+  .panel-body {
+    margin-left: 50px;
+    padding: 50px 20px 20px 10px;
+    position: relative;
+    overflow-y: scroll;
+    height: 100%;
+  }
+}
+
+ul.shortcuts {
+  list-style-type: none;
+  margin: 0;
+
+  li {
+    margin-top: 8px;
+  }
+
+  code {
+    color: #333;
+    padding: 2px 6px;
+    background-color: rgba(150, 150, 150, 0.8);
+    border-radius: 2px;
+    border: 1px solid rgb(100, 100, 100);
+    font-weight: bold;
+  }
+
+  .key {
+    margin-left: 15px;
+  }
+}
+
+.about {
+  text-align: center;
+}
