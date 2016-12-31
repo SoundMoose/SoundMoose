@@ -7,6 +7,17 @@
     <h4>MEDIA CONTROLS</h4>
 
     <div class="player-controls" *ngIf="track">
+
+
+      <!-- As a simple html5 audio element -->
+      <audio
+        src="../../assets/sounds/Broke_For_Free_-_01_-_Night_Owl.mp3"
+        preload="auto"
+        controls
+      ></audio>
+
+
+      <!-- inserting buttons as divs, calling functions, or emiting changes -->
       <div>
         <icon-button
           icon="left-arrow"
