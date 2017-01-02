@@ -42,7 +42,7 @@ import { AppState } from './app.service';
       </span>
       |
       <span>
-        <a [routerLink]=" ['./player-controls'] ">
+        <a [routerLink]=" ['./player'] ">
           Player-Controls
         </a>
       </span>

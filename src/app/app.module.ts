@@ -16,6 +16,7 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 import { HomeComponent } from './home';
 import { AboutComponent } from './about';
+import { PlayerControlsComponent } from './player';
 import { NoContentComponent } from './no-content';
 import { XLarge } from './home/x-large';
 
@@ -41,6 +42,7 @@ type StoreType = {
     AboutComponent,
     HomeComponent,
     NoContentComponent,
+    PlayerControlsComponent,
     XLarge
   ],
   imports: [ // import Angular's modules
@@ -93,4 +95,3 @@ export class AppModule {
   }
 
 }
-
