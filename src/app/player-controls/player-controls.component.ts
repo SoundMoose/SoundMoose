@@ -8,7 +8,7 @@ import { XLarge } from './x-large';
   // The selector is what angular internally uses
   // for `document.querySelectorAll(selector)` in our index.html
   // where, in this case, selector is the string 'home'
-  selector: 'player-controls',  // <home></home>
+  selector: 'player-controls',  // <player-controls></player-controls>
   // We need to tell Angular's Dependency Injection which providers are in our app.
   providers: [
     Title
