@@ -34,10 +34,10 @@ const APP_PROVIDERS = [
     TopTracksComponent
   ],
   imports: [
-    StoreModule.provideStore({ tracks : tracks }),
     BrowserModule,
     StoreModule.provideStore({
       player: Player,
+      tracks: tracks
     }),
     HttpModule
   ],
