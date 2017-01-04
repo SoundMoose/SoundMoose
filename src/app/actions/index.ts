@@ -1,9 +1,13 @@
+
 import { TrackActions } from './track';
+import { PlayerActions } from './player';
 
 export {
-  TrackActions
+  TrackActions,
+  PlayerActions
 };
 
 export default [
-  TrackActions
+  TrackActions,
+  PlayerActions
 ];

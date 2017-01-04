@@ -5,12 +5,18 @@ import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
 import tracks from './reducers/tracks';
 import { SoundCloudService } from './services/soundcloud.service';
+
+// import { Player, Song } from './reducers/';
+import Player from './reducers/player.reducer';
+import Track from './reducers/track.reducer';
+
 /*
  * Platform and Environment providers/directives/pipes
  */
 import { ENV_PROVIDERS } from './environment';
 // App is our top level component
 import { AppComponent } from './app.component';
+
 import { TopTracksComponent } from './components/top-tracks/top-tracks.component';
 
 // Application wide providers
@@ -30,6 +36,9 @@ const APP_PROVIDERS = [
   imports: [
     StoreModule.provideStore({ tracks : tracks }),
     BrowserModule,
+    StoreModule.provideStore({
+      player: Player,
+    }),
     HttpModule
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
@@ -41,4 +50,3 @@ export class AppModule {
   constructor() {}
 
 }
-

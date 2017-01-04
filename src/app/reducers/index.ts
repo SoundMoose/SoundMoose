@@ -3,11 +3,11 @@ import { compose } from '@ngrx/core/compose';
 import { combineReducers } from '@ngrx/store';
 // import { storeLogger } from 'ngrx-store-logger';
 
-import trackListReducer, * as fromTrackList from './track-list';
+import trackListReducer, * as fromTrackList from './tracks';
 import trackReducer, * as fromTrack from './track';
 
 export interface AppState {
-  tracks: fromTrackList.TrackListState;
+  // tracks: fromTrackList.TracksState;
   track: fromTrack.TrackState;
 }
 
