@@ -23,7 +23,7 @@ export class SongActions {
   static GET_SONG = '[Song] Get Song';
   getSong(id): Action {
     return {
-      type: SongActions.GET_SONG;
+      type: SongActions.GET_SONG,
       payload: id
     };
   }

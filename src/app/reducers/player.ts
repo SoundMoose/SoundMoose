@@ -1,19 +1,17 @@
 import { Action } from '@ngrx/store';
 
-import { Song } from '../models';
+import { Player } from '../models';
 import { SongActions } from '../actions';
 
-export type SongState = Song;
+export type PlayerState = Player;
 
-const initialState: SongState = {
-  id: 0,
-  name: '',
-  artist: '',
-  imgUrl: '',
-  streamUrl: ''
+const initialState: PlayerState = {
+  isPlaying: false,
+  trackId: 0,
+  volume: 5,
 };
 
-export default function (state = initialState, action: Action): SongState {
+export default function (state = initialState, action: Action): PlayerState {
   switch (action.type) {
     case SongActions.GET_SONG_SUCCESS: {
       return action.payload;
