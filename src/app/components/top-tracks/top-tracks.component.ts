@@ -7,10 +7,12 @@ import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'top-tracks',
-  templateUrl: 'top-tracks.component.html'
+  templateUrl: 'top-tracks.component.html',
+  styleUrls: ['top-tracks.component.css']
 })
 export class TopTracksComponent implements OnInit {
   topTracks: Observable<{}>;
+  buttonToggled: boolean = false;
 
   constructor(private store: Store<AppStore>, private soundCloudService: SoundCloudService) {
   }
@@ -18,5 +20,9 @@ export class TopTracksComponent implements OnInit {
   ngOnInit() {
     this.soundCloudService.loadTopTracks();
     this.topTracks = this.store.select('tracks');
+  }
+
+  toggleButton() {
+    this.buttonToggled = !this.buttonToggled;
   }
 }
