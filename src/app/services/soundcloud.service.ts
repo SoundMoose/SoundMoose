@@ -25,7 +25,7 @@ export class SoundCloudService {
             id: item.track.id,
             title: item.track.title,
             artist: (item.track.publisher_metadata && item.track.publisher_metadata.artist) ? item.track.publisher_metadata.artist : item.track.user.username,
-            imgUrl: item.track.artwork_url,
+            imgUrl: item.track.artwork_url ? item.track.artwork_url.replace('large.jpg', 't200x200.jpg') : 'http://i.imgur.com/yxZ3RuI.jpg',
             streamUrl: 'http://api.soundcloud.com/tracks/' + item.track.id + '/stream?client_id=' + soundcloudClientId,
             duration: item.track.full_duration
           }
