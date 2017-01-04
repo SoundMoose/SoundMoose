@@ -3,9 +3,9 @@ import {Http} from '@angular/http';
 import {Store} from '@ngrx/store';
 import {AppStore} from '../models/appstore.model';
 import 'rxjs/add/operator/map';
-import {Track} from '../models/track';
-import {soundcloudClientId} from '../config/keys';
-import {TrackActions} from '../actions/track';
+import {Track} from '../models/track.model';
+import {soundcloudClientId} from '../config/superSecretKeys';
+import {TrackActions} from '../actions/track.actions';
 
 @Injectable()
 export class SoundCloudService {
