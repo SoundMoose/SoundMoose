@@ -16,8 +16,8 @@ export class SoundCloudService {
   }
 
   loadTopTracks() {
- //   const topTracksUrl = 'https://api-v2.soundcloud.com/charts?kind=top&genre=soundcloud%3Agenres%3Aall-music&client_id=' + soundcloudClientId + '&limit=24&offset=0&linked_partitioning=1&app_version=1482339819';
-    const topTracksUrl = 'http://localhost:3333/toptracks';
+    const topTracksUrl = 'http://localhost:4004/charts?kind=top&genre=soundcloud%3Agenres%3Aall-music&client_id=' + soundcloudClientId + '&limit=50&offset=0&linked_partitioning=1&app_version=1482339819';
+ //   const topTracksUrl = 'http://localhost:3333/toptracks';
     return this._http.get(topTracksUrl)
       .map(res => {
         return res.json().collection.map(item => {
