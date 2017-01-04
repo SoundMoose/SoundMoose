@@ -1,9 +1,9 @@
-import { SongActions } from './song';
+import { TrackActions } from './track';
 
 export {
-  SongActions
+  TrackActions
 };
 
 export default [
-  SongActions
+  TrackActions
 ];
