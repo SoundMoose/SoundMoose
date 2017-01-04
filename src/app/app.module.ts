@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
 import { SoundCloudService } from './services/soundcloud.service';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import player from './reducers/player.reducer';
 import tracks from './reducers/tracks.reducer';
@@ -39,6 +40,7 @@ const APP_PROVIDERS = [
       player: player,
       tracks: tracks
     }),
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
     HttpModule
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection

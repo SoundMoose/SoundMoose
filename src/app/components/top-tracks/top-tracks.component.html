@@ -2,6 +2,7 @@
   <div id="top-tracks" class="ui six column grid"  *ngIf="topTracks">
     <div *ngFor="let topTrack of topTracks | async" class="column">
       <img class="album-art" src="{{topTrack.imgUrl}}">
+      <i class="icon play" style="transform: scale(4);"></i>
       <div class="track-name">{{topTrack.title}}</div>
       <div class="artist-name">{{topTrack.artist}}</div>
     </div>
