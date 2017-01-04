@@ -18,6 +18,10 @@ import { AppComponent } from './app.component';
 
 import { TopTracksComponent } from './components/top-tracks/top-tracks.component';
 import { PlayerComponent } from './components/player/player.component';
+import { PlayerControlsComponent } from './components/player/player-controls/player-controls.component';
+import { VolumeControlComponent } from './components/player/volume-control/volume-control.component';
+import { TrackInfoComponent } from './components/player/track-info/track-info.component';
+import { TrackProgressComponent } from './components/player/track-progress/track-progress.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -32,7 +36,11 @@ const APP_PROVIDERS = [
   declarations: [
     AppComponent,
     TopTracksComponent,
-    PlayerComponent
+    PlayerComponent,
+    PlayerControlsComponent,
+    VolumeControlComponent,
+    TrackInfoComponent,
+    TrackProgressComponent
   ],
   imports: [
     BrowserModule,
