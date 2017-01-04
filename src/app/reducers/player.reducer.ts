@@ -13,9 +13,9 @@ const initialState: PlayerState = {
 
 export default function (state = initialState, action: Action): PlayerState {
   switch (action.type) {
-    case PlayerActions.PLAYING_SONG: {
-      return state.set('isPlaying', true) as PlayerState;
-    }
+    // case PlayerActions.PLAYING_SONG: {
+    //   return state.set('isPlaying', true) as PlayerState;
+    // }
 
     default: {
       return state;

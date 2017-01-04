@@ -5,12 +5,10 @@ import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
 import tracks from './reducers/tracks';
 import { SoundCloudService } from './services/soundcloud.service';
-/*
- * NGRX
- */
-import { StoreModule } from '@ngrx/store';
 
-import { Player, Song } from './reducers';
+// import { Player, Song } from './reducers/';
+import Player from './reducers/player.reducer';
+import Track from './reducers/track.reducer';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -39,7 +37,7 @@ const APP_PROVIDERS = [
     StoreModule.provideStore({ tracks : tracks }),
     BrowserModule,
     StoreModule.provideStore({
-      player: playerReducer,
+      player: Player,
     }),
     HttpModule
   ],
