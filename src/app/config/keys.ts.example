@@ -1,0 +1,1 @@
+export const soundcloudClientId = 'YOUR_CLIENT_ID_HERE';
