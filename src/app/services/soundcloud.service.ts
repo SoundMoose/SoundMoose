@@ -4,7 +4,7 @@ import {Store} from '@ngrx/store';
 import {AppStore} from '../models/appstore.model';
 import 'rxjs/add/operator/map';
 import {Track} from '../models/track';
-import {soundcloudClientId} from '../config/keys';
+import {soundcloudClientId} from '../config/superSecretKeys';
 import {TrackActions} from '../actions/track';
 
 @Injectable()

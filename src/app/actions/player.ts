@@ -22,17 +22,13 @@ export class PlayerActions {
     };
   }
 
-  static VOLUME_UP = '[Player] Volume Up';
-  volumeUp(): Action {
+  static VOLUME_CHANGE = '[Player] Volume Up';
+  volumeChange(volume: number): Action {
     return {
-      type: PlayerActions.VOLUME_UP,
-    };
-  }
-
-  static VOLUME_DOWN = '[Player] Volume Down';
-  volumeDown(): Action {
-    return {
-      type: PlayerActions.VOLUME_DOWN,
+      type: PlayerActions.VOLUME_CHANGE,
+      payload: {
+        volume
+      }
     };
   }
 
