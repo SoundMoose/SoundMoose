@@ -1,9 +1,12 @@
 import { SongActions } from './song';
+import { PlayerActions } from './player';
 
 export {
-  SongActions
+  SongActions,
+  PlayerActions
 };
 
 export default [
-  SongActions
+  SongActions,
+  PlayerActions
 ];

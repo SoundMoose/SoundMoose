@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import { Player } from '../models';
-import { SongActions } from '../actions';
+import { PlayerActions } from '../actions';
 
 export type PlayerState = Player;
 
@@ -13,11 +13,9 @@ const initialState: PlayerState = {
 
 export default function (state = initialState, action: Action): PlayerState {
   switch (action.type) {
-    case SongActions.GET_SONG_SUCCESS: {
-      return action.payload;
+    case PlayerActions.PLAYING_SONG: {
+      return state.set('isPlaying', true) as PlayerState;
     }
-
-    // ..
 
     default: {
       return state;
