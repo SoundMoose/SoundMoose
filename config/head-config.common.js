@@ -35,7 +35,10 @@ module.exports = {
     { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/assets/icon/favicon-16x16.png' },
 
     /** <link> tags for a Web App Manifest **/
-    { rel: 'manifest', href: '/assets/manifest.json' }
+    { rel: 'manifest', href: '/assets/manifest.json' },
+
+    { rel: 'stylesheet', type: 'text/css', href: '/assets/semantic-ui/semantic.min.css'},
+    { rel: 'stylesheet', type: 'text/css', href: '/assets/css/styles.css'}
   ],
   meta: [
     { name: 'msapplication-TileColor', content: '#00bcd4' },
