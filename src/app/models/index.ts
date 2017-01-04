@@ -1,12 +1,3 @@
-import Song from './song';
-import Player from './player';
-
-export {
-  Song,
-  Player
-};
-
-// export default [
-//   Song,
-//   Player
-// ];
+export * from './track.model';
+export * from './appstore.model';
+export * from './player.model';
