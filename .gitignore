@@ -83,3 +83,4 @@ Thumbs.db
 # IDE #
 .idea/
 *.swp
+src/app/config/keys.ts
