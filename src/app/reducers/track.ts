@@ -1,11 +1,11 @@
 import { Action } from '@ngrx/store';
 
-import { Song } from '../models';
-import { SongActions } from '../actions';
+import { Track } from '../models';
+import { TrackActions } from '../actions';
 
-export type SongState = Song;
+export type TrackState = Track;
 
-const initialState: SongState = {
+const initialState: TrackState = {
   id: 0,
   name: '',
   artist: '',
@@ -15,7 +15,7 @@ const initialState: SongState = {
 
 export default function (state = initialState, action: Action): HeroState {
   switch (action.type) {
-    case SongActions.GET_SONG_SUCCESS: {
+    case TrackActions.GET_TRACK_SUCCESS: {
       return action.payload;
     }
 
