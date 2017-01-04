@@ -3,12 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
-import tracks from './reducers/tracks';
 import { SoundCloudService } from './services/soundcloud.service';
 
-// import { Player, Song } from './reducers/';
-import Player from './reducers/player.reducer';
-import Track from './reducers/track.reducer';
+import player from './reducers/player.reducer';
+import tracks from './reducers/tracks.reducer';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -18,6 +16,7 @@ import { ENV_PROVIDERS } from './environment';
 import { AppComponent } from './app.component';
 
 import { TopTracksComponent } from './components/top-tracks/top-tracks.component';
+import { PlayerComponent } from './components/player/player.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -31,12 +30,13 @@ const APP_PROVIDERS = [
   bootstrap: [ AppComponent ],
   declarations: [
     AppComponent,
-    TopTracksComponent
+    TopTracksComponent,
+    PlayerComponent
   ],
   imports: [
     BrowserModule,
     StoreModule.provideStore({
-      player: Player,
+      player: player,
       tracks: tracks
     }),
     HttpModule

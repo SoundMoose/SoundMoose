@@ -1,9 +1,8 @@
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { Track } from '../models';
-import { TrackActions } from '../actions';
-import * as _ from 'lodash';
+import { Track } from '../models/track.model';
+import { TrackActions } from '../actions/track.actions';
 
 export type TracksState = Track[];
 

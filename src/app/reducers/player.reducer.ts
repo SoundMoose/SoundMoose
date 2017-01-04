@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
-import { Player } from '../models';
-import { PlayerActions } from '../actions';
+import { Player } from '../models/player.model';
+import { PlayerActions } from '../actions/player.actions';
 
 export type PlayerState = Player;
 

@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 
-
-
-
-// define actions for play/pause/song_end/volume_up/volume_down
-
 export class PlayerActions {
 
   static PLAYING_SONG = '[Player] Playing Song';

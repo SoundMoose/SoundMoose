@@ -1,11 +1,10 @@
 import { Action } from '@ngrx/store';
 
-import { Track } from '../models';
-import { TrackActions } from '../actions';
+import { Track } from '../models/track.model';
+import { TrackActions } from '../actions/track.actions';
 
-export * from './player.reducer';
-export * from './tracks.reducer';
-
+// export * from './player.reducer';
+// export * from './tracks.reducer';
 
 export type TrackState = Track;
 
