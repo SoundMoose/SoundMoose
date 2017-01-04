@@ -83,3 +83,5 @@ Thumbs.db
 # IDE #
 .idea/
 *.swp
+
+keys.ts
