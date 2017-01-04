@@ -1,3 +1,1 @@
-export const keys = {
-  soundcloudClientId = '76796f79392f9398288cdac3fe3391c0'
-}
+export const soundcloudClientId = '76796f79392f9398288cdac3fe3391c0';
