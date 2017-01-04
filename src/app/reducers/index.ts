@@ -3,16 +3,16 @@ import { compose } from '@ngrx/core/compose';
 import { combineReducers } from '@ngrx/store';
 // import { storeLogger } from 'ngrx-store-logger';
 
-import songListReducer, * as fromSongList from './song-list';
-import songReducer, * as fromSong from './song';
+import trackListReducer, * as fromTrackList from './track-list';
+import trackReducer, * as fromTrack from './track';
 
 export interface AppState {
-  songs: fromSongList.SongListState;
-  song: fromSong.SongState;
+  tracks: fromTrackList.TrackListState;
+  track: fromTrack.TrackState;
 }
 
 // export default compose(storeLogger(), combineReducers)({
 export default compose(combineReducers)({
-  songs: songListReducer,
-  song: songReducer
+  tracks: trackListReducer,
+  track: trackReducer
 });
