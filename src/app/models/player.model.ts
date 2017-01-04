@@ -1,5 +1,5 @@
 export interface Player {
   isPlaying: boolean;
-  trackId: number;
+  currentTrackId: number;
   volume: number;
 }

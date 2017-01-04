@@ -7,7 +7,7 @@ export type PlayerState = Player;
 
 const initialState: PlayerState = {
   isPlaying: false,
-  trackId: 0,
+  currentTrackId: 0,
   volume: 5,
 };
 
