@@ -11,6 +11,17 @@
 
 <i (click)="jumpToNext()" class="step forward icon"></i>
 
-<i (click)="toggleRepeat()" class="retweet icon"></i>
+<i (click)="toggleRepeat()"
+  [ngClass]="{
+    yellow: repeatTrack,
+    retweet: true,
+    icon: true
+  }"
+></i>
 
-<i (click)="toggleShuffle()" class="random icon"></i>
+<i (click)="toggleShuffle()"
+  [ngClass]="{
+    yellow: shuffleTracks,
+    random: true,
+    icon: true
+  }"></i>
