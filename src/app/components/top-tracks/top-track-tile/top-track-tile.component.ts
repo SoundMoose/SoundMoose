@@ -17,10 +17,13 @@ export class TopTrackTileComponent {
   topTrack: Track;
 
   currentlyPlaying$: Observable<boolean>;
+  selected$: Observable<boolean>;
 
   constructor(private trackActions: TrackActions, private store$: Store<AppStore>) {
     this.currentlyPlaying$ = this.store$.select('player')
       .map(playerStatus => playerStatus.isPlaying && playerStatus.currentTrack.id === this.topTrack.id);
+    this.selected$ = this.store$.select('player')
+      .map(playerStatus => playerStatus.currentTrack.id === this.topTrack.id);
   }
 
   clickHandler() {

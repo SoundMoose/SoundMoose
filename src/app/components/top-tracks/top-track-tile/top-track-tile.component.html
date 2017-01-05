@@ -1,5 +1,9 @@
 <div
-  class="track-tile"
+  [ngClass]="{
+    'track-tile': true,
+    hover: !(currentlyPlaying$ | async),
+    selected: (selected$ | async) && (currentlyPlaying$ | async)
+  }"
   (click)="clickHandler()"
 >
   <img class="album-art" src="{{topTrack.imgUrl}}">
