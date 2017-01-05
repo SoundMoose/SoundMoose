@@ -6,7 +6,7 @@
 
   - __Product Owner__: Stefan Ruijsenaars
   - __Scrum Master__: Howard Xue
-  - __Development Team Members__: Doug Vaughn, Calvin Holloway
+  - __Full Stack Engineers__: Doug Vaughn, Calvin Holloway
 
 ## Table of Contents
 
@@ -25,26 +25,14 @@
 ## Requirements
 
 - Node 4.6.x
-- Postgresql ****** INSERT VERSION HERE *******
-- WebGL   **** HOW TO DESCRIBE THIS AS A REQUIREMENT? *****
-- etc
-
-## Development
 
 ### Installing Dependencies
 
 From within the root directory:
 
 ```sh
-sudo npm install -g ******* TO BE COMPLETED ********
 npm install
-bower install
 ```
-
-### Roadmap    ****** LINK TO GITHUB ISSUES PAGE HERE *****
-
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
-
 
 ## Contributing
 
@@ -52,18 +40,15 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## Learning Resources
 
-
 ### Angular 2
 
 [EggHead Web Series: Angular 2](https://egghead.io/courses/introduction-to-reactive-programming)
-
 
 ### RxJS
 
 [EggHead Web Series: Introduction to Reactive Programming](https://egghead.io/technologies/angular2)
 
 [André Staltz (@andrestaltz): You will learn RxJS at ng-europe 2016](https://www.youtube.com/watch?v=uQ1zhJHclvs)
-
 
 ### TypeScript
 Great introduction:
