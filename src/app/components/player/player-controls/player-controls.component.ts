@@ -30,8 +30,16 @@ export class PlayerControlsComponent {
     this.tracks$.subscribe(tracksList => this.tracksList = tracksList);
   }
 
-  getCurrentTrackIndex() {
-    return this.tracksList.reduce((a, b, i) => a ? a : b.id === this.currentTrackId ? i : null, null);
+  getCurrentTrackIndex(): number {
+    return this.tracksList.reduce((acc, cur, index) => {
+      if (acc !== null) {
+        return acc;
+      } else if (cur.id === this.currentTrackId) {
+        return index;
+      } else {
+        return null;
+      }
+    }, null);
   }
 
   toggleRepeat() {
@@ -43,7 +51,16 @@ export class PlayerControlsComponent {
   }
 
   jumpToPrevious() {
-    this.store$.dispatch(this.playerActions.jumpToPrevious());
+    // Find the index of the current track
+    let currentTrackIndex: number = this.getCurrentTrackIndex();
+    console.log(currentTrackIndex);
+    // Check to make sure that we are not at the end of list
+    if (currentTrackIndex !== 0) {
+      this.store$.dispatch(this.playerActions.jumpToPrevious(this.tracksList[currentTrackIndex - 1]));
+    } else {
+      // Stop playing because you've reach the beginning of your playlist and there is nowhere to go.
+      this.store$.dispatch(this.playerActions.jumpToPrevious(this.tracksList[this.tracksList.length - 1]));
+    }
   }
 
   jumpToNext() {
@@ -53,10 +70,8 @@ export class PlayerControlsComponent {
     // Check to make sure that we are not at the end of list
     if (currentTrackIndex < this.tracksList.length - 1) {
       this.store$.dispatch(this.playerActions.jumpToNext(this.tracksList[currentTrackIndex + 1]));
-    } else if (true) {  // Change the conditional here to check for repeat once implemented.
-      this.store$.dispatch(this.playerActions.jumpToNext(this.tracksList[0]));
     } else {
-      // Stop playing because you've reach the end of your playlist and don't have repeat on.
+      this.store$.dispatch(this.playerActions.jumpToNext(this.tracksList[0]));
     }
   }
 }

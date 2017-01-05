@@ -49,9 +49,10 @@ export class PlayerActions {
   }
 
   static JUMP_TO_PREVIOUS = '[Player] Jump To Previous';
-  jumpToPrevious(): Action {
+  jumpToPrevious(previousTrack: Track): Action {
     return {
       type: PlayerActions.JUMP_TO_PREVIOUS,
+      payload: previousTrack
     };
   }
 
