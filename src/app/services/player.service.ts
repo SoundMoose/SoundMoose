@@ -20,7 +20,7 @@ import { TrackActions } from '../actions/track.actions';
 @Injectable()
 export class PlayerService {
 
-   constructor(protected audio: AudioStream, private store$: Store<AppStore>) {
+   constructor(protected audio: AudioStream, private store$: Store<AppStore>, private playerActions: PlayerActions) {
      store$.select('player')
        .map(player => player.currentTrack)
        .distinctUntilChanged()
@@ -30,6 +30,17 @@ export class PlayerService {
        .map(player => player.isPlaying)
        .distinctUntilChanged()
        .subscribe(item => !item ? this.pause() : this.play());
+
+     store$.select('player')
+       .map(player => player.volume)
+       .distinctUntilChanged()
+       .subscribe(item => this.volume(item.volume));
+
+     Observable.fromEvent(this.audio, 'timeupdate')
+       .map(item => Math.floor(item.path[0].currentTime))
+       .distinctUntilChanged()
+       .subscribe((item) => this.updateCurrentTime(item));
+
    }
 
    play(url: string = null): void {
@@ -41,6 +52,17 @@ export class PlayerService {
 
    pause(): void {
      this.audio.pause();
+   }
+
+   // takes a value from 0 - 100
+   volume(volume : number): void {
+     if (this.audio.src) {
+       this.audio.volume(volume / 100);
+     }
+   }
+
+   updateCurrentTime(time) {
+     this.store$.dispatch(this.playerActions.updateCurrentTime(time));
    }
 
 }

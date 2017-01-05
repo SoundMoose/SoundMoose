@@ -56,6 +56,17 @@ export class PlayerActions {
     };
   }
 
+
+  static UPDATE_CURRENT_TIME = '[Player] Update current time';
+  // time in seconds
+  updateCurrentTime(currentTime: number): Action {
+    return {
+      type: PlayerActions.UPDATE_CURRENT_TIME,
+      payload: currentTime
+    };
+  }
+
+
   // static PAUSED_AUDIO = '[Player] Pause Audio';
   // pauseAudio(): Action {
   //   return {
