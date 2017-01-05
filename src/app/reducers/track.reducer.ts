@@ -10,7 +10,7 @@ export type TrackState = Track;
 
 const initialState: TrackState = {
   id: 0,
-  name: '',
+  title: '',
   artist: '',
   imgUrl: '',
   streamUrl: '',
