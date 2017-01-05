@@ -17,6 +17,8 @@ const initialState: PlayerState = {
     duration: 0
   },
   volume: 5,
+  repeatTrack: false,
+  shuffleTracks: false,
 };
 
 export default function (state = initialState, action: Action): PlayerState {
@@ -40,6 +42,28 @@ export default function (state = initialState, action: Action): PlayerState {
           currentTrack: action.payload
         });
       }
+    }
+
+    case PlayerActions.JUMP_TO_NEXT:
+      return Object.assign({}, state, {
+        currentTrack: action.payload
+      });
+
+    case PlayerActions.JUMP_TO_PREVIOUS:
+      return Object.assign({}, state, {
+        currentTrack: action.payload
+      });
+
+    case PlayerActions.TOGGLE_REPEAT: {
+      return Object.assign({}, state, {
+        repeatTrack: !state.repeatTrack,
+      });
+    }
+
+    case PlayerActions.TOGGLE_SHUFFLE: {
+      return Object.assign({}, state, {
+        shuffleTracks: !state.shuffleTracks,
+      });
     }
 
     default: {
