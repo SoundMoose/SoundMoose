@@ -16,7 +16,7 @@ export class TrackProgressComponent {
   duration: number;
   durationMinutesSeconds: string;
   progressMinutesSeconds: string;
-  progress: any = 0;
+  progress: number = 0;
 
   constructor (private store$: Store<AppStore>) {
     this.player$ = this.store$.select('player');
