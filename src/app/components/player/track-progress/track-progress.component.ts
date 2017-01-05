@@ -15,15 +15,20 @@ export class TrackProgressComponent {
   player$: Observable<Player>;
   duration: number;
   durationMinutesSeconds: string;
+  progressMinutesSeconds: string;
 
   constructor (private store$: Store<AppStore>) {
     this.player$ = this.store$.select('player');
     this.player$.subscribe((item) => {
-      let millis = +item.currentTrack.duration;
-      let minutes = Math.floor(millis / 60000);
-      let seconds = +((millis % 60000) / 1000).toFixed(0);
-      this.durationMinutesSeconds = minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+      this.durationMinutesSeconds = this.millisToMinutesSeconds(+item.currentTrack.duration);
+      this.progressMinutesSeconds = this.millisToMinutesSeconds(+item.currentTime * 1000);
     });
+  }
+
+  private millisToMinutesSeconds(millis) {
+    let minutes = Math.floor(millis / 60000);
+    let seconds = +((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
   }
 
 

@@ -55,6 +55,10 @@ export class PlayerControlsComponent {
     this.store$.dispatch(this.playerActions.toggleShuffle());
   }
 
+  togglePlayPause() {
+    this.store$.dispatch(this.playerActions.togglePlayPause());
+  }
+
   jumpToPrevious() {
     // Find the index of the current track
     let currentTrackIndex: number = this.getCurrentTrackIndex();

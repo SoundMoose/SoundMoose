@@ -1,11 +1,12 @@
 
 <i (click)="jumpToPrevious()" class="step backward icon"></i>
 
-<i *ngIf="isPlaying" class="play icon"
-  (click)="playerService.play()"
-></i>
-<i *ngIf="!isPlaying" class="pause icon"
-  (click)="playerService.play()"
+<i [ngClass]="{
+   pause: isPlaying,
+   play: !isPlaying,
+   icon: true
+   }"
+  (click)="togglePlayPause()"
 ></i>
 
 <i (click)="jumpToNext()" class="step forward icon"></i>
