@@ -1,4 +1,13 @@
- <h1 class="ui header">Top tracks</h1>
+ <h1 class="ui header">Top tracks in
+   <select (change)="setCurrentGenre($event.target.value)" style="background: #1a1a1a;">
+     <option *ngFor="let genre of genres"
+       [value]="genre[0]"
+     >
+       {{genre[1]}}
+     </option>
+   </select>
+ </h1>
+
   <div id="top-tracks" class="ui six column grid"  *ngIf="topTracks">
     <div *ngFor="let topTrack of topTracks | async" class="column">
       <top-track-tile [topTrack]="topTrack">

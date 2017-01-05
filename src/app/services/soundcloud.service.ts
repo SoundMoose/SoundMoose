@@ -15,8 +15,8 @@ export class SoundCloudService {
     this.tracks = store.select('tracks');
   }
 
-  loadTopTracks() {
-    const topTracksUrl = 'http://localhost:4004/charts?kind=top&genre=soundcloud%3Agenres%3Aall-music&client_id=' + soundcloudClientId + '&limit=50&offset=0&linked_partitioning=1&app_version=1482339819';
+  loadTopTracks(genre) {
+    const topTracksUrl = 'http://localhost:4004/charts?kind=top&genre=soundcloud%3Agenres%3A' + genre + '&client_id=' + soundcloudClientId + '&limit=50&offset=0&linked_partitioning=1&app_version=1482339819';
  //   const topTracksUrl = 'http://localhost:3333/toptracks';
     return this._http.get(topTracksUrl)
       .map(res => {
@@ -25,7 +25,7 @@ export class SoundCloudService {
             id: item.track.id,
             title: item.track.title,
             artist: (item.track.publisher_metadata && item.track.publisher_metadata.artist) ? item.track.publisher_metadata.artist : item.track.user.username,
-            imgUrl: item.track.artwork_url ? item.track.artwork_url.replace('large.jpg', 't200x200.jpg') : 'http://i.imgur.com/yxZ3RuI.jpg',
+            imgUrl: item.track.artwork_url ? item.track.artwork_url.replace('large.jpg', 't200x200.jpg') : '/assets/img/moosey.png',
             streamUrl: 'http://api.soundcloud.com/tracks/' + item.track.id + '/stream?client_id=' + soundcloudClientId,
             duration: item.track.full_duration
           }

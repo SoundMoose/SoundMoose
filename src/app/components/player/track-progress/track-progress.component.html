@@ -1,8 +1,12 @@
 <span class="track-current-time">{{ progressMinutesSeconds }}</span>
 
 <div class="progress-wrapper">
- <div class="progress-bar-left"></div>
- <div class="progress-bar-right"></div>
+ <div [ngStyle]="{
+   width: 225
+ }" class="progress-bar-left"></div>
+ <div [ngStyle]="{
+   width: 225
+ }" class="progress-bar-right"></div>
 </div>
 
 <span class="track-length">{{ durationMinutesSeconds }}</span>
