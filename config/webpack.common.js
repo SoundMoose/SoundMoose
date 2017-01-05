@@ -25,7 +25,7 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
  */
 const HMR = helpers.hasProcessFlag('hot');
 const METADATA = {
-  title: 'Angular2 Webpack Starter by @gdi2290 from @AngularClass',
+  title: 'Soundmoose.com - designed with Angular2 and ngrx - https://github.com/hrr20-over9000/9001',
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer()
 };
