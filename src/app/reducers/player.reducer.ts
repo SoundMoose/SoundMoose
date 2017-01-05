@@ -10,7 +10,7 @@ const initialState: PlayerState = {
   isPlaying: false,
   currentTrack: {
     id: 0,
-    name: '',
+    title: '',
     artist: '',
     imgUrl: '',
     streamUrl: '',
@@ -30,7 +30,7 @@ export default function (state = initialState, action: Action): PlayerState {
     //   return state.set('isPlaying', false) as PlayerState;
     case TrackActions.TOGGLE_PLAY_PAUSE: {
       return Object.assign({}, state, {
-        isPlaying : action.payload === !state.isPlaying,
+        isPlaying : !state.isPlaying,
         currentTrack:  action.payload
       });
     }
