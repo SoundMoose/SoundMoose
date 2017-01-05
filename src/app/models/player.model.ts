@@ -4,4 +4,6 @@ export interface Player {
   isPlaying: boolean;
   currentTrack: Track;
   volume: number;
+  isMuted: boolean;
+  volumeBeforeMute: number;
 }
