@@ -1,42 +1,61 @@
-.track-tile {
-    position: relative;
-    display: inline-block; /* added */
-    overflow: hidden; /* added */
+.hover,
+.selected {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
 }
 
-.track-tile img:hover {
-    opacity: 0.5;
+.hover img:hover {
+  opacity: 0.5;
 }
-.track-tile:hover a {
-    opacity: 1; /* added */
-    top: 0; /* added */
-    z-index: 1;
+
+.hover:hover a {
+  opacity: 1;
+  top: 0;
+  z-index: 1;
 }
-/* added */
-.track-tile:hover a span {
-    top: 50%;
-    position: absolute;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%);
+
+.hover:hover a span {
+  top: 50%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
 }
-/* added */
-.track-tile a {
-    display: block;
-    position: absolute;
-    top: -100%;
-    opacity: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    text-align: center;
-    color: inherit;
-    cursor: pointer;
+
+.hover a,
+.selected a {
+  display: block;
+  position: absolute;
+  top: -100%;
+  opacity: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  color: inherit;
+  cursor: pointer;
 }
+
+.selected a {
+  opacity: 1;
+  top: 0;
+  z-index: 1;
+}
+
+.selected a span {
+  top: 50%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+}
+
 i.play {
   margin-left: 5%;
   opacity: 0.95;
 }
+
 i.pause {
   opacity: 0.95;
 }
