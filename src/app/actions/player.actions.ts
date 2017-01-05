@@ -8,11 +8,12 @@ import { Track } from '../models/track.model';
 export class PlayerActions {
 
   static VOLUME_CHANGE = '[Player] Volume Change';
-  volumeChange(volume: number): Action {
+  volumeChange(volume: number, isMuted: boolean): Action {
     return {
       type: PlayerActions.VOLUME_CHANGE,
       payload: {
-        volume
+        volume,
+        isMuted
       }
     };
   }

@@ -18,6 +18,9 @@ export class PlayerControlsComponent {
   tracks$: Observable<Track[]>;
   isPlaying: boolean;
   currentTrackId: number;
+  repeatTrack: boolean;
+  shuffleTracks: boolean;
+
   tracksList: Track[];
 
   constructor (private store$: Store<AppStore>, private playerActions: PlayerActions) {
@@ -25,6 +28,8 @@ export class PlayerControlsComponent {
     this.player$.subscribe((item) => {
       this.isPlaying = item.isPlaying;
       this.currentTrackId = item.currentTrack.id;
+      this.repeatTrack = item.repeatTrack;
+      this.shuffleTracks = item.shuffleTracks;
     });
     this.tracks$ = this.store$.select('tracks');
     this.tracks$.subscribe(tracksList => this.tracksList = tracksList);
@@ -57,13 +62,20 @@ export class PlayerControlsComponent {
   jumpToPrevious() {
     // Find the index of the current track
     let currentTrackIndex: number = this.getCurrentTrackIndex();
-    console.log(currentTrackIndex);
-    // Check to make sure that we are not at the end of list
-    if (currentTrackIndex !== 0) {
-      this.store$.dispatch(this.playerActions.jumpToPrevious(this.tracksList[currentTrackIndex - 1]));
+
+    if (this.shuffleTracks) {
+      // generate a random index number between 0 and the length of the playlist
+      let max = this.tracksList.length;
+      let randomIdx = Math.floor(Math.random() * max);
+      this.store$.dispatch(this.playerActions.jumpToNext(this.tracksList[randomIdx]));
     } else {
-      // Stop playing because you've reach the beginning of your playlist and there is nowhere to go.
-      this.store$.dispatch(this.playerActions.jumpToPrevious(this.tracksList[this.tracksList.length - 1]));
+      // Check to make sure that we are not at the end of list
+      if (currentTrackIndex !== 0) {
+        this.store$.dispatch(this.playerActions.jumpToPrevious(this.tracksList[currentTrackIndex - 1]));
+      } else {
+        // Stop playing because you've reach the beginning of your playlist and there is nowhere to go.
+        this.store$.dispatch(this.playerActions.jumpToPrevious(this.tracksList[this.tracksList.length - 1]));
+      }
     }
   }
 
@@ -71,11 +83,17 @@ export class PlayerControlsComponent {
     // Find the index of the current track
     let currentTrackIndex: number = this.getCurrentTrackIndex();
 
-    // Check to make sure that we are not at the end of list
-    if (currentTrackIndex < this.tracksList.length - 1) {
-      this.store$.dispatch(this.playerActions.jumpToNext(this.tracksList[currentTrackIndex + 1]));
+    if (this.shuffleTracks) {
+      // generate a random index number between 0 and the length of the playlist
+      let max = this.tracksList.length;
+      let randomIdx = Math.floor(Math.random() * max);
+      this.store$.dispatch(this.playerActions.jumpToNext(this.tracksList[randomIdx]));
     } else {
-      this.store$.dispatch(this.playerActions.jumpToNext(this.tracksList[0]));
+      if (currentTrackIndex < this.tracksList.length - 1) {
+        this.store$.dispatch(this.playerActions.jumpToNext(this.tracksList[currentTrackIndex + 1]));
+      } else {
+        this.store$.dispatch(this.playerActions.jumpToNext(this.tracksList[0]));
+      }
     }
   }
 }
