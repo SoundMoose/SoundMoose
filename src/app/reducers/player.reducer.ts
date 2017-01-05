@@ -29,10 +29,17 @@ export default function (state = initialState, action: Action): PlayerState {
     // case PlayerActions.PAUSED_AUDIO:
     //   return state.set('isPlaying', false) as PlayerState;
     case TrackActions.TOGGLE_PLAY_PAUSE: {
-      return Object.assign({}, state, {
-        isPlaying : !state.isPlaying,
-        currentTrack:  action.payload
-      });
+      // Pause Track because we clicked the track that was already playing.
+      if (state.currentTrack.id === action.payload.id) {
+         return Object.assign({}, state, {
+          isPlaying: !state.isPlaying,
+        });
+      } else {  // Change Track and keep playing.
+        return Object.assign({}, state, {
+          isPlaying: true,
+          currentTrack: action.payload
+        });
+      }
     }
 
     default: {
@@ -40,16 +47,3 @@ export default function (state = initialState, action: Action): PlayerState {
     }
   }
 }
-/*
-
-{
-  tracks:
-  player:
-}
-
-function reducer(state, action) {
-
-}
-
-
-*/
