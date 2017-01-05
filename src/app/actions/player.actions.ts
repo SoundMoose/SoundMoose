@@ -20,7 +20,7 @@ export class PlayerActions {
   // Duplicate code in Track Action for ease of implementation.
   // fix later by tying both together
   static TOGGLE_PLAY_PAUSE = '[Player] Toggle Play/Pause';
-  togglePlayPause(volume: number): Action {
+  togglePlayPause(): Action {
     return {
       type: PlayerActions.TOGGLE_PLAY_PAUSE,
     };
