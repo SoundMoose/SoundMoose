@@ -8,6 +8,7 @@ export type PlayerState = Player;
 
 const initialState: PlayerState = {
   isPlaying: false,
+  currentTime: 0,
   currentTrack: {
     id: 0,
     title: '',
@@ -42,6 +43,12 @@ export default function (state = initialState, action: Action): PlayerState {
       }
     }
 
+    case PlayerActions.TOGGLE_PLAY_PAUSE:  {
+      return Object.assign({}, state, {
+          isPlaying: !state.isPlaying,
+      });
+    }
+
     case PlayerActions.JUMP_TO_NEXT:
       return Object.assign({}, state, {
         currentTrack: action.payload
@@ -50,6 +57,11 @@ export default function (state = initialState, action: Action): PlayerState {
     case PlayerActions.JUMP_TO_PREVIOUS:
       return Object.assign({}, state, {
         currentTrack: action.payload
+      });
+
+    case PlayerActions.UPDATE_CURRENT_TIME:
+      return Object.assign({}, state, {
+        currentTime: action.payload
       });
 
     default: {

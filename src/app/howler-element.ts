@@ -23,5 +23,5 @@ export class AudioStream extends HTMLAudioElement {};
 
 export const AUDIO_STREAM_PROVIDER = {
   provide: AudioStream,
-  useFactory: () => new Audio('http://localhost:3000/assets/sounds/Broke_For_Free_-_01_-_Night_Owl.mp3'),
+  useFactory: () => new Audio(),
 };
