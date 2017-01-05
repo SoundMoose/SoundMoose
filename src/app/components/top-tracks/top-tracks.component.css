@@ -5,7 +5,7 @@
 }
 
 .track-tile img:hover {
-    opacity: 0.5
+    opacity: 0.5;
 }
 .track-tile:hover a {
     opacity: 1; /* added */
@@ -31,6 +31,7 @@
     right: 0;
     text-align: center;
     color: inherit;
+    cursor: pointer;
 }
 i.play {
   margin-left: 5%;
