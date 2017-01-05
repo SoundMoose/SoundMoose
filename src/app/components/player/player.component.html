@@ -1,4 +1,6 @@
-<div class="ui footer segment">
+<div class="ui footer segment"
+  *ngIf="trackExists$ | async"
+>
   <div class="ui container">
 
     <player-controls></player-controls>
