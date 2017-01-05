@@ -1,5 +1,5 @@
-<img class="album-art" src="https://cvrvrsns.files.wordpress.com/2015/03/1518134-bad-michael-jackson-orig-1.jpg" />
-<div class="current-track">
+<img *ngIf="currentTrack.id !== 0" class="album-art" src="{{ currentTrack.imgUrl }}" />
+<div *ngIf="currentTrack.id !== 0" class="current-track">
   <div class="playing">Playing track</div>
-  <div class="track-info">Michael Jackson - Bad</div>
+  <div class="track-info">{{ currentTrack.artist }} - {{ currentTrack.title }}</div>
 </div>

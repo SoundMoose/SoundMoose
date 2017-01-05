@@ -10,7 +10,7 @@ const initialState: PlayerState = {
   isPlaying: false,
   currentTrack: {
     id: 0,
-    name: '',
+    title: '',
     artist: '',
     imgUrl: '',
     streamUrl: '',
