@@ -4,7 +4,14 @@
      <div class="volume-control-bottom"></div>
   </div>
   <i *ngIf="!volumeToggle" (click)="volumeClickHandler()" class="volume up icon"></i>
-  <i *ngIf="volumeToggle" (click)="volumeClickHandler()" class="volume off icon"></i>
+  <i *ngIf="volumeToggle"
+     (click)="volumeClickHandler()"
+     [ngClass]="{
+     yellow: isMuted,
+     volume: true,
+     off: true,
+     icon: true
+  }"></i>
 </div>
 
 <!--<i class="volume off icon"></i> -->
