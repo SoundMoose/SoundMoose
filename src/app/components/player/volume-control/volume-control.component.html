@@ -1,5 +1,5 @@
-<div class="volume-wrapper">
-  <div class="ui basic bottom pointing label volume-control-wrapper">
+<div (mouseenter)="wrapperHovered = true" (mouseleave)="wrapperHovered = false" class="volume-wrapper">
+  <div (mouseenter)="wrapperHovered = true" [hidden]="!wrapperHovered" class="ui basic bottom pointing label volume-control-wrapper">
      <div class="volume-control-top"></div>
      <div class="volume-control-bottom"></div>
   </div>

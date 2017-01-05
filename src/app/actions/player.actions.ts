@@ -25,6 +25,13 @@ export class PlayerActions {
     };
   }
 
+  static TOGGLE_REPEAT = '[Player] Toggle Repeat';
+  toggleRepeat(): Action {
+    return {
+      type: PlayerActions.TOGGLE_REPEAT,
+    };
+  }
+
   // static PAUSED_AUDIO = '[Player] Pause Audio';
   // pauseAudio(): Action {
   //   return {
