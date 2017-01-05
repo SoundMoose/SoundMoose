@@ -86,3 +86,7 @@ Thumbs.db
 
 # API keys
 superSecretKeys.ts
+
+# Floobits
+.floo
+.flooignore
