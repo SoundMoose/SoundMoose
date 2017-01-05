@@ -7,8 +7,14 @@
     <span>
       <i class="icons">
         <i class="massive circle icon"></i>
-        <i *ngIf="!buttonToggled" class="inverted huge play icon"></i>
-        <i *ngIf="buttonToggled" class="inverted huge pause icon"></i>
+        <i
+        [ngClass]="{
+          inverted: true,
+          huge: true,
+          play: !(currentlyPlaying$ | async),
+          pause: currentlyPlaying$ | async,
+          icon: true
+        }"></i>
       </i>
     </span>
   </a>
