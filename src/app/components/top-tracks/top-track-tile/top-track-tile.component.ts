@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppStore } from './../../../models/appstore.model';
 import { Track } from '../../../models/track.model';
+import { Player } from '../../../models/player.model';
 import { TrackActions } from '../../../actions/track.actions';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -21,9 +22,9 @@ export class TopTrackTileComponent {
 
   constructor(private trackActions: TrackActions, private store$: Store<AppStore>) {
     this.currentlyPlaying$ = this.store$.select('player')
-      .map(playerStatus => playerStatus.isPlaying && playerStatus.currentTrack.id === this.topTrack.id);
+      .map((playerStatus: Player) => playerStatus.isPlaying && playerStatus.currentTrack.id === this.topTrack.id);
     this.selected$ = this.store$.select('player')
-      .map(playerStatus => playerStatus.currentTrack.id === this.topTrack.id);
+      .map((playerStatus: Player)=> playerStatus.currentTrack.id === this.topTrack.id);
   }
 
   clickHandler() {

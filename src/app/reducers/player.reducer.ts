@@ -17,7 +17,7 @@ const initialState: PlayerState = {
     streamUrl: '',
     duration: 0
   },
-  volume: 5,
+  volume: 100,
 
   isMuted: false,
   volumeBeforeMute: 5,
@@ -54,35 +54,40 @@ export default function (state = initialState, action: Action): PlayerState {
       return Object.assign({}, state, {
           isPlaying: !state.isPlaying,
       });
+    }
     case PlayerActions.VOLUME_CHANGE: {
-      if(state.isMuted) {
+      if (state.isMuted) {
         return Object.assign({}, state, {
           volume: state.volumeBeforeMute,
           isMuted: !state.isMuted,
-        })
+        });
       } else {
         return Object.assign({}, state, {
           volumeBeforeMute: action.payload.volume,
           volume: 0,
           isMuted: !state.isMuted,
-        })
+        });
       }
     }
 
-    case PlayerActions.JUMP_TO_NEXT:
+    case PlayerActions.JUMP_TO_NEXT: {
       return Object.assign({}, state, {
         currentTrack: action.payload
       });
+    }
 
-    case PlayerActions.JUMP_TO_PREVIOUS:
+    case PlayerActions.JUMP_TO_PREVIOUS: {
       return Object.assign({}, state, {
         currentTrack: action.payload
       });
+    }
 
-    case PlayerActions.UPDATE_CURRENT_TIME:
+    case PlayerActions.UPDATE_CURRENT_TIME: {
       return Object.assign({}, state, {
         currentTime: action.payload
       });
+    }
+
     case PlayerActions.TOGGLE_REPEAT: {
       return Object.assign({}, state, {
         repeatTrack: !state.repeatTrack,

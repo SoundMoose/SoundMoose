@@ -17,30 +17,31 @@ import { AudioStream } from '../howler-element';
 import { PlayerActions } from '../actions/player.actions';
 import { TrackActions } from '../actions/track.actions';
 
+import { Player } from './../models/player.model';
+
 @Injectable()
 export class PlayerService {
 
    constructor(protected audio: AudioStream, private store$: Store<AppStore>, private playerActions: PlayerActions) {
-     store$.select('player')
-       .map(player => player.currentTrack)
+     this.store$.select('player')
+       .map((player: Player) => player.currentTrack)
        .distinctUntilChanged()
        .subscribe(item => this.play(item.streamUrl));
 
-     store$.select('player')
-       .map(player => player.isPlaying)
+     this.store$.select('player')
+       .map((player: Player) => player.isPlaying)
        .distinctUntilChanged()
        .subscribe(item => !item ? this.pause() : this.play());
 
-     store$.select('player')
-       .map(player => player.volume)
+     this.store$.select('player')
+       .map((player: Player) => player.volume)
        .distinctUntilChanged()
-       .subscribe(item => this.volume(item.volume));
+       .subscribe(item => this.volume(item));
 
      Observable.fromEvent(this.audio, 'timeupdate')
-       .map(item => Math.floor(item.path[0].currentTime))
+       .map((item: any) => Math.floor(item.path[0].currentTime))
        .distinctUntilChanged()
        .subscribe((item) => this.updateCurrentTime(item));
-
    }
 
    play(url: string = null): void {
@@ -55,9 +56,9 @@ export class PlayerService {
    }
 
    // takes a value from 0 - 100
-   volume(volume : number): void {
+   volume(volume: number): void {
      if (this.audio.src) {
-       this.audio.volume(volume / 100);
+       this.audio.volume = volume / 100;
      }
    }
 
