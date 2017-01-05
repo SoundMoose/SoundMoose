@@ -17,8 +17,13 @@ const initialState: PlayerState = {
     duration: 0
   },
   volume: 5,
+
+  isMuted: false,
+  volumeBeforeMute: 5,
+
   repeatTrack: false,
   shuffleTracks: false,
+
 };
 
 export default function (state = initialState, action: Action): PlayerState {
@@ -41,6 +46,21 @@ export default function (state = initialState, action: Action): PlayerState {
           isPlaying: true,
           currentTrack: action.payload
         });
+      }
+    }
+
+    case PlayerActions.VOLUME_CHANGE: {
+      if(state.isMuted) {
+        return Object.assign({}, state, {
+          volume: state.volumeBeforeMute,
+          isMuted: !state.isMuted,
+        })
+      } else {
+        return Object.assign({}, state, {
+          volumeBeforeMute: action.payload.volume,
+          volume: 0,
+          isMuted: !state.isMuted,
+        })
       }
     }
 
