@@ -27,4 +27,15 @@ export class PlayerControlsComponent {
     this.store$.dispatch(this.playerActions.toggleRepeat());
   }
 
+  toggleShuffle() {
+    this.store$.dispatch(this.playerActions.toggleShuffle());
+  }
+
+  jumpToPrevious() {
+    this.store$.dispatch(this.playerActions.jumpToPrevious());
+  }
+
+  jumpToNext() {
+    this.store$.dispatch(this.playerActions.jumpToNext());
+  }
 }

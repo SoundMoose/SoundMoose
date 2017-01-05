@@ -32,6 +32,13 @@ export class PlayerActions {
     };
   }
 
+  static TOGGLE_SHUFFLE = '[Player] Toggle Shuffle';
+  toggleShuffle(): Action {
+    return {
+      type: PlayerActions.TOGGLE_SHUFFLE,
+    };
+  }
+
   // static PAUSED_AUDIO = '[Player] Pause Audio';
   // pauseAudio(): Action {
   //   return {
