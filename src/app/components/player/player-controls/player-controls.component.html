@@ -1,5 +1,5 @@
 
-<i class="step backward icon"></i>
+<i (click)="jumpToPrevious()" class="step backward icon"></i>
 
 <i *ngIf="isPlaying" class="play icon"
   (click)="playerService.play()"
@@ -8,8 +8,8 @@
   (click)="playerService.play()"
 ></i>
 
-<i class="step forward icon"></i>
+<i (click)="jumpToNext()" class="step forward icon"></i>
 
-<i class="retweet icon"></i>
+<i (click)="toggleRepeat()" class="retweet icon"></i>
 
-<i class="random icon"></i>
+<i (click)="toggleShuffle()" class="random icon"></i>

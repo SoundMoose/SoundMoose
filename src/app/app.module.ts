@@ -27,13 +27,15 @@ import { TrackProgressComponent } from './components/player/track-progress/track
 import { TopTrackTileComponent } from './components/top-tracks/top-track-tile/top-track-tile.component';
 
 import { TrackActions } from './actions/track.actions';
+import { PlayerActions } from './actions/player.actions';
 
 // Application wide providers
 const APP_PROVIDERS = [
   SoundCloudService,
   PlayerService,
   AUDIO_STREAM_PROVIDER,
-  TrackActions
+  TrackActions,
+  PlayerActions
 ];
 
 /**

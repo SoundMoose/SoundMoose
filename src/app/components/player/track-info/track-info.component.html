@@ -1,5 +1,5 @@
 <img *ngIf="currentTrack.id !== 0" class="album-art" src="{{ currentTrack.imgUrl }}" />
 <div *ngIf="currentTrack.id !== 0" class="current-track">
   <div class="playing">Playing track</div>
-  <div class="track-info">{{ currentTrack.artist }} - {{ currentTrack.title }}</div>
+  <div class="track-info">{{ trim(currentTrack.artist + " - " + currentTrack.title) }}</div>
 </div>
