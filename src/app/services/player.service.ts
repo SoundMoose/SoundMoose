@@ -65,4 +65,8 @@ export class PlayerService {
      this.store$.dispatch(this.playerActions.updateCurrentTime(time));
    }
 
+   getProgressPercentage() {
+     store$.select('player')
+   }
+
 }
