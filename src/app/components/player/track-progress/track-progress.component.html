@@ -2,10 +2,11 @@
 
 <div class="progress-wrapper">
  <div [ngStyle]="{
-   width: 225
+   width: (450 * progress) + 'px'
  }" class="progress-bar-left"></div>
  <div [ngStyle]="{
-   width: 225
+   left: (450 * progress) + 'px',
+   width: (450 * (1 - progress)) + 'px'
  }" class="progress-bar-right"></div>
 </div>
 

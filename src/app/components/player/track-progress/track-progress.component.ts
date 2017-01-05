@@ -16,12 +16,15 @@ export class TrackProgressComponent {
   duration: number;
   durationMinutesSeconds: string;
   progressMinutesSeconds: string;
+  progress: any = 0;
 
   constructor (private store$: Store<AppStore>) {
     this.player$ = this.store$.select('player');
     this.player$.subscribe((item) => {
       this.durationMinutesSeconds = this.millisToMinutesSeconds(+item.currentTrack.duration);
       this.progressMinutesSeconds = this.millisToMinutesSeconds(+item.currentTime * 1000);
+      let progress = (+item.currentTime * 1000) / +item.currentTrack.duration;
+      this.progress = Number.isNaN(progress) ? 0 : progress;
     });
   }
 
@@ -30,7 +33,5 @@ export class TrackProgressComponent {
     let seconds = +((millis % 60000) / 1000).toFixed(0);
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
   }
-
-
 
 }
