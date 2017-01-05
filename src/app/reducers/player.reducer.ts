@@ -42,6 +42,11 @@ export default function (state = initialState, action: Action): PlayerState {
       }
     }
 
+    case PlayerActions.JUMP_TO_NEXT:
+      return Object.assign({}, state, {
+        currentTrack: action.payload
+      });
+
     default: {
       return state;
     }

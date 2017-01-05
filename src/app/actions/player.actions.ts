@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 
 import { Player } from '../models/player.model';
+import { Track } from '../models/track.model';
 
 @Injectable()
 export class PlayerActions {
@@ -36,6 +37,21 @@ export class PlayerActions {
   toggleShuffle(): Action {
     return {
       type: PlayerActions.TOGGLE_SHUFFLE,
+    };
+  }
+
+  static JUMP_TO_NEXT = '[Player] Jump To Next';
+  jumpToNext(nextTrack: Track): Action {
+    return {
+      type: PlayerActions.JUMP_TO_NEXT,
+      payload: nextTrack
+    };
+  }
+
+  static JUMP_TO_PREVIOUS = '[Player] Jump To Previous';
+  jumpToPrevious(): Action {
+    return {
+      type: PlayerActions.JUMP_TO_PREVIOUS,
     };
   }
 
