@@ -1,4 +1,4 @@
-import {Track} from './track.model';
+import { Track } from './track.model';
 
 export interface Player {
   isPlaying: boolean;
@@ -6,4 +6,6 @@ export interface Player {
   volume: number;
   isMuted: boolean;
   volumeBeforeMute: number;
+  repeatTrack: boolean;
+  shuffleTracks: boolean;
 }
