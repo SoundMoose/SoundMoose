@@ -5,26 +5,12 @@ import { Track } from '../models/track.model';
 
 @Injectable()
 export class TrackActions {
-  static LOAD_TRACKS = '[Track] Load Tracks';
-  loadTracks(): Action {
-    return {
-      type: TrackActions.LOAD_TRACKS
-    };
-  }
 
   static LOAD_TRACKS_SUCCESS = '[Track] Load Tracks Success';
   loadTracksSuccess(songs): Action {
     return {
       type: TrackActions.LOAD_TRACKS_SUCCESS,
       payload: songs
-    };
-  }
-
-  static GET_TRACK = '[Track] Get Track';
-  getTrack(id): Action {
-    return {
-      type: TrackActions.GET_TRACK,
-      payload: id
     };
   }
 
@@ -36,5 +22,15 @@ export class TrackActions {
     };
   }
 
-  // More Actions Here!..
+  // different from Player Actions in that it will pass along a track ID
+  // pause if track id is same as current track, play if new track id
+  static TOGGLE_PLAY_PAUSE = '[Track] Toggle Track Play/Pause';
+
+  togglePlayPause(currentTrack: Track ): Action {
+    return {
+      type: TrackActions.TOGGLE_PLAY_PAUSE,
+      payload: currentTrack
+    };
+  }
+
 }

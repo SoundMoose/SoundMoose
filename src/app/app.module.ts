@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
 import { SoundCloudService } from './services/soundcloud.service';
+import { PlayerService } from './services/player.service';
+import { AUDIO_STREAM_PROVIDER } from './howler-element';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import player from './reducers/player.reducer';
@@ -22,10 +24,16 @@ import { PlayerControlsComponent } from './components/player/player-controls/pla
 import { VolumeControlComponent } from './components/player/volume-control/volume-control.component';
 import { TrackInfoComponent } from './components/player/track-info/track-info.component';
 import { TrackProgressComponent } from './components/player/track-progress/track-progress.component';
+import { TopTrackTileComponent } from './components/top-tracks/top-track-tile/top-track-tile.component';
+
+import { TrackActions } from './actions/track.actions';
 
 // Application wide providers
 const APP_PROVIDERS = [
-  SoundCloudService
+  SoundCloudService,
+  PlayerService,
+  AUDIO_STREAM_PROVIDER,
+  TrackActions
 ];
 
 /**
@@ -40,7 +48,8 @@ const APP_PROVIDERS = [
     PlayerControlsComponent,
     VolumeControlComponent,
     TrackInfoComponent,
-    TrackProgressComponent
+    TrackProgressComponent,
+    TopTrackTileComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { AppState } from '../app.service';
+import { PlayerService } from './../../services/player.service';
 
 @Component({
   selector: 'player',
@@ -8,5 +9,7 @@ import { AppState } from '../app.service';
   templateUrl: './player.component.html'
 })
 export class PlayerComponent {
+
+  constructor( private playerService: PlayerService ) {}
 
 }
