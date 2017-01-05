@@ -22,8 +22,11 @@ export default function (state = initialState, action: Action): TrackState {
     case TrackActions.GET_TRACK_SUCCESS: {
       return action.payload;
     }
-
-    // ..
+/*
+    case TrackActions.TOGGLE_PLAY_PAUSE: {
+      return action.payload;
+    }
+    */
 
     default: {
       return state;

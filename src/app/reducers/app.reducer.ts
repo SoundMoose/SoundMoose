@@ -10,11 +10,7 @@ const initialState: PlayerState = {
   isPlaying: false,
   currentTrack: {
     id: 0,
-    name: '',
-    artist: '',
-    imgUrl: '',
-    streamUrl: '',
-    duration: 0
+
   },
   volume: 5,
 };
@@ -40,16 +36,3 @@ export default function (state = initialState, action: Action): PlayerState {
     }
   }
 }
-/*
-
-{
-  tracks:
-  player:
-}
-
-function reducer(state, action) {
-
-}
-
-
-*/

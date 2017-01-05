@@ -1,5 +1,7 @@
+import {Track} from './track.model';
+
 export interface Player {
   isPlaying: boolean;
-  currentTrackId: number;
+  currentTrack: Track;
   volume: number;
 }
