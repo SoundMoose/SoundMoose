@@ -18,9 +18,15 @@ import { PlayerActions } from '../actions/player.actions';
 import { TrackActions } from '../actions/track.actions';
 
 import { Player } from './../models/player.model';
+import { Track } from './../models/track.model';
 
 @Injectable()
 export class PlayerService {
+
+  currentTrack$: Observable<Track>;
+  tracksList: Track[];
+  currentTrackId: number;
+
   audioCtx: any ;
   audioSource: any;
   analyser: any;
@@ -33,30 +39,37 @@ export class PlayerService {
   dummyAudioElement: any;
 /////////////////////////////////
 
+   constructor(protected audio: AudioStream, private store$: Store<AppStore>, private playerActions: PlayerActions) {
+    this.store$.select('tracks')
+      .subscribe((item: Track[]) => this.tracksList = item);
 
+    this.currentTrack$ = this.store$.select('player')
+      .map((player: Player) => player.currentTrack)
+      .distinctUntilChanged();
 
+    this.currentTrack$
+      .subscribe(track => this.currentTrackId = track.id);
 
-  constructor(protected audio: AudioStream, private store$: Store<AppStore>, private playerActions: PlayerActions) {
+    this.currentTrack$
+      .subscribe(item => this.play(item.streamUrl));
+
     this.store$.select('player')
-     .map((player: Player) => player.currentTrack)
-     .distinctUntilChanged()
-     .subscribe(item => this.play(item.streamUrl));
+      .map((player: Player) => player.isPlaying)
+      .distinctUntilChanged()
+      .subscribe(item => !item ? this.pause() : this.play());
 
     this.store$.select('player')
-     .map((player: Player) => player.isPlaying)
-     .distinctUntilChanged()
-     .subscribe(item => !item ? this.pause() : this.play());
-
-    this.store$.select('player')
-     .map((player: Player) => player.volume)
-     .distinctUntilChanged()
-     .subscribe(item => this.volume(item));
+      .map((player: Player) => player.volume)
+      .distinctUntilChanged()
+      .subscribe(item => this.volume(item));
 
     Observable.fromEvent(this.audio, 'timeupdate')
-     .map((item: any) => Math.floor(item.path[0].currentTime))
-     .distinctUntilChanged()
-     .subscribe((item) => this.updateCurrentTime(item));
+      .map((item: any) => Math.floor(item.path[0].currentTime))
+      .distinctUntilChanged()
+      .subscribe((item) => this.updateCurrentTime(item));
 
+    Observable.fromEvent(this.audio, 'ended')
+      .subscribe(() => this.store$.dispatch(playerActions.jumpToNext(this.tracksList[this.getCurrentTrackIndex() + 1])));
 
 
 
@@ -194,9 +207,20 @@ export class PlayerService {
      this.store$.select('player')
    }
 
+   getCurrentTrackIndex(): number {
+    return this.tracksList.reduce((acc, cur, index) => {
+      if (acc !== null) {
+        return acc;
+      } else if (cur.id === this.currentTrackId) {
+        return index;
+      } else {
+        return null;
+      }
+    }, null);
+  }
+
    changePosition(fraction: number) {
      this.audio.currentTime = this.audio.duration * fraction;
    }
-
 
 }
