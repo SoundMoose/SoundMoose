@@ -1,6 +1,6 @@
 <span class="track-current-time">{{ progressMinutesSeconds }}</span>
 
-<div class="progress-wrapper">
+<div class="progress-wrapper" (click)="handleProgressClick($event)">
  <div [ngStyle]="{
    width: (450 * progress) + 'px'
  }" class="progress-bar-left"></div>

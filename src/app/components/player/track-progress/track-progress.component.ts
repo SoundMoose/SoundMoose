@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { AppState } from '../app.service';
 import { Player } from '../../../models/player.model';
 import { AppStore } from '../../../models/appstore.model';
+import { PlayerService } from '../../../services/player.service';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
@@ -18,7 +19,7 @@ export class TrackProgressComponent {
   progressMinutesSeconds: string;
   progress: number = 0;
 
-  constructor (private store$: Store<AppStore>) {
+  constructor (private playerService: PlayerService, private store$: Store<AppStore>) {
     this.player$ = this.store$.select('player');
     this.player$.subscribe((item) => {
       this.durationMinutesSeconds = this.millisToMinutesSeconds(+item.currentTrack.duration);
@@ -32,6 +33,11 @@ export class TrackProgressComponent {
     let minutes = Math.floor(millis / 60000);
     let seconds = +((millis % 60000) / 1000).toFixed(0);
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  }
+
+  handleProgressClick($event) {
+    let position = $event.offsetX / $event.target.offsetWidth;
+    this.playerService.changePosition(position);
   }
 
 }

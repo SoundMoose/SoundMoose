@@ -126,4 +126,9 @@ export class PlayerService {
      this.store$.select('player')
    }
 
+   changePosition(fraction: number) {
+     this.audio.currentTime = this.audio.duration * fraction;
+   }
+
+
 }
