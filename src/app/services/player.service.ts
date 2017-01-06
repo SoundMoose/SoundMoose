@@ -49,6 +49,44 @@ export class PlayerService {
        this.audio.src = url;
      }
      this.audio.play();
+
+    //  //// IN DEVELOPMENT //////////////////////////////////////
+    //  var audioCtx = new AudioContext(),
+    //   audio = new Audio(),
+    //   source,
+    //   // `stream_url` you'd get from
+    //   // requesting http://api.soundcloud.com/tracks/6981096.json
+    //   url = './../assets/sounds/Broke_For_Free_-_01_-_Night_Owl.mp3';
+     //
+    //   audio.src = url;
+    //   source = audioCtx.createMediaElementSource(audio);
+    //   source.connect(audioCtx.destination);
+    //   source.mediaElement.play();
+     //
+    //   var analyser = audioCtx.createAnalyser();
+    //   source.connect(analyser);
+    //   // analyser.connect(distortion);
+     //
+    //   analyser.fftSize = 4096;  // Fast Fourier Transform (fft) in a certain frequency domain,
+    //   var bufferLength = analyser.frequencyBinCount;
+    //   // var dataArray = new Uint8Array(bufferLength);
+    //   var dataArray = new Float32Array(bufferLength); // for Float analyser methods
+     //
+    //   // To capture frequency data, AnalyserNode.getFloatFrequencyData() and AnalyserNode.getByteFrequencyData()
+    //   // To capture Waveform data, and AnalyserNode.getByteTimeDomainData() and AnalyserNode.getFloatTimeDomainData() to capture waveform data.
+    //   analyser.getFloatFrequencyData(dataArray);
+    //   // analyser.getByteFrequencyData(dataArray);
+    //   // analyser.getByteTimeDomainData(dataArray);
+    //   // analyser.getFloatTimeDomainData(dataArray);
+     //
+    //   // console.log('dataArray:', dataArray);
+     //
+    //   setInterval(function() {
+    //     // console.log('Audio audioCtx', audioCtx);
+    //     // console.log('Audio analyser', analyser);
+    //     console.log('dataArray:', dataArray);
+    //   }, 1000);
+    //   //////////////////////////////////////////////////
    }
 
    pause(): void {
