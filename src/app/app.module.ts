@@ -29,6 +29,9 @@ import { TopTrackTileComponent } from './components/top-tracks/top-track-tile/to
 import { TrackActions } from './actions/track.actions';
 import { PlayerActions } from './actions/player.actions';
 
+import { MaterialModule } from '@angular/material';
+import 'hammerjs';
+
 // Application wide providers
 const APP_PROVIDERS = [
   SoundCloudService,
@@ -60,7 +63,8 @@ const APP_PROVIDERS = [
       tracks: tracks
     }),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
-    HttpModule
+    HttpModule,
+    MaterialModule.forRoot()
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

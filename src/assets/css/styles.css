@@ -140,7 +140,7 @@ player-controls .icon:hover {
   background: #404040;
   cursor: pointer;
   width: 40px;
-  height: 200px;
+/*  height: 200px;*/
   opacity: 0.98;
   box-shadow: 0 2px 4px black;
 }
@@ -183,4 +183,8 @@ player-controls .icon:hover {
 .top-tracks-header .ui.selection.dropdown {
   opacity: 0.95;
   color: #fff;
+}
+
+.md-slider-vertical .md-slider-track {
+  left: 8px !important;
 }
