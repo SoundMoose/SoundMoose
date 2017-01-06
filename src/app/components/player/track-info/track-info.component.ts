@@ -24,7 +24,7 @@ export class TrackInfoComponent {
   }
 
   private trim(string) {
-    var length = 45;
+    var length = 40;
     return string.length > length ?
                     string.substring(0, length - 3) + "..." :
                     string;

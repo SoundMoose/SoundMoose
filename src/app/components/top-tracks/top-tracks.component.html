@@ -1,9 +1,9 @@
  <h1 class="top-tracks-header ui header">Top tracks in
-   <select class="ui dropdown" (change)="setCurrentGenre($event.target.value)" style="background: #1a1a1a;">
-     <option *ngFor="let genre of genres"
+   <select id="genre-select" class="ui dropdown" (change)="setCurrentGenre($event.target.value)" style="background: #1a1a1a;">
+     <option *ngFor="let genre of genres; let last = last"
        [value]="genre[0]"
      >
-       {{genre[1]}}
+       {{genre[1]}}{{last ? setDefaultGenre() : ''}}
      </option>
    </select>
  </h1>
