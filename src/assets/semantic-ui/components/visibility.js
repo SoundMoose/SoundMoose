@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.7 - Visibility
+ * # Semantic UI undefined - Visibility
  * http://github.com/semantic-org/semantic-ui/
  *
  *

@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.7 - Statistic
+ * # Semantic UI undefined - Statistic
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -106,7 +106,7 @@
   font-size: 4rem;
   font-weight: normal;
   line-height: 1em;
-  color: #1B1C1D;
+  color: #FFFFFF;
   text-transform: uppercase;
   text-align: center;
 }
@@ -120,7 +120,7 @@
   font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 1em;
   font-weight: bold;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
   text-transform: uppercase;
   text-align: center;
 }
@@ -384,7 +384,7 @@
 
 .ui.inverted.statistics .statistic > .value,
 .ui.inverted.statistic .value {
-  color: #FFFFFF;
+  color: #1A1A1A;
 }
 .ui.inverted.statistics .statistic > .label,
 .ui.inverted.statistic .label {

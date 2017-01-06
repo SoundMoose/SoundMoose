@@ -1,5 +1,5 @@
- <h1 class="ui header">Top tracks in
-   <select (change)="setCurrentGenre($event.target.value)" style="background: #1a1a1a;">
+ <h1 class="top-tracks-header ui header">Top tracks in
+   <select class="ui dropdown" (change)="setCurrentGenre($event.target.value)" style="background: #1a1a1a;">
      <option *ngFor="let genre of genres"
        [value]="genre[0]"
      >

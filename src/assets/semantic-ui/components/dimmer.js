@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.7 - Dimmer
+ * # Semantic UI undefined - Dimmer
  * http://github.com/semantic-org/semantic-ui/
  *
  *
