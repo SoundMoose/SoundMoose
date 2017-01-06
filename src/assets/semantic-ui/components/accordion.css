@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.7 - Accordion
+ * # Semantic UI undefined - Accordion
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -33,7 +33,7 @@
   padding: 0.5em 0em;
   font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 1em;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 
 /* Content */
@@ -126,14 +126,14 @@
 .ui.styled.accordion,
 .ui.styled.accordion .accordion {
   border-radius: 0.28571429rem;
-  background: #FFFFFF;
+  background: #1A1A1A;
   box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15), 0px 0px 0px 1px rgba(34, 36, 38, 0.15);
 }
 .ui.styled.accordion .title,
 .ui.styled.accordion .accordion .title {
   margin: 0em;
   padding: 0.75em 1em;
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.4);
   font-weight: bold;
   border-top: 1px solid rgba(34, 36, 38, 0.15);
   -webkit-transition: background 0.1s ease, color 0.1s ease;
@@ -161,22 +161,22 @@
 .ui.styled.accordion .accordion .title:hover,
 .ui.styled.accordion .accordion .active.title {
   background: transparent;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 .ui.styled.accordion .accordion .title:hover,
 .ui.styled.accordion .accordion .active.title {
   background: transparent;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 
 /* Active */
 .ui.styled.accordion .active.title {
   background: transparent;
-  color: rgba(0, 0, 0, 0.95);
+  color: rgba(255, 255, 255, 0.95);
 }
 .ui.styled.accordion .accordion .active.title {
   background: transparent;
-  color: rgba(0, 0, 0, 0.95);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 

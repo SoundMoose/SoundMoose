@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.7 - Item
+ * # Semantic UI undefined - Item
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -31,7 +31,7 @@
           flex-direction: column;
   width: 290px;
   min-height: 0px;
-  background: #FFFFFF;
+  background: #1A1A1A;
   padding: 0em;
   border: none;
   border-radius: 0.28571429rem;
@@ -122,7 +122,7 @@
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
   padding: 0em;
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.05);
 }
 .ui.cards > .card > .image > img,
 .ui.card > .image > img {
@@ -168,7 +168,7 @@
   display: block;
   margin: '';
   font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  color: rgba(0, 0, 0, 0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* Default Header Size */
@@ -265,7 +265,7 @@
 .ui.cards > .card .meta,
 .ui.card .meta {
   font-size: 1em;
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 .ui.cards > .card .meta *,
 .ui.card .meta * {
@@ -301,7 +301,7 @@
 /* Header */
 .ui.cards > .card > .content > a.header,
 .ui.card > .content > a.header {
-  color: rgba(0, 0, 0, 0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
 .ui.cards > .card > .content > a.header:hover,
 .ui.card > .content > a.header:hover {
@@ -311,11 +311,11 @@
 /* Meta */
 .ui.cards > .card .meta > a:not(.ui),
 .ui.card .meta > a:not(.ui) {
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 .ui.cards > .card .meta > a:not(.ui):hover,
 .ui.card .meta > a:not(.ui):hover {
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 
 /*--------------
@@ -406,14 +406,14 @@
   padding: 0.75em 1em;
   top: 0em;
   left: 0em;
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.4);
   box-shadow: none;
   -webkit-transition: color 0.1s ease;
   transition: color 0.1s ease;
 }
 .ui.cards > .card > .extra a:not(.ui),
 .ui.card > .extra a:not(.ui) {
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 .ui.cards > .card > .extra a:not(.ui):hover,
 .ui.card > .extra a:not(.ui):hover {
@@ -485,7 +485,7 @@ a.ui.card:hover,
 .ui.link.card:hover {
   cursor: pointer;
   z-index: 5;
-  background: #FFFFFF;
+  background: #1A1A1A;
   border: none;
   box-shadow: 0px 1px 3px 0px #BCBDBD, 0px 0px 0px 1px #D4D4D5;
   -webkit-transform: translateY(-3px);
@@ -645,12 +645,12 @@ a.ui.card:hover,
 .ui.black.cards > .card,
 .ui.cards > .black.card,
 .ui.black.card {
-  box-shadow: 0px 0px 0px 1px #D4D4D5, 0px 2px 0px 0px #1B1C1D, 0px 1px 3px 0px #D4D4D5;
+  box-shadow: 0px 0px 0px 1px #D4D4D5, 0px 2px 0px 0px #FFFFFF, 0px 1px 3px 0px #D4D4D5;
 }
 .ui.black.cards > .card:hover,
 .ui.cards > .black.card:hover,
 .ui.black.card:hover {
-  box-shadow: 0px 0px 0px 1px #D4D4D5, 0px 2px 0px 0px #27292a, 0px 1px 3px 0px #BCBDBD;
+  box-shadow: 0px 0px 0px 1px #D4D4D5, 0px 2px 0px 0px #ffffff, 0px 1px 3px 0px #BCBDBD;
 }
 
 /*--------------

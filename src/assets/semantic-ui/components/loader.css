@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.7 - Loader
+ * # Semantic UI undefined - Loader
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -36,7 +36,7 @@
   width: 100%;
   height: 100%;
   border-radius: 500rem;
-  border: 0.2em solid rgba(0, 0, 0, 0.1);
+  border: 0.2em solid rgba(255, 255, 255, 0.1);
 }
 
 /* Active Shape */
@@ -148,15 +148,15 @@
   border-color: rgba(255, 255, 255, 0.15);
 }
 .ui.dimmer .ui.loader:after {
-  border-color: #FFFFFF transparent transparent;
+  border-color: #1A1A1A transparent transparent;
 }
 
 /* White Dimmer (Inverted) */
 .ui.inverted.dimmer .ui.loader {
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 .ui.inverted.dimmer .ui.loader:before {
-  border-color: rgba(0, 0, 0, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 .ui.inverted.dimmer .ui.loader:after {
   border-color: #767676 transparent transparent;
@@ -305,7 +305,7 @@
   border-color: rgba(255, 255, 255, 0.15);
 }
 .ui.inverted.loader:after {
-  border-top-color: #FFFFFF;
+  border-top-color: #1A1A1A;
 }
 
 /*-------------------

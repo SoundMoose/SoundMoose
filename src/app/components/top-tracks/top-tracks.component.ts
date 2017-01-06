@@ -54,6 +54,7 @@ export class TopTracksComponent implements OnInit {
 
   ngOnInit() {
     this.setCurrentGenre();
+    $('.ui.dropdown').dropdown();
   }
 
   setCurrentGenre(genre = 'all-music') {

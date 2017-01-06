@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.7 - List
+ * # Semantic UI undefined - List
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -161,7 +161,7 @@ ol.ui.list ol li,
   margin: 0em;
   font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: bold;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 
 /* Description */
@@ -191,7 +191,7 @@ ol.ui.list ol li,
 /* Linked Item Icons */
 .ui.list .list > a.item i.icon,
 .ui.list > a.item i.icon {
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 /* Header Link */
@@ -332,7 +332,7 @@ ol.ui.list ol li,
 
 .ui.list .list > a.item:hover .icon,
 .ui.list > a.item:hover .icon {
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 
 
@@ -404,21 +404,21 @@ ol.ui.list ol li,
 .ui.link.list .item,
 .ui.link.list a.item,
 .ui.link.list .item a:not(.ui) {
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.4);
   -webkit-transition: 0.1s color ease;
   transition: 0.1s color ease;
 }
 .ui.link.list a.item:hover,
 .ui.link.list .item a:not(.ui):hover {
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(255, 255, 255, 0.8);
 }
 .ui.link.list a.item:active,
 .ui.link.list .item a:not(.ui):active {
-  color: rgba(0, 0, 0, 0.9);
+  color: rgba(255, 255, 255, 0.9);
 }
 .ui.link.list .active.item,
 .ui.link.list .active.item a:not(.ui) {
-  color: rgba(0, 0, 0, 0.95);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 /* Inverted */
@@ -450,7 +450,7 @@ ol.ui.list ol li,
   background: transparent;
   padding: 0.5em 0.5em;
   margin: 0em;
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.4);
   border-radius: 0.5em;
   -webkit-transition: 0.1s color ease, 0.1s padding-left ease, 0.1s background-color ease;
   transition: 0.1s color ease, 0.1s padding-left ease, 0.1s background-color ease;
@@ -461,18 +461,18 @@ ol.ui.list ol li,
 }
 .ui.selection.list.list > .item:hover,
 .ui.selection.list > .item:hover {
-  background: rgba(0, 0, 0, 0.03);
-  color: rgba(0, 0, 0, 0.8);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.8);
 }
 .ui.selection.list .list > .item:active,
 .ui.selection.list > .item:active {
-  background: rgba(0, 0, 0, 0.05);
-  color: rgba(0, 0, 0, 0.9);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.9);
 }
 .ui.selection.list .list > .item.active,
 .ui.selection.list > .item.active {
-  background: rgba(0, 0, 0, 0.05);
-  color: rgba(0, 0, 0, 0.95);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 /* Inverted */
@@ -566,7 +566,7 @@ ul.ui.list li:before,
 ul.ui.list li:before,
 .ui.bulleted.list .list > a.item:before,
 .ui.bulleted.list > a.item:before {
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 ul.ui.list ul,
 .ui.bulleted.list .list {
@@ -588,7 +588,7 @@ ul.ui.horizontal.bulleted.list li:first-child,
 }
 ul.ui.horizontal.bulleted.list li::before,
 .ui.horizontal.bulleted.list > .item::before {
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 ul.ui.horizontal.bulleted.list li:first-child::before,
 .ui.horizontal.bulleted.list > .item:first-child::before {
@@ -628,7 +628,7 @@ ol.ui.list li:before,
   counter-increment: ordered;
   content: counters(ordered, ".") " ";
   text-align: right;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
   vertical-align: middle;
   opacity: 0.8;
 }

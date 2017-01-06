@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.7 - Progress Bar
+ * # Semantic UI undefined - Progress Bar
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -20,7 +20,7 @@
   border: none;
   margin: 1em 0em 2.5em;
   box-shadow: none;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   padding: 0em;
   border-radius: 0.28571429rem;
 }
@@ -76,7 +76,7 @@
   right: auto;
   left: 0%;
   bottom: auto;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
   font-weight: bold;
   text-shadow: none;
   margin-top: 0.2em;
@@ -118,25 +118,25 @@
 /* Indicating Label */
 .ui.indicating.progress[data-percent^="1"] .label,
 .ui.indicating.progress[data-percent^="2"] .label {
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 .ui.indicating.progress[data-percent^="3"] .label {
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 .ui.indicating.progress[data-percent^="4"] .label,
 .ui.indicating.progress[data-percent^="5"] .label {
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 .ui.indicating.progress[data-percent^="6"] .label {
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 .ui.indicating.progress[data-percent^="7"] .label,
 .ui.indicating.progress[data-percent^="8"] .label {
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 .ui.indicating.progress[data-percent^="9"] .label,
 .ui.indicating.progress[data-percent^="100"] .label {
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 
 /* Single Digits */
@@ -160,7 +160,7 @@
 .ui.indicating.progress[data-percent="7"] .label,
 .ui.indicating.progress[data-percent="8"] .label,
 .ui.indicating.progress[data-percent="9"] .label {
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 
 /* Indicating Success */
@@ -238,7 +238,7 @@
   left: 0px;
   right: 0px;
   bottom: 0px;
-  background: #FFFFFF;
+  background: #1A1A1A;
   border-radius: 0.28571429rem;
   -webkit-animation: progress-active 2s ease infinite;
           animation: progress-active 2s ease infinite;
@@ -298,7 +298,7 @@
   color: #F9FAFB;
 }
 .ui.inverted.progress > .label {
-  color: #FFFFFF;
+  color: #1A1A1A;
 }
 .ui.inverted.progress.success > .label {
   color: #21BA45;
@@ -462,7 +462,7 @@
 
 /* Black */
 .ui.black.progress .bar {
-  background-color: #1B1C1D;
+  background-color: #FFFFFF;
 }
 .ui.black.inverted.progress .bar {
   background-color: #545454;

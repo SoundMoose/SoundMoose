@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.7 - Header
+ * # Semantic UI undefined - Header
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -23,7 +23,7 @@
   font-weight: bold;
   line-height: 1.2857em;
   text-transform: none;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 .ui.header:first-child {
   margin-top: -0.14285em;
@@ -43,7 +43,7 @@
   margin: 0em;
   font-size: 1rem;
   line-height: 1.2em;
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /*--------------
@@ -295,20 +295,20 @@ h5.ui.header .sub.header {
 --------------------*/
 
 .ui.inverted.header {
-  color: #FFFFFF;
+  color: #1A1A1A;
 }
 .ui.inverted.header .sub.header {
   color: rgba(255, 255, 255, 0.8);
 }
 .ui.inverted.attached.header {
-  background: #545454 -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05));
-  background: #545454 linear-gradient(transparent, rgba(0, 0, 0, 0.05));
+  background: #545454 -webkit-linear-gradient(transparent, rgba(255, 255, 255, 0.05));
+  background: #545454 linear-gradient(transparent, rgba(255, 255, 255, 0.05));
   box-shadow: none;
   border-color: transparent;
 }
 .ui.inverted.block.header {
-  background: #545454 -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05));
-  background: #545454 linear-gradient(transparent, rgba(0, 0, 0, 0.05));
+  background: #545454 -webkit-linear-gradient(transparent, rgba(255, 255, 255, 0.05));
+  background: #545454 linear-gradient(transparent, rgba(255, 255, 255, 0.05));
   box-shadow: none;
 }
 .ui.inverted.block.header {
@@ -657,7 +657,7 @@ a.ui.inverted.grey.header:hover {
 --------------------*/
 
 .ui.attached.header {
-  background: #FFFFFF;
+  background: #1A1A1A;
   padding: 0.78571429rem 1rem;
   margin-left: -1px;
   margin-right: -1px;

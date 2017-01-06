@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.7 - Dimmer
+ * # Semantic UI undefined - Dimmer
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -55,7 +55,7 @@
 .ui.dimmer > .content > * {
   display: table-cell;
   vertical-align: middle;
-  color: #FFFFFF;
+  color: #1A1A1A;
 }
 
 /* Loose Coupling */
@@ -154,7 +154,7 @@ body.dimmable > .dimmer {
   background-color: rgba(255, 255, 255, 0.85);
 }
 .ui.inverted.dimmer > .content > * {
-  color: #FFFFFF;
+  color: #1A1A1A;
 }
 
 /*--------------

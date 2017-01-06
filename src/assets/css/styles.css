@@ -178,3 +178,8 @@ player-controls .icon:hover {
   font-size: 11px;
   color: #fff;
 }
+
+
+.top-tracks-header .ui.selection.dropdown {
+  opacity: 0.95;
+}

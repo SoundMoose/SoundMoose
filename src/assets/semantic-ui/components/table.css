@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.7 - Table
+ * # Semantic UI undefined - Table
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -17,13 +17,13 @@
 /* Prototype */
 .ui.table {
   width: 100%;
-  background: #FFFFFF;
+  background: #1A1A1A;
   margin: 1em 0em;
   border: 1px solid rgba(34, 36, 38, 0.15);
   box-shadow: none;
   border-radius: 0.28571429rem;
   text-align: left;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
   border-collapse: separate;
   border-spacing: 0px;
 }
@@ -55,7 +55,7 @@
   cursor: auto;
   background: #F9FAFB;
   text-align: inherit;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
   padding: 0.92857143em 0.78571429em;
   vertical-align: inherit;
   font-style: none;
@@ -86,7 +86,7 @@
   border-top: 1px solid rgba(34, 36, 38, 0.15);
   background: #F9FAFB;
   text-align: inherit;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
   padding: 0.78571429em 0.78571429em;
   vertical-align: middle;
   font-style: normal;
@@ -236,31 +236,31 @@
   pointer-events: none;
   background: transparent;
   font-weight: normal;
-  color: rgba(0, 0, 0, 0.4);
-  box-shadow: -1px -1px 0px 1px #FFFFFF;
+  color: rgba(255, 255, 255, 0.4);
+  box-shadow: -1px -1px 0px 1px #1A1A1A;
 }
 .ui.definition.table tfoot:not(.full-width) th:first-child {
   pointer-events: none;
   background: transparent;
-  font-weight: rgba(0, 0, 0, 0.4);
+  font-weight: rgba(255, 255, 255, 0.4);
   color: normal;
-  box-shadow: 1px 1px 0px 1px #FFFFFF;
+  box-shadow: 1px 1px 0px 1px #1A1A1A;
 }
 
 /* Remove Border */
 .ui.celled.definition.table thead:not(.full-width) th:first-child {
-  box-shadow: 0px -1px 0px 1px #FFFFFF;
+  box-shadow: 0px -1px 0px 1px #1A1A1A;
 }
 .ui.celled.definition.table tfoot:not(.full-width) th:first-child {
-  box-shadow: 0px 1px 0px 1px #FFFFFF;
+  box-shadow: 0px 1px 0px 1px #1A1A1A;
 }
 
 /* Highlight Defining Column */
 .ui.definition.table tr td:first-child:not(.ignored),
 .ui.definition.table tr td.definition {
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(255, 255, 255, 0.03);
   font-weight: bold;
-  color: rgba(0, 0, 0, 0.95);
+  color: rgba(255, 255, 255, 0.95);
   text-transform: '';
   box-shadow: '';
   text-align: '';
@@ -348,12 +348,12 @@
 
 .ui.table tr.active,
 .ui.table td.active {
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.87) inset;
+  box-shadow: 0px 0px 0px rgba(255, 255, 255, 0.87) inset;
 }
 .ui.table tr.active,
 .ui.table td.active {
   background: #E0E0E0 !important;
-  color: rgba(0, 0, 0, 0.87) !important;
+  color: rgba(255, 255, 255, 0.87) !important;
 }
 
 /*--------------
@@ -478,8 +478,8 @@
 
 .ui.selectable.table tbody tr:hover,
 .ui.table tbody tr td.selectable:hover {
-  background: rgba(0, 0, 0, 0.05) !important;
-  color: rgba(0, 0, 0, 0.95) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
 }
 .ui.selectable.inverted.table tbody tr:hover,
 .ui.inverted.table tbody tr td.selectable:hover {
@@ -514,7 +514,7 @@
 .ui.table tr td.selectable.active:hover,
 .ui.selectable.table tr:hover td.active {
   background: #E0E0E0 !important;
-  color: rgba(0, 0, 0, 0.87) !important;
+  color: rgba(255, 255, 255, 0.87) !important;
 }
 .ui.selectable.table tr.positive:hover,
 .ui.table tr td.selectable.positive:hover,
@@ -594,7 +594,7 @@
 /* Allow striped active hover */
 .ui.striped.selectable.selectable.selectable.table tbody tr.active:hover {
   background: #EFEFEF !important;
-  color: rgba(0, 0, 0, 0.95) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
 }
 
 /*--------------
@@ -621,7 +621,7 @@
 }
 .ui.inverted.red.table {
   background-color: #DB2828 !important;
-  color: #FFFFFF !important;
+  color: #1A1A1A !important;
 }
 
 /* Orange */
@@ -630,7 +630,7 @@
 }
 .ui.inverted.orange.table {
   background-color: #F2711C !important;
-  color: #FFFFFF !important;
+  color: #1A1A1A !important;
 }
 
 /* Yellow */
@@ -639,7 +639,7 @@
 }
 .ui.inverted.yellow.table {
   background-color: #FBBD08 !important;
-  color: #FFFFFF !important;
+  color: #1A1A1A !important;
 }
 
 /* Olive */
@@ -648,7 +648,7 @@
 }
 .ui.inverted.olive.table {
   background-color: #B5CC18 !important;
-  color: #FFFFFF !important;
+  color: #1A1A1A !important;
 }
 
 /* Green */
@@ -657,7 +657,7 @@
 }
 .ui.inverted.green.table {
   background-color: #21BA45 !important;
-  color: #FFFFFF !important;
+  color: #1A1A1A !important;
 }
 
 /* Teal */
@@ -666,7 +666,7 @@
 }
 .ui.inverted.teal.table {
   background-color: #00B5AD !important;
-  color: #FFFFFF !important;
+  color: #1A1A1A !important;
 }
 
 /* Blue */
@@ -675,7 +675,7 @@
 }
 .ui.inverted.blue.table {
   background-color: #2185D0 !important;
-  color: #FFFFFF !important;
+  color: #1A1A1A !important;
 }
 
 /* Violet */
@@ -684,7 +684,7 @@
 }
 .ui.inverted.violet.table {
   background-color: #6435C9 !important;
-  color: #FFFFFF !important;
+  color: #1A1A1A !important;
 }
 
 /* Purple */
@@ -693,7 +693,7 @@
 }
 .ui.inverted.purple.table {
   background-color: #A333C8 !important;
-  color: #FFFFFF !important;
+  color: #1A1A1A !important;
 }
 
 /* Pink */
@@ -702,7 +702,7 @@
 }
 .ui.inverted.pink.table {
   background-color: #E03997 !important;
-  color: #FFFFFF !important;
+  color: #1A1A1A !important;
 }
 
 /* Brown */
@@ -711,7 +711,7 @@
 }
 .ui.inverted.brown.table {
   background-color: #A5673F !important;
-  color: #FFFFFF !important;
+  color: #1A1A1A !important;
 }
 
 /* Grey */
@@ -720,16 +720,16 @@
 }
 .ui.inverted.grey.table {
   background-color: #767676 !important;
-  color: #FFFFFF !important;
+  color: #1A1A1A !important;
 }
 
 /* Black */
 .ui.black.table {
-  border-top: 0.2em solid #1B1C1D;
+  border-top: 0.2em solid #FFFFFF;
 }
 .ui.inverted.black.table {
-  background-color: #1B1C1D !important;
-  color: #FFFFFF !important;
+  background-color: #FFFFFF !important;
+  color: #1A1A1A !important;
 }
 
 /*--------------
@@ -861,7 +861,7 @@
   cursor: pointer;
   white-space: nowrap;
   border-left: 1px solid rgba(34, 36, 38, 0.15);
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 .ui.sortable.table thead th:first-child {
   border-left: none;
@@ -898,14 +898,14 @@
   color: rgba(40, 40, 40, 0.3);
 }
 .ui.sortable.table thead th:hover {
-  background: rgba(0, 0, 0, 0.05);
-  color: rgba(0, 0, 0, 0.8);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* Sorted */
 .ui.sortable.table thead th.sorted {
-  background: rgba(0, 0, 0, 0.05);
-  color: rgba(0, 0, 0, 0.95);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.95);
 }
 .ui.sortable.table thead th.sorted:after {
   display: inline-block;
@@ -913,19 +913,19 @@
 
 /* Sorted Hover */
 .ui.sortable.table thead th.sorted:hover {
-  background: rgba(0, 0, 0, 0.05);
-  color: rgba(0, 0, 0, 0.95);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 /* Inverted */
 .ui.inverted.sortable.table thead th.sorted {
-  background: rgba(255, 255, 255, 0.15) -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05));
-  background: rgba(255, 255, 255, 0.15) linear-gradient(transparent, rgba(0, 0, 0, 0.05));
+  background: rgba(255, 255, 255, 0.15) -webkit-linear-gradient(transparent, rgba(255, 255, 255, 0.05));
+  background: rgba(255, 255, 255, 0.15) linear-gradient(transparent, rgba(255, 255, 255, 0.05));
   color: #ffffff;
 }
 .ui.inverted.sortable.table thead th:hover {
-  background: rgba(255, 255, 255, 0.08) -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05));
-  background: rgba(255, 255, 255, 0.08) linear-gradient(transparent, rgba(0, 0, 0, 0.05));
+  background: rgba(255, 255, 255, 0.08) -webkit-linear-gradient(transparent, rgba(255, 255, 255, 0.05));
+  background: rgba(255, 255, 255, 0.08) linear-gradient(transparent, rgba(255, 255, 255, 0.05));
   color: #ffffff;
 }
 .ui.inverted.sortable.table thead th {
@@ -945,7 +945,7 @@
   border: none;
 }
 .ui.inverted.table th {
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.15);
   border-color: rgba(255, 255, 255, 0.1) !important;
   color: rgba(255, 255, 255, 0.9);
 }
@@ -963,7 +963,7 @@
 /* Definition */
 .ui.inverted.definition.table tfoot:not(.full-width) th:first-child,
 .ui.inverted.definition.table thead:not(.full-width) th:first-child {
-  background: #FFFFFF;
+  background: #1A1A1A;
 }
 .ui.inverted.definition.table tr td:first-child {
   background: rgba(255, 255, 255, 0.02);
@@ -1002,7 +1002,7 @@
   background: transparent;
 }
 .ui.basic.striped.table tbody tr:nth-child(2n) {
-  background-color: rgba(0, 0, 0, 0.05) !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 /* Very Basic */

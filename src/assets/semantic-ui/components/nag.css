@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.7 - Nag
+ * # Semantic UI undefined - Nag
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -28,7 +28,7 @@
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
   font-size: 1rem;
   text-align: center;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
   border-radius: 0em 0em 0.28571429rem 0.28571429rem;
   -webkit-transition: 0.2s background ease;
   transition: 0.2s background ease;
@@ -39,7 +39,7 @@ a.ui.nag {
 .ui.nag > .title {
   display: inline-block;
   margin: 0em 0.5em;
-  color: #FFFFFF;
+  color: #1A1A1A;
 }
 .ui.nag > .close.icon {
   cursor: pointer;
@@ -49,7 +49,7 @@ a.ui.nag {
   right: 1em;
   font-size: 1em;
   margin: -0.5em 0em 0em;
-  color: #FFFFFF;
+  color: #1A1A1A;
   -webkit-transition: opacity 0.2s ease;
   transition: opacity 0.2s ease;
 }
@@ -110,13 +110,13 @@ a.ui.nag {
 .ui.inverted.nags .nag,
 .ui.inverted.nag {
   background-color: #F3F4F5;
-  color: rgba(0, 0, 0, 0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
 .ui.inverted.nags .nag .close,
 .ui.inverted.nags .nag .title,
 .ui.inverted.nag .close,
 .ui.inverted.nag .title {
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 
