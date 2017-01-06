@@ -21,6 +21,20 @@ import { Player } from './../models/player.model';
 
 @Injectable()
 export class PlayerService {
+  audioCtx: any ;
+  audioSource: any;
+  analyser: any;
+  bufferLength: number;
+  frequencyDataArray: any;  // any[] doesnt work here?
+  waveformDataArray: any;
+
+/////////////////////////////////
+  // for dev
+  dummyAudioElement: any;
+/////////////////////////////////
+
+
+
 
   constructor(protected audio: AudioStream, private store$: Store<AppStore>, private playerActions: PlayerActions) {
     this.store$.select('player')
@@ -42,68 +56,122 @@ export class PlayerService {
      .map((item: any) => Math.floor(item.path[0].currentTime))
      .distinctUntilChanged()
      .subscribe((item) => this.updateCurrentTime(item));
+
+
+
+
+     ////////////////////////////// Under Development  /////////////////////////
+
+     this.audioCtx = new AudioContext();
+
+     ////////////////////////////////////////////////////////////////////////////
+     /////// Uncomment below to create and play from dummy audio DOM element
+       this.dummyAudioElement= new Audio;
+      //  this.dummyAudioElement.src = './../assets/sounds/Broke_For_Free_-_01_-_Night_Owl.mp3';
+       this.dummyAudioElement.src = '';
+       this.dummyAudioElement.crossOrigin = "anonymous"; // CORS :)
+       this.dummyAudioElement.play();
+       this.audioSource = this.audioCtx.createMediaElementSource(this.dummyAudioElement);
+     ////////////////////////////////////////////////////////////////////////////
+
+    // this.audioSource = this.audioCtx.createMediaElementSource(this.audio);  // comment this out when playing from dummy audio element
+    this.audioSource.connect(this.audioCtx.destination);
+    this.audioSource.mediaElement.play();
+
+    this.analyser = this.audioCtx.createAnalyser();
+    this.audioSource.connect(this.analyser);
+
+    this.analyser.fftSize = 2048;  // Fast Fourier Transform (fft) in a certain frequency domain,
+    this.bufferLength = this.analyser.frequencyBinCount;
+
+    // Byte analyser methods
+    this.frequencyDataArray = new Uint8Array(this.bufferLength);
+    this.waveformDataArray = new Uint8Array(this.bufferLength);
+
+    this.audioSource = this.audioCtx.createMediaElementSource(this.audio);
+    this.audioSource.connect(this.audioCtx.destination);
+    this.audioSource.mediaElement.play();
+
+    let that = this;
+    setInterval(function() {
+
+      // Frequency Data:
+      that.analyser.getByteFrequencyData(that.frequencyDataArray); // only use this line or the next
+      // analyser.getFloatFrequencyData(frequencyDataArray); // (choose Float or Byte)
+      // console.log('frequencyDataArray:', that.frequencyDataArray);
+
+      // waveform Data:
+      // analyser.getByteTimeDomainData(waveformDataArray);
+      // analyser.getFloatTimeDomainData(waveformDataArray);  // remember to change wafeformDataArray to float!
+      // console.log('waveformDataArray:', waveformDataArray);
+
+    }, 100);
+
+
+    ////////////////////////// End of Under Development ////////////////////////
+
+
   }
 
   play(url: string = null): void {
     if (url) {
       this.audio.src = url;
     }
-    //  this.audio.play();
+    // this.audio.crossOrigin = "anonymous"; // CORS :)
+    this.audio.play();
 
-    console.log(this.audio);
+    // console.log(this.audio);
 
 ///////////////////////////// IN-DEVELOPMENT /////////////////////////////////////
-    let audioCtx = new AudioContext();
-    let newAudio = new Audio();
-    let dummyUrl = './../assets/sounds/Broke_For_Free_-_01_-_Night_Owl.mp3';
-
+    //
+    // let newAudio = new Audio();
+    // let audioCtx = new AudioContext();
+    // let dummyUrl = './../assets/sounds/Broke_For_Free_-_01_-_Night_Owl.mp3';
+    //
     // console.log('newAudio: ', newAudio);
     // console.log('AudioStream audio: ', this.audio);
-
-    newAudio.src = dummyUrl;
+    //
+    // newAudio.src = dummyUrl;
     // newAudio.src = url;
-    newAudio.crossOrigin = "anonymous"; // CORS :)
-    this.audio.crossOrigin = "anonymous"; // CORS :)
+    // this.audio.crossOrigin = "anonymous"; // CORS :)
     // console.log('newArudio.src = ' + newAudio.src);
+    //
+    //
+    //
 
-    let source = audioCtx.createMediaElementSource(newAudio);
-    // let source = audioCtx.createMediaElementSource(this.audio);
-    // source.connect(audioCtx.destination);
-    source.connect(audioCtx.destination);
-    source.mediaElement.play();
-
-    let analyser = audioCtx.createAnalyser();
-    source.connect(analyser);
-    // analyser.connect(distortion);
-
-    analyser.fftSize = 2048;  // Fast Fourier Transform (fft) in a certain frequency domain,
-    let bufferLength = analyser.frequencyBinCount;
-
-    // Byte analyser methods
-    let frequencyDataArray = new Uint8Array(bufferLength);
-    let waveformDataArray = new Uint8Array(bufferLength);
-
-    // Float analyser methods
-    // let frequencyDataArray = new Float32Array(bufferLength);
-    // let waveformDataArray = new Float32Array(bufferLength);
-
-    /// to fix -infinity dataArray bug in frequency, resource: http://stackoverflow.com/questions/14169317/interpreting-web-audio-api-fft-results
-
-    // dataArray = dataArray.map(item=> (item - analyser.minDecibels)*(analyser.maxDecibels - analyser.minDecibels));
-
-    setInterval(function() {
-
-    // Frequency Data:
-    analyser.getByteFrequencyData(frequencyDataArray); // only use this line or the next
-    // analyser.getFloatFrequencyData(frequencyDataArray); // (choose Float or Byte)
-    console.log('frequencyDataArray:', frequencyDataArray);
-
-    // waveform Data:
-    // analyser.getByteTimeDomainData(waveformDataArray);
-    // analyser.getFloatTimeDomainData(waveformDataArray);  // remember to change wafeformDataArray to float!
-    // console.log('waveformDataArray:', waveformDataArray);
-
-  }, 1000);
+  //
+  //   let analyser = audioCtx.createAnalyser();
+  //   source.connect(analyser);
+  //   // analyser.connect(distortion);
+  //
+  //   analyser.fftSize = 2048;  // Fast Fourier Transform (fft) in a certain frequency domain,
+  //   let bufferLength = analyser.frequencyBinCount;
+  //
+  //   // Byte analyser methods
+  //   let frequencyDataArray = new Uint8Array(bufferLength);
+  //   let waveformDataArray = new Uint8Array(bufferLength);
+  //
+  //   // Float analyser methods
+  //   // let frequencyDataArray = new Float32Array(bufferLength);
+  //   // let waveformDataArray = new Float32Array(bufferLength);
+  //
+  //   /// to fix -infinity dataArray bug in frequency, resource: http://stackoverflow.com/questions/14169317/interpreting-web-audio-api-fft-results
+  //
+  //   // dataArray = dataArray.map(item=> (item - analyser.minDecibels)*(analyser.maxDecibels - analyser.minDecibels));
+  //
+  //   setInterval(function() {
+  //
+  //   // Frequency Data:
+  //   // analyser.getByteFrequencyData(frequencyDataArray); // only use this line or the next
+  //   // analyser.getFloatFrequencyData(frequencyDataArray); // (choose Float or Byte)
+  //   // console.log('frequencyDataArray:', frequencyDataArray);
+  //
+  //   // waveform Data:
+  //   // analyser.getByteTimeDomainData(waveformDataArray);
+  //   // analyser.getFloatTimeDomainData(waveformDataArray);  // remember to change wafeformDataArray to float!
+  //   // console.log('waveformDataArray:', waveformDataArray);
+  //
+  // }, 100);
 ///////////////////////// END OF IN-DEVELOPMENT ////////////////////////////////
   }
 
