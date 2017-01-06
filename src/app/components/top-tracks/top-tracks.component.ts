@@ -57,7 +57,7 @@ export class TopTracksComponent implements OnInit {
   }
 
   setDefaultGenre() {
-    (<any>$('.ui.dropdown')).dropdown('set selected', 'all-music')));
+    (<any>$('.ui.dropdown')).dropdown('refresh');
   }
 
   setCurrentGenre(genre = 'all-music') {
