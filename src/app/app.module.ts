@@ -64,7 +64,8 @@ const APP_PROVIDERS = [
     }),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     HttpModule,
-    MaterialModule.forRoot()
+    MaterialModule.forRoot(),
+    FormsModule
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

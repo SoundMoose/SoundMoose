@@ -17,7 +17,7 @@ const initialState: PlayerState = {
     streamUrl: '',
     duration: 0
   },
-  volume: 100,
+  volume: 50,
 
   isMuted: false,
   volumeBeforeMute: 5,
@@ -62,11 +62,26 @@ export default function (state = initialState, action: Action): PlayerState {
           isMuted: !state.isMuted,
         });
       } else {
-        return Object.assign({}, state, {
-          volumeBeforeMute: action.payload.volume,
-          volume: 0,
-          isMuted: !state.isMuted,
-        });
+          // return Object.assign({}, state, {
+          //   volume: action.payload.volume
+          // });
+          // return Object.assign({}, state, {
+          //   volumeBeforeMute: action.payload.volume,
+          //   volume: 0,
+          //   isMuted: !state.isMuted,
+          // });
+        if (action.payload.volume === 0) {
+          return Object.assign({}, state, {
+            volumeBeforeMute: 10,
+            volume: action.payload.volume,
+            isMuted: !state.isMuted,
+          });
+        } else {
+          return Object.assign({}, state, {
+            volume: action.payload.volume,
+          });
+        }
+
       }
     }
 
