@@ -182,4 +182,5 @@ player-controls .icon:hover {
 
 .top-tracks-header .ui.selection.dropdown {
   opacity: 0.95;
+  color: #fff;
 }
