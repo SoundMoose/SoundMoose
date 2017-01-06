@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.7 - Dropdown
+ * # Semantic UI undefined - Dropdown
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -45,7 +45,7 @@
   min-width: max-content;
   margin: 0em;
   padding: 0em 0em;
-  background: #FFFFFF;
+  background: #1a1a1a;
   font-size: 1em;
   text-shadow: none;
   text-align: left;
@@ -112,7 +112,7 @@
   text-align: left;
   border-top: none;
   line-height: 1em;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
   padding: 0.78571429rem 1.14285714rem !important;
   font-size: 1rem;
   text-transform: none;
@@ -154,7 +154,7 @@
 .ui.dropdown .menu > .header {
   margin: 1rem 0rem 0.75rem;
   padding: 0em 1.14285714rem;
-  color: rgba(0, 0, 0, 0.85);
+  color: rgba(255, 255, 255, 0.85);
   font-size: 0.78571429em;
   font-weight: bold;
   text-transform: uppercase;
@@ -193,7 +193,7 @@
 .ui.dropdown .menu > .item > .description {
   float: right;
   margin: 0em 0em 0em 1em;
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 /*-----------------
@@ -205,7 +205,7 @@
   font-weight: normal;
 }
 .ui.dropdown .menu > .message:not(.ui) {
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 /*--------------
@@ -350,10 +350,10 @@
           transform: rotateZ(0deg);
   min-width: 14em;
   min-height: 2.7142em;
-  background: #FFFFFF;
+  background: #1A1A1A;
   display: inline-block;
   padding: 0.78571429em 2.1em 0.78571429em 1em;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
   box-shadow: none;
   border: 1px solid rgba(34, 36, 38, 0.15);
   border-radius: 0.28571429rem;
@@ -486,7 +486,7 @@ select.ui.dropdown {
 /* Visible */
 .ui.selection.visible.dropdown > .text:not(.default) {
   font-weight: normal;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* Visible Hover */
@@ -588,7 +588,7 @@ select.ui.dropdown {
   opacity: 0.45;
 }
 .ui.active.search.dropdown input.search:focus + .text {
-  color: rgba(115, 115, 115, 0.87) !important;
+  color: rgba(255, 255, 255, 0.87) !important;
 }
 
 /* Search Menu */
@@ -741,7 +741,7 @@ select.ui.dropdown {
 .ui.dropdown .menu .active.item {
   background: transparent;
   font-weight: bold;
-  color: rgba(0, 0, 0, 0.95);
+  color: rgba(255, 255, 255, 0.95);
   box-shadow: none;
   z-index: 12;
 }
@@ -753,8 +753,8 @@ select.ui.dropdown {
 
 /* Menu Item Hover */
 .ui.dropdown .menu > .item:hover {
-  background: rgba(0, 0, 0, 0.05);
-  color: rgba(0, 0, 0, 0.95);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.95);
   z-index: 13;
 }
 
@@ -775,7 +775,7 @@ select.ui.dropdown {
   width: 1.28571429em;
   height: 1.28571429em;
   border-radius: 500rem;
-  border: 0.2em solid rgba(0, 0, 0, 0.1);
+  border: 0.2em solid rgba(255, 255, 255, 0.1);
 }
 .ui.loading.dropdown > i.icon:after {
   position: absolute;
@@ -828,11 +828,11 @@ select.ui.dropdown {
 
 .ui.dropdown:not(.button) > .default.text,
 .ui.default.dropdown:not(.button) > .text {
-  color: rgba(191, 191, 191, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 .ui.dropdown:not(.button) > input:focus + .default.text,
 .ui.default.dropdown:not(.button) > input:focus + .text {
-  color: rgba(115, 115, 115, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 
 /*--------------------
@@ -859,8 +859,8 @@ select.ui.dropdown {
 /* Selected Item */
 .ui.dropdown.selected,
 .ui.dropdown .menu .selected.item {
-  background: rgba(0, 0, 0, 0.03);
-  color: rgba(0, 0, 0, 0.95);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 /*--------------------
@@ -1211,7 +1211,7 @@ select.ui.dropdown {
   width: 0.5em;
   height: 0.5em;
   box-shadow: -1px -1px 0px 1px rgba(34, 36, 38, 0.15);
-  background: #FFFFFF;
+  background: #1A1A1A;
   z-index: 2;
 }
 .ui.pointing.dropdown > .menu:after {

@@ -47,11 +47,11 @@
     Brand Colors
 --------------------*/
 
-@primaryColor        : @blue;
-@secondaryColor      : @black;
+@primaryColor        : #1A1A1A;
+@secondaryColor      : @white;
 
-@lightPrimaryColor   : @lightBlue;
-@lightSecondaryColor : @lightBlack;
+@lightPrimaryColor   : @grey;
+@lightSecondaryColor : @white;
 
 /*--------------
   Page Heading
@@ -121,7 +121,7 @@
 @pageOverflowX       : hidden;
 
 @lineHeight          : 1.4285em;
-@textColor           : rgba(0, 0, 0, 0.87);
+@textColor           : rgba(255, 255, 255, 0.87);
 
 /*-------------------
       Paragraph
@@ -157,7 +157,7 @@
 @loaderSize              : @relativeBig;
 @loaderSpeed             : 0.6s;
 @loaderLineWidth         : 0.2em;
-@loaderFillColor         : rgba(0, 0, 0, 0.1);
+@loaderFillColor         : rgba(255, 255, 255, 0.1);
 @loaderLineColor         : @grey;
 
 @invertedLoaderFillColor : rgba(255, 255, 255, 0.15);
@@ -203,7 +203,7 @@
 @pink             : #E03997;
 @brown            : #A5673F;
 @grey             : #767676;
-@black            : #1B1C1D;
+@black            : #FFFFFF;
 
 /*---  Light Colors  ---*/
 @lightRed         : #FF695E;
@@ -225,7 +225,7 @@
 @offWhite         : #F9FAFB;
 @darkWhite        : #F3F4F5;
 @midWhite         : #DCDDDE;
-@white            : #FFFFFF;
+@white            : #1A1A1A;
 
 /*--- Colored Backgrounds ---*/
 @redBackground    : #FFE8E6;
@@ -283,10 +283,10 @@
      Alpha Colors
 --------------------*/
 
-@subtleTransparentBlack     : rgba(0, 0, 0, 0.03);
-@transparentBlack           : rgba(0, 0, 0, 0.05);
-@strongTransparentBlack     : rgba(0, 0, 0, 0.10);
-@veryStrongTransparentBlack : rgba(0, 0, 0, 0.15);
+@subtleTransparentBlack     : rgba(255, 255, 255, 0.03);
+@transparentBlack           : rgba(255, 255, 255, 0.05);
+@strongTransparentBlack     : rgba(255, 255, 255, 0.10);
+@veryStrongTransparentBlack : rgba(255, 255, 255, 0.15);
 
 @subtleTransparentWhite     : rgba(255, 255, 255, 0.02);
 @transparentWhite           : rgba(255, 255, 255, 0.08);
@@ -401,15 +401,15 @@
      Neutral Text
 --------------------*/
 
-@darkTextColor               : rgba(0, 0, 0, 0.85);
-@mutedTextColor              : rgba(0, 0, 0, 0.6);
-@lightTextColor              : rgba(0, 0, 0, 0.4);
+@darkTextColor               : rgba(255, 255, 255, 0.85);
+@mutedTextColor              : rgba(255, 255, 255, 0.6);
+@lightTextColor              : rgba(255, 255, 255, 0.4);
 
-@unselectedTextColor         : rgba(0, 0, 0, 0.4);
-@hoveredTextColor            : rgba(0, 0, 0, 0.8);
-@pressedTextColor            : rgba(0, 0, 0, 0.9);
-@selectedTextColor           : rgba(0, 0, 0, 0.95);
-@disabledTextColor           : rgba(0, 0, 0, 0.2);
+@unselectedTextColor         : rgba(255, 255, 255, 0.4);
+@hoveredTextColor            : rgba(255, 255, 255, 0.8);
+@pressedTextColor            : rgba(255, 255, 255, 0.9);
+@selectedTextColor           : rgba(255, 255, 255, 0.95);
+@disabledTextColor           : rgba(255, 255, 255, 0.2);
 
 @invertedTextColor           : rgba(255, 255, 255, 0.9);
 @invertedMutedTextColor      : rgba(255, 255, 255, 0.8);

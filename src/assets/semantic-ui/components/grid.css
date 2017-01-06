@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.7 - Grid
+ * # Semantic UI undefined - Grid
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -1339,7 +1339,7 @@
 .ui.grid > .red.column,
 .ui.grid > .row > .red.column {
   background-color: #DB2828 !important;
-  color: #FFFFFF;
+  color: #1A1A1A;
 }
 
 /* Orange */
@@ -1347,7 +1347,7 @@
 .ui.grid > .orange.column,
 .ui.grid > .row > .orange.column {
   background-color: #F2711C !important;
-  color: #FFFFFF;
+  color: #1A1A1A;
 }
 
 /* Yellow */
@@ -1355,7 +1355,7 @@
 .ui.grid > .yellow.column,
 .ui.grid > .row > .yellow.column {
   background-color: #FBBD08 !important;
-  color: #FFFFFF;
+  color: #1A1A1A;
 }
 
 /* Olive */
@@ -1363,7 +1363,7 @@
 .ui.grid > .olive.column,
 .ui.grid > .row > .olive.column {
   background-color: #B5CC18 !important;
-  color: #FFFFFF;
+  color: #1A1A1A;
 }
 
 /* Green */
@@ -1371,7 +1371,7 @@
 .ui.grid > .green.column,
 .ui.grid > .row > .green.column {
   background-color: #21BA45 !important;
-  color: #FFFFFF;
+  color: #1A1A1A;
 }
 
 /* Teal */
@@ -1379,7 +1379,7 @@
 .ui.grid > .teal.column,
 .ui.grid > .row > .teal.column {
   background-color: #00B5AD !important;
-  color: #FFFFFF;
+  color: #1A1A1A;
 }
 
 /* Blue */
@@ -1387,7 +1387,7 @@
 .ui.grid > .blue.column,
 .ui.grid > .row > .blue.column {
   background-color: #2185D0 !important;
-  color: #FFFFFF;
+  color: #1A1A1A;
 }
 
 /* Violet */
@@ -1395,7 +1395,7 @@
 .ui.grid > .violet.column,
 .ui.grid > .row > .violet.column {
   background-color: #6435C9 !important;
-  color: #FFFFFF;
+  color: #1A1A1A;
 }
 
 /* Purple */
@@ -1403,7 +1403,7 @@
 .ui.grid > .purple.column,
 .ui.grid > .row > .purple.column {
   background-color: #A333C8 !important;
-  color: #FFFFFF;
+  color: #1A1A1A;
 }
 
 /* Pink */
@@ -1411,7 +1411,7 @@
 .ui.grid > .pink.column,
 .ui.grid > .row > .pink.column {
   background-color: #E03997 !important;
-  color: #FFFFFF;
+  color: #1A1A1A;
 }
 
 /* Brown */
@@ -1419,7 +1419,7 @@
 .ui.grid > .brown.column,
 .ui.grid > .row > .brown.column {
   background-color: #A5673F !important;
-  color: #FFFFFF;
+  color: #1A1A1A;
 }
 
 /* Grey */
@@ -1427,15 +1427,15 @@
 .ui.grid > .grey.column,
 .ui.grid > .row > .grey.column {
   background-color: #767676 !important;
-  color: #FFFFFF;
+  color: #1A1A1A;
 }
 
 /* Black */
 .ui.grid > .black.row,
 .ui.grid > .black.column,
 .ui.grid > .row > .black.column {
-  background-color: #1B1C1D !important;
-  color: #FFFFFF;
+  background-color: #FFFFFF !important;
+  color: #1A1A1A;
 }
 
 /*----------------------
