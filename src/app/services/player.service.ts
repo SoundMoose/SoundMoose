@@ -97,4 +97,8 @@ export class PlayerService {
     }, null);
   }
 
+   changePosition(fraction: number) {
+     this.audio.currentTime = this.audio.duration * fraction;
+   }
+
 }
