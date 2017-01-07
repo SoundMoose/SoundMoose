@@ -55,7 +55,7 @@ const APP_PROVIDERS = [
     TrackInfoComponent,
     TrackProgressComponent,
     TopTrackTileComponent,
-    VisualizerComponent
+    VisualizerComponent,
     SpinnerComponent
   ],
   imports: [
