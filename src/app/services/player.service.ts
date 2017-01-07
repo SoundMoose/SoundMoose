@@ -37,8 +37,11 @@ export class PlayerService {
       .map((player: Player) => player.currentTrack)
       .distinctUntilChanged();
 
-     this.playingSubscription = Observable.fromEvent(this.audio, 'playing')
-       .subscribe();
+    this.playingSubscription = Observable.fromEvent(this.audio, 'playing')
+      .subscribe(() => this.store$.dispatch(playerActions.startAudioPlaying()));
+
+    Observable.fromEvent(this.audio, 'loadstart')
+      .subscribe(() => this.store$.dispatch(playerActions.startAudioLoading()));
 
     this.currentTrack$
       .subscribe(track => this.currentTrackId = track.id);
