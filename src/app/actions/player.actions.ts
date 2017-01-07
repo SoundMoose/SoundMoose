@@ -68,6 +68,18 @@ export class PlayerActions {
   }
 
 
+  static START_AUDIO_PLAYING = '[Player] Start <audio> playing';
+  startAudioPlaying(): Action {
+    return {
+      type: PlayerActions.START_AUDIO_PLAYING
+    };
+  }
+  static START_AUDIO_LOADING = '[Player] Start <audio> loading';
+  startAudioLoading(): Action {
+    return {
+      type: PlayerActions.START_AUDIO_LOADING
+    };
+  }
   // static PAUSED_AUDIO = '[Player] Pause Audio';
   // pauseAudio(): Action {
   //   return {

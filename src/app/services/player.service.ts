@@ -10,6 +10,7 @@ import { Action } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { Subscription} from 'rxjs/Subscription';
 
 import { AppStore } from '../models/appstore.model';
 import { PlayerState } from '../reducers/player.reducer';
@@ -26,6 +27,8 @@ export class PlayerService {
   tracksList: Track[];
   currentTrackId: number;
 
+   playingSubscription: Subscription;
+
    constructor(protected audio: AudioStream, private store$: Store<AppStore>, private playerActions: PlayerActions) {
     this.store$.select('tracks')
       .subscribe((item: Track[]) => this.tracksList = item);
@@ -33,6 +36,12 @@ export class PlayerService {
     this.currentTrack$ = this.store$.select('player')
       .map((player: Player) => player.currentTrack)
       .distinctUntilChanged();
+
+    this.playingSubscription = Observable.fromEvent(this.audio, 'playing')
+      .subscribe(() => this.store$.dispatch(playerActions.startAudioPlaying()));
+
+    Observable.fromEvent(this.audio, 'loadstart')
+      .subscribe(() => this.store$.dispatch(playerActions.startAudioLoading()));
 
     this.currentTrack$
       .subscribe(track => this.currentTrackId = track.id);
@@ -101,6 +110,10 @@ export class PlayerService {
 
    changePosition(fraction: number) {
      this.audio.currentTime = this.audio.duration * fraction;
+   }
+
+   isAudioPlaying() {
+     return this.playingSubscription;
    }
 
 }

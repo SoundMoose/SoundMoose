@@ -5,6 +5,9 @@ import { AppStore } from './../../models/appstore.model';
 import { Track } from './../../models/track.model';
 import { Observable } from 'rxjs/Observable';
 import { AudioStream } from '../../howler-element';
+import { Subscription } from 'rxjs/Subscription';
+
+declare var $: any;
 
 @Component({
   selector: 'top-tracks',
