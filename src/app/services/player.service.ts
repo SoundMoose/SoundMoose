@@ -85,8 +85,8 @@ export class PlayerService {
      this.store$.select('player')
    }
 
-   getCurrentTrackIndex(): number {
-    return this.tracksList.reduce((acc, cur, index) => {
+  getCurrentTrackIndex(): number {
+    let currentIndex = this.tracksList.reduce((acc, cur, index) => {
       if (acc !== null) {
         return acc;
       } else if (cur.id === this.currentTrackId) {
@@ -95,6 +95,8 @@ export class PlayerService {
         return null;
       }
     }, null);
+
+    return currentIndex === this.tracksList.length - 1 ? -1 : currentIndex;
   }
 
    changePosition(fraction: number) {
