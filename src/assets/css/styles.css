@@ -198,4 +198,5 @@ player-controls .icon:hover {
 }*/
 .track-progress-bar {
   width: 450px;
+  top: -8px !important;
 }
