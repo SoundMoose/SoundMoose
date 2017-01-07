@@ -38,7 +38,10 @@ module.exports = {
     { rel: 'manifest', href: '/assets/manifest.json' },
 
     { rel: 'stylesheet', type: 'text/css', href: '/assets/semantic-ui/semantic.min.css'},
+    /** <link> tags for angular material 2 theme css **/
+    { rel: 'stylesheet', type: 'text/css', href: '/assets/css/pink-bluegrey.css'},
     { rel: 'stylesheet', type: 'text/css', href: '/assets/css/styles.css'}
+
   ],
   meta: [
     { name: 'msapplication-TileColor', content: '#00bcd4' },
