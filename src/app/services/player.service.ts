@@ -80,8 +80,6 @@ export class PlayerService {
     if (url) {
       this.audio.src = url;
       this.audio.crossOrigin = "anonymous"; // CORS :)
-      // this.audioSource.mediaElement.play();
-      // this.audio.play();
     }
     this.audio.play();
   }
