@@ -1,7 +1,8 @@
 <span class="track-current-time">{{ progressMinutesSeconds }}</span>
 
-<div class="progress-wrapper" (click)="handleProgressClick($event)">
- <md-slider (change)="onChange($event)" class="track-progress-bar"></md-slider>
+<!-- <div (click)="handleProgressClick($event)" class= -->
+<div class="progress-wrapper">
+ <md-slider [value]="currentProgress" (change)="handleProgressChange($event)" class="track-progress-bar"></md-slider>
 <!--  <div [ngStyle]="{
    width: (450 * progress) + 'px'
  }" class="progress-bar-left"></div>

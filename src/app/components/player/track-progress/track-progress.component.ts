@@ -18,6 +18,7 @@ export class TrackProgressComponent {
   durationMinutesSeconds: string;
   progressMinutesSeconds: string;
   progress: number = 0;
+  currentProgress: number = 0;
 
   constructor (private playerService: PlayerService, private store$: Store<AppStore>) {
     this.player$ = this.store$.select('player');
@@ -26,6 +27,7 @@ export class TrackProgressComponent {
       this.progressMinutesSeconds = this.millisToMinutesSeconds(+item.currentTime * 1000);
       let progress = (+item.currentTime * 1000) / +item.currentTrack.duration;
       this.progress = Number.isNaN(progress) ? 0 : progress;
+      this.currentProgress = Math.floor(((+item.currentTime*1000/+item.currentTrack.duration)*100));
     });
   }
 
@@ -35,8 +37,15 @@ export class TrackProgressComponent {
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
   }
 
-  handleProgressClick($event) {
-    let position = $event.offsetX / $event.target.offsetWidth;
+  // handleProgressClick($event) {
+  //   let position = $event.offsetX / $event.target.offsetWidth;
+  //   console.log(position);
+  //   this.playerService.changePosition(position);
+  // }
+  
+  handleProgressChange($event) {
+    let position = $event.value / 100;
+    console.log(position);
     this.playerService.changePosition(position);
   }
 
