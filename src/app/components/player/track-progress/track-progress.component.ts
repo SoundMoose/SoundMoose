@@ -42,7 +42,7 @@ export class TrackProgressComponent {
 
   // test function
   onChange($event) {
-    console.log($event);
-    console.log(this.progress);
+    // console.log($event);
+    // console.log(this.progress);
   }
 }

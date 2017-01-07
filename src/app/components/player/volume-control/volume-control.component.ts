@@ -36,7 +36,6 @@ export class VolumeControlComponent {
   }
 
   volumeClickHandler() {
-    console.log(this.volume);
     this.store$.dispatch(this.playerActions.volumeMuteToggle(this.volume, this.isMuted));
   }
 

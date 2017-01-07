@@ -24,7 +24,6 @@ export const AUDIO_STREAM_PROVIDER = {
       // Fast Fourier Transform (fft) in a certain frequency domain. 1024, 2048, etc..
       analyser.fftSize = 256;
       bufferLength = analyser.frequencyBinCount;
-      console.log('buffer length = ', bufferLength);
 
       // Byte analyser Arrays (change to float if using .getFloat_____Data methods below)
       frequencyDataArray = new Uint8Array(bufferLength);
