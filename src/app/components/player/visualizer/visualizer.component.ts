@@ -10,7 +10,6 @@ import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'visualizer-2D',
-  styleUrls: [ './visualizer.component.css' ],
   templateUrl: './visualizer.component.html'
 })
 export class VisualizerComponent {
@@ -31,19 +30,20 @@ export class VisualizerComponent {
 
     this.bufferLength = this.audioSrc.bufferLength;
 
-    var that = this;
     setInterval(function() {
       that.frequencyDataArray = that.audioSrc.frequencyDataArray;
       that.draw();
     }, 200);
 
+    var that = this;
     window.onload = function() {
       that.canvas = document.getElementById('visualizerCanvas');
-      // this.canvas = document.querySelector('.visualizer');
+      // that.canvas = document.querySelector('.visualizer');
       that.canvasCtx = that.canvas.getContext("2d");
       that.WIDTH = that.canvas.width;
       that.HEIGHT = that.canvas.height;
       that.canvasCtx.clearRect(0, 0, that.WIDTH, that.HEIGHT);
+
     };
 
   }
