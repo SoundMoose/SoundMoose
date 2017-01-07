@@ -15,7 +15,6 @@ import { Observable } from 'rxjs/Observable';
 })
 export class VolumeControlComponent {
   wrapperHovered : boolean = false;
-  // volumeToggle : boolean = false;
 
   player$ : Observable<Player>;
   volume: number;
@@ -36,14 +35,13 @@ export class VolumeControlComponent {
     window.setTimeout(() => { this.wrapperHovered = false; }, 1000);
   }
 
-  volumeClickHandler($event) {
-    // this.volumeToggle = !this.volumeToggle;
-    if ($event.value !== undefined) {
-      this.volume = $event.value;
-    }
-    console.log($event);
+  volumeClickHandler() {
     console.log(this.volume);
-    this.store$.dispatch(this.playerActions.volumeChange(this.volume, this.isMuted));
+    this.store$.dispatch(this.playerActions.volumeMuteToggle(this.volume, this.isMuted));
   }
 
+  volumeSlideHandler($event) {
+    this.volume = $event.value;
+    this.store$.dispatch(this.playerActions.volumeChange(this.volume, this.isMuted));
+  }
 }
