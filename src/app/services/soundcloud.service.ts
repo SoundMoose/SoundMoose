@@ -10,11 +10,9 @@ import {TrackActions} from '../actions/track.actions';
 @Injectable()
 export class SoundCloudService {
   tracks: any;
-  spinner: any;
 
   constructor(private _http:Http, private store: Store<AppStore>) {
     this.tracks = store.select('tracks');
-    this.spinner = store.select('spinner');
   }
 
   loadTopTracks(genre) {

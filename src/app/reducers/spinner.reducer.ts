@@ -1,6 +1,5 @@
 import { Action } from '@ngrx/store';
 
-import { SpinnerActions } from '../actions/spinner.actions';
 import { TrackActions } from '../actions/track.actions';
 import { PlayerActions } from '../actions/player.actions';
 
