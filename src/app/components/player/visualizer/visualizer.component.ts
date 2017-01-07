@@ -23,7 +23,7 @@ export class VisualizerComponent {
   constructor (private audioSrc: AudioStream, private store$: Store<AppStore>) {
     var that = this;
     setInterval(function() {
-      // console.log('frequencyDataArray:', that.audioSrc.frequencyDataArray);
+      console.log('frequencyDataArray:', that.audioSrc.frequencyDataArray);
     }, 250);
   }
 

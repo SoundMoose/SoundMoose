@@ -10,6 +10,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import player from './reducers/player.reducer';
 import tracks from './reducers/tracks.reducer';
+import spinner from './reducers/spinner.reducer';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -20,6 +21,7 @@ import { AppComponent } from './app.component';
 
 import { TopTracksComponent } from './components/top-tracks/top-tracks.component';
 import { PlayerComponent } from './components/player/player.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 import { PlayerControlsComponent } from './components/player/player-controls/player-controls.component';
 import { VolumeControlComponent } from './components/player/volume-control/volume-control.component';
 import { TrackInfoComponent } from './components/player/track-info/track-info.component';
@@ -54,12 +56,14 @@ const APP_PROVIDERS = [
     TrackProgressComponent,
     TopTrackTileComponent,
     VisualizerComponent
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
     StoreModule.provideStore({
       player: player,
-      tracks: tracks
+      tracks: tracks,
+      spinner: spinner
     }),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     HttpModule
