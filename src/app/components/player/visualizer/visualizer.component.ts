@@ -30,15 +30,7 @@ export class VisualizerComponent {
   constructor (private audioSrc: AudioStream, private store$: Store<AppStore>) {
 
     this.bufferLength = this.audioSrc.bufferLength;
-
-    // var that = this;
     this.hasCanvas = false;
-
-    var that = this;
-    setInterval(function() {
-      that.frequencyDataArray = that.audioSrc.frequencyDataArray;
-      that.draw(that);
-    }, 200);
 
     window.onload = function() {
       this.canvas = document.getElementById('visualizerCanvas');
@@ -48,6 +40,12 @@ export class VisualizerComponent {
       this.HEIGHT = this.canvas.height;
       this.canvasCtx.clearRect(0, 0, this.WIDTH, this.HEIGHT);
       this.hasCanvas = true;
+
+      var that = this;
+      setInterval(function() {
+        that.frequencyDataArray = that.audioSrc.frequencyDataArray;
+        that.draw(that);
+      }, 200);
     }.bind(this);
   }
 
