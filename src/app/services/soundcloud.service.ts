@@ -10,14 +10,17 @@ import {TrackActions} from '../actions/track.actions';
 @Injectable()
 export class SoundCloudService {
   tracks: any;
+  spinner: any;
 
   constructor(private _http:Http, private store: Store<AppStore>) {
     this.tracks = store.select('tracks');
+    this.spinner = store.select('spinner');
   }
 
   loadTopTracks(genre) {
     const topTracksUrl = 'http://localhost:4004/charts?kind=top&genre=soundcloud%3Agenres%3A' + genre + '&client_id=' + soundcloudClientId + '&limit=50&offset=0&linked_partitioning=1&app_version=1482339819';
  //   const topTracksUrl = 'http://localhost:3333/toptracks';
+    this.store.dispatch({ type: TrackActions.LOAD_TRACKS_START })
     return this._http.get(topTracksUrl)
       .map(res => {
         return res.json().collection.map(item => {

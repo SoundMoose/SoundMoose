@@ -5,6 +5,7 @@ import { Track } from '../../../models/track.model';
 import { Player } from '../../../models/player.model';
 import { TrackActions } from '../../../actions/track.actions';
 import { Action } from '@ngrx/store';
+import { PlayerService } from '../../../services/player.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -30,6 +31,5 @@ export class TopTrackTileComponent {
   clickHandler() {
     this.store$.dispatch(this.trackActions.togglePlayPause(this.topTrack));
   }
-
 
 }

@@ -10,6 +10,7 @@ import { Action } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { Subscription} from 'rxjs/Subscription';
 
 import { AppStore } from '../models/appstore.model';
 import { PlayerState } from '../reducers/player.reducer';
@@ -21,6 +22,8 @@ import { Player } from './../models/player.model';
 
 @Injectable()
 export class PlayerService {
+
+   playingSubscription: Subscription;
 
    constructor(protected audio: AudioStream, private store$: Store<AppStore>, private playerActions: PlayerActions) {
      this.store$.select('player')
@@ -42,6 +45,10 @@ export class PlayerService {
        .map((item: any) => Math.floor(item.path[0].currentTime))
        .distinctUntilChanged()
        .subscribe((item) => this.updateCurrentTime(item));
+
+     this.playingSubscription = Observable.fromEvent(this.audio, 'playing')
+       .subscribe();
+
    }
 
    play(url: string = null): void {
@@ -72,6 +79,10 @@ export class PlayerService {
 
    changePosition(fraction: number) {
      this.audio.currentTime = this.audio.duration * fraction;
+   }
+
+   isAudioPlaying() {
+     return this.playingSubscription;
    }
 
 
