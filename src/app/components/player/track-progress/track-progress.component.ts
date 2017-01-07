@@ -40,4 +40,9 @@ export class TrackProgressComponent {
     this.playerService.changePosition(position);
   }
 
+  // test function
+  onChange($event) {
+    console.log($event);
+    console.log(this.progress);
+  }
 }
