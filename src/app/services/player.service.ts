@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { AppStore } from '../models/appstore.model';
 import { PlayerState } from '../reducers/player.reducer';
-import { AudioStream } from '../howler-element';
+import { AudioStream } from '../audio-element';
 import { PlayerActions } from '../actions/player.actions';
 import { TrackActions } from '../actions/track.actions';
 
@@ -26,20 +26,13 @@ export class PlayerService {
   currentTrack$: Observable<Track>;
   tracksList: Track[];
   currentTrackId: number;
+  audio: any;
 
-  audioCtx: any ;
-  audioSource: any;
-  analyser: any;
-  bufferLength: number;
-  frequencyDataArray: any;  // any[] doesnt work here?
-  waveformDataArray: any;
+   constructor(protected audioStream: AudioStream, private store$: Store<AppStore>, private playerActions: PlayerActions) {
 
-/////////////////////////////////
-  // for dev
-  dummyAudioElement: any;
-/////////////////////////////////
+     // this grabs the html audio element from the audio stream
+     this.audio = audioStream.mediaElement;
 
-   constructor(protected audio: AudioStream, private store$: Store<AppStore>, private playerActions: PlayerActions) {
     this.store$.select('tracks')
       .subscribe((item: Track[]) => this.tracksList = item);
 
@@ -72,60 +65,6 @@ export class PlayerService {
       .subscribe(() => this.store$.dispatch(playerActions.jumpToNext(this.tracksList[this.getCurrentTrackIndex() + 1])));
       //  WILL THE CODE ABOVE SHUFFLE? NEEDS TO BE TESTED //
 
-
-     ////////////////////////////// Under Development  /////////////////////////
-
-     this.audioCtx = new AudioContext();
-
-     ////////////////////////////////////////////////////////////////////////////
-     /////// Uncomment below to create and play from dummy audio DOM element
-       this.dummyAudioElement = new Audio();
-       this.dummyAudioElement.src = './../assets/sounds/Broke_For_Free_-_01_-_Night_Owl.mp3';
-      //  this.dummyAudioElement.src = this.audio.src;
-      //  this.dummyAudioElement.src = '';
-      //  this.dummyAudioElement.crossOrigin = "anonymous"; // CORS :)
-      //  this.dummyAudioElement.play();
-      //  this.audioSource = this.audioCtx.createMediaElementSource(this.dummyAudioElement);
-     ////////////////////////////////////////////////////////////////////////////
-
-    //  console.log('this.audio = ', this.audio);
-    //  console.log('this.dummyAudioElement', this.dummyAudioElement);
-
-    this.audioSource = this.audioCtx.createMediaElementSource(this.audio);
-    this.audioSource.connect(this.audioCtx.destination);
-    this.audio.src = './../assets/sounds/Broke_For_Free_-_01_-_Night_Owl.mp3';
-    // this.audioSource.mediaElement.play();
-
-    this.analyser = this.audioCtx.createAnalyser();
-    this.analyser.smoothingTimeConstant = 0.25;
-    this.audioSource.connect(this.analyser);
-
-    this.analyser.fftSize = 2048;  // Fast Fourier Transform (fft) in a certain frequency domain,
-    this.bufferLength = this.analyser.frequencyBinCount;
-
-    // Byte analyser methods
-    this.frequencyDataArray = new Uint8Array(this.bufferLength);
-    this.waveformDataArray = new Uint8Array(this.bufferLength);
-
-    // this.audioSource = this.audioCtx.createMediaElementSource(this.audio);
-    // this.audioSource = this.audioCtx.createMediaStreamSource(this.audio);
-    this.audioSource.connect(this.audioCtx.destination);
-    // this.audioSource.mediaElement.play();
-
-    let that = this;
-    setInterval(function() {
-    //
-    //   // Frequency Data:
-      that.analyser.getByteFrequencyData(that.frequencyDataArray); // only use this line or the next
-    //   // analyser.getFloatFrequencyData(frequencyDataArray); // (choose Float or Byte)
-      console.log('frequencyDataArray:', that.frequencyDataArray);
-    //
-    //   // waveform Data:
-    //   // analyser.getByteTimeDomainData(waveformDataArray);
-    //   // analyser.getFloatTimeDomainData(waveformDataArray);  // remember to change wafeformDataArray to float!
-    //   // console.log('waveformDataArray:', waveformDataArray);
-    //
-    }, 1000);
 
   }
 
