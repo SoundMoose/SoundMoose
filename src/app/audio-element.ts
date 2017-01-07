@@ -6,8 +6,10 @@ export const AUDIO_STREAM_PROVIDER = {
     let audioElement = new Audio(),
         audioCtx,
         audioSrc,
-        analyser,
-        bufferLength,
+        frequencyAnalyser,
+        waveformAnalyser,
+        frequencyBufferLength,
+        waveformBufferLength,
         frequencyDataArray,
         waveformDataArray;
 
@@ -17,42 +19,57 @@ export const AUDIO_STREAM_PROVIDER = {
       audioSrc = audioCtx.createMediaElementSource(audioElement);
       audioSrc.connect(audioCtx.destination);
 
-      analyser = audioCtx.createAnalyser();
-      analyser.smoothingTimeConstant = 0.15;
-      audioSrc.connect(analyser);
+      frequencyAnalyser = audioCtx.createAnalyser();
+      waveformAnalyser = audioCtx.createAnalyser();
+      frequencyAnalyser.smoothingTimeConstant = 0.15;
+      // waveformAnalyser.smoothingTimeConstant = 0.15;
+      audioSrc.connect(frequencyAnalyser);
+      audioSrc.connect(waveformAnalyser);
 
       // Fast Fourier Transform (fft) in a certain frequency domain. 1024, 2048, etc..
-      analyser.fftSize = 256;
-      bufferLength = analyser.frequencyBinCount;
+      frequencyAnalyser.fftSize = 256;
+      waveformAnalyser.fftSize = 2048;
+      frequencyBufferLength = frequencyAnalyser.frequencyBinCount;
+      waveformBufferLength = waveformAnalyser.frequencyBinCount;
 
-      // Byte analyser Arrays (change to float if using .getFloat_____Data methods below)
-      frequencyDataArray = new Uint8Array(bufferLength);
-      waveformDataArray = new Uint8Array(bufferLength);
+      // console.log('frequencyBufferLength',frequencyBufferLength);
+      // console.log('waveformBufferLength',waveformBufferLength);
+
+      // Byte frequencyAnalyser Arrays (change to float if using .getFloat_____Data methods below)
+      frequencyDataArray = new Uint8Array(frequencyBufferLength);
+      waveformDataArray = new Uint8Array(waveformBufferLength);  // Float32Array - alternative
 
       audioSrc.connect(audioCtx.destination);
 
-      // this could probably be more elegant
+      frequencyAnalyser.getByteFrequencyData(frequencyDataArray);
+      waveformAnalyser.getByteTimeDomainData(waveformDataArray);
+      // waveformAnalyser.getFloatTimeDomainData(waveformDataArray);
 
-      analyser.getByteFrequencyData(frequencyDataArray);
+
+      // assign to properties of what will be returned
       audioSrc.frequencyDataArray = frequencyDataArray;
-      audioSrc.bufferLength = bufferLength;
+      audioSrc.waveformDataArray = waveformDataArray;
+      audioSrc.frequencyBufferLength = frequencyBufferLength;
+      audioSrc.waveformBufferLength = waveformBufferLength;
 
       setInterval(function() {
 
         ////////////////////// Frequency Data: ////////////////////////
         // only use one of the next two lines (choose Float or Byte)
         // and remember to change the correstponding array type!
-        analyser.getByteFrequencyData(frequencyDataArray);
-        // analyser.getFloatFrequencyData(frequencyDataArray);
+        frequencyAnalyser.getByteFrequencyData(frequencyDataArray);
+        // frequencyAnalyser.getFloatFrequencyData(frequencyDataArray);
         // console.log('frequencyDataArray:', frequencyDataArray);
 
         audioSrc.frequencyDataArray = frequencyDataArray;
 
         ////////////////////// Waveform Data:  ////////////////////////
-        // analyser.getByteTimeDomainData(waveformDataArray);
-        // analyser.getFloatTimeDomainData(waveformDataArray);
+        waveformAnalyser.getByteTimeDomainData(waveformDataArray);
+        // waveformAnalyser.getFloatTimeDomainData(waveformDataArray);
         // console.log('waveformDataArray:', waveformDataArray);
-      }, 100);
+        audioSrc.waveformDataArray = waveformDataArray;
+
+      }, 50);
 
       return audioSrc;
   },

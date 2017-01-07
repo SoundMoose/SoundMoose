@@ -13,59 +13,113 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: './visualizer.component.html'
 })
 export class VisualizerComponent {
-  frequencyDataArray: any;
-  wavelengthArray: any;
 
-  canvas: any;
-  canvasCtx: any;
+  // Frequency Visualization
+  frequencyDataArray: any;
+  frequencyBufferLength: number;
+  frequencyCanvas: any;
+  frequencyCanvasCtx: any;
   WIDTH: number;
   HEIGHT: number;
-  drawVisual: any;
+  drawFrequencyVisual: any;
   barWidth: number;
   barHeight: number;
-  bufferLength: number;
   x: number;
   hasCanvas: boolean;
 
+  // Waveform Visualization
+  waveformDataArray: any;
+  waveformBufferLength: number;
+  waveformCanvas: any;
+  waveformCanvasCtx: any;
+  waveformWIDTH: number;
+  waveformHEIGHT: number;
+  sliceWidth: number;
+  waveformX: number;
+  waveformV: number;
+  waveformY: number;
+  drawWaveformVisual: any;
+
   constructor (private audioSrc: AudioStream, private store$: Store<AppStore>) {
 
-    this.bufferLength = this.audioSrc.bufferLength;
+    this.frequencyBufferLength = this.audioSrc.frequencyBufferLength;
+    this.waveformBufferLength = this.audioSrc.waveformBufferLength;
     this.hasCanvas = false;
 
     window.onload = function() {
-      this.canvas = document.getElementById('visualizerCanvas');
-      // this.canvas = document.querySelector('.visualizer');
-      this.canvasCtx = this.canvas.getContext("2d");
-      this.WIDTH = this.canvas.width;
-      this.HEIGHT = this.canvas.height;
-      this.canvasCtx.clearRect(0, 0, this.WIDTH, this.HEIGHT);
-      this.hasCanvas = true;
+      // build frequency bar visualizer:
+      this.frequencyCanvas = document.getElementById('visualizerFrequencyCanvas');
+      this.frequencyCanvasCtx = this.frequencyCanvas.getContext("2d");
+      this.WIDTH = this.frequencyCanvas.width;
+      this.HEIGHT = this.frequencyCanvas.height;
+      this.frequencyCanvasCtx.clearRect(0, 0, this.WIDTH, this.HEIGHT);
 
+      // build waveform oscilliscope visualizer:
+      this.waveformCanvas = document.getElementById('visualizerWaveformCanvas');
+      this.waveformCanvasCtx = this.waveformCanvas.getContext("2d");
+      this.waveformWIDTH = this.waveformCanvas.width;
+      this.waveformHEIGHT = this.waveformCanvas.height;
+      this.waveformCanvasCtx.clearRect(0, 0, this.waveformWIDTH, this.waveformHEIGHT);
+
+      this.hasCanvas = true;
       var that = this;
       setInterval(function() {
         that.frequencyDataArray = that.audioSrc.frequencyDataArray;
-        that.draw(that);
-      }, 200);
+        that.waveformDataArray = that.audioSrc.waveformDataArray;
+        that.drawFrequencyBars(that);
+        that.drawWaveOscilliscope(that);
+      }, 50);
     }.bind(this);
   }
 
-  draw(context) {
+  drawFrequencyBars(context) {
     if (context.hasCanvas) {
-
-      context.drawVisual = requestAnimationFrame(context.draw);
-      context.canvasCtx.fillStyle = 'rgb(0, 0, 0)';
-      context.canvasCtx.fillRect(0, 0, context.WIDTH, context.HEIGHT);
-      context.barWidth = (context.WIDTH / context.bufferLength) * 2.5;
+      // console.log('DRAWING FREQUENCY');
+      context.drawFrequencyVisual = requestAnimationFrame(context.drawFrequencyBars);
+      context.frequencyCanvasCtx.fillStyle = 'rgb(0, 0, 0)';
+      context.frequencyCanvasCtx.fillRect(0, 0, context.WIDTH, context.HEIGHT);
+      context.barWidth = (context.WIDTH / context.frequencyBufferLength) * 2.5;
       context.barHeight;
       context.x = 0;
 
-      for(var i = 0; i < context.bufferLength; i++) {
+      for(var i = 0; i < context.frequencyBufferLength; i++) {
         context.barHeight = context.frequencyDataArray[i];
-        context.canvasCtx.fillStyle = 'rgb(' + (context.barHeight+100) + ',50,50)';
-        context.canvasCtx.fillRect(context.x, context.HEIGHT-context.barHeight/2, context.barWidth, context.barHeight/2);
+        context.frequencyCanvasCtx.fillStyle = 'rgb('+ (context.barHeight+50) + ','+ (context.barHeight+50) + ','+ (context.barHeight+50) + ')';
+        context.frequencyCanvasCtx.fillRect(context.x, context.HEIGHT-context.barHeight/2, context.barWidth, context.barHeight/2);
         context.x += context.barWidth + 1;
       }
     }
+  };
+
+  drawWaveOscilliscope(context) {
+    if (context.hasCanvas) {
+      context.drawWaveformVisual = requestAnimationFrame(context.drawWaveOscilliscope);
+      context.waveformCanvasCtx.fillStyle = 'rgb(0, 0, 0)';
+      context.waveformCanvasCtx.fillRect(0, 0, context.waveformWIDTH, context.waveformHEIGHT);
+      context.waveformCanvasCtx.lineWidth = 2;
+      context.waveformCanvasCtx.strokeStyle = 'rgb(255, 255, 255)';;
+      context.waveformCanvasCtx.beginPath();
+
+      context.sliceWidth = context.waveformWIDTH * 1.0 / context.waveformBufferLength;
+      context.waveformX = 0;
+
+      for (var j = 0; j < context.waveformBufferLength; j++) {
+
+        context.waveformV = context.waveformDataArray[j] / 128.0;
+        context.waveformY = context.waveformV * context.waveformHEIGHT/2;
+
+        if (j === 0) {
+          context.waveformCanvasCtx.moveTo(context.waveformX, context.waveformY);
+        } else {
+          context.waveformCanvasCtx.lineTo(context.waveformX, context.waveformY);
+        }
+
+        context.waveformX += context.sliceWidth;
+      }
+
+      context.waveformCanvasCtx.lineTo(context.waveformCanvas.width, context.waveformCanvas.height/2);
+      context.waveformCanvasCtx.stroke();
+    };
   };
 
 }
