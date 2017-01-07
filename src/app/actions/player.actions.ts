@@ -18,6 +18,16 @@ export class PlayerActions {
     };
   }
 
+  static VOLUME_MUTE_TOGGLE = '[Player] Volume Mute Toggle';
+  volumeMuteToggle(volume: number, isMuted: boolean): Action {
+    return {
+      type: PlayerActions.VOLUME_MUTE_TOGGLE,
+      payload: {
+        volume,
+        isMuted
+      }
+    };
+  }
   // Duplicate code in Track Action for ease of implementation.
   // fix later by tying both together
   static TOGGLE_PLAY_PAUSE = '[Player] Toggle Play/Pause';
