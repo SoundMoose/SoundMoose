@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  trigger,
+  state,
+  style,
+  transition,
+  animate
+} from '@angular/core';
 import { SoundCloudService } from './../../services/soundcloud.service';
 import { Store } from '@ngrx/store';
 import { AppStore } from './../../models/appstore.model';
@@ -12,7 +20,23 @@ declare var $: any;
 @Component({
   selector: 'top-tracks',
   templateUrl: 'top-tracks.component.html',
-  styleUrls: ['top-tracks.component.css']
+  styleUrls: ['top-tracks.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('in', style({opacity: 1})),
+      transition('void => *', [
+        style({
+          opacity: 0,
+        }),
+        animate('0.2s ease-in')
+      ]),
+      transition('* => void', [
+        animate('0.2s 10 ease-out', style({
+          opacity: 0,
+        }))
+      ])
+    ])
+  ]
 })
 export class TopTracksComponent implements OnInit {
   topTracks: Observable<{}>;
