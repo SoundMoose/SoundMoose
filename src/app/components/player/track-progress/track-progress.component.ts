@@ -27,6 +27,7 @@ export class TrackProgressComponent {
   timer: number;
   // Whether we are currently sliding.
   sliding: boolean;
+  bufferedRanges: number[][] | number[];
 
   constructor (private playerService: PlayerService, private store$: Store<AppStore>) {
     this.player$ = this.store$.select('player');
@@ -39,6 +40,7 @@ export class TrackProgressComponent {
       this.durationMinutesSeconds = this.millisToMinutesSeconds(+item.currentTrack.duration);
       this.progressMinutesSeconds = this.millisToMinutesSeconds(+item.currentTime * 1000);
       this.currentProgress = Math.floor(((+item.currentTime*1000/+item.currentTrack.duration)*100)) * this.multiplier / 100;
+      this.bufferedRanges = item.bufferedRanges;
     });
   }
 

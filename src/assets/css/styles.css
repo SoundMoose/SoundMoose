@@ -200,3 +200,6 @@ player-controls .icon:hover {
   width: 450px;
   top: -8px !important;
 }
+.md-slider-track-fill {
+  z-index: 1;
+}

@@ -9,4 +9,5 @@ export interface Player {
   volumeBeforeMute: number;
   repeatTrack: boolean;
   shuffleTracks: boolean;
+  bufferedRanges: Array<number>;
 }
