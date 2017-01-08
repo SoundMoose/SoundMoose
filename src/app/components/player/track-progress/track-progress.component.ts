@@ -42,16 +42,10 @@ export class TrackProgressComponent {
   //   console.log(position);
   //   this.playerService.changePosition(position);
   // }
-  
+
   handleProgressChange($event) {
     let position = $event.value / 100;
-    console.log(position);
     this.playerService.changePosition(position);
   }
 
-  // test function
-  onChange($event) {
-    // console.log($event);
-    // console.log(this.progress);
-  }
 }
