@@ -1,10 +1,15 @@
-<!-- <div class="ui footer segment" *ngIf="toggleAudioControls$"> -->
+<div *ngIf="toggleAudioControls$ | async">
+<!-- <div class="ui footer segment" *ngIf="toggleAudioControls$ | async"> -->
 
   <div class="ui container">
     <visualizer-2D-frequency></visualizer-2D-frequency>
   </div>
-  
+
   <div class="ui container">
     <visualizer-2D-waveform></visualizer-2D-waveform>
   </div>
-<!-- </div> -->
+
+  <div class="ui container">
+    <equalizer></equalizer>
+  </div>
+</div>

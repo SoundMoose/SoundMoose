@@ -15,13 +15,13 @@ import { Observable } from 'rxjs/Observable';
 })
 
 export class EqualizerComponent {
-  // wrapperHovered : boolean = false;
-  //
-  // player$ : Observable<Player>;
-  // volume: number;
-  // isMuted: boolean;
-  // volumeBeforeMute: number;
+  wrapperHovered : boolean = false;
 
+  player$ : Observable<Player>;
+  volume: number;
+  bass: number;
+  mid: number;
+  treble: number;
 
   constructor (private store$: Store<AppStore>, private playerActions: PlayerActions) {
     // this.player$ = this.store$.select('player');
@@ -32,16 +32,24 @@ export class EqualizerComponent {
     // })
   }
 
-  // private handleMouseOut() {
-  //   window.setTimeout(() => { this.wrapperHovered = false; }, 1000);
-  // }
-  //
-  // volumeClickHandler() {
-  //   this.store$.dispatch(this.playerActions.volumeMuteToggle(this.volume, this.isMuted));
-  // }
-  //
+  private handleMouseOut() {
+    window.setTimeout(() => { this.wrapperHovered = false; }, 1000);
+  }
+
   // volumeSlideHandler($event) {
   //   this.volume = $event.value;
-  //   this.store$.dispatch(this.playerActions.volumeChange(this.volume, this.isMuted));
+  //   this.store$.dispatch(this.playerActions.volumeChange(this.volume, false));
+  // }
+  // bassSlideHandler($event) {
+  //   this.bass = $event.value;
+  //   this.store$.dispatch(this.equalizerActions.bassChange(this.bass));
+  // }
+  // midSlideHandler($event) {
+  //   this.mid = $event.value;
+  //   this.store$.dispatch(this.equalizerActions.midChange(this.mid));
+  // }
+  // trebleSlideHandler($event) {
+  //   this.treble = $event.value;
+  //   this.store$.dispatch(this.equalizerActions.trebleChange(this.treble));
   // }
 }

@@ -32,7 +32,6 @@ export class FrequencyVisualizerComponent {
     this.frequencyBufferLength = this.audioSrc.frequencyBufferLength;
     this.hasfrequencyCanvas = false;
 
-
     // can't call window.onload twice, so using event listeners!
     window.addEventListener("load", function() {
       this.frequencyCanvas = document.getElementById('visualizerFrequencyCanvas');
@@ -51,7 +50,6 @@ export class FrequencyVisualizerComponent {
   }
 
   drawFrequencyBars(context) {
-    console.log('=-=-=-=-=---=MADE IT THIS FAR=-=-=-=-=-=-=-=-=-=-');
     if (context.hasfrequencyCanvas) {
       // console.log('DRAWING FREQUENCY');
       context.drawFrequencyVisual = requestAnimationFrame(context.drawFrequencyBars);

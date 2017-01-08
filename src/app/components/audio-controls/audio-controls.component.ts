@@ -14,14 +14,11 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: './audio-controls.component.html',
 })
 export class AudioControlsComponent {
-  // toggleAudioControls$: Observable<boolean>;
-  toggleAudioControls$: boolean;
+  toggleAudioControls$: Observable<boolean>;
 
   constructor(private playerService: PlayerService, private store$: Store<AppStore> ) {
-
-    this.toggleAudioControls$ = true;
-    // this.toggleAudioControls$ = this.store$.select('player')
-    //   .map((playerStatus: Player) => playerStatus.toggleAudioControls === true);
+    this.toggleAudioControls$ = this.store$.select('player')
+      .map((playerStatus: Player) => playerStatus.toggleAudioControls === true);
   }
 
 }

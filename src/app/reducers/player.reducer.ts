@@ -24,8 +24,11 @@ const initialState: PlayerState = {
 
   repeatTrack: false,
   shuffleTracks: false,
-  toggleAudioControls:true
 
+  //////////////////////////////////////////////////////////////////////////
+  // CHANGE BELOW TO TRUE TO SHOW AUDIO CONTROLS
+  toggleAudioControls:false
+  //////////////////////////////////////////////////////////////////////////
 };
 
 export default function (state = initialState, action: Action): PlayerState {
