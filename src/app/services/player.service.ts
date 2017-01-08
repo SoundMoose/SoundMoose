@@ -91,27 +91,36 @@ export class PlayerService {
     if (url) {
       this.audio.src = url;
     }
-    this.audio.play();
+    // See http://stackoverflow.com/questions/36803176/how-to-prevent-the-play-request-was-interrupted-by-a-call-to-pause-error
+    // Give the timeout enough time to avoid the race conflict.
+    let waitTime = 150;
+
+    setTimeout(() => {
+      // Resume play if the element if is paused.
+      if (this.audio.paused) {
+        this.audio.play();
+      }
+    }, 150);
   }
 
    pause(): void {
      this.audio.pause();
    }
 
-   // takes a value from 0 - 100
-   volume(volume: number): void {
-     if (this.audio.src) {
-       this.audio.volume = volume / 100;
-     }
-   }
+  // takes a value from 0 - 100
+  volume(volume: number): void {
+    if (this.audio.src) {
+      this.audio.volume = volume / 100;
+    }
+  }
 
-   updateCurrentTime(time) {
-     this.store$.dispatch(this.playerActions.updateCurrentTime(time));
-   }
+  updateCurrentTime(time) {
+    this.store$.dispatch(this.playerActions.updateCurrentTime(time));
+  }
 
-   getProgressPercentage() {
-     this.store$.select('player')
-   }
+  getProgressPercentage() {
+    this.store$.select('player')
+  }
 
   getCurrentTrackIndex(): number {
     let currentIndex = this.tracksList.reduce((acc, cur, index) => {
