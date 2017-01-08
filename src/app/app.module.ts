@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
 import { SoundCloudService } from './services/soundcloud.service';
 import { PlayerService } from './services/player.service';
-import { AUDIO_STREAM_PROVIDER } from './howler-element';
+import { AUDIO_STREAM_PROVIDER } from './audio-element';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import player from './reducers/player.reducer';
@@ -27,6 +27,13 @@ import { VolumeControlComponent } from './components/player/volume-control/volum
 import { TrackInfoComponent } from './components/player/track-info/track-info.component';
 import { TrackProgressComponent } from './components/player/track-progress/track-progress.component';
 import { TopTrackTileComponent } from './components/top-tracks/top-track-tile/top-track-tile.component';
+
+  // Audio Controls Deck:
+import { AudioControlsComponent } from './components/audio-controls/audio-controls.component';
+import { FrequencyVisualizerComponent } from './components/audio-controls/visualizer/frequency-visualizer.component';
+import { WaveformVisualizerComponent } from './components/audio-controls/visualizer/waveform-visualizer.component';
+import { EqualizerComponent } from './components/audio-controls/equalizer/equalizer.component';
+
 
 import { TrackActions } from './actions/track.actions';
 import { PlayerActions } from './actions/player.actions';
@@ -57,7 +64,11 @@ const APP_PROVIDERS = [
     TrackInfoComponent,
     TrackProgressComponent,
     TopTrackTileComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    AudioControlsComponent,
+    FrequencyVisualizerComponent,
+    WaveformVisualizerComponent,
+    EqualizerComponent
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppStore } from './../../models/appstore.model';
 import { Track } from './../../models/track.model';
 import { Observable } from 'rxjs/Observable';
-import { AudioStream } from '../../howler-element';
+import { AudioStream } from '../../audio-element';
 import { Subscription } from 'rxjs/Subscription';
 
 declare var $: any;
