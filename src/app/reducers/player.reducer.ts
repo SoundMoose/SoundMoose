@@ -24,6 +24,7 @@ const initialState: PlayerState = {
 
   repeatTrack: false,
   shuffleTracks: false,
+  toggleAudioControls:true
 
 };
 
