@@ -84,5 +84,4 @@ export class TrackProgressComponent {
     while ((el = el.parentElement) && !el.classList.contains(cls));
     return el;
   }
-
 }

@@ -1,0 +1,14 @@
+
+<div class="ui container" [ngStyle]="{ width: '512px' }">
+  EQUALIZER IN DEVELOPMENT:
+  <md-slider [value]="volume" (change)="volumeSlideHandler($event)" vertical></md-slider>
+  <md-slider [value]="bass" (change)="bassSlideHandler($event)" vertical></md-slider>
+  <md-slider [value]="mid" (change)="midSlideHandler($event)" vertical></md-slider>
+  <md-slider [value]="treble" (change)="trebleSlideHandler($event)" vertical></md-slider>
+</div>
+<div (mouseenter)="wrapperHovered = true" [hidden]="!wrapperHovered" class="ui basic bottom pointing label volume-control-wrapper">
+   <md-slider [value]="volume" (change)="volumeSlideHandler($event)" vertical></md-slider>
+   <!-- <div class="volume-control-top"></div>
+   <div class="volume-control-bottom"></div> -->
+
+</div>

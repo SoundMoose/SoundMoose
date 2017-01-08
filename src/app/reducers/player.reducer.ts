@@ -26,6 +26,10 @@ const initialState: PlayerState = {
   shuffleTracks: false,
   bufferedRanges: []
 
+  //////////////////////////////////////////////////////////////////////////
+  // CHANGE BELOW TO TRUE TO SHOW AUDIO CONTROLS
+  toggleAudioControls:false
+  //////////////////////////////////////////////////////////////////////////
 };
 
 export default function (state = initialState, action: Action): PlayerState {

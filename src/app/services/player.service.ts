@@ -14,7 +14,7 @@ import { Subscription} from 'rxjs/Subscription';
 
 import { AppStore } from '../models/appstore.model';
 import { PlayerState } from '../reducers/player.reducer';
-import { AudioStream } from '../howler-element';
+import { AudioStream } from '../audio-element';
 import { PlayerActions } from '../actions/player.actions';
 import { TrackActions } from '../actions/track.actions';
 
@@ -23,13 +23,19 @@ import { Track } from './../models/track.model';
 
 @Injectable()
 export class PlayerService {
+
   currentTrack$: Observable<Track>;
   tracksList: Track[];
   currentTrackId: number;
+  audio: any;
+  playingSubscription: Subscription;
 
-   playingSubscription: Subscription;
+   constructor(protected audioStream: AudioStream, private store$: Store<AppStore>, private playerActions: PlayerActions) {
 
-   constructor(protected audio: AudioStream, private store$: Store<AppStore>, private playerActions: PlayerActions) {
+    // this grabs the html audio element from the audio stream
+    this.audio = audioStream.mediaElement;
+    this.audio.crossOrigin = "anonymous"; // CORS :)
+
     this.store$.select('tracks')
       .subscribe((item: Track[]) => this.tracksList = item);
 
@@ -81,13 +87,17 @@ export class PlayerService {
         });
 
    }
+      //  WILL THE CODE ABOVE SHUFFLE? NEEDS TO BE TESTED //
 
-   play(url: string = null): void {
-     if (url) {
-       this.audio.src = url;
-     }
-     this.audio.play();
-   }
+
+  }
+
+  play(url: string = null): void {
+    if (url) {
+      this.audio.src = url;
+    }
+    this.audio.play();
+  }
 
    pause(): void {
      this.audio.pause();
