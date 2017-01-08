@@ -6,8 +6,13 @@
      (change)="handleProgressChange($event)"
      (slidestart)="handleSlideStart($event)"
      min="0" max="{{multiplier}}" class="track-progress-bar">
-
   </md-slider>
+  <div id="progress">
+    <span *ngFor="let bufferedRange of bufferedRanges" [ngStyle]="{
+      left: 100 * bufferedRange[0] + '%',
+      width: 100 * (bufferedRange[1] - bufferedRange[0]) + '%'
+    }"></span>
+  </div>
 </div>
 
 <span class="track-length">{{ durationMinutesSeconds }}</span>

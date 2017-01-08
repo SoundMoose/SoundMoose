@@ -66,12 +66,27 @@ export class PlayerService {
       .subscribe(item => this.volume(item));
 
     Observable.fromEvent(this.audio, 'timeupdate')
-      .map((item: any) => Math.floor(item.path[0].currentTime))
+      .map((item: any) => Math.round(item.path[0].currentTime))
       .distinctUntilChanged()
       .subscribe((item) => this.updateCurrentTime(item));
 
     Observable.fromEvent(this.audio, 'ended')
       .subscribe(() => this.store$.dispatch(playerActions.jumpToNext(this.tracksList[this.getCurrentTrackIndex() + 1])));
+
+    Observable.fromEvent(this.audio, 'progress')
+      .subscribe(() => {
+        var ranges = [];
+          for (let i = 0; i < this.audio.buffered.length; i ++) {
+            ranges.push([
+              this.audio.buffered.start(i) / this.audio.duration,
+              this.audio.buffered.end(i) / this.audio.duration
+            ]);
+            // Array of tuples with ranges (fractions)
+          }
+          this.store$.dispatch(playerActions.setBufferedRanges(ranges));
+        });
+
+   }
       //  WILL THE CODE ABOVE SHUFFLE? NEEDS TO BE TESTED //
 
 

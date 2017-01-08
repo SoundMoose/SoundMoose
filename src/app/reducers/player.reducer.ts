@@ -24,6 +24,7 @@ const initialState: PlayerState = {
 
   repeatTrack: false,
   shuffleTracks: false,
+  bufferedRanges: []
 
   //////////////////////////////////////////////////////////////////////////
   // CHANGE BELOW TO TRUE TO SHOW AUDIO CONTROLS
@@ -125,6 +126,12 @@ export default function (state = initialState, action: Action): PlayerState {
     case PlayerActions.TOGGLE_SHUFFLE: {
       return Object.assign({}, state, {
         shuffleTracks: !state.shuffleTracks,
+      });
+    }
+
+    case PlayerActions.SET_BUFFERED_RANGES: {
+      return Object.assign({}, state, {
+        bufferedRanges: action.payload
       });
     }
 

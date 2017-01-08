@@ -30,7 +30,10 @@
 <body>
 
   <app>
-      <span style="font-size: 50px;">Loading...</span>
+    <div class="spinner">
+      <div class="ui large text loader active">Loading</div>
+    </div>
+  </div>
   </app>
 
   <% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>

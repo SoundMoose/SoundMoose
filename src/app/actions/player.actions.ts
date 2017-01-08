@@ -90,6 +90,14 @@ export class PlayerActions {
       type: PlayerActions.START_AUDIO_LOADING
     };
   }
+
+  static SET_BUFFERED_RANGES = '[Player] Set buffered regions';
+  setBufferedRanges(regions: number[][] | number[]) {
+    return {
+      type: PlayerActions.SET_BUFFERED_RANGES,
+      payload: regions
+    };
+  }
   // static PAUSED_AUDIO = '[Player] Pause Audio';
   // pauseAudio(): Action {
   //   return {

@@ -1,1 +1,17 @@
-/*styles for player-controls content only*/
+  #progress {
+    position: relative;
+    display: block;
+    top: -33px;
+    width:443px;
+    left: 7px;
+    height: 2px;
+  }
+  #progress > span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: inline-block;
+    height: 2px;
+    background: #555;
+    z-index: 0;
+  }
