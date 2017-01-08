@@ -15,36 +15,29 @@ export const AUDIO_STREAM_PROVIDER = {
 
       audioCtx = new AudioContext();
 
-      // below can also use .createMediaStreamSource if desirable
       audioSrc = audioCtx.createMediaElementSource(audioElement);
       audioSrc.connect(audioCtx.destination);
 
       frequencyAnalyser = audioCtx.createAnalyser();
       waveformAnalyser = audioCtx.createAnalyser();
-      frequencyAnalyser.smoothingTimeConstant = 0.15;
+      frequencyAnalyser.smoothingTimeConstant = 0.5;
       // waveformAnalyser.smoothingTimeConstant = 0.15;
       audioSrc.connect(frequencyAnalyser);
       audioSrc.connect(waveformAnalyser);
 
       // Fast Fourier Transform (fft) in a certain frequency domain. 1024, 2048, etc..
-      frequencyAnalyser.fftSize = 256;
+      frequencyAnalyser.fftSize = 1024;
       waveformAnalyser.fftSize = 2048;
       frequencyBufferLength = frequencyAnalyser.frequencyBinCount;
       waveformBufferLength = waveformAnalyser.frequencyBinCount;
 
-      // console.log('frequencyBufferLength',frequencyBufferLength);
-      // console.log('waveformBufferLength',waveformBufferLength);
-
-      // Byte frequencyAnalyser Arrays (change to float if using .getFloat_____Data methods below)
       frequencyDataArray = new Uint8Array(frequencyBufferLength);
-      waveformDataArray = new Uint8Array(waveformBufferLength);  // Float32Array - alternative
+      waveformDataArray = new Uint8Array(waveformBufferLength);  // alternative: Float32Array
 
       audioSrc.connect(audioCtx.destination);
 
-      frequencyAnalyser.getByteFrequencyData(frequencyDataArray);
+      frequencyAnalyser.getByteFrequencyData(frequencyDataArray); // alternative: getFloatFrequencyData
       waveformAnalyser.getByteTimeDomainData(waveformDataArray);
-      // waveformAnalyser.getFloatTimeDomainData(waveformDataArray);
-
 
       // assign to properties of what will be returned
       audioSrc.frequencyDataArray = frequencyDataArray;
@@ -60,7 +53,6 @@ export const AUDIO_STREAM_PROVIDER = {
         frequencyAnalyser.getByteFrequencyData(frequencyDataArray);
         // frequencyAnalyser.getFloatFrequencyData(frequencyDataArray);
         // console.log('frequencyDataArray:', frequencyDataArray);
-
         audioSrc.frequencyDataArray = frequencyDataArray;
 
         ////////////////////// Waveform Data:  ////////////////////////
@@ -68,7 +60,6 @@ export const AUDIO_STREAM_PROVIDER = {
         // waveformAnalyser.getFloatTimeDomainData(waveformDataArray);
         // console.log('waveformDataArray:', waveformDataArray);
         audioSrc.waveformDataArray = waveformDataArray;
-
       }, 50);
 
       return audioSrc;

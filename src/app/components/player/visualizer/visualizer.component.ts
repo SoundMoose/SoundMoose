@@ -76,7 +76,7 @@ export class VisualizerComponent {
     if (context.hasCanvas) {
       // console.log('DRAWING FREQUENCY');
       context.drawFrequencyVisual = requestAnimationFrame(context.drawFrequencyBars);
-      context.frequencyCanvasCtx.fillStyle = 'rgb(0, 0, 0)';
+      context.frequencyCanvasCtx.fillStyle = 'rgb(26, 26, 26)';
       context.frequencyCanvasCtx.fillRect(0, 0, context.WIDTH, context.HEIGHT);
       context.barWidth = (context.WIDTH / context.frequencyBufferLength) * 2.5;
       context.barHeight;
@@ -94,7 +94,7 @@ export class VisualizerComponent {
   drawWaveOscilliscope(context) {
     if (context.hasCanvas) {
       context.drawWaveformVisual = requestAnimationFrame(context.drawWaveOscilliscope);
-      context.waveformCanvasCtx.fillStyle = 'rgb(0, 0, 0)';
+      context.waveformCanvasCtx.fillStyle = 'rgb(26, 26, 26)';
       context.waveformCanvasCtx.fillRect(0, 0, context.waveformWIDTH, context.waveformHEIGHT);
       context.waveformCanvasCtx.lineWidth = 2;
       context.waveformCanvasCtx.strokeStyle = 'rgb(255, 255, 255)';;
