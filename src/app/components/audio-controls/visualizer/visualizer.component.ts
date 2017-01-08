@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 
 import { AppState } from '../app.service';
-import { AppStore } from '../../../models/appstore.model';
+import { AppStore } from '../../models/appstore.model';
 import { AudioStream } from '../../../audio-element';
 
 import { Store } from '@ngrx/store';

@@ -27,7 +27,7 @@ import { VolumeControlComponent } from './components/player/volume-control/volum
 import { TrackInfoComponent } from './components/player/track-info/track-info.component';
 import { TrackProgressComponent } from './components/player/track-progress/track-progress.component';
 import { TopTrackTileComponent } from './components/top-tracks/top-track-tile/top-track-tile.component';
-import { VisualizerComponent } from './components/player/visualizer/visualizer.component';
+import { VisualizerComponent } from './components/audio-controls/visualizer/visualizer.component';
 
 import { TrackActions } from './actions/track.actions';
 import { PlayerActions } from './actions/player.actions';
