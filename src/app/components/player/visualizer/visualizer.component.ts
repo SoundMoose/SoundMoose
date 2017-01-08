@@ -84,7 +84,7 @@ export class VisualizerComponent {
 
       for(var i = 0; i < context.frequencyBufferLength; i++) {
         context.barHeight = context.frequencyDataArray[i];
-        context.frequencyCanvasCtx.fillStyle = 'rgb('+ (context.barHeight+50) + ','+ (context.barHeight+50) + ','+ (context.barHeight+50) + ')';
+        context.frequencyCanvasCtx.fillStyle = 'rgb('+ (context.barHeight+0) + ','+ (context.barHeight+0) + ','+ (context.barHeight+0) + ')';
         context.frequencyCanvasCtx.fillRect(context.x, context.HEIGHT-context.barHeight/2, context.barWidth, context.barHeight/2);
         context.x += context.barWidth + 1;
       }
@@ -97,7 +97,7 @@ export class VisualizerComponent {
       context.waveformCanvasCtx.fillStyle = 'rgb(26, 26, 26)';
       context.waveformCanvasCtx.fillRect(0, 0, context.waveformWIDTH, context.waveformHEIGHT);
       context.waveformCanvasCtx.lineWidth = 2;
-      context.waveformCanvasCtx.strokeStyle = 'rgb(255, 255, 255)';;
+      context.waveformCanvasCtx.strokeStyle = 'rgb(173, 187, 194)';;
       context.waveformCanvasCtx.beginPath();
 
       context.sliceWidth = context.waveformWIDTH * 1.0 / context.waveformBufferLength;
