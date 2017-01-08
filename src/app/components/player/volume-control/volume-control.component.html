@@ -1,9 +1,6 @@
 <div (mouseenter)="wrapperHovered = true" (mouseleave)="wrapperHovered = false" class="volume-wrapper">
   <div (mouseenter)="wrapperHovered = true" [hidden]="!wrapperHovered" class="ui basic bottom pointing label volume-control-wrapper">
      <md-slider [value]="volume" (change)="volumeSlideHandler($event)" vertical></md-slider>
-     <!-- <div class="volume-control-top"></div>
-     <div class="volume-control-bottom"></div> -->
-
   </div>
   <i *ngIf="!isMuted" (click)="volumeClickHandler()" class="volume up icon"></i>
   <i *ngIf="isMuted"
@@ -15,5 +12,3 @@
      icon: true
   }"></i>
 </div>
-
-<!--<i class="volume off icon"></i> -->
