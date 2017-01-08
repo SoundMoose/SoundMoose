@@ -17,7 +17,7 @@ export class TrackProgressComponent {
   player$: Observable<Player>;
   durationMinutesSeconds: string;
   progressMinutesSeconds: string;
-  // duration in milliseconds
+  // Duration in milliseconds.
   duration: number;
   // Progress, a number between 0 and this.multiplier.
   currentProgress: number = 0;
@@ -28,7 +28,7 @@ export class TrackProgressComponent {
   // Whether we are currently sliding.
   sliding: boolean;
 
-  constructor (private playerService: PlayerService, private store$: Store<AppStore>, private playerActions: PlayerActions) {
+  constructor (private playerService: PlayerService, private store$: Store<AppStore>) {
     this.player$ = this.store$.select('player');
     this.player$.subscribe((item) => {
       if (this.sliding) {
@@ -57,7 +57,7 @@ export class TrackProgressComponent {
     this.sliding = false;
     // Stop updating the progress bar timer while dragging.
     clearInterval(this.timer);
-    // Send a fraction to the player service.
+    // Send a fraction to the player service so it can change the position of the track.
     this.playerService.changePosition($event.value / this.multiplier);
   }
 
@@ -70,7 +70,9 @@ export class TrackProgressComponent {
       this.timer = window.setInterval(() =>  {
         // Progress, a number between 0 and this.multiplier.
         let progress = slider.attributes['aria-valuenow'].value;
+        // The progress timer is bound to this.
         this.progressMinutesSeconds = this.millisToMinutesSeconds(progress / this.multiplier * this.duration);
+         // The slider is bound to this.
         this.currentProgress = progress;
       }, 100);
     }
