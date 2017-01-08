@@ -24,11 +24,11 @@ const initialState: PlayerState = {
 
   repeatTrack: false,
   shuffleTracks: false,
-  bufferedRanges: []
+  bufferedRanges: [],
 
   //////////////////////////////////////////////////////////////////////////
   // CHANGE BELOW TO TRUE TO SHOW AUDIO CONTROLS
-  toggleAudioControls:false
+  toggleAudioControls: false
   //////////////////////////////////////////////////////////////////////////
 };
 
