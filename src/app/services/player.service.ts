@@ -86,7 +86,6 @@ export class PlayerService {
           this.store$.dispatch(playerActions.setBufferedRanges(ranges));
         });
 
-   }
       //  WILL THE CODE ABOVE SHUFFLE? NEEDS TO BE TESTED //
 
 
