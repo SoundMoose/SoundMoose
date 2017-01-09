@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 
 import { AppState } from '../app.service';
-import { AppStore } from '../../models/appstore.model';
+import { AppStore } from '../../../models/appstore.model';
 import { AudioStream } from '../../../audio-element';
 
 import { Store } from '@ngrx/store';
@@ -29,11 +29,17 @@ export class FrequencyVisualizerComponent {
 
   constructor (private audioSrc: AudioStream, private store$: Store<AppStore>) {
 
+  }
+
+  ngOnInit() {
+
+    console.log('ngOnInit run in frequencyVisualizer')
+
     this.frequencyBufferLength = this.audioSrc.frequencyBufferLength;
     this.hasfrequencyCanvas = false;
 
     // can't call window.onload twice, so using event listeners!
-    window.addEventListener("load", function() {
+    // window.addEventListener("load", function() {
       this.frequencyCanvas = document.getElementById('visualizerFrequencyCanvas');
       this.frequencyCanvasCtx = this.frequencyCanvas.getContext("2d");
       this.WIDTH = this.frequencyCanvas.width;
@@ -46,8 +52,10 @@ export class FrequencyVisualizerComponent {
         that.frequencyDataArray = that.audioSrc.frequencyDataArray;
         that.drawFrequencyBars(that);
       }, 50);
-    }.bind(this));
+    // }.bind(this));
+
   }
+
 
   drawFrequencyBars(context) {
     if (context.hasfrequencyCanvas) {
