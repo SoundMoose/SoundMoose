@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core'
 
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
@@ -13,7 +14,7 @@ import { AudioControls } from './models/audio-controls.model';
 
 @Component({
   selector: 'app',
-
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: 'app.component.html'
 })
 

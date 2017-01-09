@@ -3,11 +3,15 @@ import { Action } from '@ngrx/store';
 import { TrackActions } from '../actions/track.actions';
 import { PlayerActions } from '../actions/player.actions';
 
-const initialState: any = {
+export type SpinnerState = {
+  isSpinning: boolean;
+};
+
+const initialState: SpinnerState = {
   isSpinning: false,
 };
 
-export default function (state = initialState, action: Action): any {
+export default function (state = initialState, action: Action): SpinnerState {
   switch (action.type) {
 
     // Load tracks begin / end

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core'
 
 import { AppState } from '../app.service';
 import { PlayerService } from './../../services/player.service';
@@ -17,6 +18,7 @@ import {
 } from '@angular/core';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'player',
   styleUrls: [ './player.component.css' ],
   templateUrl: './player.component.html',

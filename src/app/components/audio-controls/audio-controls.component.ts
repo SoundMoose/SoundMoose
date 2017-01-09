@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core'
 
 import { AppState } from '../app.service';
 import { AudioControlsService } from './../../services/audio-controls.service';
@@ -9,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'audio-controls',
   styleUrls: [ './audio-controls.component.css' ],
   templateUrl: './audio-controls.component.html',
