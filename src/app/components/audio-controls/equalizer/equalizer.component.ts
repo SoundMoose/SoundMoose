@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core'
 
 import { AppState } from '../app.service';
 
@@ -9,6 +10,7 @@ import { PlayerActions } from '../../../actions/player.actions';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'equalizer',
   styleUrls: [ './equalizer.component.css' ],
   templateUrl: './equalizer.component.html'

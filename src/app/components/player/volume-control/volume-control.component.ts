@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core'
 
 import { AppState } from '../app.service';
 
@@ -9,6 +10,7 @@ import { PlayerActions } from '../../../actions/player.actions';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'volume-control',
   styleUrls: [ '../player.component.css' ],
   templateUrl: './volume-control.component.html'
@@ -23,7 +25,7 @@ export class VolumeControlComponent {
 
 
   constructor (private store$: Store<AppStore>, private playerActions: PlayerActions) {
-    this.player$ = this.store$.select('player');
+    this.player$ = this.store$.select(s => s.player);
     this.player$.subscribe(item => {
       this.volume = item.volume;
       this.isMuted = item.isMuted;

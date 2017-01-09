@@ -7,10 +7,11 @@ import {
   transition,
   animate
 } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core'
 import { SoundCloudService } from './../../services/soundcloud.service';
 import { Store } from '@ngrx/store';
 import { AppStore } from './../../models/appstore.model';
-import { Track } from './../../models/track.model';
+import { TracksState } from './../../reducers/tracks.reducer';
 import { Observable } from 'rxjs/Observable';
 import { AudioStream } from '../../audio-element';
 import { Subscription } from 'rxjs/Subscription';
@@ -39,7 +40,7 @@ declare var $: any;
   ]
 })
 export class TopTracksComponent implements OnInit {
-  topTracks: Observable<{}>;
+  topTracks$: Observable<TracksState>;
   buttonToggled: boolean = false;
   genres = [
     ['all-music', 'All music'],
@@ -76,7 +77,7 @@ export class TopTracksComponent implements OnInit {
   ];
   currentGenre: string;
 
-  constructor(private store: Store<AppStore>, private soundCloudService: SoundCloudService) {
+  constructor(private store$: Store<AppStore>, private soundCloudService: SoundCloudService) {
   }
 
   ngOnInit() {
@@ -90,7 +91,7 @@ export class TopTracksComponent implements OnInit {
   setCurrentGenre(genre = 'all-music') {
     this.currentGenre = genre;
     this.soundCloudService.loadTopTracks(this.currentGenre);
-    this.topTracks = this.store.select('tracks');
+    this.topTracks$ = this.store$.select(s => s.tracks);
   }
 
 }

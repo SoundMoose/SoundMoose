@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core'
 
 import { AppState } from '../app.service';
-import { Player } from '../../../models/player.model';
+import { PlayerState } from '../../../reducers/player.reducer';
 import { AppStore } from '../../../models/appstore.model';
 import { PlayerService } from '../../../services/player.service';
 import { Store } from '@ngrx/store';
@@ -9,12 +10,13 @@ import { Observable } from 'rxjs/Observable';
 import { PlayerActions } from '../../../actions/player.actions';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'track-progress',
   styleUrls: [ '../player.component.css' ],
   templateUrl: './track-progress.component.html'
 })
 export class TrackProgressComponent {
-  player$: Observable<Player>;
+  player$: Observable<PlayerState>;
   durationMinutesSeconds: string;
   progressMinutesSeconds: string;
   // Duration in milliseconds.
@@ -30,7 +32,7 @@ export class TrackProgressComponent {
   bufferedRanges: number[][] | number[];
 
   constructor (private playerService: PlayerService, private store$: Store<AppStore>) {
-    this.player$ = this.store$.select('player');
+    this.player$ = this.store$.select(s => s.player);
     this.player$.subscribe((item) => {
       if (this.sliding) {
         // We let the slider take over the timer while we are sliding.

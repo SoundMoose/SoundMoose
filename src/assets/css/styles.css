@@ -42,10 +42,9 @@ img.logo {
 }
 .grid .track-tile {
   width: 100%;
-  padding-top: 93.5%;
+  padding-top: 95%;
   background-repeat: no-repeat;
   background-size: contain;
-  background-image: url('../img/square.png');
 }
 .album-art {
   border: 1px solid #404040;
@@ -192,10 +191,7 @@ player-controls .icon:hover {
 .md-slider-vertical .md-slider-track {
   left: 8px !important;
 }
-/*.md-slider-thumb {
-  width: 10px !important;
-  height: 10px !important;
-}*/
+
 .track-progress-bar {
   width: 450px;
   top: -8px !important;
