@@ -2,6 +2,7 @@
    <select id="genre-select" class="ui dropdown" (change)="setCurrentGenre($event.target.value)" style="background: #1a1a1a;">
      <option *ngFor="let genre of genres; let last = last"
        [value]="genre[0]"
+       [selected]="genre[0] == 'currentGenre'"
      >
        {{genre[1]}}{{last ? setDefaultGenre() : ''}}
      </option>

@@ -15,6 +15,7 @@ import { TracksState } from './../../reducers/tracks.reducer';
 import { Observable } from 'rxjs/Observable';
 import { AudioStream } from '../../audio-element';
 import { Subscription } from 'rxjs/Subscription';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 declare var $: any;
 
@@ -77,11 +78,17 @@ export class TopTracksComponent implements OnInit {
   ];
   currentGenre: string;
 
-  constructor(private store$: Store<AppStore>, private soundCloudService: SoundCloudService) {
+  constructor(
+    private store$: Store<AppStore>,
+    private soundCloudService: SoundCloudService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
   }
 
   ngOnInit() {
-    this.setCurrentGenre();
+    let genre = this.route.snapshot.params['genre'];
+    this.setCurrentGenre(genre);
   }
 
   setDefaultGenre() {
@@ -91,6 +98,10 @@ export class TopTracksComponent implements OnInit {
   setCurrentGenre(genre = 'all-music') {
     this.currentGenre = genre;
     this.soundCloudService.loadTopTracks(this.currentGenre);
+    if (!(this.route.snapshot.url[0].path == 'home' && this.currentGenre == 'all-music')) {
+      this.router.navigate(['/top_tracks', this.currentGenre]);
+    }
+
     this.topTracks$ = this.store$.select(s => s.tracks);
   }
 
