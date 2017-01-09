@@ -18,8 +18,8 @@ import { PlayerActions } from '../../../actions/player.actions';
   templateUrl: './player-controls.component.html'
 })
 export class PlayerControlsComponent {
-  player$: Observable<PlayerState>;
-  tracks$: Observable<TracksState>;
+  player$: Observable<Player>;
+  tracks$: Observable<Track[]>;
   isPlaying: boolean;
   currentTrackId: number;
   repeatTrack: boolean;

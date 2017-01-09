@@ -10,5 +10,4 @@ export interface Player {
   repeatTrack: boolean;
   shuffleTracks: boolean;
   bufferedRanges: Array<number>;
-  toggleAudioControls: boolean;
 }
