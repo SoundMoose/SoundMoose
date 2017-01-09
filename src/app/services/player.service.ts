@@ -33,7 +33,7 @@ export class PlayerService {
    constructor(protected audioStream: AudioStream, private store$: Store<AppStore>, private playerActions: PlayerActions) {
 
     // this grabs the html audio element from the audio stream
-    this.audio = audioStream.mediaElement;
+    this.audio = audioStream.audioElement;
     this.audio.crossOrigin = "anonymous"; // CORS :)
 
     this.store$.select('tracks')

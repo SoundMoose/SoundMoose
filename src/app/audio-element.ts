@@ -1,4 +1,13 @@
-export class AudioStream extends HTMLAudioElement {};
+export interface AudioStream {
+  frequencyDataArray: Uint8Array;
+  waveformDataArray: Uint8Array;
+  // audioSrc: MediaElementAudioSourceNode;
+  waveformBufferLength: number;
+  frequencyBufferLength: number;
+  audioElement: any;
+};
+export class AudioStream {
+};
 
 export const AUDIO_STREAM_PROVIDER = {
   provide: AudioStream,
@@ -14,7 +23,6 @@ export const AUDIO_STREAM_PROVIDER = {
         waveformDataArray;
 
       audioCtx = new AudioContext();
-
       audioSrc = audioCtx.createMediaElementSource(audioElement);
       audioSrc.connect(audioCtx.destination);
 
@@ -40,10 +48,10 @@ export const AUDIO_STREAM_PROVIDER = {
       waveformAnalyser.getByteTimeDomainData(waveformDataArray);
 
       // assign to properties of what will be returned
-      audioSrc.frequencyDataArray = frequencyDataArray;
-      audioSrc.waveformDataArray = waveformDataArray;
-      audioSrc.frequencyBufferLength = frequencyBufferLength;
-      audioSrc.waveformBufferLength = waveformBufferLength;
+      // audioSrc.frequencyDataArray = frequencyDataArray;
+      // audioSrc.waveformDataArray = waveformDataArray;
+      // audioSrc.frequencyBufferLength = frequencyBufferLength;
+      // audioSrc.waveformBufferLength = waveformBufferLength;
 
       setInterval(function() {
 
@@ -53,15 +61,22 @@ export const AUDIO_STREAM_PROVIDER = {
         frequencyAnalyser.getByteFrequencyData(frequencyDataArray);
         // frequencyAnalyser.getFloatFrequencyData(frequencyDataArray);
         // console.log('frequencyDataArray:', frequencyDataArray);
-        audioSrc.frequencyDataArray = frequencyDataArray;
+        // audioSrc.frequencyDataArray = frequencyDataArray;
 
         ////////////////////// Waveform Data:  ////////////////////////
         waveformAnalyser.getByteTimeDomainData(waveformDataArray);
         // waveformAnalyser.getFloatTimeDomainData(waveformDataArray);
         // console.log('waveformDataArray:', waveformDataArray);
-        audioSrc.waveformDataArray = waveformDataArray;
-      }, 50);
+        // audioSrc.waveformDataArray = waveformDataArray;
+      }, 100);
 
-      return audioSrc;
+      return {
+        // audioSrc: audioSrc,
+        audioElement: audioElement,
+        frequencyDataArray: frequencyDataArray,
+        waveformDataArray: waveformDataArray,
+        waveformBufferLength: waveformBufferLength,
+        frequencyBufferLength: frequencyBufferLength
+      };
   },
 };

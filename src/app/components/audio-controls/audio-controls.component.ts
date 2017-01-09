@@ -22,5 +22,4 @@ export class AudioControlsComponent {
     this.toggleAudioControls$ = this.store$.select('audiocontrols')
       .map((audioControls: AudioControls) => audioControls.showAudioControls);
   }
-
 }
