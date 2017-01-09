@@ -2,7 +2,10 @@ import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { StoreModule } from '@ngrx/store';
+import { combineReducers, StoreModule } from '@ngrx/store';
+import { storeFreeze } from 'ngrx-store-freeze';
+import { compose } from '@ngrx/core/compose';
+
 import { SoundCloudService } from './services/soundcloud.service';
 import { PlayerService } from './services/player.service';
 import { AudioControlsService } from './services/audio-controls.service';
@@ -54,6 +57,15 @@ const APP_PROVIDERS = [
   PlayerActions,
   AudioControlsActions
 ];
+
+const metaReducers = (ENV !== 'production') ? [storeFreeze, combineReducers] : [combineReducers];
+
+const store = compose(...metaReducers)({
+  player: player,
+  tracks: tracks,
+  spinner: spinner
+});
+
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process

@@ -7,31 +7,36 @@ import { AppStore } from '../../models/appstore.model';
 import { Player } from '../../models/player.model';
 import { Observable } from 'rxjs/Observable';
 
-// Animation Stuff
-// import {
-//   Input,
-//   trigger,
-//   state,
-//   style,
-//   transition,
-//   animate
-// } from '@angular/core';
+
+import {
+   trigger,
+   state,
+   style,
+   transition,
+   animate
+} from '@angular/core';
 
 @Component({
   selector: 'player',
   styleUrls: [ './player.component.css' ],
   templateUrl: './player.component.html',
-  // animations: [
-  // trigger('trackExists', [
-  //     state('noTrack', style({
-  //       display: 'none'
-  //     })),
-  //     state('track', style({
-  //       display: 'block'
-  //     })),
-  //     transition('noTrack => track', animate('1000ms ease-in'))
-  //   ])
-  // ]
+  animations: [
+    trigger('fadeInOut', [
+      state('in', style({transform: 'translateY(0)', opacity: 0.98})),
+      transition('void => *', [
+        style({
+          transform: 'translateY(100%)'
+          opacity: 0,
+        }),
+        animate('0.2s ease-in')
+      ]),
+      transition('* => void', [
+        animate('0.2s 10 ease-out', style({
+          opacity: 0,
+        }))
+      ])
+    ])
+  ]
 })
 export class PlayerComponent {
   trackExists$: Observable<boolean>;

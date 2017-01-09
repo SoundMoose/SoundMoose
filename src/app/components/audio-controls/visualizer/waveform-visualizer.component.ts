@@ -72,7 +72,6 @@ export class WaveformVisualizerComponent {
         } else {
           context.waveformCanvasCtx.lineTo(context.waveformX, context.waveformY);
         }
-
         context.waveformX += context.sliceWidth;
       }
 

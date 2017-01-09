@@ -203,3 +203,11 @@ player-controls .icon:hover {
 .md-slider-track-fill {
   z-index: 1;
 }
+top-tracks .ui.selection.dropdown {
+  border: 1px solid #aaa;
+}
+top-tracks .ui.selection.dropdown.active,
+top-tracks .ui.selection.active.dropdown .menu,
+top-tracks .ui.selection.dropdown .menu>.item {
+  border: none;
+}

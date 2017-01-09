@@ -13,8 +13,6 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: './frequency-visualizer.component.html'
 })
 export class FrequencyVisualizerComponent {
-
-  // Frequency Visualization
   frequencyDataArray: any;
   frequencyBufferLength: number;
   frequencyCanvas: any;
@@ -28,18 +26,12 @@ export class FrequencyVisualizerComponent {
   hasfrequencyCanvas: boolean;
 
   constructor (private audioSrc: AudioStream, private store$: Store<AppStore>) {
-
   }
 
   ngOnInit() {
-
-    console.log('ngOnInit run in frequencyVisualizer')
-
     this.frequencyBufferLength = this.audioSrc.frequencyBufferLength;
     this.hasfrequencyCanvas = false;
 
-    // can't call window.onload twice, so using event listeners!
-    // window.addEventListener("load", function() {
       this.frequencyCanvas = document.getElementById('visualizerFrequencyCanvas');
       this.frequencyCanvasCtx = this.frequencyCanvas.getContext("2d");
       this.WIDTH = this.frequencyCanvas.width;
@@ -52,10 +44,7 @@ export class FrequencyVisualizerComponent {
         that.frequencyDataArray = that.audioSrc.frequencyDataArray;
         that.drawFrequencyBars(that);
       }, 50);
-    // }.bind(this));
-
   }
-
 
   drawFrequencyBars(context) {
     if (context.hasfrequencyCanvas) {
@@ -75,5 +64,4 @@ export class FrequencyVisualizerComponent {
       }
     }
   };
-
 }
