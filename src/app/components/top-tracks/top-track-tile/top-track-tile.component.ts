@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core'
 import { Store } from '@ngrx/store';
 import { AppStore } from './../../../models/appstore.model';
 import { Track } from '../../../models/track.model';
@@ -9,6 +10,7 @@ import { PlayerService } from '../../../services/player.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'top-track-tile',
   styleUrls: ['../top-tracks.component.css'],
   templateUrl: './top-track-tile.component.html'

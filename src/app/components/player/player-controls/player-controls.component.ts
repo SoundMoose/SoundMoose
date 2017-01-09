@@ -1,21 +1,25 @@
 import { Component } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core'
 
 import { AppState } from '../app.service';
 import { Player } from '../../../models/player.model';
 import { Track } from '../../../models/track.model';
+import { TracksState } from '../../../reducers/tracks.reducer';
+import { PlayerState } from '../../../reducers/player.reducer';
 import { AppStore } from '../../../models/appstore.model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { PlayerActions } from '../../../actions/player.actions';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'player-controls',
   styleUrls: [ '../player.component.css' ],
   templateUrl: './player-controls.component.html'
 })
 export class PlayerControlsComponent {
-  player$: Observable<Player>;
-  tracks$: Observable<Track[]>;
+  player$: Observable<PlayerState>;
+  tracks$: Observable<TracksState>;
   isPlaying: boolean;
   currentTrackId: number;
   repeatTrack: boolean;
@@ -24,14 +28,14 @@ export class PlayerControlsComponent {
   tracksList: Track[];
 
   constructor (private store$: Store<AppStore>, private playerActions: PlayerActions) {
-    this.player$ = this.store$.select('player');
+    this.player$ = this.store$.select(s => s.player);
     this.player$.subscribe((item) => {
       this.isPlaying = item.isPlaying;
       this.currentTrackId = item.currentTrack.id;
       this.repeatTrack = item.repeatTrack;
       this.shuffleTracks = item.shuffleTracks;
     });
-    this.tracks$ = this.store$.select('tracks');
+    this.tracks$ = this.store$.select(s => s.tracks);
     this.tracks$.subscribe(tracksList => this.tracksList = tracksList);
   }
 

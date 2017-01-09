@@ -17,10 +17,17 @@ import tracks from './reducers/tracks.reducer';
 import spinner from './reducers/spinner.reducer';
 import audiocontrols from './reducers/audio-controls.reducer';
 
+import {
+  RouterModule,
+  PreloadAllModules
+} from '@angular/router';
+
 /*
  * Platform and Environment providers/directives/pipes
  */
 import { ENV_PROVIDERS } from './environment';
+import { ROUTES } from './app.routes';
+
 // App is our top level component
 import { AppComponent } from './app.component';
 
@@ -98,7 +105,8 @@ const store = compose(...metaReducers)({
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     HttpModule,
     MaterialModule.forRoot(),
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

@@ -1,5 +1,6 @@
 
 import { Component } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core'
 
 import { AppState } from '../app.service';
 import { AppStore } from '../../../models/appstore.model';
@@ -9,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'visualizer-2D-waveform',
   templateUrl: './waveform-visualizer.component.html'
 })
