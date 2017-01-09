@@ -1,10 +1,10 @@
 
 // in development!
 
-export interface AudioStreamType {
-  waveformBufferLength: number;
-  frequencyBufferLength: number;
-  frequencyDataArray: number[];
-  waveformDataArray: number[];
-  mediaElement: any;
-}
+// export interface AudioStreamType {
+//   waveformBufferLength: number;
+//   frequencyBufferLength: number;
+//   frequencyDataArray: number[];
+//   waveformDataArray: number[];
+//   mediaElement: any;
+// }

@@ -47,7 +47,7 @@ export class WaveformVisualizerComponent {
     setInterval(function() {
       that.waveformDataArray = that.audioSrc.waveformDataArray;
       that.drawWaveOscilliscope(that);
-    }, 50);
+    }, 100);
   }
 
   drawWaveOscilliscope(context) {
