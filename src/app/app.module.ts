@@ -8,12 +8,14 @@ import { compose } from '@ngrx/core/compose';
 
 import { SoundCloudService } from './services/soundcloud.service';
 import { PlayerService } from './services/player.service';
+import { AudioControlsService } from './services/audio-controls.service';
 import { AUDIO_STREAM_PROVIDER } from './audio-element';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import player from './reducers/player.reducer';
 import tracks from './reducers/tracks.reducer';
 import spinner from './reducers/spinner.reducer';
+import audiocontrols from './reducers/audio-controls.reducer';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -40,6 +42,7 @@ import { EqualizerComponent } from './components/audio-controls/equalizer/equali
 
 import { TrackActions } from './actions/track.actions';
 import { PlayerActions } from './actions/player.actions';
+import { AudioControlsActions } from './actions/audio-controls.actions';
 
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
@@ -48,9 +51,11 @@ import 'hammerjs';
 const APP_PROVIDERS = [
   SoundCloudService,
   PlayerService,
+  AudioControlsService,
   AUDIO_STREAM_PROVIDER,
   TrackActions,
-  PlayerActions
+  PlayerActions,
+  AudioControlsActions
 ];
 
 const metaReducers = (ENV !== 'production') ? [storeFreeze, combineReducers] : [combineReducers];
@@ -84,7 +89,12 @@ const store = compose(...metaReducers)({
   ],
   imports: [
     BrowserModule,
-    StoreModule.provideStore(store),
+    StoreModule.provideStore({
+      player: player,
+      tracks: tracks,
+      spinner: spinner,
+      audiocontrols: audiocontrols
+    }),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     HttpModule,
     MaterialModule.forRoot(),

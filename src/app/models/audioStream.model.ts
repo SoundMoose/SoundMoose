@@ -1,3 +1,6 @@
+
+// in development!
+
 export interface AudioStreamType {
   waveformBufferLength: number;
   frequencyBufferLength: number;

@@ -1,6 +1,16 @@
     <div class="ui borderless main menu container">
       <div class="ui container">
         <img class="logo" src="/assets/img/logo.png">
+
+        <i [ngClass]="{
+             big: true,
+             settings: true,
+             icon: true,
+             yellow: showAudioControls$ | async
+             }"
+          (click)="toggleAudioControls()"
+        ></i>
+
       </div>
     </div>
 

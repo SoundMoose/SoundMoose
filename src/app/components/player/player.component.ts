@@ -25,8 +25,8 @@ import {
       state('in', style({transform: 'translateY(0)', opacity: 0.98})),
       transition('void => *', [
         style({
-          transform: 'translateY(100%)'
-          opacity: 0,
+          transform: 'translateY(100%)',
+          opacity: 0
         }),
         animate('0.2s ease-in')
       ]),

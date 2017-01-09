@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
 import { AppState } from '../app.service';
-import { PlayerService } from './../../services/player.service';
+import { AudioControlsService } from './../../services/audio-controls.service';
 import { Store } from '@ngrx/store';
 import { AppStore } from '../../models/appstore.model';
-import { Player } from '../../models/player.model';
+import { AudioControls } from '../../models/audio-controls.model';
 import { Observable } from 'rxjs/Observable';
 
 
@@ -16,9 +16,9 @@ import { Observable } from 'rxjs/Observable';
 export class AudioControlsComponent {
   toggleAudioControls$: Observable<boolean>;
 
-  constructor(private playerService: PlayerService, private store$: Store<AppStore> ) {
-    this.toggleAudioControls$ = this.store$.select('player')
-      .map((playerStatus: Player) => playerStatus.toggleAudioControls === true);
+  constructor(private audioControlsService: AudioControlsService, private store$: Store<AppStore> ) {
+    this.toggleAudioControls$ = this.store$.select('audiocontrols')
+      .map((audioControls: AudioControls) => audioControls.showAudioControls);
   }
 
 }

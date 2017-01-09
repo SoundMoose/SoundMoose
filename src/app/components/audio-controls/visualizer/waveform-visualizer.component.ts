@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 
 import { AppState } from '../app.service';
-import { AppStore } from '../../models/appstore.model';
+import { AppStore } from '../../../models/appstore.model';
 import { AudioStream } from '../../../audio-element';
 
 import { Store } from '@ngrx/store';
@@ -30,23 +30,24 @@ export class WaveformVisualizerComponent {
 
   constructor (private audioSrc: AudioStream, private store$: Store<AppStore>) {
 
+  }
+
+  ngOnInit() {
     this.waveformBufferLength = this.audioSrc.waveformBufferLength;
     this.hasCanvas = false;
 
-    window.addEventListener("load", function() {
-      this.waveformCanvas = document.getElementById('visualizerWaveformCanvas');
-      this.waveformCanvasCtx = this.waveformCanvas.getContext("2d");
-      this.waveformWIDTH = this.waveformCanvas.width;
-      this.waveformHEIGHT = this.waveformCanvas.height;
-      this.waveformCanvasCtx.clearRect(0, 0, this.waveformWIDTH, this.waveformHEIGHT);
+    this.waveformCanvas = document.getElementById('visualizerWaveformCanvas');
+    this.waveformCanvasCtx = this.waveformCanvas.getContext("2d");
+    this.waveformWIDTH = this.waveformCanvas.width;
+    this.waveformHEIGHT = this.waveformCanvas.height;
+    this.waveformCanvasCtx.clearRect(0, 0, this.waveformWIDTH, this.waveformHEIGHT);
 
-      this.hasCanvas = true;
-      var that = this;
-      setInterval(function() {
-        that.waveformDataArray = that.audioSrc.waveformDataArray;
-        that.drawWaveOscilliscope(that);
-      }, 50);
-    }.bind(this));
+    this.hasCanvas = true;
+    var that = this;
+    setInterval(function() {
+      that.waveformDataArray = that.audioSrc.waveformDataArray;
+      that.drawWaveOscilliscope(that);
+    }, 50);
   }
 
   drawWaveOscilliscope(context) {
@@ -71,7 +72,6 @@ export class WaveformVisualizerComponent {
         } else {
           context.waveformCanvasCtx.lineTo(context.waveformX, context.waveformY);
         }
-
         context.waveformX += context.sliceWidth;
       }
 
