@@ -91,8 +91,14 @@ export class PlayerService {
 
   play(url: string = null): void {
     if (url) {
+      // setting up audio for garbage collection:
+      this.audio.pause();
+      this.audio.src = '';
+      this.audio.load();
+
       this.audio.src = url;
     }
+
     // See http://stackoverflow.com/questions/36803176/how-to-prevent-the-play-request-was-interrupted-by-a-call-to-pause-error
     // Give the timeout enough time to avoid the race conflict.
     let waitTime = 150;
@@ -100,6 +106,9 @@ export class PlayerService {
     setTimeout(() => {
       // Resume play if the element if is paused.
       if (this.audio.paused) {
+
+
+
         this.audio.play();
       }
     }, 150);

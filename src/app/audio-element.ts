@@ -104,7 +104,7 @@ export const AUDIO_STREAM_PROVIDER = {
       setInterval(function() {
         frequencyAnalyser.getByteFrequencyData(frequencyDataArray);
         waveformAnalyser.getByteTimeDomainData(waveformDataArray);
-      }, 100);
+      }, 50);
 
       return {
         audioSrcNode: audioSrcNode,
