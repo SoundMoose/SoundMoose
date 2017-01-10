@@ -42,21 +42,21 @@ export class AudioControlsService {
 
   }
 
-  lowGain(lowGain: number): void {
+  lowGain(lowBand: any): void {
     if (this.audioStream) {
-      this.audioStream.lowBand.gain.value = lowGain.gain.value;
+      this.audioStream.lowBand.gain.value = lowBand.gain.value;
     }
   }
 
-  midGain(midGain: number): void {
+  midGain(midBand: any): void {
     if (this.audioStream) {
-      this.audioStream.midBand.gain.value = midGain.gain.value;
+      this.audioStream.midBand.gain.value = midBand.gain.value;
     }
   }
 
-  highGain(highGain: number): void {
+  highGain(highBand: any): void {
     if (this.audioStream) {
-      this.audioStream.highBand.gain.value = highGain.gain.value;
+      this.audioStream.highBand.gain.value = highBand.gain.value;
     }
   }
 

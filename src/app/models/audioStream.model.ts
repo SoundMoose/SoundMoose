@@ -1,10 +1,16 @@
+export interface AudioStreamModel {
+  // 2D Visualizations
+  frequencyDataArray: Uint8Array;
+  waveformDataArray: Uint8Array;
+  audioSrcNode: MediaElementAudioSourceNode;
+  waveformBufferLength: number;
+  frequencyBufferLength: number;
+  audioElement: any;
+  audioCtx: any;
 
-// in development!
+  // Equalizer - In Development
+  highBand: any;
+  midBand: any;
+  lowBand: any;
 
-// export interface AudioStreamType {
-//   waveformBufferLength: number;
-//   frequencyBufferLength: number;
-//   frequencyDataArray: number[];
-//   waveformDataArray: number[];
-//   mediaElement: any;
-// }
+};

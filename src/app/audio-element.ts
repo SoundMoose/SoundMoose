@@ -9,11 +9,12 @@ export interface AudioStream {
   audioCtx: any;
 
   // Equalizer - In Development
-  highGain: any;
-  midGain: any;
-  lowGain: any;
+  highBand: any;
+  midBand: any;
+  lowBand: any;
 
 };
+
 export class AudioStream {
 };
 
