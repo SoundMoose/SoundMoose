@@ -36,7 +36,7 @@ describe('Tracks Reducer', () => {
     Object.freeze(state);
   });
 
-  it('should handle no state being passed in  and unknown action types', () => {
+  it('should handle no state being passed in and unknown action types', () => {
     // Dispatching an undefined state and unknown action.
     let actual = tracksReducer(undefined, { type: 'TACOS' });
 
