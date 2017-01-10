@@ -30,12 +30,6 @@ const initialState: PlayerState = {
 export default function (state = initialState, action: Action): PlayerState {
   switch (action.type) {
 
-    // // is set an immutable import?
-    // case PlayerActions.PLAYING_AUDIO:
-    // return state.set('isPlaying', true) as PlayerState;
-    //
-    // case PlayerActions.PAUSED_AUDIO:
-    //   return state.set('isPlaying', false) as PlayerState;
     case TrackActions.TOGGLE_PLAY_PAUSE: {
       // Pause Track because we clicked the track that was already playing.
       if (state.currentTrack.id === action.payload.id) {
