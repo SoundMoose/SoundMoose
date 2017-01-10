@@ -31,7 +31,7 @@ before_script:
 script:
   # - npm run lint
   - npm test
-  - npm run build:prod
-  - npm run server:prod:ci &
-  - sleep 3
+  # - npm run build:prod
+  # - npm run server:prod:ci &
+  # - sleep 3
   # - npm run e2e
