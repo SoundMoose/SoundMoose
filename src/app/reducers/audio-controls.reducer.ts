@@ -6,7 +6,7 @@ import { AudioControlsActions } from '../actions/audio-controls.actions';
 export type AudioControlsState = AudioControls;
 
 const initialState: AudioControlsState = {
-  showAudioControls: false,
+  showAudioControls: true,
   lowBand: {
     gain: {
       value: 0.5,
