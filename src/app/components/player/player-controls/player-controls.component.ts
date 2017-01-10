@@ -12,7 +12,6 @@ import { Observable } from 'rxjs/Observable';
 import { PlayerActions } from '../../../actions/player.actions';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'player-controls',
   styleUrls: [ '../player.component.css' ],
   templateUrl: './player-controls.component.html'

@@ -8,6 +8,7 @@ import { TrackActions } from '../../../actions/track.actions';
 import { Action } from '@ngrx/store';
 import { PlayerService } from '../../../services/player.service';
 import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,7 +24,7 @@ export class TopTrackTileComponent {
   currentlyPlaying$: Observable<boolean>;
   selected$: Observable<boolean>;
 
-  constructor(private trackActions: TrackActions, private store$: Store<AppStore>) {
+  constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router) {
     this.currentlyPlaying$ = this.store$.select('player')
       .map((playerStatus: Player) => playerStatus.isPlaying && playerStatus.currentTrack.id === this.topTrack.id);
     this.selected$ = this.store$.select('player')
@@ -32,6 +33,13 @@ export class TopTrackTileComponent {
 
   clickHandler() {
     this.store$.dispatch(this.trackActions.togglePlayPause(this.topTrack));
+  }
+
+  goToDetail($event) {
+    // Only go to detail page if we clicked outside of the play icon
+    if ($event.target.tagName != 'I') {
+      this.router.navigate(['/track', this.topTrack.id]);
+    }
   }
 
 }

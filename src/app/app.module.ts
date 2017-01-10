@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { combineReducers, StoreModule } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { compose } from '@ngrx/core/compose';
+import {MomentModule} from 'angular2-moment';
 
 import { SoundCloudService } from './services/soundcloud.service';
 import { PlayerService } from './services/player.service';
@@ -17,6 +18,8 @@ import tracks from './reducers/tracks.reducer';
 import spinner from './reducers/spinner.reducer';
 import audiocontrols from './reducers/audio-controls.reducer';
 import trackDetails from './reducers/track-details.reducer';
+
+
 
 import {
   RouterModule,
@@ -52,7 +55,7 @@ import { EqualizerComponent } from './components/audio-controls/equalizer/equali
 import { TrackActions } from './actions/track.actions';
 import { PlayerActions } from './actions/player.actions';
 import { AudioControlsActions } from './actions/audio-controls.actions';
-
+import { YoutubePipe } from './youtube.pipe';
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
 
@@ -95,9 +98,11 @@ const store = compose(...metaReducers)({
     FrequencyVisualizerComponent,
     WaveformVisualizerComponent,
     EqualizerComponent,
-    TrackDetailComponent
+    TrackDetailComponent,
+    YoutubePipe
   ],
   imports: [
+    MomentModule,
     BrowserModule,
     StoreModule.provideStore({
       player: player,

@@ -4,7 +4,7 @@ import {Store} from '@ngrx/store';
 import {AppStore} from '../models/appstore.model';
 import 'rxjs/add/operator/map';
 import {Track} from '../models/track.model';
-import {soundcloudClientId} from '../config/superSecretKeys';
+import {soundcloudClientId, youtubeApiKey } from '../config/superSecretKeys';
 import {TrackActions} from '../actions/track.actions';
 import {TrackDetailsActions} from '../actions/track-details.actions';
 
@@ -42,7 +42,6 @@ export class SoundCloudService {
     return this._http.get(trackDetailsUrl)
       .map(res => res.json())
       .map(item => {
-        console.log(item);
         return {
             track: {
               id: item.id,
@@ -62,7 +61,8 @@ export class SoundCloudService {
             commentCount: item.comment_count,
             playbackCount: item.playback_count,
             favoriteCount: item.favoritings_count,
-            description: item.description
+            description: item.description,
+            created: item.created_at
           };
       })
       .map(payload => ({ type: TrackDetailsActions.LOAD_TRACK_DETAILS_SUCCESS, payload }))
@@ -73,6 +73,18 @@ export class SoundCloudService {
     const tracksUrl = 'http://api.soundcloud.com/tracks/' + trackId + '?client_id=' + soundcloudClientId;
     // comments
 
+  }
+
+  // move to different service or rename soundcloud service
+  searchYoutubeVideo(query) {
+    const queryUrl = 'https://www.googleapis.com/youtube/v3/search?part=snippet&order=viewcount&q=' + encodeURIComponent(query) + '&maxResults=1&key=' + youtubeApiKey;
+
+    return this._http.get(queryUrl)
+      .map(res => res.json())
+      .map(item => {
+        console.log(item.items[0].id.videoId);
+        return item.items[0].id.videoId;
+      });
   }
 }
 
