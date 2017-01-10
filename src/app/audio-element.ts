@@ -1,10 +1,18 @@
 export interface AudioStream {
+  // 2D Visualizations
   frequencyDataArray: Uint8Array;
   waveformDataArray: Uint8Array;
-  // audioSrc: MediaElementAudioSourceNode;
+  audioSrcNode: MediaElementAudioSourceNode;
   waveformBufferLength: number;
   frequencyBufferLength: number;
   audioElement: any;
+  audioCtx: any;
+
+  // Equalizer - In Development
+  highGain: any;
+  midGain: any;
+  lowGain: any;
+
 };
 export class AudioStream {
 };
@@ -14,7 +22,7 @@ export const AUDIO_STREAM_PROVIDER = {
   useFactory: () => {
     let audioElement = new Audio(),
         audioCtx,
-        audioSrc,
+        audioSrcNode,
         frequencyAnalyser,
         waveformAnalyser,
         frequencyBufferLength,
@@ -23,60 +31,97 @@ export const AUDIO_STREAM_PROVIDER = {
         waveformDataArray;
 
       audioCtx = new AudioContext();
-      audioSrc = audioCtx.createMediaElementSource(audioElement);
-      audioSrc.connect(audioCtx.destination);
+      audioSrcNode = audioCtx.createMediaElementSource(audioElement);
+      audioSrcNode.connect(audioCtx.destination);
 
       frequencyAnalyser = audioCtx.createAnalyser();
       waveformAnalyser = audioCtx.createAnalyser();
       frequencyAnalyser.smoothingTimeConstant = 0.5;
       // waveformAnalyser.smoothingTimeConstant = 0.15;
-      audioSrc.connect(frequencyAnalyser);
-      audioSrc.connect(waveformAnalyser);
+      audioSrcNode.connect(frequencyAnalyser);
+      audioSrcNode.connect(waveformAnalyser);
 
-      // Fast Fourier Transform (fft) in a certain frequency domain. 1024, 2048, etc..
       frequencyAnalyser.fftSize = 1024;
       waveformAnalyser.fftSize = 2048;
       frequencyBufferLength = frequencyAnalyser.frequencyBinCount;
       waveformBufferLength = waveformAnalyser.frequencyBinCount;
 
       frequencyDataArray = new Uint8Array(frequencyBufferLength);
-      waveformDataArray = new Uint8Array(waveformBufferLength);  // alternative: Float32Array
+      waveformDataArray = new Uint8Array(waveformBufferLength);
 
-      audioSrc.connect(audioCtx.destination);
+      audioSrcNode.connect(audioCtx.destination);
 
-      frequencyAnalyser.getByteFrequencyData(frequencyDataArray); // alternative: getFloatFrequencyData
+      frequencyAnalyser.getByteFrequencyData(frequencyDataArray);
       waveformAnalyser.getByteTimeDomainData(waveformDataArray);
 
-      // assign to properties of what will be returned
-      // audioSrc.frequencyDataArray = frequencyDataArray;
-      // audioSrc.waveformDataArray = waveformDataArray;
-      // audioSrc.frequencyBufferLength = frequencyBufferLength;
-      // audioSrc.waveformBufferLength = waveformBufferLength;
+/////////////// In-Development Equalizer Component  ////////////////////
+      let gainDb,
+        bandSplit,
+        highBand,
+        midBand,
+        lowBand,
+        highGain,
+        midGain,
+        lowGain,
+        hInvert,
+        lInvert,
+        sum,
+        masterGain;
+
+      masterGain = audioCtx.createGain();
+      masterGain.gain.value = -40;
+
+      gainDb = -40.0;
+      // gainDb = 0.0;
+      bandSplit = [ 360, 1000, 3600 ];
+
+      lowBand = audioCtx.createBiquadFilter();
+      lowBand.type = "lowshelf";
+      lowBand.frequency.value = bandSplit[0];
+      lowBand.gain.value = gainDb;
+      lowBand.connect( masterGain );
+
+      midBand = audioCtx.createBiquadFilter();
+    	midBand.type = "peaking";
+    	midBand.frequency.value = bandSplit[1];
+    	midBand.Q.value = 0.5;
+    	midBand.gain.value = gainDb;
+    	midBand.connect( lowBand );
+
+      highBand = audioCtx.createBiquadFilter();
+      highBand.type = "highshelf";
+      highBand.frequency.value = bandSplit[2];
+      highBand.gain.value = gainDb;
+      highBand.connect( midBand );
+
+      audioSrcNode.connect(highBand);
+      // audioSrcNode.connect(audioCtx.destination);
+
+////////// End of In-Development Equalizer Component ////////////////
+
 
       setInterval(function() {
-
-        ////////////////////// Frequency Data: ////////////////////////
-        // only use one of the next two lines (choose Float or Byte)
-        // and remember to change the correstponding array type!
         frequencyAnalyser.getByteFrequencyData(frequencyDataArray);
-        // frequencyAnalyser.getFloatFrequencyData(frequencyDataArray);
-        // console.log('frequencyDataArray:', frequencyDataArray);
-        // audioSrc.frequencyDataArray = frequencyDataArray;
-
-        ////////////////////// Waveform Data:  ////////////////////////
         waveformAnalyser.getByteTimeDomainData(waveformDataArray);
-        // waveformAnalyser.getFloatTimeDomainData(waveformDataArray);
-        // console.log('waveformDataArray:', waveformDataArray);
-        // audioSrc.waveformDataArray = waveformDataArray;
       }, 100);
 
       return {
-        // audioSrc: audioSrc,
+        audioSrcNode: audioSrcNode,
         audioElement: audioElement,
+        audioCtx: audioCtx,
         frequencyDataArray: frequencyDataArray,
         waveformDataArray: waveformDataArray,
         waveformBufferLength: waveformBufferLength,
-        frequencyBufferLength: frequencyBufferLength
+        frequencyBufferLength: frequencyBufferLength,
+
+
+        // Temporary for Equalizer component:
+        // lowGain: lowBand.gain.value,
+        // midGain: midBand.gain.value,
+        // highGain: highBand.gain.value
+        lowBand: lowBand,
+        midBand: midBand,
+        highBand: highBand
       };
   },
 };

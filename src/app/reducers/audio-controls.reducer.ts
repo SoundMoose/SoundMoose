@@ -7,6 +7,21 @@ export type AudioControlsState = AudioControls;
 
 const initialState: AudioControlsState = {
   showAudioControls: false,
+  lowBand: {
+    gain: {
+      value: 0.5,
+    }
+  },
+  midBand: {
+    gain: {
+      value: 0.5,
+    }
+  },
+  highBand: {
+    gain: {
+      value: 0.5,
+    }
+  }
 };
 
 export default function (state = initialState, action: Action): AudioControlsState {
@@ -17,7 +32,33 @@ export default function (state = initialState, action: Action): AudioControlsSta
           showAudioControls: !state.showAudioControls,
       });
     }
-
+    case AudioControlsActions.ADJUST_BASS:  {
+      return Object.assign({}, state, {
+        lowBand: {
+          gain: {
+          value: action.payload.bass,
+          }
+        }
+      });
+    }
+    case AudioControlsActions.ADJUST_MIDS:  {
+      return Object.assign({}, state, {
+        midBand: {
+          gain: {
+          value: action.payload.mids,
+          }
+        }
+      });
+    }
+    case AudioControlsActions.ADJUST_TREBLE:  {
+      return Object.assign({}, state, {
+          highBand: {
+            gain: {
+              value: action.payload.treble,
+            }
+          }
+      });
+    }
     default: {
       return state;
     }

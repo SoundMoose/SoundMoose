@@ -34,6 +34,7 @@ export class PlayerService {
 
     // this grabs the html audio element from the audio stream
     this.audio = audioStream.audioElement;
+    // this.audio = audioStream.audioSrcNode.mediaElement;
     this.audio.crossOrigin = "anonymous"; // CORS :)
 
     this.store$.select('tracks')
