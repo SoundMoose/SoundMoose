@@ -37,7 +37,7 @@ describe('Player Reducer', () => {
       repeatTrack: false,
       shuffleTracks: false,
       bufferedRanges: []
-    }
+    };
 
     tracks = [
       {
@@ -55,7 +55,7 @@ describe('Player Reducer', () => {
         streamUrl: 'http://www.google.com',
         duration: 123
       }
-    ]
+    ];
 
     Object.freeze(state);
   });
