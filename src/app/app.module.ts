@@ -55,7 +55,7 @@ import { EqualizerComponent } from './components/audio-controls/equalizer/equali
 import { TrackActions } from './actions/track.actions';
 import { PlayerActions } from './actions/player.actions';
 import { AudioControlsActions } from './actions/audio-controls.actions';
-
+import { YoutubePipe } from './youtube.pipe';
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
 
@@ -98,7 +98,8 @@ const store = compose(...metaReducers)({
     FrequencyVisualizerComponent,
     WaveformVisualizerComponent,
     EqualizerComponent,
-    TrackDetailComponent
+    TrackDetailComponent,
+    YoutubePipe
   ],
   imports: [
     MomentModule,

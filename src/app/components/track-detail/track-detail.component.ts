@@ -46,6 +46,8 @@ export class TrackDetailComponent implements OnInit {
   imgUrl: string;
   waveformUrl: string;
   track: Track;
+  youtubeId$: Observable<string>;
+  created: string;
 
   licenses: {} = {
     'no-rights-reserved': 'No rights reserved',
@@ -69,6 +71,7 @@ export class TrackDetailComponent implements OnInit {
       this.waveformUrl = item.waveformUrl;
       this.track = item.track;
       this.created = item.created;
+      this.youtubeId$ = this.soundCloudService.searchYoutubeVideo(this.track.title + ' ' + this.track.artist);
     });
     this.currentlyPlaying$ = this.store$.select(s => s.player)
       .map((playerStatus: PlayerState) => playerStatus.isPlaying && playerStatus.currentTrack.id === this.track.id);
