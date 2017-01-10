@@ -91,9 +91,13 @@ player-controls .icon:hover {
   background-color: #1a1a1a;
   margin-bottom: 80px;
 }
+.overview .track-name a,
 .overview .track-name {
   color: #fff;
   font-size: 14px;
+}
+.overview .track-name a.hover {
+  text-decoration: underline;
 }
 .overview .artist-name {
   color: #aaa;
