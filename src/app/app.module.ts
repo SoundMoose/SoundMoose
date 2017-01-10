@@ -16,6 +16,7 @@ import player from './reducers/player.reducer';
 import tracks from './reducers/tracks.reducer';
 import spinner from './reducers/spinner.reducer';
 import audiocontrols from './reducers/audio-controls.reducer';
+import trackDetails from './reducers/track-details.reducer';
 
 import {
   RouterModule,
@@ -39,6 +40,7 @@ import { VolumeControlComponent } from './components/player/volume-control/volum
 import { TrackInfoComponent } from './components/player/track-info/track-info.component';
 import { TrackProgressComponent } from './components/player/track-progress/track-progress.component';
 import { TopTrackTileComponent } from './components/top-tracks/top-track-tile/top-track-tile.component';
+import { TrackDetailComponent } from './components/track-detail/track-detail.component';
 
   // Audio Controls Deck:
 import { AudioControlsComponent } from './components/audio-controls/audio-controls.component';
@@ -92,7 +94,8 @@ const store = compose(...metaReducers)({
     AudioControlsComponent,
     FrequencyVisualizerComponent,
     WaveformVisualizerComponent,
-    EqualizerComponent
+    EqualizerComponent,
+    TrackDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -100,7 +103,8 @@ const store = compose(...metaReducers)({
       player: player,
       tracks: tracks,
       spinner: spinner,
-      audiocontrols: audiocontrols
+      audiocontrols: audiocontrols,
+      trackDetails: trackDetails
     }),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     HttpModule,

@@ -73,6 +73,7 @@ export class TrackProgressComponent {
     if (slider) {
       this.timer = window.setInterval(() =>  {
         // Progress, a number between 0 and this.multiplier.
+        console.log('called setInterval in track progress');
         let progress = slider.attributes['aria-valuenow'].value;
         // The progress timer is bound to this.
         this.progressMinutesSeconds = this.millisToMinutesSeconds(progress / this.multiplier * this.duration);

@@ -67,10 +67,10 @@ export class PlayerService {
       .distinctUntilChanged()
       .subscribe(item => this.volume(item));
 
-    Observable.fromEvent(this.audio, 'timeupdate')
-      .map((item: any) => Math.round(item.path[0].currentTime))
-      .distinctUntilChanged()
-      .subscribe((item) => this.updateCurrentTime(item));
+    // Observable.fromEvent(this.audio, 'timeupdate')
+    //   .map((item: any) => Math.round(item.path[0].currentTime))
+    //   .distinctUntilChanged()
+      // .subscribe((item) => this.updateCurrentTime(item));
 
     Observable.fromEvent(this.audio, 'ended')
       .subscribe(() => this.store$.dispatch(playerActions.jumpToNext(this.tracksList[this.getCurrentTrackIndex() + 1])));
@@ -126,7 +126,7 @@ export class PlayerService {
   }
 
   updateCurrentTime(time) {
-    this.store$.dispatch(this.playerActions.updateCurrentTime(time));
+    // this.store$.dispatch(this.playerActions.updateCurrentTime(time));
   }
 
   getProgressPercentage() {
