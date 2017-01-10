@@ -43,7 +43,7 @@ export class FrequencyVisualizerComponent {
       setInterval(function() {
         that.frequencyDataArray = that.audioSrc.frequencyDataArray;
         that.drawFrequencyBars(that);
-      }, 100);
+      }, 50);
   }
 
   drawFrequencyBars(context) {

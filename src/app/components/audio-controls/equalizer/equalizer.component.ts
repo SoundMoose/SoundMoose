@@ -4,9 +4,11 @@ import { ChangeDetectionStrategy } from '@angular/core'
 import { AppState } from '../app.service';
 
 import { AppStore } from '../../../models/appstore.model';
-import { Player } from '../../../models/player.model';
+import { AudioControls } from '../../../models/audio-controls.model';
+import { AudioStream } from '../../../audio-element';
+
 import { Store } from '@ngrx/store';
-import { PlayerActions } from '../../../actions/player.actions';
+import { AudioControlsActions } from '../../../actions/audio-controls.actions';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -19,39 +21,41 @@ import { Observable } from 'rxjs/Observable';
 export class EqualizerComponent {
   wrapperHovered : boolean = false;
 
-  player$ : Observable<Player>;
-  volume: number;
-  bass: number;
-  mid: number;
-  treble: number;
+  audioControls$ : Observable<AudioControls>;
 
-  constructor (private store$: Store<AppStore>, private playerActions: PlayerActions) {
-    // this.player$ = this.store$.select('player');
-    // this.player$.subscribe(item => {
-    //   this.volume = item.volume;
-    //   this.isMuted = item.isMuted;
-    //   this.volumeBeforeMute = item.volumeBeforeMute;
-    // })
+  highGain: any;
+  midGain: any;
+  lowGain: any;
+
+  constructor (private store$: Store<AppStore>, private audioSrc: AudioStream, private AudioControlsActions: AudioControlsActions) {
+
+    this.audioControls$ = this.store$.select(item => item.audiocontrols);
+    this.audioControls$.subscribe((item) => {
+      this.lowGain = item.lowBand.gain.value;
+      this.midGain = item.midBand.gain.value;
+      this.highGain = item.highBand.gain.value;
+    });
+
+  }
+
+  ngOnInit() {
+
   }
 
   private handleMouseOut() {
     window.setTimeout(() => { this.wrapperHovered = false; }, 1000);
   }
 
-  // volumeSlideHandler($event) {
-  //   this.volume = $event.value;
-  //   this.store$.dispatch(this.playerActions.volumeChange(this.volume, false));
-  // }
-  // bassSlideHandler($event) {
-  //   this.bass = $event.value;
-  //   this.store$.dispatch(this.equalizerActions.bassChange(this.bass));
-  // }
-  // midSlideHandler($event) {
-  //   this.mid = $event.value;
-  //   this.store$.dispatch(this.equalizerActions.midChange(this.mid));
-  // }
-  // trebleSlideHandler($event) {
-  //   this.treble = $event.value;
-  //   this.store$.dispatch(this.equalizerActions.trebleChange(this.treble));
-  // }
+  bassSlideHandler($event) {
+    this.lowGain = $event.value / 100;
+    this.store$.dispatch(this.AudioControlsActions.adjustBass(this.lowGain));
+  }
+  midSlideHandler($event) {
+    this.midGain = $event.value / 100;
+    this.store$.dispatch(this.AudioControlsActions.adjustMids(this.midGain));
+  }
+  trebleSlideHandler($event) {
+    this.highGain = $event.value / 100;
+    this.store$.dispatch(this.AudioControlsActions.adjustTreble(this.highGain));
+  }
 }

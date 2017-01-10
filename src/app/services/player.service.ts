@@ -20,6 +20,7 @@ import { TrackActions } from '../actions/track.actions';
 
 import { Player } from './../models/player.model';
 import { Track } from './../models/track.model';
+// import { AudioStreamModel } from './../models/audioStream.model';
 
 @Injectable()
 export class PlayerService {
@@ -65,10 +66,10 @@ export class PlayerService {
       .distinctUntilChanged()
       .subscribe(item => this.volume(item));
 
-    Observable.fromEvent(this.audio, 'timeupdate')
-      .map((item: any) => Math.round(item.path[0].currentTime))
-      .distinctUntilChanged()
-      .subscribe((item) => this.updateCurrentTime(item));
+    // Observable.fromEvent(this.audio, 'timeupdate')
+    //   .map((item: any) => Math.round(item.path[0].currentTime))
+    //   .distinctUntilChanged()
+      // .subscribe((item) => this.updateCurrentTime(item));
 
     Observable.fromEvent(this.audio, 'ended')
       .subscribe(() => this.store$.dispatch(playerActions.jumpToNext(this.tracksList[this.getCurrentTrackIndex() + 1])));
@@ -89,8 +90,14 @@ export class PlayerService {
 
   play(url: string = null): void {
     if (url) {
+      // setting up audio for garbage collection:
+      this.audio.pause();
+      this.audio.src = '';
+      this.audio.load();
+
       this.audio.src = url;
     }
+
     // See http://stackoverflow.com/questions/36803176/how-to-prevent-the-play-request-was-interrupted-by-a-call-to-pause-error
     // Give the timeout enough time to avoid the race conflict.
     let waitTime = 150;
@@ -98,6 +105,9 @@ export class PlayerService {
     setTimeout(() => {
       // Resume play if the element if is paused.
       if (this.audio.paused) {
+
+
+
         this.audio.play();
       }
     }, 150);
@@ -115,7 +125,7 @@ export class PlayerService {
   }
 
   updateCurrentTime(time) {
-    this.store$.dispatch(this.playerActions.updateCurrentTime(time));
+    // this.store$.dispatch(this.playerActions.updateCurrentTime(time));
   }
 
   getProgressPercentage() {
