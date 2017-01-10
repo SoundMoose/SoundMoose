@@ -6,8 +6,6 @@ node_js:
   - "5"
   - "4"
 
-# Default Test Script: npm test, customize how to run in package.json
-
 sudo: required
 dist: trusty
 addons:
@@ -18,16 +16,19 @@ addons:
       - google-chrome-stable
 
 # Matrix failure enabled for https://github.com/TheLarkInn/LazyParseWebpackPlugin/issues/6
+
 matrix:
   fast_finish: true
   allow_failures:
   - node_js: "4"
+
 install:
   - npm install
+
 before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - sleep 3
+  # - export DISPLAY=:99.0
+  # - sh -e /etc/init.d/xvfb start
+  # - sleep 3
 script:
   # - npm run lint
   - npm test
