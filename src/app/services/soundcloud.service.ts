@@ -42,7 +42,6 @@ export class SoundCloudService {
     return this._http.get(trackDetailsUrl)
       .map(res => res.json())
       .map(item => {
-        console.log(item);
         return {
             track: {
               id: item.id,
@@ -62,7 +61,8 @@ export class SoundCloudService {
             commentCount: item.comment_count,
             playbackCount: item.playback_count,
             favoriteCount: item.favoritings_count,
-            description: item.description
+            description: item.description,
+            created: item.created_at
           };
       })
       .map(payload => ({ type: TrackDetailsActions.LOAD_TRACK_DETAILS_SUCCESS, payload }))

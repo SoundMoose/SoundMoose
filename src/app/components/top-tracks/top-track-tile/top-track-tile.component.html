@@ -4,14 +4,13 @@
     hover: !(currentlyPlaying$ | async),
     selected: (selected$ | async) && (currentlyPlaying$ | async)
   }"
-  (click)="clickHandler()"
 >
   <img class="album-art" src="{{topTrack.imgUrl}}">
-  <a>
+  <a (click)="goToDetail($event)">
     <span>
       <i class="icons">
         <i class="massive circle icon"></i>
-        <i
+        <i (click)="clickHandler()"
         [ngClass]="{
           inverted: true,
           huge: true,

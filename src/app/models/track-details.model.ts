@@ -10,4 +10,5 @@ export interface TrackDetails {
   commentCount: number;
   playbackCount: number;
   favoriteCount: number;
+  created: string;
 }

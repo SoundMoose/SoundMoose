@@ -14,7 +14,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { SoundCloudService } from './../../services/soundcloud.service';
 import { Store } from '@ngrx/store';
 import { AppStore } from './../../models/appstore.model';
+import { Track } from './../../models/track.model';
+import { TrackActions } from './../../actions/track.actions';
 import { TracksState } from './../../reducers/tracks.reducer';
+import { PlayerState } from './../../reducers/player.reducer';
 import { Observable } from 'rxjs/Observable';
 import { AudioStream } from '../../audio-element';
 import { Subscription } from 'rxjs/Subscription';
@@ -32,14 +35,17 @@ export class TrackDetailComponent implements OnInit {
     private soundCloudService: SoundCloudService,
     private router: Router,
     private route: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private trackActions: TrackActions
   ) {
   }
+  currentlyPlaying$: Observable<boolean>;
   trackDetails$: Observable<TrackDetailsState>;
   license: string;
   description: string;
   imgUrl: string;
   waveformUrl: string;
+  track: Track;
 
   licenses: {} = {
     'no-rights-reserved': 'No rights reserved',
@@ -61,7 +67,15 @@ export class TrackDetailComponent implements OnInit {
       this.license = this.licenses[item.license] ? this.licenses[item.license] : item.license;
       this.imgUrl = item.track.imgUrl;
       this.waveformUrl = item.waveformUrl;
+      this.track = item.track;
+      this.created = item.created;
     });
+    this.currentlyPlaying$ = this.store$.select(s => s.player)
+      .map((playerStatus: PlayerState) => playerStatus.isPlaying && playerStatus.currentTrack.id === this.track.id);
+  }
+
+  clickHandler() {
+    this.store$.dispatch(this.trackActions.togglePlayPause(this.track));
   }
 
 }
