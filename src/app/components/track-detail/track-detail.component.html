@@ -1,0 +1,62 @@
+<div class ="ui container" style="height: 380px; background: #232526; background: -webkit-linear-gradient(to left, #232526 , #414345);
+background: linear-gradient(to left, #232526 , #414345); display: -webkit-flex; display: flex; -webkit-flex-direction: row; flex-direction: row;">
+        <div class="left" style="margin-left: 20px; display: flex; width: 700px; height: 100%; flex-direction: column; justify-content: space-between;">
+          <div class="title-info-and-controls-and-age" style="display: -webkit-flex; display: flex;">
+            <div class="control" style="margin-top: 10px;">
+              <i class="icons">
+                <i class="massive circle icon"></i>
+                <i class="inverted huge play icon"></i>
+              </i>
+            </div>
+            <div class="user-and-title" style="flex: 0 1 100%; margin-left: 20px; margin-top: 20px;">
+              <div class = "user-wrapper" style="margin-bottom: 5px;">
+                <span class="user" style="position: relative; left: 6px; font-size: 16px; font-weight: 100; background: #000;  box-shadow: 6px 0 0 #000, -6px 0 0 #000; padding-top: 3px; padding-bottom: 3px; color: #aaa">{{ (trackDetails$ | async)?.track.artist }}</span>
+              </div>
+              <span class="title-wrapper" style="padding-top: 11px; ">
+                <span class="title" style="position: relative; left: 6px;font-weight: 100; font-size: 24px; color: #fff; padding-top: 3px; padding-bottom: 3px; display: inline; background: #000; box-shadow: 6px 0 0 #000, -6px 0 0 #000; line-height: 34px;">{{ (trackDetails$ | async)?.track.title }}</span>
+              </span>
+            </div>
+            <div style="width: 80px; margin-top: 20px;">1 year</div>
+          </div>
+          <div class="waveform" [ngStyle]="{
+            'margin-bottom': '20px',
+            width: '100%',
+            height: '180px',
+            'background-image': 'url(' + waveformUrl + ')',
+            opacity: 0.5,
+            'background-size': 'cover',
+            'background-color': '#000',
+            'border': '1px solid #aaa'
+          }">
+          </div>
+        </div>
+        <div class="right" style="width: 340px; height: 380px;">
+          <div class="album-art" [ngStyle]="{
+            height: '340px',
+            margin: '20px',
+            'background-image': 'url(' + imgUrl + ')'
+          }">
+          </div>
+        </div>
+      </div>
+<div class="ui container">
+<div class="ui segment">
+ {{ description }}
+</div>
+
+<div class="ui segment">
+ <p>License: {{ license }}</p>
+ <p>From: SoundCloud</p>
+</div>
+
+<div class="ui segment">
+ {{ (trackDetails$ | async)?.commentCount }} comments
+</div>
+ <div class="ui segments">
+   <div class="ui segment">
+     <p>Hi</p>
+   </div>
+   <div class="ui segment">
+     <p>Hi</p>
+   </div>
+</div>
