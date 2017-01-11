@@ -74,6 +74,6 @@ describe('Track-Details Reducer', () => {
 
     // Should be the track details we passed in.
     expect(actual).toEqual(track);
-  })
+  });
 
 });
