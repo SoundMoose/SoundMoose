@@ -1,21 +1,21 @@
 
 <div class="ui container" [ngStyle]="{ width: '512px' }">
 
-  320kHz:
+  Low Shelf Filter:
   <md-slider
     [value]="lowGain * 100"
     (change)="bassSlideHandler($event)"
     vertical>
   </md-slider>
 
-  1000kHz:
+  Peak (1000kHz):
   <md-slider
     [value]="midGain * 100"
     (change)="midSlideHandler($event)"
     vertical>
   </md-slider>
 
-  3600kHz:
+  High Shelf Filter:
   <md-slider
     [value]="highGain * 100"
     (change)="trebleSlideHandler($event)"

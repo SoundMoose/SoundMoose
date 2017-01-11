@@ -73,13 +73,13 @@ export const AUDIO_STREAM_PROVIDER = {
       //  highshelf.type = 4;
       // filters with type 5 (peaking), which lets all frequencies through and only amplifies/reduce at the frequency at which you've set the respective filter.frequency.value.
 
-      highGain = 1.0;
-      midGain = 1.0;
-      lowGain = 1.0;
-      bandSplit = [ 320, 1000, 3600 ];
+      highGain = 0.5;
+      midGain = 0.5;
+      lowGain = 0.5;
+      bandSplit = [ 360, 1000, 3600 ];
 
       lowBand = audioCtx.createBiquadFilter();
-      lowBand.type = "highshelf";
+      lowBand.type = "lowshelf";
       lowBand.frequency.value = bandSplit[0];
       lowBand.gain.value = lowGain;
 
@@ -90,7 +90,7 @@ export const AUDIO_STREAM_PROVIDER = {
     	midBand.gain.value = midGain;
 
       highBand = audioCtx.createBiquadFilter();
-      highBand.type = "lowshelf";
+      highBand.type = "highshelf";
       highBand.frequency.value = bandSplit[2];
       highBand.gain.value = highGain;
 
@@ -126,7 +126,7 @@ export const AUDIO_STREAM_PROVIDER = {
         // highGain: highBand.gain.value
         toggleFrequencyOrWaveform: false,
 
-        
+
         lowBand: lowBand,
         midBand: midBand,
         highBand: highBand

@@ -39,19 +39,18 @@ export class AudioControlsService {
       .map((audiocontrols: AudioControls) => audiocontrols.highBand)
       .distinctUntilChanged()
       .subscribe(item => this.highGain(item));
-
   }
 
   lowGain(lowBand: any): void {
-    this.audioStream.lowBand.gain.value = lowBand.gain.value*10;
+    this.audioStream.lowBand.gain.value = lowBand.gain.value*(3);
   }
 
   midGain(midBand: any): void {
-    this.audioStream.midBand.gain.value = midBand.gain.value*10;
+    this.audioStream.midBand.gain.value = midBand.gain.value*(3);
   }
 
   highGain(highBand: any): void {
-    this.audioStream.highBand.gain.value = highBand.gain.value*10;
+    this.audioStream.highBand.gain.value = highBand.gain.value*(3);
   }
 
 }
