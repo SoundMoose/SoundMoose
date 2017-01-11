@@ -6,10 +6,10 @@ import { AudioControls } from '../models/audio-controls.model';
 @Injectable()
 export class AudioControlsActions {
 
-  static TOGGLE_AUDIO_CONTROLS = '[AudioControls] Toggle Showing Audio Controls';
-  toggleAudioControls(): Action {
+  static TOGGLE_VISUALIZATION_FREQ_WAVE = '[AudioControls] Toggle Showing Frequency Bars or Oscilliscope';
+  toggleVisualizersFreqWave(): Action {
     return {
-      type: AudioControlsActions.TOGGLE_AUDIO_CONTROLS,
+      type: AudioControlsActions.TOGGLE_VISUALIZATION_FREQ_WAVE,
     };
   }
 

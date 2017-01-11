@@ -51,6 +51,13 @@ export class PlayerActions {
     };
   }
 
+  static TOGGLE_VISUALIZATION = '[Player] Toggle Visualization';
+  toggleShowVisualization(): Action {
+    return {
+      type: PlayerActions.TOGGLE_VISUALIZATION,
+    };
+  }
+
   static JUMP_TO_NEXT = '[Player] Jump To Next';
   jumpToNext(nextTrack: Track): Action {
     return {

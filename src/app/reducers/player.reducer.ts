@@ -24,7 +24,8 @@ const initialState: PlayerState = {
 
   repeatTrack: false,
   shuffleTracks: false,
-  bufferedRanges: []
+  bufferedRanges: [],
+  showVisualization: false
 };
 
 export default function (state = initialState, action: Action): PlayerState {
@@ -115,6 +116,12 @@ export default function (state = initialState, action: Action): PlayerState {
     case PlayerActions.TOGGLE_SHUFFLE: {
       return Object.assign({}, state, {
         shuffleTracks: !state.shuffleTracks,
+      });
+    }
+
+    case PlayerActions.TOGGLE_VISUALIZATION: {
+      return Object.assign({}, state, {
+        showVisualization: !state.showVisualization,
       });
     }
 

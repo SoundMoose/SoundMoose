@@ -15,15 +15,15 @@ import { AudioStream } from '../audio-element';
 
 @Injectable()
 export class AudioControlsService {
-  showAudioControls$: Observable<boolean>;
+  toggleFrequencyOrWaveform$: Observable<boolean>;
   audio: any;
 
   constructor(protected audioStream: AudioStream, private store$: Store<AppStore>, private audioControlsActions: AudioControlsActions) {
 
     this.audio = audioStream.audioElement;
 
-    this.showAudioControls$ = this.store$.select('audiocontrols')
-      .map((audioControls: AudioControls) => audioControls.showAudioControls)
+    this.toggleFrequencyOrWaveform$ = this.store$.select('audiocontrols')
+      .map((audioControls: AudioControls) => audioControls.toggleFrequencyOrWaveform)
 
     this.store$.select('audiocontrols')
       .map((audiocontrols: AudioControls) => audiocontrols.lowBand)
