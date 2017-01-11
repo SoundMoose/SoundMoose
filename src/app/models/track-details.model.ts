@@ -4,6 +4,7 @@ import { User } from './user.model';
 export interface TrackDetails {
   track: Track;
   user: User;
+  largeArtworkUrl: string;
   waveformUrl: string;
   description: string;
   license: string;

@@ -50,6 +50,7 @@ export class TrackDetailComponent implements OnInit {
   track: Track;
   youtubeId$: Observable<string>;
   created: string;
+  largeArtworkUrl: string;
 
   licenses: {} = {
     'no-rights-reserved': 'No rights reserved',
@@ -69,7 +70,7 @@ export class TrackDetailComponent implements OnInit {
     this.trackDetails$.subscribe(item => {
       this.description = item.description;
       this.license = this.licenses[item.license] ? this.licenses[item.license] : item.license;
-      this.imgUrl = item.track.imgUrl;
+      this.largeArtworkUrl = item.largeArtworkUrl;
       this.waveformUrl = item.waveformUrl;
       this.track = item.track;
       this.created = item.created;
