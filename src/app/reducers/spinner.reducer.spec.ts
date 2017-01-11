@@ -76,7 +76,7 @@ describe('Spinner Reducer', () => {
     // Start loading a track.
     let actual1 = spinnerReducer(state, playerActions.startAudioLoading());
     // Track starts playing.
-    let actual2 = spinnerReducer(state, playerActions.startAudioPlaying());
+    let actual2 = spinnerReducer(state, playerActions.startAudioPlaying({}));
 
     // isSpinning should be false.
     expect(actual2.isSpinning).toBe(false);

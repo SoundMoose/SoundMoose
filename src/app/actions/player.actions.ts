@@ -91,7 +91,7 @@ export class PlayerActions {
   startAudioPlaying(timerInfo : {}): Action {
     return {
       type: PlayerActions.START_AUDIO_PLAYING,
-      payload: timerInfo
+      payload: timerInfo  // <-- Do we need this?
     };
   }
   static START_AUDIO_LOADING = '[Player] Start <audio> loading';

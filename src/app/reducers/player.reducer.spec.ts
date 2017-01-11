@@ -20,7 +20,7 @@ describe('Player Reducer', () => {
   beforeEach(() => {
     state = {
       isPlaying: false,
-      currentTime: 0,
+      // currentTime: 0,
       currentTrack: {
         id: 0,
         title: '',
@@ -155,13 +155,13 @@ describe('Player Reducer', () => {
     expect(actual2.shuffleTracks).toBe(false);
   });
 
-  it('should update the current time', () => {
-    // Simulate current time change.
-    let actual = playerReducer(state, playerActions.updateCurrentTime(1337));
+  // it('should update the current time', () => {
+  //   // Simulate current time change.
+  //   let actual = playerReducer(state, playerActions.updateCurrentTime(1337));
 
-    // currentTime should now be equal to what we set it to.
-    expect(actual.currentTime).toBe(1337);
-  });
+  //   // currentTime should now be equal to what we set it to.
+  //   expect(actual.currentTime).toBe(1337);
+  // });
 
   it('should set the buffer range', () => {
     // Define buffer ranges.
