@@ -42,7 +42,7 @@ export class TrackProgressContainerComponent {
       this.progressMinutesSeconds = this.millisToMinutesSeconds(currentProgressInMilliseconds);
       // Why is {{ progressMinutesSeconds }} so laggy?
       //$('#track-current-time').html(this.progressMinutesSeconds);
-      this.currentProgress = Math.floor(((currentProgressInMilliseconds/this.duration)*100)) * this.multiplier / 100;
+      this.currentProgress = Math.floor(((currentProgressInMilliseconds/this.duration)*1000)) * this.multiplier / 1000;
     });
     this.player$.subscribe((item) => {
       this.duration = +item.currentTrack.duration;
