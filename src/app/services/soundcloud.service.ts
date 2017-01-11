@@ -77,5 +77,17 @@ export class SoundCloudService {
 
   }
 
+  loadSearchResults() {
+
+  }
+
+  search(term: string) {
+    const searchUrl = 'http://api.soundcloud.com/tracks/?q=' + term + '&client_id=' + soundcloudClientId;
+
+    return this._http.get(searchUrl)
+      .map(res => res.json())
+      .map(results => console.log(results));
+  }
+
 }
 
