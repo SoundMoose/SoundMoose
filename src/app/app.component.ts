@@ -10,8 +10,6 @@ import { AppStore } from './models/appstore.model';
 import { AudioControlsActions } from './actions/audio-controls.actions';
 import { AudioControls } from './models/audio-controls.model';
 
-
-
 @Component({
   selector: 'app',
   changeDetection: ChangeDetectionStrategy.OnPush,
