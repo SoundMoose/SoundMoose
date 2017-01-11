@@ -10,6 +10,7 @@ import { Action } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { TimerObservable } from 'rxjs/observable/TimerObservable';
 import { Subscription} from 'rxjs/Subscription';
 
 import { AppStore } from '../models/appstore.model';
@@ -30,8 +31,11 @@ export class PlayerService {
   currentTrackId: number;
   audio: any;
   playingSubscription: Subscription;
+  progressInfo: {};
+  currentProgressInSeconds$: Observable<number>;
 
-   constructor(protected audioStream: AudioStream, private store$: Store<AppStore>, private playerActions: PlayerActions) {
+  constructor(protected audioStream: AudioStream, private store$: Store<AppStore>, private playerActions: PlayerActions) {
+    console.log('player service started');
 
     // this grabs the html audio element from the audio stream
     this.audio = audioStream.audioElement;
@@ -44,8 +48,14 @@ export class PlayerService {
       .map((player: Player) => player.currentTrack)
       .distinctUntilChanged();
 
+/*
+    // Not used yet...
     this.playingSubscription = Observable.fromEvent(this.audio, 'playing')
-      .subscribe(() => this.store$.dispatch(playerActions.startAudioPlaying()));
+      .subscribe(() => this.store$.dispatch(playerActions.startAudioPlaying({
+        millisecondProgressWhenStartedPlaying: this.audio.currentTime*1000,
+        timestampWhenStartedPlaying: Date.now()
+      })));
+      */
 
     Observable.fromEvent(this.audio, 'loadstart')
       .subscribe(() => this.store$.dispatch(playerActions.startAudioLoading()));
@@ -66,11 +76,6 @@ export class PlayerService {
       .distinctUntilChanged()
       .subscribe(item => this.volume(item));
 
-    // Observable.fromEvent(this.audio, 'timeupdate')
-    //   .map((item: any) => Math.round(item.path[0].currentTime))
-    //   .distinctUntilChanged()
-      // .subscribe((item) => this.updateCurrentTime(item));
-
     Observable.fromEvent(this.audio, 'ended')
       .subscribe(() => this.store$.dispatch(playerActions.jumpToNext(this.tracksList[this.getCurrentTrackIndex() + 1])));
 
@@ -86,6 +91,10 @@ export class PlayerService {
           }
           this.store$.dispatch(playerActions.setBufferedRanges(ranges));
         });
+
+    this.currentProgressInSeconds$ = TimerObservable.create(0, 1000)
+    .map(item => this.audio.currentTime);
+
   }
 
   play(url: string = null): void {
@@ -113,9 +122,9 @@ export class PlayerService {
     }, 150);
   }
 
-   pause(): void {
-     this.audio.pause();
-   }
+  pause(): void {
+    this.audio.pause();
+  }
 
   // takes a value from 0 - 100
   volume(volume: number): void {

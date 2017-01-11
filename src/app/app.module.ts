@@ -8,6 +8,7 @@ import { compose } from '@ngrx/core/compose';
 import {MomentModule} from 'angular2-moment';
 
 import { SoundCloudService } from './services/soundcloud.service';
+import { YoutubeService } from './services/youtube.service';
 import { PlayerService } from './services/player.service';
 import { AudioControlsService } from './services/audio-controls.service';
 import { AUDIO_STREAM_PROVIDER } from './audio-element';
@@ -41,7 +42,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { PlayerControlsComponent } from './components/player/player-controls/player-controls.component';
 import { VolumeControlComponent } from './components/player/volume-control/volume-control.component';
 import { TrackInfoComponent } from './components/player/track-info/track-info.component';
-import { TrackProgressComponent } from './components/player/track-progress/track-progress.component';
+import { TrackProgressComponent } from './components/player/track-progress-container/track-progress/track-progress.component';
+import { TrackProgressContainerComponent } from './components/player/track-progress-container/track-progress-container.component';
 import { TopTrackTileComponent } from './components/top-tracks/top-track-tile/top-track-tile.component';
 import { TrackDetailComponent } from './components/track-detail/track-detail.component';
 
@@ -62,6 +64,7 @@ import 'hammerjs';
 // Application wide providers
 const APP_PROVIDERS = [
   SoundCloudService,
+  YoutubeService,
   PlayerService,
   AudioControlsService,
   AUDIO_STREAM_PROVIDER,
@@ -92,6 +95,7 @@ const store = compose(...metaReducers)({
     VolumeControlComponent,
     TrackInfoComponent,
     TrackProgressComponent,
+    TrackProgressContainerComponent,
     TopTrackTileComponent,
     SpinnerComponent,
     AudioControlsComponent,

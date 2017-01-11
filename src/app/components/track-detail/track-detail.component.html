@@ -2,7 +2,7 @@
 background: linear-gradient(to left, #232526 , #414345); display: -webkit-flex; display: flex; -webkit-flex-direction: row; flex-direction: row;">
         <div class="left" style="margin-left: 20px; display: flex; width: 700px; height: 100%; flex-direction: column; justify-content: space-between;">
           <div class="title-info-and-controls-and-age" style="display: -webkit-flex; display: flex;">
-            <div (click)="clickHandler()" class="control" style="cursor: pointer; margin-top: 10px;">
+            <div (click)="clickHandler()" class="control" style="cursor: pointer; margin-top: 10px; width:">
               <i class="icons">
                 <i class="massive circle icon"></i>
                 <i
@@ -37,10 +37,12 @@ background: linear-gradient(to left, #232526 , #414345); display: -webkit-flex; 
           }">
           </div>
         </div>
-        <div class="right" style="width: 340px; height: 380px;">
+        <div class="right" style="width: 380px; height: 380px;">
           <div class="album-art" [ngStyle]="{
             height: '340px',
+            width: '340px',
             margin: '20px',
+            'background-size': 'cover',
             'background-image': 'url(' + imgUrl + ')'
           }">
           </div>

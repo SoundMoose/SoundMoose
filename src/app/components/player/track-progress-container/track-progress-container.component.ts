@@ -10,12 +10,12 @@ import { Observable } from 'rxjs/Observable';
 import { PlayerActions } from '../../../actions/player.actions';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'track-progress',
+ // changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'track-progress-container',
   styleUrls: [ '../player.component.css' ],
-  templateUrl: './track-progress.component.html'
+  templateUrl: './track-progress-container.component.html'
 })
-export class TrackProgressComponent {
+export class TrackProgressContainerComponent {
   player$: Observable<PlayerState>;
   durationMinutesSeconds: string;
   progressMinutesSeconds: string;
@@ -33,15 +33,21 @@ export class TrackProgressComponent {
 
   constructor (private playerService: PlayerService, private store$: Store<AppStore>) {
     this.player$ = this.store$.select(s => s.player);
-    this.player$.subscribe((item) => {
+    this.playerService.currentProgressInSeconds$.subscribe(item => {
       if (this.sliding) {
         // We let the slider take over the timer while we are sliding.
         return;
       }
+      console.log(item);
+      let currentProgressInMilliseconds = item * 1000;
+      this.progressMinutesSeconds = this.millisToMinutesSeconds(currentProgressInMilliseconds);
+      // Why is {{ progressMinutesSeconds }} so laggy?
+      //$('#track-current-time').html(this.progressMinutesSeconds);
+      this.currentProgress = Math.floor(((currentProgressInMilliseconds/this.duration)*100)) * this.multiplier / 100;
+    });
+    this.player$.subscribe((item) => {
       this.duration = +item.currentTrack.duration;
-      this.durationMinutesSeconds = this.millisToMinutesSeconds(+item.currentTrack.duration);
-      this.progressMinutesSeconds = this.millisToMinutesSeconds(+item.currentTime * 1000);
-      this.currentProgress = Math.floor(((+item.currentTime*1000/+item.currentTrack.duration)*100)) * this.multiplier / 100;
+      this.durationMinutesSeconds = this.millisToMinutesSeconds(this.duration);
       this.bufferedRanges = item.bufferedRanges;
     });
   }
@@ -76,6 +82,7 @@ export class TrackProgressComponent {
         let progress = slider.attributes['aria-valuenow'].value;
         // The progress timer is bound to this.
         this.progressMinutesSeconds = this.millisToMinutesSeconds(progress / this.multiplier * this.duration);
+    //  $('#track-current-time').html(this.progressMinutesSeconds);
          // The slider is bound to this.
         this.currentProgress = progress;
       }, 100);
