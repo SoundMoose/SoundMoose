@@ -69,34 +69,58 @@ export const AUDIO_STREAM_PROVIDER = {
         sum,
         masterGain;
 
-      masterGain = audioCtx.createGain();
-      masterGain.gain.value = -40;
 
-      gainDb = -40.0;
+
+       //set the filter types (you could set all to 5, for a different result, feel free to experiment)
+       //https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html#BANDPASS
+      //  lowshelf.type = 3;
+      //  mid.type = 5;
+      //  highshelf.type = 4;
+      // filters with type 5 (peaking), which lets all frequencies through and only amplifies/reduce at the frequency at which you've set the respective filter.frequency.value.
+
+
+      masterGain = audioCtx.createGain();
+      masterGain.gain.value = 0;
+
+      // gainDb = 40.0;
       // gainDb = 0.0;
       bandSplit = [ 360, 1000, 3600 ];
 
       lowBand = audioCtx.createBiquadFilter();
-      lowBand.type = "lowshelf";
-      lowBand.frequency.value = bandSplit[0];
-      lowBand.gain.value = gainDb;
-      lowBand.connect( masterGain );
-
       midBand = audioCtx.createBiquadFilter();
-    	midBand.type = "peaking";
-    	midBand.frequency.value = bandSplit[1];
-    	midBand.Q.value = 0.5;
-    	midBand.gain.value = gainDb;
-    	midBand.connect( lowBand );
-
       highBand = audioCtx.createBiquadFilter();
-      highBand.type = "highshelf";
-      highBand.frequency.value = bandSplit[2];
-      highBand.gain.value = gainDb;
-      highBand.connect( midBand );
 
-      audioSrcNode.connect(highBand);
+      lowBand.type = "lowshelf";
+      midBand.type = "peaking";
+      highBand.type = "highshelf";
+
+      lowBand.gain.value = gainDb;
+      midBand.Q.value = 0.5;
+      midBand.gain.value = gainDb;
+      highBand.gain.value = gainDb;
+
+
+      lowBand.frequency.value = bandSplit[0];
+    	midBand.frequency.value = bandSplit[1];
+      highBand.frequency.value = bandSplit[2];
+
+      lowBand.gain.value = 0.6;
+    	midBand.gain.value = 1;
+      highBand.gain.value = 1;
+
+      masterGain.connect(lowBand);
+      lowBand.connect(midBand);
+      midBand.connect(highBand);
+      highBand.connect(audioCtx.destination);
+
+      // lowBand.connect( masterGain );
+      // midBand.connect( lowBand );
+      // highBand.connect( midBand );
+      // audioSrcNode.connect(highBand);
       // audioSrcNode.connect(audioCtx.destination);
+
+      audioSrcNode.mediaElement.src = './assets/sounds/Broke_For_Free_-_01_-_Night_Owl.mp3';
+      audioSrcNode.mediaElement.play();
 
 ////////// End of In-Development Equalizer Component ////////////////
 
