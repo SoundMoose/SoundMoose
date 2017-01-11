@@ -22,6 +22,7 @@ describe('App', () => {
     let select = element(by.css('.top-tracks-header .selection'))
     select.click();
     select.$('[value="classical"]').click();
+    element.all(by.tagName('option'))
     browser.pause();
     // expect(subject).toEqual(result);
   });

@@ -5,8 +5,10 @@ import { HttpModule } from '@angular/http';
 import { combineReducers, StoreModule } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { compose } from '@ngrx/core/compose';
+import {MomentModule} from 'angular2-moment';
 
 import { SoundCloudService } from './services/soundcloud.service';
+import { YoutubeService } from './services/youtube.service';
 import { PlayerService } from './services/player.service';
 import { AudioControlsService } from './services/audio-controls.service';
 import { AUDIO_STREAM_PROVIDER } from './audio-element';
@@ -17,6 +19,8 @@ import tracks from './reducers/tracks.reducer';
 import spinner from './reducers/spinner.reducer';
 import audiocontrols from './reducers/audio-controls.reducer';
 import trackDetails from './reducers/track-details.reducer';
+
+
 
 import {
   RouterModule,
@@ -38,7 +42,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { PlayerControlsComponent } from './components/player/player-controls/player-controls.component';
 import { VolumeControlComponent } from './components/player/volume-control/volume-control.component';
 import { TrackInfoComponent } from './components/player/track-info/track-info.component';
-import { TrackProgressComponent } from './components/player/track-progress/track-progress.component';
+import { TrackProgressComponent } from './components/player/track-progress-container/track-progress/track-progress.component';
+import { TrackProgressContainerComponent } from './components/player/track-progress-container/track-progress-container.component';
 import { TopTrackTileComponent } from './components/top-tracks/top-track-tile/top-track-tile.component';
 import { TrackDetailComponent } from './components/track-detail/track-detail.component';
 
@@ -52,13 +57,14 @@ import { EqualizerComponent } from './components/audio-controls/equalizer/equali
 import { TrackActions } from './actions/track.actions';
 import { PlayerActions } from './actions/player.actions';
 import { AudioControlsActions } from './actions/audio-controls.actions';
-
+import { YoutubePipe } from './youtube.pipe';
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
 
 // Application wide providers
 const APP_PROVIDERS = [
   SoundCloudService,
+  YoutubeService,
   PlayerService,
   AudioControlsService,
   AUDIO_STREAM_PROVIDER,
@@ -89,15 +95,18 @@ const store = compose(...metaReducers)({
     VolumeControlComponent,
     TrackInfoComponent,
     TrackProgressComponent,
+    TrackProgressContainerComponent,
     TopTrackTileComponent,
     SpinnerComponent,
     AudioControlsComponent,
     FrequencyVisualizerComponent,
     WaveformVisualizerComponent,
     EqualizerComponent,
-    TrackDetailComponent
+    TrackDetailComponent,
+    YoutubePipe
   ],
   imports: [
+    MomentModule,
     BrowserModule,
     StoreModule.provideStore({
       player: player,

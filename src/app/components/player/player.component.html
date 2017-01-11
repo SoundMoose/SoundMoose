@@ -5,11 +5,18 @@
 
     <player-controls></player-controls>
 
-    <track-progress *ngIf='false'></track-progress>
+    <track-progress-container></track-progress-container>
 
     <volume-control></volume-control>
 
     <track-info></track-info>
 
+    <div
+      class="ui container segment"
+      *ngIf="showVisualization$ | async"
+      [ngStyle]="{'background-color': '#2E2E2E'}">
+      <audio-controls></audio-controls>
+    </div>
+
+    </div>
   </div>
-</div>

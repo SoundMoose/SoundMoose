@@ -2,10 +2,17 @@
 background: linear-gradient(to left, #232526 , #414345); display: -webkit-flex; display: flex; -webkit-flex-direction: row; flex-direction: row;">
         <div class="left" style="margin-left: 20px; display: flex; width: 700px; height: 100%; flex-direction: column; justify-content: space-between;">
           <div class="title-info-and-controls-and-age" style="display: -webkit-flex; display: flex;">
-            <div class="control" style="margin-top: 10px;">
+            <div (click)="clickHandler()" class="control" style="cursor: pointer; margin-top: 10px; width:">
               <i class="icons">
                 <i class="massive circle icon"></i>
-                <i class="inverted huge play icon"></i>
+                <i
+                [ngClass]="{
+                  inverted: true,
+                  huge: true,
+                  play: !(currentlyPlaying$ | async),
+                  pause: currentlyPlaying$ | async,
+                  icon: true
+                }"></i>
               </i>
             </div>
             <div class="user-and-title" style="flex: 0 1 100%; margin-left: 20px; margin-top: 20px;">
@@ -16,7 +23,7 @@ background: linear-gradient(to left, #232526 , #414345); display: -webkit-flex; 
                 <span class="title" style="position: relative; left: 6px;font-weight: 100; font-size: 24px; color: #fff; padding-top: 3px; padding-bottom: 3px; display: inline; background: #000; box-shadow: 6px 0 0 #000, -6px 0 0 #000; line-height: 34px;">{{ (trackDetails$ | async)?.track.title }}</span>
               </span>
             </div>
-            <div style="width: 80px; margin-top: 20px;">1 year</div>
+            <div style="width: 100px; margin-top: 20px;">{{ created | amTimeAgo:true }}</div>
           </div>
           <div class="waveform" [ngStyle]="{
             'margin-bottom': '20px',
@@ -30,23 +37,26 @@ background: linear-gradient(to left, #232526 , #414345); display: -webkit-flex; 
           }">
           </div>
         </div>
-        <div class="right" style="width: 340px; height: 380px;">
+        <div class="right" style="width: 380px; height: 380px;">
           <div class="album-art" [ngStyle]="{
             height: '340px',
+            width: '340px',
             margin: '20px',
+            'background-size': 'cover',
             'background-image': 'url(' + imgUrl + ')'
           }">
           </div>
         </div>
       </div>
 <div class="ui container">
-<div class="ui segment">
+<div class="ui segment" style="white-space: pre;">
  {{ description }}
 </div>
 
 <div class="ui segment">
  <p>License: {{ license }}</p>
  <p>From: SoundCloud</p>
+ <p>YouTube: <iframe width="420" height="315" [src]="youtubeId$ | async | youtube" frameborder="0" allowfullscreen></iframe></p>
 </div>
 
 <div class="ui segment">

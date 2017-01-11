@@ -1,12 +1,13 @@
-import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import {Store} from '@ngrx/store';
-import {AppStore} from '../models/appstore.model';
+import { Http } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/map';
-import {Track} from '../models/track.model';
-import {soundcloudClientId} from '../config/superSecretKeys';
-import {TrackActions} from '../actions/track.actions';
-import {TrackDetailsActions} from '../actions/track-details.actions';
+
+import { AppStore } from '../models/appstore.model';
+import { soundcloudClientId } from '../config/superSecretKeys';
+import { Track } from '../models/track.model';
+import { TrackActions } from '../actions/track.actions';
+import { TrackDetailsActions } from '../actions/track-details.actions';
 
 @Injectable()
 export class SoundCloudService {
@@ -42,7 +43,6 @@ export class SoundCloudService {
     return this._http.get(trackDetailsUrl)
       .map(res => res.json())
       .map(item => {
-        console.log(item);
         return {
             track: {
               id: item.id,
@@ -62,7 +62,8 @@ export class SoundCloudService {
             commentCount: item.comment_count,
             playbackCount: item.playback_count,
             favoriteCount: item.favoritings_count,
-            description: item.description
+            description: item.description,
+            created: item.created_at
           };
       })
       .map(payload => ({ type: TrackDetailsActions.LOAD_TRACK_DETAILS_SUCCESS, payload }))
@@ -74,5 +75,6 @@ export class SoundCloudService {
     // comments
 
   }
+
 }
 

@@ -8,7 +8,8 @@ export type PlayerState = Player;
 
 const initialState: PlayerState = {
   isPlaying: false,
-  currentTime: 0,
+  millisecondProgressWhenStartedPlaying: 0,
+  timestampWhenStartedPlaying: Date.now(),
   currentTrack: {
     id: 0,
     title: '',
@@ -24,7 +25,8 @@ const initialState: PlayerState = {
 
   repeatTrack: false,
   shuffleTracks: false,
-  bufferedRanges: []
+  bufferedRanges: [],
+  showVisualization: false
 };
 
 export default function (state = initialState, action: Action): PlayerState {
@@ -100,11 +102,13 @@ export default function (state = initialState, action: Action): PlayerState {
       });
     }
 
+/*
     case PlayerActions.UPDATE_CURRENT_TIME: {
       return Object.assign({}, state, {
         currentTime: action.payload
       });
     }
+    */
 
     case PlayerActions.TOGGLE_REPEAT: {
       return Object.assign({}, state, {
@@ -118,9 +122,23 @@ export default function (state = initialState, action: Action): PlayerState {
       });
     }
 
+    case PlayerActions.TOGGLE_VISUALIZATION: {
+      return Object.assign({}, state, {
+        showVisualization: !state.showVisualization,
+      });
+    }
+
     case PlayerActions.SET_BUFFERED_RANGES: {
       return Object.assign({}, state, {
         bufferedRanges: action.payload
+      });
+    }
+
+    case PlayerActions.START_AUDIO_PLAYING: {
+      console.log(action.payload);
+      return Object.assign({}, state, {
+        millisecondProgressWhenStartedPlaying: action.payload.millisecondProgressWhenStartedPlaying,
+        timestampWhenStartedPlaying: action.payload.timestampWhenStartedPlaying
       });
     }
 

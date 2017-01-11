@@ -55,7 +55,7 @@ export class WaveformVisualizerComponent {
   drawWaveOscilliscope(context) {
     if (context.hasCanvas) {
       context.drawWaveformVisual = requestAnimationFrame(context.drawWaveOscilliscope);
-      context.waveformCanvasCtx.fillStyle = 'rgb(26, 26, 26)';
+      context.waveformCanvasCtx.fillStyle = 'rgb(46, 46, 46)';
       context.waveformCanvasCtx.fillRect(0, 0, context.waveformWIDTH, context.waveformHEIGHT);
       context.waveformCanvasCtx.lineWidth = 2;
       context.waveformCanvasCtx.strokeStyle = 'rgb(173, 187, 194)';;

@@ -95,13 +95,15 @@ export class TopTracksComponent implements OnInit {
     (<any>$('.ui.dropdown')).dropdown('refresh');
   }
 
+  navigateToGenre(genre) {
+    if (!(this.route.snapshot.url[0].path == 'home' && genre == 'all-music')) {
+      this.router.navigate(['/top_tracks', genre]);
+      this.setCurrentGenre(genre);
+    }
+  }
   setCurrentGenre(genre = 'all-music') {
     this.currentGenre = genre;
     this.soundCloudService.loadTopTracks(this.currentGenre);
-    if (!(this.route.snapshot.url[0].path == 'home' && this.currentGenre == 'all-music')) {
-      this.router.navigate(['/top_tracks', this.currentGenre]);
-    }
-
     this.topTracks$ = this.store$.select(s => s.tracks);
   }
 

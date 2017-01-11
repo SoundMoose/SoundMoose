@@ -25,7 +25,8 @@ const initialState: TrackDetailsState = {
   license: '',
   commentCount: 0,
   playbackCount: 0,
-  favoriteCount: 0
+  favoriteCount: 0,
+  created: ''
 };
 
 export default function (state = initialState, action: Action): TrackDetailsState {

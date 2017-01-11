@@ -6,7 +6,7 @@ import { AudioControlsActions } from '../actions/audio-controls.actions';
 export type AudioControlsState = AudioControls;
 
 const initialState: AudioControlsState = {
-  showAudioControls: false,
+  toggleFrequencyOrWaveform: true,
   lowBand: {
     gain: {
       value: 0.5,
@@ -27,9 +27,9 @@ const initialState: AudioControlsState = {
 export default function (state = initialState, action: Action): AudioControlsState {
   switch (action.type) {
 
-    case AudioControlsActions.TOGGLE_AUDIO_CONTROLS:  {
+    case AudioControlsActions.TOGGLE_VISUALIZATION_FREQ_WAVE:  {
       return Object.assign({}, state, {
-          showAudioControls: !state.showAudioControls,
+          toggleFrequencyOrWaveform: !state.toggleFrequencyOrWaveform,
       });
     }
     case AudioControlsActions.ADJUST_BASS:  {

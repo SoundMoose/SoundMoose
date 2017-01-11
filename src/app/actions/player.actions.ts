@@ -51,6 +51,13 @@ export class PlayerActions {
     };
   }
 
+  static TOGGLE_VISUALIZATION = '[Player] Toggle Visualization';
+  toggleShowVisualization(): Action {
+    return {
+      type: PlayerActions.TOGGLE_VISUALIZATION,
+    };
+  }
+
   static JUMP_TO_NEXT = '[Player] Jump To Next';
   jumpToNext(nextTrack: Track): Action {
     return {
@@ -68,6 +75,7 @@ export class PlayerActions {
   }
 
 
+/*
   static UPDATE_CURRENT_TIME = '[Player] Update current time';
   // time in seconds
   updateCurrentTime(currentTime: number): Action {
@@ -76,12 +84,14 @@ export class PlayerActions {
       payload: currentTime
     };
   }
+  */
 
 
   static START_AUDIO_PLAYING = '[Player] Start <audio> playing';
-  startAudioPlaying(): Action {
+  startAudioPlaying(timerInfo : {}): Action {
     return {
-      type: PlayerActions.START_AUDIO_PLAYING
+      type: PlayerActions.START_AUDIO_PLAYING,
+      payload: timerInfo
     };
   }
   static START_AUDIO_LOADING = '[Player] Start <audio> loading';
