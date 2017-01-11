@@ -38,7 +38,7 @@ describe('Player Reducer', () => {
       shuffleTracks: false,
       bufferedRanges: [],
       showVisualization: false
-    }
+    };
 
     tracks = [
       {
@@ -56,16 +56,16 @@ describe('Player Reducer', () => {
         streamUrl: 'http://www.google.com',
         duration: 123
       }
-    ]
+    ];
 
     Object.freeze(state);
   });
 
-  it('should handle unknown types', () => {
-    // The reducer does not no how to deal with this.
-    let actual = playerReducer(state, {type: 'TACOS'});
+  it('should handle no state being passed in and unknown types', () => {
+    // Dispatching an undefined state and unknown action.
+    let actual = playerReducer(undefined, {type: 'TACOS'});
 
-    // Just return the unchanged state.
+    // Just return the default state.
     expect(state).toEqual(actual);
   });
 
