@@ -64,7 +64,7 @@ describe('Player Reducer', () => {
     // Dispatching an undefined state and unknown action.
     let actual = playerReducer(undefined, {type: 'TACOS'});
 
-    // Just return the unchanged state.
+    // Just return the default state.
     expect(state).toEqual(actual);
   });
 
