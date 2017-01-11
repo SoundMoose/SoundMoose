@@ -1,12 +1,27 @@
-<div *ngIf="toggleAudioControls$ | async">
-<!-- <div *ngIf="false"> -->
+<div >
 
-  <div class="ui container">
+  <!-- <div
+    *ngIf="toggleVisualizersFreqWave$ | async"
+    class="ui container"
+    (click)="toggleVisualizersFreqWave()">
     <visualizer-2D-frequency></visualizer-2D-frequency>
-  </div>
+  </div> -->
 
-  <div class="ui container">
-    <visualizer-2D-waveform></visualizer-2D-waveform>
+  <div>
+    <visualizer-2D-frequency
+        *ngIf="toggleVisualizersFreqWave$ | async"
+        class="ui container"
+        (click)="toggleVisualizersFreqWave()"
+    >
+    </visualizer-2D-frequency>
+  </div>
+  <div>
+    <visualizer-2D-waveform
+        *ngIf="!(toggleVisualizersFreqWave$ | async)"
+        class="ui container"
+        (click)="toggleVisualizersFreqWave()"
+    >
+    </visualizer-2D-waveform>
   </div>
 
   <!-- Eqalizer - In Development -->

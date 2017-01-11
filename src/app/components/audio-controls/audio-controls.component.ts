@@ -6,6 +6,7 @@ import { AudioControlsService } from './../../services/audio-controls.service';
 import { Store } from '@ngrx/store';
 import { AppStore } from '../../models/appstore.model';
 import { AudioControls } from '../../models/audio-controls.model';
+import { AudioControlsActions } from '../../actions/audio-controls.actions';
 import { Observable } from 'rxjs/Observable';
 
 
@@ -16,10 +17,14 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: './audio-controls.component.html',
 })
 export class AudioControlsComponent {
-  toggleAudioControls$: Observable<boolean>;
+  toggleVisualizersFreqWave$: Observable<boolean>;
 
-  constructor(private audioControlsService: AudioControlsService, private store$: Store<AppStore> ) {
-    this.toggleAudioControls$ = this.store$.select('audiocontrols')
-      .map((audioControls: AudioControls) => audioControls.showAudioControls);
+  constructor(private audioControlsService: AudioControlsService, private store$: Store<AppStore>, private audioControlActions: AudioControlsActions) {
+    this.toggleVisualizersFreqWave$ = this.store$.select('audiocontrols')
+      .map((audioControls: AudioControls) => audioControls.toggleFrequencyOrWaveform);
+  }
+
+  toggleVisualizersFreqWave() {
+    this.store$.dispatch(this.audioControlActions.toggleVisualizersFreqWave());
   }
 }

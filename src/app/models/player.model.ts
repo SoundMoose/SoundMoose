@@ -11,4 +11,5 @@ export interface Player {
   repeatTrack: boolean;
   shuffleTracks: boolean;
   bufferedRanges: Array<number>;
+  showVisualization: boolean;
 }

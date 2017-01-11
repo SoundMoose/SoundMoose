@@ -25,3 +25,12 @@
     random: true,
     icon: true
   }"></i>
+
+<i (click)="toggleVisualization()"
+  *ngIf="showVisualization"
+  class="yellow compress icon">
+</i>
+
+<i (click)="toggleVisualization()"
+  *ngIf="!showVisualization"
+  class="expand icon"></i>

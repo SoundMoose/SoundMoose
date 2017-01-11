@@ -2,15 +2,6 @@
       <div class="ui container">
         <a href="/#/"><img class="logo" src="/assets/img/logo.png"></a>
 
-        <i [ngClass]="{
-             big: true,
-             settings: true,
-             icon: true,
-             yellow: showAudioControls$ | async
-             }"
-          (click)="toggleAudioControls()"
-        ></i>
-
       </div>
     </div>
 
@@ -18,7 +9,7 @@
 
     <div class="overview ui container">
       <!-- To be moved -->
-      <audio-controls></audio-controls>
+      <!-- <audio-controls></audio-controls> -->
       <!--  -->
       <router-outlet></router-outlet>
     </div>
