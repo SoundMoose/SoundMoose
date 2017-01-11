@@ -72,9 +72,27 @@ export class SoundCloudService {
   }
 
   loadComments(trackId) {
-    const tracksUrl = 'http://api.soundcloud.com/tracks/' + trackId + '?client_id=' + soundcloudClientId;
+    const tracksUrl = 'http://api.soundcloud.com/tracks/' + trackId + '/comments?client_id=' + soundcloudClientId;
     // comments
-
+    return this._http.get(tracksUrl)
+      .map(res => {
+        return res.json().map(item => {
+          return {
+            commentId: item.id,
+            created: item.created_at,
+            trackId: item.track_id,
+            timestamp: item.timestamp,
+            body: item.body,
+            user: {
+              id: item.user.id,
+              username: item.user.username,
+              avatarUrl: item.user.avatar_url
+            }
+          };
+        });
+      })
+      .map(payload => ({ type: TrackDetailsActions.LOAD_COMMENTS_SUCCESS, payload }))
+      .subscribe(action => this.store.dispatch(action));
   }
 
 }

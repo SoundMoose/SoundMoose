@@ -12,5 +12,11 @@ export class TrackDetailsActions {
       payload: tracks
     };
   }
-
+  static LOAD_COMMENTS_SUCCESS = '[Track] Load Comments Success';
+  loadCommentsSuccess(comments): Action {
+    return {
+      type: TrackDetailsActions.LOAD_COMMENTS_SUCCESS,
+      payload: comments
+    };
+  }
 }
