@@ -67,6 +67,7 @@ export const AUDIO_STREAM_PROVIDER = {
 /////////////// In-Development Equalizer Component  ////////////////////
       let gainDb,
         bandSplit,
+        defaultQValue,
 
         highBand,
         midBand1,
@@ -99,6 +100,8 @@ export const AUDIO_STREAM_PROVIDER = {
       // bandSplit = [ 30, 1000, 12000 ];
       bandSplit = [ 30, 60, 110, 220, 350, 700, 1600, 3200, 4800, 7000, 10000, 12000 ];
 
+      defaultQValue = 100;
+
       lowBand = audioCtx.createBiquadFilter();
       lowBand.type = "lowshelf";
       lowBand.frequency.value = bandSplit[0];
@@ -107,61 +110,61 @@ export const AUDIO_STREAM_PROVIDER = {
       midBand1 = audioCtx.createBiquadFilter();
     	midBand1.type = "peaking";
     	midBand1.frequency.value = bandSplit[1];
-    	midBand1.Q.value = 0.5;
+    	midBand1.Q.value = defaultQValue;
       midBand1.gain.value = midGain;
 
       midBand2 = audioCtx.createBiquadFilter();
     	midBand2.type = "peaking";
     	midBand2.frequency.value = bandSplit[2];
-    	midBand2.Q.value = 0.5;
+    	midBand2.Q.value = defaultQValue;
     	midBand2.gain.value = midGain;
 
       midBand3 = audioCtx.createBiquadFilter();
     	midBand3.type = "peaking";
     	midBand3.frequency.value = bandSplit[3];
-    	midBand3.Q.value = 0.5;
+    	midBand3.Q.value = defaultQValue;
     	midBand3.gain.value = midGain;
 
       midBand4 = audioCtx.createBiquadFilter();
     	midBand4.type = "peaking";
     	midBand4.frequency.value = bandSplit[4];
-    	midBand4.Q.value = 0.5;
+    	midBand4.Q.value = defaultQValue;
     	midBand4.gain.value = midGain;
 
       midBand5 = audioCtx.createBiquadFilter();
     	midBand5.type = "peaking";
     	midBand5.frequency.value = bandSplit[5];
-    	midBand5.Q.value = 0.5;
+    	midBand5.Q.value = defaultQValue;
     	midBand5.gain.value = midGain;
 
       midBand6 = audioCtx.createBiquadFilter();
     	midBand6.type = "peaking";
     	midBand6.frequency.value = bandSplit[6];
-    	midBand6.Q.value = 0.5;
+    	midBand6.Q.value = defaultQValue;
     	midBand6.gain.value = midGain;
 
       midBand7 = audioCtx.createBiquadFilter();
     	midBand7.type = "peaking";
     	midBand7.frequency.value = bandSplit[7];
-    	midBand7.Q.value = 0.5;
+    	midBand7.Q.value = defaultQValue;
     	midBand7.gain.value = midGain;
 
       midBand8 = audioCtx.createBiquadFilter();
     	midBand8.type = "peaking";
     	midBand8.frequency.value = bandSplit[8];
-    	midBand8.Q.value = 0.5;
+    	midBand8.Q.value = defaultQValue;
     	midBand8.gain.value = midGain;
 
       midBand9 = audioCtx.createBiquadFilter();
     	midBand9.type = "peaking";
     	midBand9.frequency.value = bandSplit[9];
-    	midBand9.Q.value = 0.5;
+    	midBand9.Q.value = defaultQValue;
     	midBand9.gain.value = midGain;
 
       midBand10 = audioCtx.createBiquadFilter();
     	midBand10.type = "peaking";
     	midBand10.frequency.value = bandSplit[10];
-    	midBand10.Q.value = 0.5;
+    	midBand10.Q.value = defaultQValue;
     	midBand10.gain.value = midGain;
 
       highBand = audioCtx.createBiquadFilter();
