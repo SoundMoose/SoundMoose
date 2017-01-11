@@ -5,7 +5,7 @@
      [value]="currentProgress"
      (change)="handleSliderChange($event)"
      (slidestart)="handleSliderStart($event)"
-     min="0" max="{{multiplier}}" class="track-progress-bar">
+     min="0" max="{{multiplier}}" step="1" class="track-progress-bar">
   </md-slider>
   <div id="progress">
     <span *ngFor="let bufferedRange of bufferedRanges" [ngStyle]="{
