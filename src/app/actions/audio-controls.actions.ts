@@ -23,11 +23,12 @@ export class AudioControlsActions {
     };
   }
   static ADJUST_MIDS = '[AudioControls] Adjust Mids';
-  adjustMids(mids: number): Action {
+  adjustMids(mids: number, frequencyBandId: number): Action {
     return {
       type: AudioControlsActions.ADJUST_MIDS,
       payload: {
-        mids
+        mids,
+        frequencyBandId
       }
     };
   }
