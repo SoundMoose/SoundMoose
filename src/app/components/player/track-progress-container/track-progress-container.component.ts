@@ -31,6 +31,9 @@ export class TrackProgressContainerComponent implements OnInit, OnDestroy {
   // Whether we are currently sliding.
   sliding: boolean;
   bufferedRanges: number[][] | number[];
+  s1: Observable<PlayerState>;
+  s2: Observable<number>;
+  s3: Observable<PlayerState>;
   // 'detail' or 'bottom'
   @Input() progressContainerType: string;
 

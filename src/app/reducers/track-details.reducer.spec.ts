@@ -26,6 +26,7 @@ describe('Track-Details Reducer', () => {
         avatarUrl: ''
       },
       waveformUrl: '',
+      largeArtworkUrl: '',
       description: '',
       license: '',
       commentCount: 0,
