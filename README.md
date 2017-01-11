@@ -1,3 +1,5 @@
+![Build Status](https://travis-ci.org/hrr20-over9000/SoundMoose.svg?branch=master)
+
 # SoundMoose
 
 > A Modern Media Plateform utilizing the SoundCloud API
