@@ -8,6 +8,7 @@ import { AppStore } from '../../../models/appstore.model';
 import { PlayerService } from '../../../services/player.service';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import { PlayerActions } from '../../../actions/player.actions';
 
 @Component({
@@ -31,9 +32,9 @@ export class TrackProgressContainerComponent implements OnInit, OnDestroy {
   // Whether we are currently sliding.
   sliding: boolean;
   bufferedRanges: number[][] | number[];
-  s1: Observable<PlayerState>;
-  s2: Observable<number>;
-  s3: Observable<PlayerState>;
+  s1: Subscription;
+  s2: Subscription;
+  s3: Subscription;
   // 'detail' or 'bottom'
   @Input() progressContainerType: string;
 
