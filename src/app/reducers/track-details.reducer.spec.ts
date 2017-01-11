@@ -1,10 +1,14 @@
 import trackDetailsReducer from './track-details.reducer';
 
+import { TrackDetailsActions } from '../actions/track-details.actions';
+
 'use strict';
 
 describe('Track-Details Reducer', () => {
 
-  let state;
+  let trackDetailsActions = new TrackDetailsActions(),
+      state,
+      track;
 
   beforeEach(() => {
     state = {
@@ -30,6 +34,29 @@ describe('Track-Details Reducer', () => {
       created: ''
     };
 
+    track = {
+      track: {
+        id: 1,
+        title: 'Tacos',
+        artist: 'Mexican Food',
+        imgUrl: 'http://www.google.com',
+        streamUrl: 'http://www.google.com',
+        duration: 123
+      },
+      user: {
+        id: 1,
+        username: 'texmex4lyfe',
+        avatarUrl: 'http://www.google.com'
+      },
+      waveformUrl: 'http://www.google.com',
+      description: 'Best song about tacos ever!',
+      license: 'none',
+      commentCount: 1,
+      playbackCount: 3,
+      favoriteCount: 3,
+      created: 'today'
+    };
+
     Object.freeze(state);
   });
 
@@ -40,5 +67,13 @@ describe('Track-Details Reducer', () => {
     // Should return the default state.
     expect(actual).toEqual(state);
   });
+
+  it('should load track details', () => {
+    // Load track-details.
+    let actual = trackDetailsReducer(state, trackDetailsActions.loadTrackDetailsSuccess(track));
+
+    // Should be the track details we passed in.
+    expect(actual).toEqual(track);
+  })
 
 });
