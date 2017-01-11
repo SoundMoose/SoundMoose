@@ -7,21 +7,22 @@ import {
   transition,
   animate
 } from '@angular/core';
-import {TrackDetailsState} from '../../reducers/track-details.reducer';
-
 import { ChangeDetectionStrategy } from '@angular/core'
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-import { SoundCloudService } from './../../services/soundcloud.service';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+
 import { AppStore } from './../../models/appstore.model';
 import { Track } from './../../models/track.model';
 import { TrackActions } from './../../actions/track.actions';
 import { TracksState } from './../../reducers/tracks.reducer';
 import { PlayerState } from './../../reducers/player.reducer';
-import { Observable } from 'rxjs/Observable';
+import { TrackDetailsState } from '../../reducers/track-details.reducer';
 import { AudioStream } from '../../audio-element';
-import { Subscription } from 'rxjs/Subscription';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { SoundCloudService } from './../../services/soundcloud.service';
+import { YoutubeService } from './../../services/youtube.service';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class TrackDetailComponent implements OnInit {
  constructor(
     private store$: Store<AppStore>,
     private soundCloudService: SoundCloudService,
+    private youtubeService: YoutubeService,
     private router: Router,
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
@@ -71,7 +73,7 @@ export class TrackDetailComponent implements OnInit {
       this.waveformUrl = item.waveformUrl;
       this.track = item.track;
       this.created = item.created;
-      this.youtubeId$ = this.soundCloudService.searchYoutubeVideo(this.track.title + ' ' + this.track.artist);
+      this.youtubeId$ = this.youtubeService.searchYoutubeVideo(this.track.title + ' ' + this.track.artist);
     });
     this.currentlyPlaying$ = this.store$.select(s => s.player)
       .map((playerStatus: PlayerState) => playerStatus.isPlaying && playerStatus.currentTrack.id === this.track.id);

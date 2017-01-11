@@ -1,10 +1,10 @@
-<span class="track-current-time">{{ progressMinutesSeconds }}</span>
+<span id="track-current-time" class="track-current-time">{{ progressMinutesSeconds }}</span>
 
 <div class="progress-wrapper">
   <md-slider
      [value]="currentProgress"
-     (change)="handleProgressChange($event)"
-     (slidestart)="handleSlideStart($event)"
+     (change)="handleSliderChange($event)"
+     (slidestart)="handleSliderStart($event)"
      min="0" max="{{multiplier}}" class="track-progress-bar">
   </md-slider>
   <div id="progress">
