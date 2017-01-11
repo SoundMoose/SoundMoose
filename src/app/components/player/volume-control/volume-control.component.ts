@@ -10,7 +10,7 @@ import { PlayerActions } from '../../../actions/player.actions';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  //changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'volume-control',
   styleUrls: [ '../player.component.css' ],
   templateUrl: './volume-control.component.html'

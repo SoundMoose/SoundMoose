@@ -48,14 +48,12 @@ export class PlayerService {
       .map((player: Player) => player.currentTrack)
       .distinctUntilChanged();
 
-/*
-    // Not used yet...
     this.playingSubscription = Observable.fromEvent(this.audio, 'playing')
       .subscribe(() => this.store$.dispatch(playerActions.startAudioPlaying({
+        // Not currently used:
         millisecondProgressWhenStartedPlaying: this.audio.currentTime*1000,
         timestampWhenStartedPlaying: Date.now()
       })));
-      */
 
     Observable.fromEvent(this.audio, 'loadstart')
       .subscribe(() => this.store$.dispatch(playerActions.startAudioLoading()));

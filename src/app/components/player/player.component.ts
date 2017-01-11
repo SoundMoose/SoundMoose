@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
+//  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'player',
   styleUrls: [ './player.component.css' ],
   templateUrl: './player.component.html',

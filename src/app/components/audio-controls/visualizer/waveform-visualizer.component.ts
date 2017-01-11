@@ -10,7 +10,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  //changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'visualizer-2D-waveform',
   templateUrl: './waveform-visualizer.component.html'
 })

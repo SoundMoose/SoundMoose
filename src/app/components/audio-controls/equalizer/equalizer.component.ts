@@ -12,7 +12,7 @@ import { AudioControlsActions } from '../../../actions/audio-controls.actions';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  //changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'equalizer',
   styleUrls: [ './equalizer.component.css' ],
   templateUrl: './equalizer.component.html'
