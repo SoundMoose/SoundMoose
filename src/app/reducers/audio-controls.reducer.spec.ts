@@ -11,7 +11,7 @@ describe('Audio-Controls Reducer', () => {
 
   beforeEach(() => {
     state = {
-      showAudioControls: true,
+      toggleFrequencyOrWaveform: true,
       lowBand: {
         gain: {
           value: 0.5,
