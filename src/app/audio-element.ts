@@ -124,6 +124,9 @@ export const AUDIO_STREAM_PROVIDER = {
         // lowGain: lowBand.gain.value,
         // midGain: midBand.gain.value,
         // highGain: highBand.gain.value
+        toggleFrequencyOrWaveform: false,
+
+        
         lowBand: lowBand,
         midBand: midBand,
         highBand: highBand
