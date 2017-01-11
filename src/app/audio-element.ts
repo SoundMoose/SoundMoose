@@ -100,7 +100,7 @@ export const AUDIO_STREAM_PROVIDER = {
       // bandSplit = [ 30, 1000, 12000 ];
       bandSplit = [ 30, 60, 110, 220, 350, 700, 1600, 3200, 4800, 7000, 10000, 12000 ];
 
-      defaultQValue = 100;
+      defaultQValue = 5;
 
       lowBand = audioCtx.createBiquadFilter();
       lowBand.type = "lowshelf";
