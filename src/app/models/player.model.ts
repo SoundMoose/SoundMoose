@@ -3,8 +3,9 @@ import { Track } from './track.model';
 export interface Player {
   isPlaying: boolean;
   currentTrack: Track;
-  millisecondProgressWhenStartedPlaying: number;
-  timestampWhenStartedPlaying: number;
+  // currentTime: number;
+  // millisecondProgressWhenStartedPlaying: number;
+  // timestampWhenStartedPlaying: number;
   volume: number;
   isMuted: boolean;
   volumeBeforeMute: number;
