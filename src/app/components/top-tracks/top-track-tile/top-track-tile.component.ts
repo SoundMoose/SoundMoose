@@ -9,6 +9,7 @@ import { Action } from '@ngrx/store';
 import { PlayerService } from '../../../services/player.service';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
+import { SpinnerState } from '../../../reducers/spinner.reducer';
 
 @Component({
   //changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,14 +22,24 @@ export class TopTrackTileComponent {
   @Input()
   topTrack: Track;
 
+  player$: Observable<{}>;
   currentlyPlaying$: Observable<boolean>;
   selected$: Observable<boolean>;
+  isLoading$: Observable<boolean>;
 
   constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router) {
-    this.currentlyPlaying$ = this.store$.select('player')
+    // Grab the player stream from the store
+    this.player$ = this.store$.select('player');
+
+    // Map the player stream to see if the player is playing
+    this.currentlyPlaying$ = this.player$
       .map((playerStatus: Player) => playerStatus.isPlaying && playerStatus.currentTrack.id === this.topTrack.id);
-    this.selected$ = this.store$.select('player')
+    // Map the player stream to see if the player is playing the current song
+    this.selected$ = this.player$
       .map((playerStatus: Player)=> playerStatus.currentTrack.id === this.topTrack.id);
+    // Map the spinner stream to see if the song is loading
+    this.isLoading$ = this.store$.select('spinner')
+      .map((spinnerStatus: SpinnerState) => spinnerStatus.isSpinning);
   }
 
   clickHandler() {
