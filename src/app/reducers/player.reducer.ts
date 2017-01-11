@@ -8,8 +8,9 @@ export type PlayerState = Player;
 
 const initialState: PlayerState = {
   isPlaying: false,
-  millisecondProgressWhenStartedPlaying: 0,
-  timestampWhenStartedPlaying: Date.now(),
+  // currentTime: 0,
+  // millisecondProgressWhenStartedPlaying: 0,
+  // timestampWhenStartedPlaying: Date.now(),
   currentTrack: {
     id: 0,
     title: '',

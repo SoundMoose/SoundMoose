@@ -72,7 +72,7 @@ export class TrackProgressContainerComponent implements OnInit, OnDestroy {
       }
       let currentProgressInMilliseconds = item * 1000;
       this.progressMinutesSeconds = this.millisToMinutesSeconds(currentProgressInMilliseconds);
-      this.currentProgress = Math.floor(((currentProgressInMilliseconds/this.duration)*100)) * this.multiplier / 100;
+      this.currentProgress = Math.floor(((currentProgressInMilliseconds/this.duration)*1000)) * this.multiplier / 1000;
     });
     this.s3 = this.player$.subscribe((item) => {
       this.duration = +item.currentTrack.duration;
