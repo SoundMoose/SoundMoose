@@ -21,7 +21,7 @@ export class AudioStream {
 export const AUDIO_STREAM_PROVIDER = {
   provide: AudioStream,
   useFactory: () => {
-    let audioElement = new Audio(),
+    let audioElement,
         audioCtx,
         audioSrcNode,
         frequencyAnalyser,
@@ -32,13 +32,13 @@ export const AUDIO_STREAM_PROVIDER = {
         waveformDataArray;
 
       audioCtx = new AudioContext();
+      audioElement =  new Audio();
       audioSrcNode = audioCtx.createMediaElementSource(audioElement);
-      audioSrcNode.connect(audioCtx.destination);
+      // audioSrcNode.connect(audioCtx.destination);
 
       frequencyAnalyser = audioCtx.createAnalyser();
       waveformAnalyser = audioCtx.createAnalyser();
       frequencyAnalyser.smoothingTimeConstant = 0.5;
-      // waveformAnalyser.smoothingTimeConstant = 0.15;
       audioSrcNode.connect(frequencyAnalyser);
       audioSrcNode.connect(waveformAnalyser);
 
@@ -50,7 +50,7 @@ export const AUDIO_STREAM_PROVIDER = {
       frequencyDataArray = new Uint8Array(frequencyBufferLength);
       waveformDataArray = new Uint8Array(waveformBufferLength);
 
-      audioSrcNode.connect(audioCtx.destination);
+      // audioSrcNode.connect(audioCtx.destination);
 
       frequencyAnalyser.getByteFrequencyData(frequencyDataArray);
       waveformAnalyser.getByteTimeDomainData(waveformDataArray);
@@ -64,39 +64,43 @@ export const AUDIO_STREAM_PROVIDER = {
         highGain,
         midGain,
         lowGain,
-        hInvert,
-        lInvert,
-        sum,
         masterGain;
 
-      masterGain = audioCtx.createGain();
-      masterGain.gain.value = -40;
+       //set the filter types (you could set all to 5, for a different result, feel free to experiment)
+       //https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html#BANDPASS
+      //  lowshelf.type = 3;
+      //  mid.type = 5;
+      //  highshelf.type = 4;
+      // filters with type 5 (peaking), which lets all frequencies through and only amplifies/reduce at the frequency at which you've set the respective filter.frequency.value.
 
-      gainDb = -40.0;
-      // gainDb = 0.0;
+      highGain = 0.5;
+      midGain = 0.5;
+      lowGain = 0.5;
       bandSplit = [ 360, 1000, 3600 ];
 
       lowBand = audioCtx.createBiquadFilter();
       lowBand.type = "lowshelf";
       lowBand.frequency.value = bandSplit[0];
-      lowBand.gain.value = gainDb;
-      lowBand.connect( masterGain );
+      lowBand.gain.value = lowGain;
 
       midBand = audioCtx.createBiquadFilter();
     	midBand.type = "peaking";
     	midBand.frequency.value = bandSplit[1];
-    	midBand.Q.value = 0.5;
-    	midBand.gain.value = gainDb;
-    	midBand.connect( lowBand );
+    	// midBand.Q.value = 0.5;
+    	midBand.gain.value = midGain;
 
       highBand = audioCtx.createBiquadFilter();
       highBand.type = "highshelf";
       highBand.frequency.value = bandSplit[2];
-      highBand.gain.value = gainDb;
-      highBand.connect( midBand );
+      highBand.gain.value = highGain;
 
-      audioSrcNode.connect(highBand);
-      // audioSrcNode.connect(audioCtx.destination);
+      audioSrcNode.connect( lowBand );
+      lowBand.connect( midBand );
+      midBand.connect( highBand );
+      highBand.connect( audioCtx.destination );
+
+      // audioElement.src = './assets/sounds/Broke_For_Free_-_01_-_Night_Owl.mp3';
+      // audioElement.play();
 
 ////////// End of In-Development Equalizer Component ////////////////
 
@@ -120,6 +124,9 @@ export const AUDIO_STREAM_PROVIDER = {
         // lowGain: lowBand.gain.value,
         // midGain: midBand.gain.value,
         // highGain: highBand.gain.value
+        toggleFrequencyOrWaveform: false,
+
+
         lowBand: lowBand,
         midBand: midBand,
         highBand: highBand
