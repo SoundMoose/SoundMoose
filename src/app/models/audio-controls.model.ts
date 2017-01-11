@@ -1,5 +1,6 @@
 export interface AudioControls {
   toggleFrequencyOrWaveform: boolean;
+  showEqualizer: boolean;
   lowBand: any;
   midBand1: any;
   midBand2: any;

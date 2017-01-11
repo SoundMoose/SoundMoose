@@ -45,24 +45,6 @@ export const AUDIO_STREAM_PROVIDER = {
       audioSrcNode = audioCtx.createMediaElementSource(audioElement);
       // audioSrcNode.connect(audioCtx.destination);
 
-      frequencyAnalyser = audioCtx.createAnalyser();
-      waveformAnalyser = audioCtx.createAnalyser();
-      frequencyAnalyser.smoothingTimeConstant = 0.5;
-      audioSrcNode.connect(frequencyAnalyser);
-      audioSrcNode.connect(waveformAnalyser);
-
-      frequencyAnalyser.fftSize = 1024;
-      waveformAnalyser.fftSize = 2048;
-      frequencyBufferLength = frequencyAnalyser.frequencyBinCount;
-      waveformBufferLength = waveformAnalyser.frequencyBinCount;
-
-      frequencyDataArray = new Uint8Array(frequencyBufferLength);
-      waveformDataArray = new Uint8Array(waveformBufferLength);
-
-      // audioSrcNode.connect(audioCtx.destination);
-
-      frequencyAnalyser.getByteFrequencyData(frequencyDataArray);
-      waveformAnalyser.getByteTimeDomainData(waveformDataArray);
 
 /////////////// In-Development Equalizer Component  ////////////////////
       let gainDb,
@@ -97,9 +79,9 @@ export const AUDIO_STREAM_PROVIDER = {
       highGain = 0;
       midGain = 0;
       lowGain = 0;
-      // bandSplit = [ 30, 1000, 12000 ];
       bandSplit = [ 30, 60, 110, 220, 350, 700, 1600, 3200, 4800, 7000, 10000, 12000 ];
 
+      // https://en.wikipedia.org/wiki/Q_factor
       defaultQValue = 5;
 
       lowBand = audioCtx.createBiquadFilter();
@@ -189,6 +171,30 @@ export const AUDIO_STREAM_PROVIDER = {
 
 ////////// End of In-Development Equalizer Component ////////////////
 
+
+      frequencyAnalyser = audioCtx.createAnalyser();
+      waveformAnalyser = audioCtx.createAnalyser();
+      frequencyAnalyser.smoothingTimeConstant = 0.5;
+      // audioSrcNode.connect(frequencyAnalyser);
+      // audioSrcNode.connect(waveformAnalyser);
+      highBand.connect(frequencyAnalyser);
+      highBand.connect(waveformAnalyser);
+
+      frequencyAnalyser.fftSize = 1024;
+      waveformAnalyser.fftSize = 2048;
+      frequencyBufferLength = frequencyAnalyser.frequencyBinCount;
+      waveformBufferLength = waveformAnalyser.frequencyBinCount;
+
+      frequencyDataArray = new Uint8Array(frequencyBufferLength);
+      waveformDataArray = new Uint8Array(waveformBufferLength);
+
+      // audioSrcNode.connect(audioCtx.destination);
+
+      frequencyAnalyser.getByteFrequencyData(frequencyDataArray);
+      waveformAnalyser.getByteTimeDomainData(waveformDataArray);
+
+
+
       setInterval(function() {
         frequencyAnalyser.getByteFrequencyData(frequencyDataArray);
         waveformAnalyser.getByteTimeDomainData(waveformDataArray);
@@ -203,10 +209,6 @@ export const AUDIO_STREAM_PROVIDER = {
         waveformBufferLength: waveformBufferLength,
         frequencyBufferLength: frequencyBufferLength,
 
-        // Temporary for Equalizer component:
-        // lowGain: lowBand.gain.value,
-        // midGain: midBand.gain.value,
-        // highGain: highBand.gain.value
         toggleFrequencyOrWaveform: false,
 
         lowBand: lowBand,

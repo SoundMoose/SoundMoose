@@ -18,9 +18,14 @@
       [ngStyle]="{'background-color': '#2E2E2E'}">
 
       <div [ngStyle]="{'width': '40px', 'height': '150px', 'display':'inline-block'}">
-        <i class="area chart icon"></i>
-        <i class="bar chart icon"></i>
+        <i class="area chart icon"
+
+        ></i>
+        <i class="bar chart icon"
+
+        ></i>
         <i class="large clockwise rotated options icon"
+          (click)="toggleEqualizer()"
           [ngStyle]="{'margin-left': '5px'}"
         ></i>
       </div>

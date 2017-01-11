@@ -18,13 +18,21 @@ import { Observable } from 'rxjs/Observable';
 })
 export class AudioControlsComponent {
   toggleVisualizersFreqWave$: Observable<boolean>;
+  showEqualizer$: Observable<boolean>;
 
   constructor(private audioControlsService: AudioControlsService, private store$: Store<AppStore>, private audioControlActions: AudioControlsActions) {
     this.toggleVisualizersFreqWave$ = this.store$.select('audiocontrols')
       .map((audioControls: AudioControls) => audioControls.toggleFrequencyOrWaveform);
+
+    this.showEqualizer$ = this.store$.select('audiocontrols')
+      .map((audioControls: AudioControls) => audioControls.showEqualizer);
+
   }
 
   toggleVisualizersFreqWave() {
     this.store$.dispatch(this.audioControlActions.toggleVisualizersFreqWave());
   }
+
+
+
 }

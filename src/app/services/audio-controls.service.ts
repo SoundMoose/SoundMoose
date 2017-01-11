@@ -17,70 +17,73 @@ import { AudioStream } from '../audio-element';
 export class AudioControlsService {
   toggleFrequencyOrWaveform$: Observable<boolean>;
   audio: any;
+  audioControlStream$: any;
 
   constructor(protected audioStream: AudioStream, private store$: Store<AppStore>, private audioControlsActions: AudioControlsActions) {
 
     this.audio = audioStream.audioElement;
 
     this.toggleFrequencyOrWaveform$ = this.store$.select('audiocontrols')
-      .map((audioControls: AudioControls) => audioControls.toggleFrequencyOrWaveform)
+    .map((audioControls: AudioControls) => audioControls.toggleFrequencyOrWaveform);
 
-    this.store$.select('audiocontrols')
+    this.audioControlStream$ = this.store$.select('audiocontrols');
+
+    this.audioControlStream$
       .map((audiocontrols: AudioControls) => audiocontrols.lowBand)
       .distinctUntilChanged()
       .subscribe(item => this.lowGain(item));
 
-    this.store$.select('audiocontrols')
+    this.audioControlStream$
       .map((audiocontrols: AudioControls) => audiocontrols.midBand1)
       .distinctUntilChanged()
       .subscribe(item => this.midGain1(item));
 
-    this.store$.select('audiocontrols')
+    this.audioControlStream$
       .map((audiocontrols: AudioControls) => audiocontrols.midBand2)
       .distinctUntilChanged()
       .subscribe(item => this.midGain2(item));
 
-    this.store$.select('audiocontrols')
+    this.audioControlStream$
       .map((audiocontrols: AudioControls) => audiocontrols.midBand3)
       .distinctUntilChanged()
       .subscribe(item => this.midGain3(item));
 
-    this.store$.select('audiocontrols')
+    this.audioControlStream$
       .map((audiocontrols: AudioControls) => audiocontrols.midBand4)
       .distinctUntilChanged()
       .subscribe(item => this.midGain4(item));
 
-    this.store$.select('audiocontrols')
+    this.audioControlStream$
       .map((audiocontrols: AudioControls) => audiocontrols.midBand5)
       .distinctUntilChanged()
       .subscribe(item => this.midGain5(item));
 
-    this.store$.select('audiocontrols')
+    this.audioControlStream$
       .map((audiocontrols: AudioControls) => audiocontrols.midBand6)
       .distinctUntilChanged()
       .subscribe(item => this.midGain6(item));
 
-    this.store$.select('audiocontrols')
+    this.audioControlStream$
       .map((audiocontrols: AudioControls) => audiocontrols.midBand7)
       .distinctUntilChanged()
       .subscribe(item => this.midGain7(item));
 
-    this.store$.select('audiocontrols')
+    this.audioControlStream$
       .map((audiocontrols: AudioControls) => audiocontrols.midBand8)
       .distinctUntilChanged()
       .subscribe(item => this.midGain8(item));
 
-    this.store$.select('audiocontrols')
+    this.audioControlStream$
       .map((audiocontrols: AudioControls) => audiocontrols.midBand9)
       .distinctUntilChanged()
       .subscribe(item => this.midGain9(item));
 
-    this.store$.select('audiocontrols')
+    this.audioControlStream$
       .map((audiocontrols: AudioControls) => audiocontrols.midBand10)
       .distinctUntilChanged()
       .subscribe(item => this.midGain10(item));
 
-    this.store$.select('audiocontrols')
+    this.audioControlStream$
       .map((audiocontrols: AudioControls) => audiocontrols.highBand)
       .distinctUntilChanged()
       .subscribe(item => this.highGain(item));

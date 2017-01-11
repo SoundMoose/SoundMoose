@@ -7,6 +7,7 @@ export type AudioControlsState = AudioControls;
 
 const initialState: AudioControlsState = {
   toggleFrequencyOrWaveform: true,
+  showEqualizer: false,
   lowBand: {
     gain: {
       value: 0,
@@ -77,6 +78,13 @@ export default function (state = initialState, action: Action): AudioControlsSta
           toggleFrequencyOrWaveform: !state.toggleFrequencyOrWaveform,
       });
     }
+
+    case AudioControlsActions.TOGGLE_EQUALIZER:  {
+      return Object.assign({}, state, {
+          showEqualizer: !state.showEqualizer,
+      });
+    }
+
     case AudioControlsActions.ADJUST_BASS:  {
       return Object.assign({}, state, {
         lowBand: {

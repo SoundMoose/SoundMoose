@@ -8,6 +8,7 @@ import { AppStore } from '../../models/appstore.model';
 import { Player } from '../../models/player.model';
 import { Observable } from 'rxjs/Observable';
 
+import { AudioControlsActions } from '../../actions/audio-controls.actions';
 
 import {
    trigger,
@@ -44,12 +45,16 @@ export class PlayerComponent {
   trackExists$: Observable<boolean>;
   showVisualization$: Observable<boolean>;
 
-  constructor(private playerService: PlayerService, private store$: Store<AppStore> ) {
+  constructor(private playerService: PlayerService, private store$: Store<AppStore>, private audioControlActions: AudioControlsActions ) {
     this.trackExists$ = this.store$.select('player')
       .map((playerStatus: Player) => playerStatus.currentTrack.duration !== 0);
 
     this.showVisualization$ = this.store$.select('player')
       .map((playerStatus: Player) => playerStatus.showVisualization);
+  }
+
+  toggleEqualizer() {
+    this.store$.dispatch(this.audioControlActions.toggleShowEqualizer());
   }
 
 }
