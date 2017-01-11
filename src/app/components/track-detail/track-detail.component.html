@@ -64,8 +64,9 @@ background: linear-gradient(to left, #232526 , #414345); display: -webkit-flex; 
  {{ (trackDetails$ | async)?.commentCount }} comments
 </div>
  <div class="ui segments">
-   <div class="ui segment">
-     <p>Hi</p>
+   <div *ngFor="let comment of comments$ | async" class="ui segment">
+     <img src="{{comment.user.avatarUrl}}" alt="avatar" /> {{ comment.user.username }}
+     <p> {{comment.timestamp}}: {{ comment.body }}</p>
    </div>
    <div class="ui segment">
      <p>Hi</p>

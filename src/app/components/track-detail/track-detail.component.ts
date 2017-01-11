@@ -43,6 +43,7 @@ export class TrackDetailComponent implements OnInit {
   }
   currentlyPlaying$: Observable<boolean>;
   trackDetails$: Observable<TrackDetailsState>;
+  comments$: Observable<any>;
   license: string;
   description: string;
   imgUrl: string;
@@ -66,6 +67,7 @@ export class TrackDetailComponent implements OnInit {
   ngOnInit() {
     let trackId = this.route.snapshot.params['trackId'];
     this.soundCloudService.loadTrackDetails(trackId);
+    this.soundCloudService.loadComments(trackId);
     this.trackDetails$ = this.store$.select(s => s.trackDetails);
     this.trackDetails$.subscribe(item => {
       this.description = item.description;
@@ -78,6 +80,7 @@ export class TrackDetailComponent implements OnInit {
     });
     this.currentlyPlaying$ = this.store$.select(s => s.player)
       .map((playerStatus: PlayerState) => playerStatus.isPlaying && playerStatus.currentTrack.id === this.track.id);
+    this.comments$ = this.store$.select(s => s.comments);
   }
 
   clickHandler() {
