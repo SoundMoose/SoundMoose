@@ -23,6 +23,7 @@ export class PlayerControlsComponent {
   currentTrackId: number;
   repeatTrack: boolean;
   shuffleTracks: boolean;
+  showVisualization: boolean;
 
   tracksList: Track[];
 
@@ -33,6 +34,7 @@ export class PlayerControlsComponent {
       this.currentTrackId = item.currentTrack.id;
       this.repeatTrack = item.repeatTrack;
       this.shuffleTracks = item.shuffleTracks;
+      this.showVisualization = item.showVisualization;
     });
     this.tracks$ = this.store$.select(s => s.tracks);
     this.tracks$.subscribe(tracksList => this.tracksList = tracksList);
@@ -56,6 +58,10 @@ export class PlayerControlsComponent {
 
   toggleShuffle() {
     this.store$.dispatch(this.playerActions.toggleShuffle());
+  }
+
+  toggleVisualization() {
+    this.store$.dispatch(this.playerActions.toggleShowVisualization());
   }
 
   togglePlayPause() {

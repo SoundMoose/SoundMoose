@@ -1,5 +1,5 @@
 export interface AudioControls {
-  showAudioControls: boolean;
+  toggleFrequencyOrWaveform: boolean;
   lowBand: any;
   midBand: any;
   highBand: any;

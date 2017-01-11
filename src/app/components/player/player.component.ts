@@ -42,10 +42,14 @@ import {
 })
 export class PlayerComponent {
   trackExists$: Observable<boolean>;
+  showVisualization$: Observable<boolean>;
 
   constructor(private playerService: PlayerService, private store$: Store<AppStore> ) {
     this.trackExists$ = this.store$.select('player')
       .map((playerStatus: Player) => playerStatus.currentTrack.duration !== 0);
+
+    this.showVisualization$ = this.store$.select('player')
+      .map((playerStatus: Player) => playerStatus.showVisualization);
   }
 
 }

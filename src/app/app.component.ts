@@ -19,15 +19,15 @@ import { AudioControls } from './models/audio-controls.model';
 })
 
 export class AppComponent {
-  showAudioControls$: Observable<boolean>;
+  toggleFrequencyOrWaveform$: Observable<boolean>;
 
   constructor( private store$: Store<AppStore>, private AudioControlsActions: AudioControlsActions ) {
 
-    this.showAudioControls$ = this.store$.select('audiocontrols')
-      .map((audiocontrols: AudioControls) => audiocontrols.showAudioControls)
+    this.toggleFrequencyOrWaveform$ = this.store$.select('audiocontrols')
+      .map((audiocontrols: AudioControls) => audiocontrols.toggleFrequencyOrWaveform)
   }
 
   toggleAudioControls() {
-    this.store$.dispatch(this.AudioControlsActions.toggleAudioControls());
+    this.store$.dispatch(this.AudioControlsActions.toggleVisualizersFreqWave());
   }
 }

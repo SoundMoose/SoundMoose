@@ -50,7 +50,7 @@ export class FrequencyVisualizerComponent {
     if (context.hasfrequencyCanvas) {
       // console.log('DRAWING FREQUENCY');
       context.drawFrequencyVisual = requestAnimationFrame(context.drawFrequencyBars);
-      context.frequencyCanvasCtx.fillStyle = 'rgb(26, 26, 26)';
+      context.frequencyCanvasCtx.fillStyle = 'rgb(46, 46, 46)';
       context.frequencyCanvasCtx.fillRect(0, 0, context.WIDTH, context.HEIGHT);
       context.barWidth = (context.WIDTH / context.frequencyBufferLength) * 2.5;
       context.barHeight;
