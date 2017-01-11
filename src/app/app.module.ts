@@ -76,9 +76,11 @@ const APP_PROVIDERS = [
 const metaReducers = (ENV !== 'production') ? [storeFreeze, combineReducers] : [combineReducers];
 
 const store = compose(...metaReducers)({
-  player: player,
-  tracks: tracks,
-  spinner: spinner
+      player: player,
+      tracks: tracks,
+      spinner: spinner,
+      audiocontrols: audiocontrols,
+      trackDetails: trackDetails
 });
 
 
@@ -108,13 +110,7 @@ const store = compose(...metaReducers)({
   imports: [
     MomentModule,
     BrowserModule,
-    StoreModule.provideStore({
-      player: player,
-      tracks: tracks,
-      spinner: spinner,
-      audiocontrols: audiocontrols,
-      trackDetails: trackDetails
-    }),
+    StoreModule.provideStore(store),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     HttpModule,
     MaterialModule.forRoot(),

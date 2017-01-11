@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Input, Component, OnInit, OnDestroy } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { AppState } from '../app.service';
 import { PlayerState } from '../../../reducers/player.reducer';
@@ -15,7 +16,7 @@ import { PlayerActions } from '../../../actions/player.actions';
   styleUrls: [ '../player.component.css' ],
   templateUrl: './track-progress-container.component.html'
 })
-export class TrackProgressContainerComponent {
+export class TrackProgressContainerComponent implements OnInit, OnDestroy {
   player$: Observable<PlayerState>;
   durationMinutesSeconds: string;
   progressMinutesSeconds: string;
@@ -30,27 +31,55 @@ export class TrackProgressContainerComponent {
   // Whether we are currently sliding.
   sliding: boolean;
   bufferedRanges: number[][] | number[];
+  // 'detail' or 'bottom'
+  @Input() progressContainerType: string;
 
-  constructor (private playerService: PlayerService, private store$: Store<AppStore>) {
+  constructor (private playerService: PlayerService, private store$: Store<AppStore>, private route: ActivatedRoute,) {
+  }
+
+  ngOnInit() {
+    // This component is used both on the detail page and in the bottom part of the page.
+    // Split this out into two separate components if the logic becomes too convoluted.
     this.player$ = this.store$.select(s => s.player);
-    this.playerService.currentProgressInSeconds$.subscribe(item => {
+    if (this.progressContainerType == 'detail') {
+      this.s1 = this.player$.subscribe((p) => {
+        if (p.currentTrack && this.route.snapshot.params['trackId'] == p.currentTrack.id) {
+          this.setPlayerInfo();
+        }
+      });
+    } else if (this.progressContainerType == 'bottom') {
+      this.setPlayerInfo();
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.s1) {
+      this.s1.unsubscribe();
+    }
+    if (this.s2) {
+      this.s2.unsubscribe();
+    }
+    if (this.s3) {
+      this.s3.unsubscribe();
+    }
+  }
+
+  private setPlayerInfo() {
+    this.s2 = this.playerService.currentProgressInSeconds$.subscribe(item => {
       if (this.sliding) {
         // We let the slider take over the timer while we are sliding.
         return;
       }
       let currentProgressInMilliseconds = item * 1000;
       this.progressMinutesSeconds = this.millisToMinutesSeconds(currentProgressInMilliseconds);
-      // Why is {{ progressMinutesSeconds }} so laggy?
-      //$('#track-current-time').html(this.progressMinutesSeconds);
       this.currentProgress = Math.floor(((currentProgressInMilliseconds/this.duration)*100)) * this.multiplier / 100;
     });
-    this.player$.subscribe((item) => {
+    this.s3 = this.player$.subscribe((item) => {
       this.duration = +item.currentTrack.duration;
       this.durationMinutesSeconds = this.millisToMinutesSeconds(this.duration);
       this.bufferedRanges = item.bufferedRanges;
     });
   }
-
   private millisToMinutesSeconds(millis) {
     let minutes = Math.floor(millis / 60000);
     let seconds = +((millis % 60000) / 1000).toFixed(0);
@@ -81,10 +110,9 @@ export class TrackProgressContainerComponent {
         let progress = slider.attributes['aria-valuenow'].value;
         // The progress timer is bound to this.
         this.progressMinutesSeconds = this.millisToMinutesSeconds(progress / this.multiplier * this.duration);
-    //  $('#track-current-time').html(this.progressMinutesSeconds);
          // The slider is bound to this.
         this.currentProgress = progress;
-      }, 100);
+      }, 50);
     }
   }
 

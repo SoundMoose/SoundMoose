@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from 
 
 
 @Component({
- // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'track-progress',
   styleUrls: [ '../../player.component.css' ],
   templateUrl: './track-progress.component.html'
@@ -21,7 +21,6 @@ export class TrackProgressComponent {
   }
 
   handleSliderStart($event) {
-    console.log($event);
     this.sliderStarted.emit($event);
   }
 

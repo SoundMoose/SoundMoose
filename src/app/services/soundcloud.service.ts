@@ -53,6 +53,7 @@ export class SoundCloudService {
               duration: item.duration
             },
             waveformUrl: item.waveform_url,
+            largeArtworkUrl: item.artwork_url ? item.artwork_url.replace('large.jpg', 't500x500.jpg') : '/assets/img/moosey.png',
             user: {
               id: item.user.id,
               username: item.user.username,

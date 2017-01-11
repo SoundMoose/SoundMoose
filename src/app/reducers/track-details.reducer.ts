@@ -21,6 +21,7 @@ const initialState: TrackDetailsState = {
     avatarUrl: ''
   },
   waveformUrl: '',
+  largeArtworkUrl: '',
   description: '',
   license: '',
   commentCount: 0,
