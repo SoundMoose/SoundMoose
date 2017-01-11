@@ -42,7 +42,8 @@ export class TrackProgressContainerComponent {
       this.progressMinutesSeconds = this.millisToMinutesSeconds(currentProgressInMilliseconds);
       // Why is {{ progressMinutesSeconds }} so laggy?
       //$('#track-current-time').html(this.progressMinutesSeconds);
-      this.currentProgress = Math.floor(((currentProgressInMilliseconds/this.duration)*100)) * this.multiplier / 100;
+      this.currentProgress = Math.floor(((currentProgressInMilliseconds/this.duration)*1000)) * this.multiplier / 1000;
+      console.log("currProgress: ", this.currentProgress);
     });
     this.player$.subscribe((item) => {
       this.duration = +item.currentTrack.duration;
@@ -79,6 +80,7 @@ export class TrackProgressContainerComponent {
       this.timer = window.setInterval(() =>  {
         // Progress, a number between 0 and this.multiplier.
         let progress = slider.attributes['aria-valuenow'].value;
+        console.log("PROGRESS: ", progress);
         // The progress timer is bound to this.
         this.progressMinutesSeconds = this.millisToMinutesSeconds(progress / this.multiplier * this.duration);
     //  $('#track-current-time').html(this.progressMinutesSeconds);
