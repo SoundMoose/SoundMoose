@@ -26,13 +26,10 @@ export class AudioControlsComponent {
 
     this.showEqualizer$ = this.store$.select('audiocontrols')
       .map((audioControls: AudioControls) => audioControls.showEqualizer);
-
   }
 
   toggleVisualizersFreqWave() {
     this.store$.dispatch(this.audioControlActions.toggleVisualizersFreqWave());
   }
-
-
 
 }
