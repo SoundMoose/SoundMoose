@@ -1,7 +1,8 @@
 <div [@fadeInOut]="'in'" class="ui footer segment"
   *ngIf="trackExists$ | async"
 >
-  <div class="ui container">
+  <div class="ui container"
+  [ngStyle]="{'min-width': '1127px'}">
 
     <player-controls></player-controls>
 
@@ -15,7 +16,18 @@
       class="ui container segment"
       *ngIf="showVisualization$ | async"
       [ngStyle]="{'background-color': '#2E2E2E'}">
-      <audio-controls></audio-controls>
+
+      <div [ngStyle]="{'width': '40px', 'height': '150px', 'display':'inline-block'}">
+        <i class="area chart icon"></i>
+        <i class="bar chart icon"></i>
+        <i class="large clockwise rotated options icon"
+          [ngStyle]="{'margin-left': '5px'}"
+        ></i>
+      </div>
+
+      <audio-controls
+        [ngStyle]="{'width': '980px'}"
+      ></audio-controls>
     </div>
 
     </div>
