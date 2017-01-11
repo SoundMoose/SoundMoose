@@ -1,3 +1,11 @@
+<i (click)="toggleVisualization()"
+*ngIf="showVisualization"
+class="large yellow chevron down icon">
+</i>
+
+<i (click)="toggleVisualization()"
+*ngIf="!showVisualization"
+class="large green chevron up icon"></i>
 
 <i (click)="jumpToPrevious()" class="step backward icon"></i>
 
@@ -25,12 +33,3 @@
     random: true,
     icon: true
   }"></i>
-
-<i (click)="toggleVisualization()"
-  *ngIf="showVisualization"
-  class="yellow compress icon">
-</i>
-
-<i (click)="toggleVisualization()"
-  *ngIf="!showVisualization"
-  class="expand icon"></i>
