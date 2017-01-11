@@ -38,7 +38,6 @@ export class TrackProgressContainerComponent {
         // We let the slider take over the timer while we are sliding.
         return;
       }
-      console.log(item);
       let currentProgressInMilliseconds = item * 1000;
       this.progressMinutesSeconds = this.millisToMinutesSeconds(currentProgressInMilliseconds);
       // Why is {{ progressMinutesSeconds }} so laggy?
@@ -62,20 +61,20 @@ export class TrackProgressContainerComponent {
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
   }
 
-  handleProgressChange($event) {
+  onSliderChanged(event) {
     // Sliding is set to true when slide starts, and set to false here when it stops.
     this.sliding = false;
     // Stop updating the progress bar timer while dragging.
     clearInterval(this.timer);
     // Send a fraction to the player service so it can change the position of the track.
-    this.playerService.changePosition($event.value / this.multiplier);
+    this.playerService.changePosition(event.value / this.multiplier);
   }
 
-  handleSlideStart($event) {
+  onSliderStarted(event) {
     // Slide starts, will stop when we stop sliding (onchange).
     this.sliding = true;
     // Currently the only way we can find the progress is by grabbing aria-valuenow from the parent.
-    let slider = this.findAncestor($event.target, 'track-progress-bar');
+    let slider = this.findAncestor(event.target, 'track-progress-bar');
     if (slider) {
       this.timer = window.setInterval(() =>  {
         // Progress, a number between 0 and this.multiplier.

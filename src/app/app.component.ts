@@ -12,7 +12,7 @@ import { AudioControls } from './models/audio-controls.model';
 
 @Component({
   selector: 'app',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+ // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: 'app.component.html'
 })
 

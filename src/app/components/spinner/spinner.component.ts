@@ -6,7 +6,7 @@ import { AppStore } from './../../models/appstore.model';
 import { SpinnerState } from './../../reducers/spinner.reducer';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  //changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'spinner',
   styleUrls: ['spinner.component.css'],
   templateUrl: 'spinner.component.html'

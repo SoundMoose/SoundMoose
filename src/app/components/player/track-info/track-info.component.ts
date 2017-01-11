@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  //changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'track-info',
   styleUrls: [ '../player.component.css' ],
   templateUrl: './track-info.component.html'

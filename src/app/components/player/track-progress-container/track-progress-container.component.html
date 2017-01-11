@@ -4,6 +4,6 @@
   [durationMinutesSeconds]="durationMinutesSeconds"
   [bufferedRanges]="bufferedRanges"
   [currentProgress]="currentProgress"
-  (sliderChange)="handleProgressChange"
-  (sliderStart)="handleSlideStart"
+  (sliderChanged)="onSliderChanged($event)"
+  (sliderStarted)="onSliderStarted($event)"
   ></track-progress>

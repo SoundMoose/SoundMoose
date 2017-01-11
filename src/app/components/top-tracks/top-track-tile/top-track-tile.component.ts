@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  //changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'top-track-tile',
   styleUrls: ['../top-tracks.component.css'],
   templateUrl: './top-track-tile.component.html'

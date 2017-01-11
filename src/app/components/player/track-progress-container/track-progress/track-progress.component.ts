@@ -13,15 +13,16 @@ export class TrackProgressComponent {
   @Input() durationMinutesSeconds: string;
   @Input() bufferedRanges: number[][] | number[];
   @Input() currentProgress: number;
-  @Output() sliderChangeEventEmitter: EventEmitter = new EventEmitter();
-  @Output() sliderStartEventEmitter: EventEmitter = new EventEmitter();
+  @Output() sliderChanged: EventEmitter<{}> = new EventEmitter();
+  @Output() sliderStarted: EventEmitter<{}> = new EventEmitter();
 
-  handleSliderChange(event) {
-    this.sliderChangeEventEmitter(event);
+  handleSliderChange($event) {
+    this.sliderChanged.emit($event);
   }
 
-  handleSliderStart(event) {
-    this.sliderStartEventEmitter(event);
+  handleSliderStart($event) {
+    console.log($event);
+    this.sliderStarted.emit($event);
   }
 
 }

@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  //changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'audio-controls',
   styleUrls: [ './audio-controls.component.css' ],
   templateUrl: './audio-controls.component.html',
