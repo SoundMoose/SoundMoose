@@ -12,7 +12,7 @@
     </visualizer-2D-waveform>
 
   <!-- Eqalizer - In Development -->
-  <div class="ui container">
+  <div [@fadeInOut]="'in'" class="ui container">
     <equalizer
       *ngIf="showEqualizer$ | async"
     ></equalizer>
