@@ -54,7 +54,7 @@ export class FrequencyVisualizerComponent {
       let gradient = context.frequencyCanvasCtx.createLinearGradient(0, 0, 0, context.HEIGHT);
       gradient.addColorStop(0, '#1B1B1B');
       gradient.addColorStop(0.3, '#222222');
-      gradient.addColorStop(0.7, '#222222');
+      gradient.addColorStop(0.8, '#222222');
       gradient.addColorStop(1, '#1B1B1B');
       context.frequencyCanvasCtx.fillStyle = gradient;
       context.frequencyCanvasCtx.fillRect(0, 0, context.WIDTH, context.HEIGHT);

@@ -60,7 +60,7 @@ export class WaveformVisualizerComponent {
       let gradient = context.waveformCanvasCtx.createLinearGradient(0, 0, 0, context.waveformHEIGHT);
       gradient.addColorStop(0, '#1B1B1B');
       gradient.addColorStop(0.3, '#222222');
-      gradient.addColorStop(0.7, '#222222');
+      gradient.addColorStop(0.8, '#222222');
       gradient.addColorStop(1, '#1B1B1B');
       context.waveformCanvasCtx.fillStyle = gradient;
       context.waveformCanvasCtx.fillRect(0, 0, context.waveformWIDTH, context.waveformHEIGHT);

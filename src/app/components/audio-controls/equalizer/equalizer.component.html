@@ -10,6 +10,7 @@
      }"
   >
     <md-slider
+      [ngStyle]="{'margin-left': '5px'}"
       [value]="lowGain"
       min = "-40"
       max = "10"
@@ -28,6 +29,7 @@
   >
     <md-slider
       [value]="this['midGain'+ (i+1)]"
+      [ngStyle]="{'margin-left': '5px'}"
       min = "-40"
       max = "10"
       step = "1"
@@ -44,6 +46,7 @@
   >
     <md-slider
       [value]="highGain"
+      [ngStyle]="{'margin-left': '5px'}"
       min = "-40"
       max = "10"
       step = "1"
