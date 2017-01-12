@@ -13,5 +13,7 @@
 
   <!-- Eqalizer - In Development -->
   <div class="ui container">
-    <equalizer></equalizer>
+    <equalizer
+      *ngIf="showEqualizer$ | async"
+    ></equalizer>
   </div>

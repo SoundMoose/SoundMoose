@@ -7,19 +7,65 @@ export type AudioControlsState = AudioControls;
 
 const initialState: AudioControlsState = {
   toggleFrequencyOrWaveform: true,
+  showEqualizer: false,
   lowBand: {
     gain: {
-      value: 0.5,
+      value: 0,
     }
   },
-  midBand: {
+  midBand1: {
     gain: {
-      value: 0.5,
+      value: 0,
+    }
+  },
+  midBand2: {
+    gain: {
+      value: 0,
+    }
+  },
+  midBand3: {
+    gain: {
+      value: 0,
+    }
+  },
+  midBand4: {
+    gain: {
+      value: 0,
+    }
+  },
+  midBand5: {
+    gain: {
+      value: 0,
+    }
+  },
+  midBand6: {
+    gain: {
+      value: 0,
+    }
+  },
+  midBand7: {
+    gain: {
+      value: 0,
+    }
+  },
+  midBand8: {
+    gain: {
+      value: 0,
+    }
+  },
+  midBand9: {
+    gain: {
+      value: 0,
+    }
+  },
+  midBand10: {
+    gain: {
+      value: 0,
     }
   },
   highBand: {
     gain: {
-      value: 0.5,
+      value: 0,
     }
   }
 };
@@ -32,6 +78,13 @@ export default function (state = initialState, action: Action): AudioControlsSta
           toggleFrequencyOrWaveform: !state.toggleFrequencyOrWaveform,
       });
     }
+
+    case AudioControlsActions.TOGGLE_EQUALIZER:  {
+      return Object.assign({}, state, {
+          showEqualizer: !state.showEqualizer,
+      });
+    }
+
     case AudioControlsActions.ADJUST_BASS:  {
       return Object.assign({}, state, {
         lowBand: {
@@ -42,13 +95,17 @@ export default function (state = initialState, action: Action): AudioControlsSta
       });
     }
     case AudioControlsActions.ADJUST_MIDS:  {
-      return Object.assign({}, state, {
-        midBand: {
-          gain: {
-          value: action.payload.mids,
-          }
+
+      let bandName = "midBand" + action.payload.frequencyBandId;
+      let newState = new Object();
+      newState[bandName] = {
+        "gain": {
+          "value": action.payload.mids
         }
-      });
+      };
+      console.log(JSON.stringify(newState, null, 2));
+
+      return Object.assign({}, state, newState);
     }
     case AudioControlsActions.ADJUST_TREBLE:  {
       return Object.assign({}, state, {

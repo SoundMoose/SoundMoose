@@ -13,6 +13,13 @@ export class AudioControlsActions {
     };
   }
 
+  static TOGGLE_EQUALIZER = '[AudioControls] Toggle Equalizer';
+  toggleShowEqualizer(): Action {
+    return {
+      type: AudioControlsActions.TOGGLE_EQUALIZER,
+    };
+  }
+
   static ADJUST_BASS = '[AudioControls] Adjust Bass';
   adjustBass(bass: number): Action {
     return {
@@ -22,15 +29,18 @@ export class AudioControlsActions {
       }
     };
   }
+
   static ADJUST_MIDS = '[AudioControls] Adjust Mids';
-  adjustMids(mids: number): Action {
+  adjustMids(mids: number, frequencyBandId: number): Action {
     return {
       type: AudioControlsActions.ADJUST_MIDS,
       payload: {
-        mids
+        mids,
+        frequencyBandId
       }
     };
   }
+
   static ADJUST_TREBLE = '[AudioControls] Adjust Treble';
   adjustTreble(treble: number): Action {
     return {
