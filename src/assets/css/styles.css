@@ -294,3 +294,8 @@ track-detail .track-current-time {
   top: 0px;
   height: 25px;
 }
+
+track-detail .comments,
+player {
+  font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif
+}
