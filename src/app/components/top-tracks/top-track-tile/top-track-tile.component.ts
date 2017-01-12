@@ -28,6 +28,7 @@ export class TopTrackTileComponent {
   selected$: Observable<boolean>;
   isLoading$: Observable<boolean>;
   loadBuffer: boolean;
+  playing: boolean;
 
   constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router) {
     // Grab the player stream from the store
@@ -44,10 +45,15 @@ export class TopTrackTileComponent {
     // Map the spinner stream to see if the song is loading
     this.isLoading$ = this.spinner$
       .map((spinnerStatus: SpinnerState) => spinnerStatus.isLoadSpinning);
+
+    this.currentlyPlaying$
+      .subscribe(isPlaying => this.playing = isPlaying);
   }
 
   clickHandler() {
-    this.loadingNow();
+    if (!this.playing) {
+      this.loadingNow();
+    }
     this.store$.dispatch(this.trackActions.togglePlayPause(this.topTrack));
   }
 
