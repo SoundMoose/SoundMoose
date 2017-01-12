@@ -47,6 +47,7 @@ import { TrackProgressComponent } from './components/player/track-progress-conta
 import { TrackProgressContainerComponent } from './components/player/track-progress-container/track-progress-container.component';
 import { TopTrackTileComponent } from './components/top-tracks/top-track-tile/top-track-tile.component';
 import { TrackDetailComponent } from './components/track-detail/track-detail.component';
+import { SearchComponent } from './components/search/search.component';
 
   // Audio Controls Deck:
 import { AudioControlsComponent } from './components/audio-controls/audio-controls.component';
@@ -107,7 +108,8 @@ const store = compose(...metaReducers)({
     WaveformVisualizerComponent,
     EqualizerComponent,
     TrackDetailComponent,
-    YoutubePipe
+    YoutubePipe,
+    SearchComponent
   ],
   imports: [
     MomentModule,
