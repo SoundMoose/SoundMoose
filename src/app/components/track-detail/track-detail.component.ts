@@ -22,18 +22,37 @@ import { PlayerState } from './../../reducers/player.reducer';
 import { TrackDetailsState } from '../../reducers/track-details.reducer';
 import { AudioStream } from '../../audio-element';
 import { SoundCloudService } from './../../services/soundcloud.service';
+import { PlayerService } from './../../services/player.service';
 import { YoutubeService } from './../../services/youtube.service';
 
 
 @Component({
   selector: 'track-detail',
   templateUrl: 'track-detail.component.html',
-  styleUrls: ['track-detail.component.css']
+  styleUrls: ['track-detail.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('in', style({transform: 'translateX(0)', opacity: 0.98})),
+      transition('void => *', [
+        style({
+          transform: 'translateX(-10%)',
+          opacity: 0
+        }),
+        animate('0.2s ease-in')
+      ]),
+      transition('* => void', [
+        animate('0.2s 10 ease-out', style({
+          opacity: 0,
+        }))
+      ])
+    ])
+  ]
 })
 export class TrackDetailComponent implements OnInit {
  constructor(
     private store$: Store<AppStore>,
     private soundCloudService: SoundCloudService,
+    private playerService: PlayerService,
     private youtubeService: YoutubeService,
     private router: Router,
     private route: ActivatedRoute,
@@ -41,7 +60,7 @@ export class TrackDetailComponent implements OnInit {
     private trackActions: TrackActions
   ) {
   }
-  currentlyPlaying$: Observable<boolean>;
+  currentlyPlaying: boolean;
   trackDetails$: Observable<TrackDetailsState>;
   comments$: Observable<any>;
   license: string;
@@ -52,6 +71,11 @@ export class TrackDetailComponent implements OnInit {
   youtubeId$: Observable<string>;
   created: string;
   largeArtworkUrl: string;
+  hovering: {} = {};
+  currentProgressInMilliseconds: number;
+  trackDetailsSubscription: Subscription;
+  storeSubscription: Subscription;
+  secondsSubscription: Subscription;
 
   licenses: {} = {
     'no-rights-reserved': 'No rights reserved',
@@ -69,7 +93,7 @@ export class TrackDetailComponent implements OnInit {
     this.soundCloudService.loadTrackDetails(trackId);
     this.soundCloudService.loadComments(trackId);
     this.trackDetails$ = this.store$.select(s => s.trackDetails);
-    this.trackDetails$.subscribe(item => {
+    this.trackDetailsSubscription = this.trackDetails$.subscribe(item => {
       this.description = item.description;
       this.license = this.licenses[item.license] ? this.licenses[item.license] : item.license;
       this.largeArtworkUrl = item.largeArtworkUrl;
@@ -78,9 +102,20 @@ export class TrackDetailComponent implements OnInit {
       this.created = item.created;
       this.youtubeId$ = this.youtubeService.searchYoutubeVideo(this.track.title + ' ' + this.track.artist);
     });
-    this.currentlyPlaying$ = this.store$.select(s => s.player)
-      .map((playerStatus: PlayerState) => playerStatus.isPlaying && playerStatus.currentTrack.id === this.track.id);
+    this.storeSubscription = this.store$.select(s => s.player)
+      .map((playerStatus: PlayerState) => playerStatus.isPlaying && playerStatus.currentTrack.id === this.track.id)
+      .subscribe(item => this.currentlyPlaying = item);
     this.comments$ = this.store$.select(s => s.comments);
+
+    this.secondsSubscription = this.playerService.currentProgressInSeconds$.subscribe(item => {
+      this.currentProgressInMilliseconds = item * 1000;
+    });
+  }
+
+  ngOnDestroy() {
+    this.secondsSubscription.unsubscribe();
+    this.storeSubscription.unsubscribe();
+    this.trackDetailsSubscription.unsubscribe();
   }
 
   clickHandler() {
@@ -95,5 +130,11 @@ export class TrackDetailComponent implements OnInit {
       minutes++;
     }
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  }
+
+  getCommentPosition(millis) {
+    // 96% is all the way to the right
+    let relative = millis / this.track.duration * 96;
+    return relative + '%';
   }
 }
