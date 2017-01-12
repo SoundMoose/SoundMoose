@@ -9,8 +9,8 @@ background: linear-gradient(to left, #232526 , #414345); display: -webkit-flex; 
                 [ngClass]="{
                   inverted: true,
                   huge: true,
-                  play: !(currentlyPlaying$ | async),
-                  pause: currentlyPlaying$ | async,
+                  play: !currentlyPlaying,
+                  pause: currentlyPlaying,
                   icon: true
                 }"></i>
               </i>
@@ -36,6 +36,45 @@ background: linear-gradient(to left, #232526 , #414345); display: -webkit-flex; 
             'border': '1px solid #aaa'
           }">
           <track-progress-container [progressContainerType]="'detail'"></track-progress-container>
+          <div class="track-comments" style="width:100%; position: relative; top: -90px; border-top: 1px yellow solid;">
+            <div
+              *ngFor="let comment of comments$ | async"
+              (mouseenter)="hovering[comment.commentId] = true"
+              (mouseleave)="hovering[comment.commentId] = false"
+              [ngStyle]="{
+                position: 'absolute',
+                left: getCommentPosition(comment.timestamp)
+              }"
+            >
+              <img [src]="comment.user.avatarUrl" [ngStyle]="{
+                width: '30px',
+                height: '30px',
+                opacity: 1,
+                'z-index': hovering[comment.commentId] ? 5 : 1
+              }" />
+              <div
+                *ngIf="
+                  hovering[comment.commentId] ||
+                  (
+                    currentProgressInMilliseconds > (comment.timestamp - 1000) &&
+                    currentProgressInMilliseconds < (comment.timestamp + 1000) &&
+                    currentlyPlaying
+                  )
+                "
+                [@fadeInOut]="'in'"
+                [ngStyle]="{
+                  position: 'absolute',
+                  left: getCommentPosition(comment.timestamp),
+                  top: '40px',
+                  width: '300px',
+                  background: '#000',
+                  opacity: '0.98',
+                  padding: '5px'
+                }">
+                <span style="color: #aaa">{{ comment.user.username }}</span>:  <span style="color: #fff">{{ comment.body }}</span>
+              </div>
+            </div>
+            </div>
           </div>
         </div>
         <div class="right" style="width: 380px; height: 380px;">
