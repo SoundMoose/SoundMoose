@@ -14,7 +14,8 @@ describe('Spinner Reducer', () => {
 
   beforeEach(() => {
     state = {
-      isSpinning: false
+      isSpinning: false,
+      isLoadSpinning: false
     };
 
     tracks = [
@@ -69,7 +70,7 @@ describe('Spinner Reducer', () => {
     let actual = spinnerReducer(state, playerActions.startAudioLoading());
 
     // isSpinning should be true.
-    expect(actual.isSpinning).toBe(true);
+    expect(actual.isLoadSpinning).toBe(true);
   });
 
   it('should set the spinner to false when a track starts to play', () => {

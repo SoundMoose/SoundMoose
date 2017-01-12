@@ -119,7 +119,7 @@ player-controls .icon:hover {
   margin-left: 5px;
   position: relative;
   top: 7px;
-  width: 450px;
+  width: 390px;
   height: 20px;
   display: inline-block;
   cursor: pointer;
@@ -277,7 +277,10 @@ track-detail .waveform .track-current-time {
   margin-left: 0px;
 }
 equalizer .md-slider-track {
-  background: #fff;
+  background: #404244;
+}
+equalizer .md-slider-track-fill {
+  background: #b0bec5;
 }
 equalizer md-slider {
   margin-top: 10px;

@@ -2,7 +2,7 @@
     position: relative;
     display: block;
     top: -33px;
-    width:443px;
+    width: 390px;
     left: 7px;
     height: 2px;
   }
@@ -14,4 +14,13 @@
     height: 2px;
     background: #555;
     z-index: 0;
+  }
+  .track-progress-bar {
+    width: 100%;
+  }
+  #track-current-time {
+    display: inline-block;
+    margin-left: 0;
+    width: 50px;
+    text-align: right;
   }
