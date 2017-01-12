@@ -49,8 +49,7 @@ background: linear-gradient(to left, #232526 , #414345); display: -webkit-flex; 
               <img [src]="comment.user.avatarUrl" [ngStyle]="{
                 width: '30px',
                 height: '30px',
-                opacity: 1,
-                'z-index': hovering[comment.commentId] ? 5 : 1
+                opacity: 1
               }" />
               <div
                 *ngIf="
@@ -97,9 +96,7 @@ background: linear-gradient(to left, #232526 , #414345); margin-top: 35px;">
             </div>
           </div>
           <div class="column">
-            <div *ngIf="description" class="ui segment" style="white-space: pre-wrap; margin-right: 20px;  background: rgba(0,0,0,0.2);">
-             {{ description }}
-            </div>
+            <div *ngIf="description" class="ui segment" style="white-space: pre-wrap; margin-right: 20px;  background: rgba(0,0,0,0.2);">{{ description }}</div>
 
             <div class="ui segment" style="margin-right: 20px; background: rgba(0,0,0,0.2);">
              <p>License: {{ license }}</p>
