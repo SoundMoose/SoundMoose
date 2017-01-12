@@ -1,0 +1,23 @@
+<div class="ui centered grid">
+  <div class="six wide column">
+    <div id="search-container" class="ui fluid inverted icon input">
+    <input
+      (input)="term$.next($event.target.value)"
+      type="text"
+      placeholder="Search for track..."
+      id="track-search"
+    />
+    <i class="search icon"></i>
+    </div>
+  </div>
+</div>
+
+<div id="search-results" class="ui six column grid" *ngIf="items$">
+  <div
+    [@fadeInOut]="'in'"
+    *ngFor="let item of items$ | async"
+    class="column"
+  >
+    <top-track-tile [topTrack]="item"></top-track-tile>
+  </div>
+</div>
