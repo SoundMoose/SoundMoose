@@ -43,7 +43,13 @@ background: linear-gradient(to left, #232526 , #414345); display: -webkit-flex; 
               (mouseleave)="hovering[comment.commentId] = false"
               [ngStyle]="{
                 position: 'absolute',
-                left: getCommentPosition(comment.timestamp)
+                left: getCommentPosition(comment.timestamp),
+                'z-index': hovering[comment.commentId] ||
+                  (
+                    currentProgressInMilliseconds > (comment.timestamp - 1000) &&
+                    currentProgressInMilliseconds < (comment.timestamp + 1000) &&
+                    currentlyPlaying
+                  ) ? 5 : 1
               }"
             >
               <img [src]="comment.user.avatarUrl" [ngStyle]="{
