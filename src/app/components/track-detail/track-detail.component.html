@@ -33,7 +33,8 @@ background: linear-gradient(to left, #232526 , #414345); display: -webkit-flex; 
             opacity: 0.5,
             'background-size': 'cover',
             'background-color': '#000',
-            'border': '1px solid #aaa'
+            'border': '1px solid #aaa',
+            position: 'relative'
           }">
           <track-progress-container [progressContainerType]="'detail'"></track-progress-container>
           <div class="track-comments" style="width:100%; position: relative; top: -90px; border-top: 1px yellow solid;">
@@ -43,14 +44,19 @@ background: linear-gradient(to left, #232526 , #414345); display: -webkit-flex; 
               (mouseleave)="hovering[comment.commentId] = false"
               [ngStyle]="{
                 position: 'absolute',
-                left: getCommentPosition(comment.timestamp)
+                left: getCommentPosition(comment.timestamp),
+                'z-index': hovering[comment.commentId] ||
+                  (
+                    currentProgressInMilliseconds > (comment.timestamp - 1000) &&
+                    currentProgressInMilliseconds < (comment.timestamp + 1000) &&
+                    currentlyPlaying
+                  ) ? 5 : 1
               }"
             >
               <img [src]="comment.user.avatarUrl" [ngStyle]="{
                 width: '30px',
                 height: '30px',
-                opacity: 1,
-                'z-index': hovering[comment.commentId] ? 5 : 1
+                opacity: 1
               }" />
               <div
                 *ngIf="
@@ -97,9 +103,7 @@ background: linear-gradient(to left, #232526 , #414345); margin-top: 35px;">
             </div>
           </div>
           <div class="column">
-            <div *ngIf="description" class="ui segment" style="white-space: pre-wrap; margin-right: 20px;  background: rgba(0,0,0,0.2);">
-             {{ description }}
-            </div>
+            <div *ngIf="description" class="ui segment" style="white-space: pre-wrap; margin-right: 20px;  background: rgba(0,0,0,0.2);">{{ description }}</div>
 
             <div class="ui segment" style="margin-right: 20px; background: rgba(0,0,0,0.2);">
              <p>License: {{ license }}</p>
