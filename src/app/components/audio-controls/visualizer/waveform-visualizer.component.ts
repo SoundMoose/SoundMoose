@@ -43,11 +43,6 @@ export class WaveformVisualizerComponent {
     this.waveformWIDTH = this.waveformCanvas.width;
     this.waveformHEIGHT = this.waveformCanvas.height;
     this.waveformCanvasCtx.clearRect(0, 0, this.waveformWIDTH, this.waveformHEIGHT);
-    // let gradient = this.waveformCanvasCtx.createLinearGradient(0, 0, 0, this.waveformHEIGHT);
-    // gradient.addColorStop(0, 'black');
-    // gradient.addColorStop(1, 'white');
-    // this.waveformCanvasCtx.fillStyle = gradient;
-    // this.waveformCanvasCtx.fillRect(0, 0, this.waveformWIDTH, this.waveformHEIGHT);
 
 
     this.hasCanvas = true;
@@ -63,10 +58,9 @@ export class WaveformVisualizerComponent {
       context.drawWaveformVisual = requestAnimationFrame(context.drawWaveOscilliscope);
 
       let gradient = context.waveformCanvasCtx.createLinearGradient(0, 0, 0, context.waveformHEIGHT);
-      gradient.addColorStop(1/4, '#2E2E2E');
-      // gradient.addColorStop(2/4, 'rgb(46, 46, 46');
-      // gradient.addColorStop(3/4, 'rgb(46, 46, 46');
-      gradient.addColorStop(4/4, 'white');
+      gradient.addColorStop(0, '#040404');
+      gradient.addColorStop(0.5, '#2E2E2E');
+      gradient.addColorStop(1, '#131313');
       context.waveformCanvasCtx.fillStyle = gradient;
       context.waveformCanvasCtx.fillRect(0, 0, context.waveformWIDTH, context.waveformHEIGHT);
 
