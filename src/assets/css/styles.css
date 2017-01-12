@@ -264,3 +264,12 @@ track-detail .waveform .track-length {
 track-detail .waveform .track-current-time {
   margin-left: 0px;
 }
+equalizer .md-slider-track {
+  background: #fff;
+}
+equalizer md-slider {
+  margin-top: 10px;
+}
+.equalizer {
+  margin-bottom: 10px;
+}
