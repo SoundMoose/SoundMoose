@@ -14,7 +14,8 @@ describe('Spinner Reducer', () => {
 
   beforeEach(() => {
     state = {
-      isSpinning: false
+      isSpinning: false,
+      isLoadSpinning: false
     };
 
     tracks = [

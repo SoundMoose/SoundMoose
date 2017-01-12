@@ -5,10 +5,12 @@ import { PlayerActions } from '../actions/player.actions';
 
 export type SpinnerState = {
   isSpinning: boolean;
+  isLoadSpinning: boolean;
 };
 
 const initialState: SpinnerState = {
   isSpinning: false,
+  isLoadSpinning: false
 };
 
 export default function (state = initialState, action: Action): SpinnerState {
@@ -29,13 +31,13 @@ export default function (state = initialState, action: Action): SpinnerState {
     // Start loading / start playing
     case PlayerActions.START_AUDIO_LOADING: {
      return Object.assign({}, state, {
-        isSpinning: true,
+        isLoadSpinning: true,
       });
     }
 
     case PlayerActions.START_AUDIO_PLAYING: {
       return Object.assign({}, state, {
-        isSpinning: false,
+        isLoadSpinning: false,
       });
     }
 
