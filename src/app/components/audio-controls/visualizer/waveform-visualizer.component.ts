@@ -58,9 +58,10 @@ export class WaveformVisualizerComponent {
       context.drawWaveformVisual = requestAnimationFrame(context.drawWaveOscilliscope);
 
       let gradient = context.waveformCanvasCtx.createLinearGradient(0, 0, 0, context.waveformHEIGHT);
-      gradient.addColorStop(0, '#040404');
-      gradient.addColorStop(0.5, '#2E2E2E');
-      gradient.addColorStop(1, '#131313');
+      gradient.addColorStop(0, '#1B1B1B');
+      gradient.addColorStop(0.3, '#222222');
+      gradient.addColorStop(0.8, '#222222');
+      gradient.addColorStop(1, '#1B1B1B');
       context.waveformCanvasCtx.fillStyle = gradient;
       context.waveformCanvasCtx.fillRect(0, 0, context.waveformWIDTH, context.waveformHEIGHT);
 
