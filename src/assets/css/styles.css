@@ -265,7 +265,10 @@ track-detail .waveform .track-current-time {
   margin-left: 0px;
 }
 equalizer .md-slider-track {
-  background: #fff;
+  background: #404244;
+}
+equalizer .md-slider-track-fill {
+  background: #b0bec5;
 }
 equalizer md-slider {
   margin-top: 10px;
