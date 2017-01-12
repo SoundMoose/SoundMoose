@@ -1,4 +1,4 @@
- <h1 class="top-tracks-header ui header">Top tracks in
+ <h3 class="top-tracks-header ui header">Top tracks in
    <select id="genre-select" class="ui dropdown" (change)="navigateToGenre($event.target.value)" style="background: #1a1a1a;">
      <option *ngFor="let genre of genres; let last = last"
        [value]="genre[0]"
@@ -7,7 +7,7 @@
        {{genre[1]}}{{last ? setDefaultGenre() : ''}}
      </option>
    </select>
- </h1>
+ </h3>
 
   <div id="top-tracks" class="ui six column grid" *ngIf="topTracks$">
     <div [@fadeInOut]="'in'" *ngFor="let topTrack of topTracks$ | async" class="column">
