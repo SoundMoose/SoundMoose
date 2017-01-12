@@ -23,7 +23,7 @@ background: linear-gradient(to left, #232526 , #414345); display: -webkit-flex; 
                 <span class="title" style="position: relative; left: 6px;font-weight: 100; font-size: 24px; color: #fff; padding-top: 3px; padding-bottom: 3px; display: inline; background: #000; box-shadow: 6px 0 0 #000, -6px 0 0 #000; line-height: 34px;">{{ (trackDetails$ | async)?.track.title }}</span>
               </span>
             </div>
-            <div style="width: 100px; margin-top: 20px;">{{ created | amTimeAgo:true }}</div>
+            <div *ngIf="created" style="font-size: 16px; width: 100px; margin-top: 20px;">{{ created | amTimeAgo:true }}</div>
           </div>
           <div class="waveform" [ngStyle]="{
             'margin-bottom': '20px',
@@ -77,7 +77,7 @@ background: linear-gradient(to left, #232526 , #414345); display: -webkit-flex; 
                   opacity: '0.98',
                   padding: '5px'
                 }">
-                <span style="color: #aaa">{{ comment.user.username }}</span>:  <span style="color: #fff">{{ comment.body }}</span>
+                <span style="color: #aaa">{{ comment.user.username }}</span>:  <span style="color: #fff">{{ trim(comment.body) }}</span>
               </div>
             </div>
             </div>
