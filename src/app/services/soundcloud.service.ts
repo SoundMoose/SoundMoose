@@ -2,6 +2,12 @@ import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/distinctUntilChanged';
+
+import { Observable } from 'rxjs/Observable';
+
 
 import { AppStore } from '../models/appstore.model';
 import { soundcloudClientId } from '../config/superSecretKeys';
@@ -77,8 +83,10 @@ export class SoundCloudService {
 
   }
 
-  loadSearchResults() {
-
+  loadSearchResults(terms: Observable<string>, debounceMs: number = 400) {
+    return terms.debounceTime(debounceMs)
+                .distinctUntilChanged()
+                .switchMap(term => this.search(term));
   }
 
   search(term: string) {
@@ -86,7 +94,14 @@ export class SoundCloudService {
 
     return this._http.get(searchUrl)
       .map(res => res.json())
-      .map(results => console.log(results));
+      .map(items => items.map(item => ({
+        id: item.id,
+        title: item.title,
+        artist: (item.publisher_metadata && item.publisher_metadata.artist) ? item.publisher_metadata.artist : item.user.username,
+        imgUrl: item.artwork_url ? item.artwork_url.replace('large.jpg', 't200x200.jpg') : '/assets/img/moosey.png',
+        streamUrl: 'http://api.soundcloud.com/tracks/' + item.id + '/stream?client_id=' + soundcloudClientId,
+        duration: item.duration
+      })));
   }
 
 }
