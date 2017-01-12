@@ -15,7 +15,7 @@
     <div
       class="ui container segment"
       *ngIf="showVisualization$ | async"
-      [ngStyle]="{'background-color': '#222'}">
+      [ngStyle]="{'background-color': '#222', 'min-width':'1127px'}">
 
       <div [ngStyle]="{'width': '40px', 'height': '115px', 'display':'inline-block'}">
         <i [ngClass]="{
@@ -40,7 +40,7 @@
       </div>
 
       <audio-controls
-        [ngStyle]="{'width': '980px'}"
+        [ngStyle]="{'width': '1040px'}"
       ></audio-controls>
     </div>
 
