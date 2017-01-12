@@ -1,4 +1,4 @@
-<span id="track-current-time" class="track-current-time">{{ progressMinutesSeconds }}</span>
+<span id="track-current-time" *ngIf="progressMinutesSeconds" class="track-current-time">{{ progressMinutesSeconds }}</span>
 
 <div class="progress-wrapper">
   <md-slider
