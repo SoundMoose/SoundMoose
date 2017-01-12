@@ -15,3 +15,12 @@
     background: #555;
     z-index: 0;
   }
+  .track-progress-bar {
+    width: 100%;
+  }
+  #track-current-time {
+    display: inline-block;
+    margin-left: 0;
+    width: 50px;
+    text-align: right;
+  }
