@@ -19,7 +19,7 @@ const initialState: PlayerState = {
     streamUrl: '',
     duration: 0
   },
-  volume: 50,
+  volume: 100,
 
   isMuted: false,
   volumeBeforeMute: 5,
