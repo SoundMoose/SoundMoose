@@ -82,7 +82,8 @@ export const AUDIO_STREAM_PROVIDER = {
       bandSplit = [ 30, 60, 110, 220, 350, 700, 1600, 3200, 4800, 7000, 10000, 12000 ];
 
       // https://en.wikipedia.org/wiki/Q_factor
-      defaultQValue = 5;
+      // http://googlechrome.github.io/web-audio-samples/samples/audio/frequency-response.html
+      defaultQValue = 3;
 
       lowBand = audioCtx.createBiquadFilter();
       lowBand.type = "lowshelf";
@@ -171,7 +172,7 @@ export const AUDIO_STREAM_PROVIDER = {
 
 ////////// End of In-Development Equalizer Component ////////////////
 
-
+      // https://developer.mozilla.org/en/docs/Web/API/AnalyserNode
       frequencyAnalyser = audioCtx.createAnalyser();
       waveformAnalyser = audioCtx.createAnalyser();
       frequencyAnalyser.smoothingTimeConstant = 0.5;
@@ -180,7 +181,7 @@ export const AUDIO_STREAM_PROVIDER = {
       highBand.connect(frequencyAnalyser);
       highBand.connect(waveformAnalyser);
 
-      frequencyAnalyser.fftSize = 1024;
+      frequencyAnalyser.fftSize = 2048;
       waveformAnalyser.fftSize = 2048;
       frequencyBufferLength = frequencyAnalyser.frequencyBinCount;
       waveformBufferLength = waveformAnalyser.frequencyBinCount;
