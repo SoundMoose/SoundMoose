@@ -16,5 +16,5 @@ app.use('/', function(req, res) {
   req.pipe(request(url)).pipe(res);
 });
 
+console.log('Proxy listening on port 4004');
 app.listen(4004);
-

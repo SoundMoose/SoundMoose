@@ -136,7 +136,7 @@ export default function (state = initialState, action: Action): PlayerState {
     }
 
     case PlayerActions.START_AUDIO_PLAYING: {
-      console.log(action.payload);
+      // console.log(action.payload);
       return Object.assign({}, state, {
         millisecondProgressWhenStartedPlaying: action.payload.millisecondProgressWhenStartedPlaying,
         timestampWhenStartedPlaying: action.payload.timestampWhenStartedPlaying

@@ -214,7 +214,6 @@ top-tracks .ui.selection.dropdown .menu>.item {
   border: none;
 }
 
-
 track-detail .waveform md-slider {
   width: 100%;
   height: 100%;
@@ -265,4 +264,3 @@ track-detail .waveform .track-length {
 track-detail .waveform .track-current-time {
   margin-left: 0px;
 }
-

@@ -24,7 +24,13 @@ export class SoundCloudService {
   }
 
   loadTopTracks(genre) {
-    const topTracksUrl = 'http://localhost:4004/charts?kind=top&genre=soundcloud%3Agenres%3A' + genre + '&client_id=' + soundcloudClientId + '&limit=50&offset=0&linked_partitioning=1&app_version=1482339819';
+
+    // if using local proxy:
+//    const topTracksUrl = 'http://localhost:4004/charts?kind=top&genre=soundcloud%3Agenres%3A' + genre + '&client_id=' + soundcloudClientId + '&limit=50&offset=0&linked_partitioning=1&app_version=1482339819';
+
+    // deployed server:
+    const topTracksUrl = 'http://138.197.88.233:4004/charts?kind=top&genre=soundcloud%3Agenres%3A' + genre + '&client_id=' + soundcloudClientId + '&limit=50&offset=0&linked_partitioning=1&app_version=1482339819';
+
  //   const topTracksUrl = 'http://localhost:3333/toptracks';
     this.store.dispatch({ type: TrackActions.LOAD_TRACKS_START })
     return this._http.get(topTracksUrl)
@@ -78,9 +84,27 @@ export class SoundCloudService {
   }
 
   loadComments(trackId) {
-    const tracksUrl = 'http://api.soundcloud.com/tracks/' + trackId + '?client_id=' + soundcloudClientId;
+    const tracksUrl = 'http://api.soundcloud.com/tracks/' + trackId + '/comments?client_id=' + soundcloudClientId;
     // comments
-
+    return this._http.get(tracksUrl)
+      .map(res => {
+        return res.json().map(item => {
+          return {
+            commentId: item.id,
+            created: item.created_at,
+            trackId: item.track_id,
+            timestamp: item.timestamp,
+            body: item.body,
+            user: {
+              id: item.user.id,
+              username: item.user.username,
+              avatarUrl: item.user.avatar_url
+            }
+          };
+        });
+      })
+      .map(payload => ({ type: TrackDetailsActions.LOAD_COMMENTS_SUCCESS, payload }))
+      .subscribe(action => this.store.dispatch(action));
   }
 
   loadSearchResults(terms: Observable<string>, debounceMs: number = 400) {
@@ -105,4 +129,3 @@ export class SoundCloudService {
   }
 
 }
-

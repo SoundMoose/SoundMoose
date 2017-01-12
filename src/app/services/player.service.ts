@@ -103,6 +103,15 @@ export class PlayerService {
       this.audio.load();
 
       this.audio.src = url;
+
+      //////////  For caibrating the frequency graph and equalizer: ///////////
+      // this.audio.src = '../../assets/sounds/10kHz_44100Hz_16bit_30sec.mp3';
+      // this.audio.src = '../../assets/sounds/1kHz_44100Hz_16bit_30sec.mp3';
+      // this.audio.src = '../../assets/sounds/440Hz_44100Hz_16bit_30sec.mp3';
+      // this.audio.src = '../../assets/sounds/250Hz_44100Hz_16bit_30sec.mp3';
+      // this.audio.src = '../../assets/sounds/100Hz_44100Hz_16bit_30sec.mp3';
+      // this.audio.src = '../../assets/sounds/Broke_For_Free_-_01_-_Night_Owl.mp3';
+
     }
 
     // See http://stackoverflow.com/questions/36803176/how-to-prevent-the-play-request-was-interrupted-by-a-call-to-pause-error

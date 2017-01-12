@@ -19,6 +19,7 @@ import tracks from './reducers/tracks.reducer';
 import spinner from './reducers/spinner.reducer';
 import audiocontrols from './reducers/audio-controls.reducer';
 import trackDetails from './reducers/track-details.reducer';
+import comments from './reducers/comments.reducer';
 
 
 
@@ -77,11 +78,12 @@ const APP_PROVIDERS = [
 const metaReducers = (ENV !== 'production') ? [storeFreeze, combineReducers] : [combineReducers];
 
 const store = compose(...metaReducers)({
-      player: player,
-      tracks: tracks,
-      spinner: spinner,
-      audiocontrols: audiocontrols,
-      trackDetails: trackDetails
+  player: player,
+  tracks: tracks,
+  spinner: spinner,
+  audiocontrols: audiocontrols,
+  trackDetails: trackDetails,
+  comments: comments
 });
 
 

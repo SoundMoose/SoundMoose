@@ -1,25 +1,59 @@
 
-<div class="ui container" [ngStyle]="{ width: '512px' }">
+<div class="ui container" [ngStyle]="{ width: '1000px' }">
 
-  Bass:
-  <md-slider
-    [value]="lowGain * 100"
-    (change)="bassSlideHandler($event)"
-    vertical>
-  </md-slider>
+  <!-- Low Shelf Filter -->
+  <div
+    [ngStyle]="{
+      display: 'inline-block',
+      width: '80px',
+      'margin-left': '30px'
+     }"
+  >
+    <md-slider
+      [ngStyle]="{'margin-left': '5px'}"
+      [value]="lowGain"
+      min = "-40"
+      max = "10"
+      step = "1"
+      (change)="bassSlideHandler($event)"
+      vertical>
+    </md-slider>
+    30Hz
+  </div>
 
-  Mids:
-  <md-slider
-    [value]="midGain * 100"
-    (change)="midSlideHandler($event)"
-    vertical>
-  </md-slider>
+  <!-- Mid Peak Fitlers -->
+  <div
+    *ngFor="let band of bandRange; let i = index"
+    [ngStyle]="{ display: 'inline-block',
+    width: '80px' }"
+  >
+    <md-slider
+      [value]="this['midGain'+ (i+1)]"
+      [ngStyle]="{'margin-left': '5px'}"
+      min = "-40"
+      max = "10"
+      step = "1"
+      (change)="midSlideHandler($event, this.i)"
+      vertical>
+    </md-slider>
+    {{ (band < 1000) ? band + 'Hz' : band/1000 + 'kHz' }}
+  </div>
 
-  Treble:
-  <md-slider
-    [value]="highGain * 100"
-    (change)="trebleSlideHandler($event)"
-    vertical>
-  </md-slider>
-  
+  <!-- High Shelf Filter -->
+  <div
+    [ngStyle]="{ display: 'inline-block',
+    width: '80px' }"
+  >
+    <md-slider
+      [value]="highGain"
+      [ngStyle]="{'margin-left': '5px'}"
+      min = "-40"
+      max = "10"
+      step = "1"
+      (change)="trebleSlideHandler($event)"
+      vertical>
+    </md-slider>
+    12kHz
+  </div>
+
 </div>

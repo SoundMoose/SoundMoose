@@ -44,6 +44,7 @@ export class WaveformVisualizerComponent {
     this.waveformHEIGHT = this.waveformCanvas.height;
     this.waveformCanvasCtx.clearRect(0, 0, this.waveformWIDTH, this.waveformHEIGHT);
 
+
     this.hasCanvas = true;
     var that = this;
     setInterval(function() {
@@ -55,8 +56,17 @@ export class WaveformVisualizerComponent {
   drawWaveOscilliscope(context) {
     if (context.hasCanvas) {
       context.drawWaveformVisual = requestAnimationFrame(context.drawWaveOscilliscope);
-      context.waveformCanvasCtx.fillStyle = 'rgb(46, 46, 46)';
+
+      let gradient = context.waveformCanvasCtx.createLinearGradient(0, 0, 0, context.waveformHEIGHT);
+      gradient.addColorStop(0, '#1B1B1B');
+      gradient.addColorStop(0.3, '#222222');
+      gradient.addColorStop(0.8, '#222222');
+      gradient.addColorStop(1, '#1B1B1B');
+      context.waveformCanvasCtx.fillStyle = gradient;
       context.waveformCanvasCtx.fillRect(0, 0, context.waveformWIDTH, context.waveformHEIGHT);
+
+      // context.waveformCanvasCtx.fillStyle = 'rgb(0, 0, 0)';
+      // context.waveformCanvasCtx.fillRect(0, 0, context.waveformWIDTH, context.waveformHEIGHT);
       context.waveformCanvasCtx.lineWidth = 2;
       context.waveformCanvasCtx.strokeStyle = 'rgb(173, 187, 194)';;
       context.waveformCanvasCtx.beginPath();

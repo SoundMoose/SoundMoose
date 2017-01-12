@@ -1,5 +1,5 @@
 <div class ="ui container" style="height: 380px; background: #232526; background: -webkit-linear-gradient(to left, #232526 , #414345);
-background: linear-gradient(to left, #232526 , #414345); display: -webkit-flex; display: flex; -webkit-flex-direction: row; flex-direction: row;">
+background: linear-gradient(to left, #232526 , #414345); display: -webkit-flex; display: flex; -webkit-flex-direction: row; flex-direction: row; margin-bottom: 20px;">
         <div class="left" style="margin-left: 20px; display: flex; width: 700px; height: 100%; flex-direction: column; justify-content: space-between;">
           <div class="title-info-and-controls-and-age" style="display: -webkit-flex; display: flex;">
             <div (click)="clickHandler()" class="control" style="cursor: pointer; margin-top: 10px; width:">
@@ -49,25 +49,43 @@ background: linear-gradient(to left, #232526 , #414345); display: -webkit-flex; 
           </div>
         </div>
       </div>
-<div class="ui container">
-<div class="ui segment" style="white-space: pre;">
- {{ description }}
-</div>
+      <div class ="ui container" style="min-height: 410px; background: #232526; background: -webkit-linear-gradient(to left, #232526 , #414345);
+background: linear-gradient(to left, #232526 , #414345); margin-top: 35px;">
+        <div class="ui two column very relaxed grid">
+          <div class="column">
+            <div style="margin-left: 20px;">
+              <iframe width="520" height="390" [src]="youtubeId$ | async | youtube" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="column">
+            <div *ngIf="description" class="ui segment" style="white-space: pre-wrap; margin-right: 20px;  background: rgba(0,0,0,0.2);">
+             {{ description }}
+            </div>
 
-<div class="ui segment">
- <p>License: {{ license }}</p>
- <p>From: SoundCloud</p>
- <p>YouTube: <iframe width="420" height="315" [src]="youtubeId$ | async | youtube" frameborder="0" allowfullscreen></iframe></p>
-</div>
+            <div class="ui segment" style="margin-right: 20px; background: rgba(0,0,0,0.2);">
+             <p>License: {{ license }}</p>
+             <p>From: SoundCloud</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="trackDetails$ && trackDetails$.commentCount" class="ui segment" style="margin-top: 20px; font-weight: bold;">
+       {{ (trackDetails$ | async)?.commentCount }} comments
+      </div>
+      <div class="ui segment" style="width: 100%; font-size: 12px;">
+         <div *ngFor="let comment of comments$ | async" style="width: 50%; display: flex; margin: 20px;">
+           <div style="width: 40px; margin-right: 20px;">
+             <img [src]="comment.user.avatarUrl" [ngStyle]="{
+               width: '40px',
+               height: '40px',
+               opacity: 1,
+               'border-radius':'50%'
+             }" />
+           </div>
+           <div>
+           <span style="color: #aaa">{{ comment.user.username }}</span> at <span style="color: #aaa">{{ getTrackTime(comment.timestamp) }}</span>
+             <p>{{ comment.body }}</p>
+          </div>
+        </div>
+      </div>
 
-<div class="ui segment">
- {{ (trackDetails$ | async)?.commentCount }} comments
-</div>
- <div class="ui segments">
-   <div class="ui segment">
-     <p>Hi</p>
-   </div>
-   <div class="ui segment">
-     <p>Hi</p>
-   </div>
-</div>

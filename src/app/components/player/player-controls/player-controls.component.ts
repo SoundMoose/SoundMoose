@@ -27,6 +27,7 @@ export class PlayerControlsComponent {
 
   tracksList: Track[];
 
+
   constructor (private store$: Store<AppStore>, private playerActions: PlayerActions) {
     this.player$ = this.store$.select(s => s.player);
     this.player$.subscribe((item) => {
