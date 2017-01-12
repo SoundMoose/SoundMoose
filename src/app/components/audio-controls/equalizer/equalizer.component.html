@@ -1,25 +1,35 @@
 
-<div class="ui container" [ngStyle]="{ width: '512px' }">
+<div class="ui container" [ngStyle]="{ width: '1000px' }">
 
-  Bass:
+  <!-- Low Shelf Filter -->
   <md-slider
-    [value]="lowGain * 100"
+    [value]="lowGain"
+    min = "-40"
+    max = "10"
+    step = "1"
     (change)="bassSlideHandler($event)"
     vertical>
   </md-slider>
 
-  Mids:
+  <!-- Mid Peak Fitlers -->
   <md-slider
-    [value]="midGain * 100"
-    (change)="midSlideHandler($event)"
+   *ngFor="let band of bandRange; let i = index"
+    [value]="this['midGain'+ (i+1)]"
+    min = "-40"
+    max = "10"
+    step = "1"
+    (change)="midSlideHandler($event, this.i)"
     vertical>
   </md-slider>
 
-  Treble:
+  <!-- High Shelf Filter -->
   <md-slider
-    [value]="highGain * 100"
+    [value]="highGain"
+    min = "-40"
+    max = "10"
+    step = "1"
     (change)="trebleSlideHandler($event)"
     vertical>
   </md-slider>
-  
+
 </div>

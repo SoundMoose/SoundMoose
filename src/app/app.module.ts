@@ -19,6 +19,7 @@ import tracks from './reducers/tracks.reducer';
 import spinner from './reducers/spinner.reducer';
 import audiocontrols from './reducers/audio-controls.reducer';
 import trackDetails from './reducers/track-details.reducer';
+import comments from './reducers/comments.reducer';
 
 
 
@@ -78,7 +79,10 @@ const metaReducers = (ENV !== 'production') ? [storeFreeze, combineReducers] : [
 const store = compose(...metaReducers)({
   player: player,
   tracks: tracks,
-  spinner: spinner
+  spinner: spinner,
+  audiocontrols: audiocontrols,
+  trackDetails: trackDetails,
+  comments: comments
 });
 
 
@@ -108,13 +112,7 @@ const store = compose(...metaReducers)({
   imports: [
     MomentModule,
     BrowserModule,
-    StoreModule.provideStore({
-      player: player,
-      tracks: tracks,
-      spinner: spinner,
-      audiocontrols: audiocontrols,
-      trackDetails: trackDetails
-    }),
+    StoreModule.provideStore(store),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     HttpModule,
     MaterialModule.forRoot(),

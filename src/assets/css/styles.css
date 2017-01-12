@@ -180,7 +180,10 @@ player-controls .icon:hover {
   font-size: 11px;
   color: #aaa;
 }
-.footer .current-track .track-info {
+.footer .current-track .track-info,
+.footer .current-track .track-info a,
+.footer .current-track .track-info a:active,
+.footer .current-track .track-info a:hover {
   font-size: 11px;
   color: #fff;
 }
@@ -211,3 +214,53 @@ top-tracks .ui.selection.dropdown .menu>.item {
   border: none;
 }
 
+track-detail .waveform md-slider {
+  width: 100%;
+  height: 100%;
+}
+track-detail .waveform .md-slider-track {
+  height: 100%;
+  left: 0px;
+  right: 0px;
+  top: 8px;
+}
+track-detail .waveform .md-slider-track-fill {
+  height: 100%;
+  background: #FBBD08;
+  border-right: 2px solid red;
+  opacity: 0.5;
+}
+track-detail .waveform .progress-wrapper {
+  width:100%;
+  margin-left: 0px;
+  top: 0px;
+  height: 100%;
+}
+track-detail .waveform .md-slider-thumb {
+  display: none;
+}
+
+track-detail .waveform .progress,
+track-detail .waveform .progress span,
+ {
+  display: none;
+}
+
+track-detail .waveform .track-length,
+track-detail .waveform .track-current-time {
+  font-size: 14px;
+  padding: 3px;
+  position: absolute;
+  background: #000;
+  z-index: 2;
+  bottom: 135px;
+  z-index: 2;
+  opacity: 0.8;
+}
+track-detail .waveform .track-length {
+  margin-left: 0px;
+  left: 885px;
+}
+track-detail .waveform .track-current-time {
+  margin-left: 0px;
+}

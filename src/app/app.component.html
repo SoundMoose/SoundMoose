@@ -1,16 +1,22 @@
     <div class="ui borderless main menu container">
       <div class="ui container">
         <a href="/#/"><img class="logo" src="/assets/img/logo.png"></a>
+      </div>
 
+      <div [ngStyle]="{'margin':'8px'}">
+        <a href="https://github.com/hrr20-over9000/SoundMoose">
+          <i class="big yellow github icon" ></i>
+        </a>
       </div>
     </div>
 
+
     <spinner></spinner>
 
-    <div class="overview ui container">
-      <!-- To be moved -->
-      <!-- <audio-controls></audio-controls> -->
-      <!--  -->
+    <div
+      class="overview ui container"
+      [ngStyle]="{'margin':'0px'}"
+    >
       <router-outlet></router-outlet>
     </div>
 

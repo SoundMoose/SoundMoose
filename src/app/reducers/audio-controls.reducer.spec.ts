@@ -12,19 +12,65 @@ describe('Audio-Controls Reducer', () => {
   beforeEach(() => {
     state = {
       toggleFrequencyOrWaveform: true,
+      showEqualizer: false,
       lowBand: {
         gain: {
-          value: 0.5,
+          value: 0,
         }
       },
-      midBand: {
+      midBand1: {
         gain: {
-          value: 0.5,
+          value: 0,
+        }
+      },
+      midBand2: {
+        gain: {
+          value: 0,
+        }
+      },
+      midBand3: {
+        gain: {
+          value: 0,
+        }
+      },
+      midBand4: {
+        gain: {
+          value: 0,
+        }
+      },
+      midBand5: {
+        gain: {
+          value: 0,
+        }
+      },
+      midBand6: {
+        gain: {
+          value: 0,
+        }
+      },
+      midBand7: {
+        gain: {
+          value: 0,
+        }
+      },
+      midBand8: {
+        gain: {
+          value: 0,
+        }
+      },
+      midBand9: {
+        gain: {
+          value: 0,
+        }
+      },
+      midBand10: {
+        gain: {
+          value: 0,
         }
       },
       highBand: {
         gain: {
-          value: 0.5,
+          value: 0,
         }
       }
     };

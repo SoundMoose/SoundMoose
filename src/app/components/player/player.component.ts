@@ -6,8 +6,10 @@ import { PlayerService } from './../../services/player.service';
 import { Store } from '@ngrx/store';
 import { AppStore } from '../../models/appstore.model';
 import { Player } from '../../models/player.model';
+import { AudioControls } from '../../models/audio-controls.model';
 import { Observable } from 'rxjs/Observable';
 
+import { AudioControlsActions } from '../../actions/audio-controls.actions';
 
 import {
    trigger,
@@ -43,13 +45,35 @@ import {
 export class PlayerComponent {
   trackExists$: Observable<boolean>;
   showVisualization$: Observable<boolean>;
+  toggleFrequencyOrWaveform: boolean;
+  showEqualizer: boolean;
 
-  constructor(private playerService: PlayerService, private store$: Store<AppStore> ) {
+  constructor(private playerService: PlayerService, private store$: Store<AppStore>, private audioControlActions: AudioControlsActions ) {
     this.trackExists$ = this.store$.select('player')
       .map((playerStatus: Player) => playerStatus.currentTrack.duration !== 0);
 
     this.showVisualization$ = this.store$.select('player')
       .map((playerStatus: Player) => playerStatus.showVisualization);
+
+    this.store$.select('audiocontrols')
+      .map((audioControlsStatus: AudioControls) => audioControlsStatus.showEqualizer)
+      .subscribe(item=> this.showEqualizer = item);
+
+    this.store$.select('audiocontrols')
+      .map((audioControlsStatus: AudioControls) => audioControlsStatus.toggleFrequencyOrWaveform)
+      .subscribe(item=> this.toggleFrequencyOrWaveform = item);
+  }
+
+  toggleEqualizer() {
+    this.store$.dispatch(this.audioControlActions.toggleShowEqualizer());
+  }
+
+  toggleVisualization(typeSelected) {
+    if (typeSelected === 'wave' && this.toggleFrequencyOrWaveform) {
+      this.store$.dispatch(this.audioControlActions.toggleVisualizersFreqWave());
+    } else if (typeSelected === 'freq' && !this.toggleFrequencyOrWaveform) {
+      this.store$.dispatch(this.audioControlActions.toggleVisualizersFreqWave());
+    }
   }
 
 }
