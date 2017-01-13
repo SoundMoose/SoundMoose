@@ -10,7 +10,6 @@ import { PlayerService } from '../../../services/player.service';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { SpinnerState } from '../../../reducers/spinner.reducer';
-import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
   //changeDetection: ChangeDetectionStrategy.OnPush,
