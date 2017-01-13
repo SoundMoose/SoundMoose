@@ -76,7 +76,7 @@ export class TopTrackTileComponent{
 
   loadingNow() {
     this.loadBuffer = !this.loadBuffer;
-    setTimeout(() => this.loadBuffer = !this.loadBuffer, 300);
+    setTimeout(() => this.loadBuffer = !this.loadBuffer, 20);
   }
 
 }
