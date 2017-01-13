@@ -27,6 +27,8 @@ export class ThreeDComponent {
   private material: any;
   private mesh: any;
 
+  private audio: any;
+
   constructor( private audioSrc: AudioStream, private store$: Store<AppStore> ) {
 
   }
@@ -34,9 +36,9 @@ export class ThreeDComponent {
   ngOnInit(){
 
     var ctx = new AudioContext();
-    var audio = new Audio();
-    audio.src = '../../assets/sounds/Broke_For_Free_-_01_-_Night_Owl.mp3'
-    var audioSrc = ctx.createMediaElementSource(audio);
+    this.audio = new Audio();
+    this.audio.src = '../../assets/sounds/Broke_For_Free_-_01_-_Night_Owl.mp3'
+    var audioSrc = ctx.createMediaElementSource(this.audio);
     var analyser = ctx.createAnalyser();
     analyser.smoothingTimeConstant = 0.8;
 
@@ -45,7 +47,7 @@ export class ThreeDComponent {
     // // frequencyBinCount tells you how many values you'll receive from the analyser
     var frequencyData = new Uint8Array(analyser.frequencyBinCount);
 
-    audio.play();
+    this.audio.play();
 
     var scene, light, light1, camera, renderer;
     var geometry, material1, material2, material3, mesh1, mesh2, mesh3;
@@ -147,5 +149,9 @@ export class ThreeDComponent {
       renderer.render(scene, camera);
       requestAnimationFrame(render);
     }
+  }
+
+  ngOnDestroy() {
+    this.audio.pause();
   }
 }
