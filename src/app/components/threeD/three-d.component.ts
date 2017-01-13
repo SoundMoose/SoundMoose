@@ -116,10 +116,15 @@ export class ThreeDComponent {
 
         // var adjustment = Math.round(frequencyData[0]/100);
         // var adjustment = Math.round(sumOfAll/10000);
-        var adjustment = Math.round(sumOfBass/2000);
+        var colorAdjustment = Math.round(sumOfBass/100);
+
+        // var color = new THREE.Color("rgb(colorAdjustment, colorAdjustment, colorAdjustment)");
 
         // console.log(frequencyData)
-        mesh.material.color.setHex( adjustment*0xff3300 );
+        // mesh.material.color.setHex( adjustment*0xff3300 );
+        // mesh.material.color.set( color );
+        // mesh.material.color.set( colorAdjustment, colorAdjustment, colorAdjustment );
+        mesh.material.color.set( 'rgb(' + colorAdjustment +',' + colorAdjustment +',' + colorAdjustment +')');
         mesh.scale.y = sumOfBass/2000;
         mesh.rotation.x += 0.01;  // this is our animation, we should be able to pull out audio spectrum data
         mesh.rotation.y += 0.01;  // to use in modifying speed, size, or colors
