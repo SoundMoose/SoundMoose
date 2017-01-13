@@ -1,5 +1,7 @@
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AUTH_PROVIDERS }  from 'angular2-jwt';
+
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { combineReducers, StoreModule } from '@ngrx/store';
@@ -11,6 +13,7 @@ import { SoundCloudService } from './services/soundcloud.service';
 import { YoutubeService } from './services/youtube.service';
 import { PlayerService } from './services/player.service';
 import { AudioControlsService } from './services/audio-controls.service';
+import { Auth } from './services/auth.service';
 import { AUDIO_STREAM_PROVIDER } from './audio-element';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -121,11 +124,13 @@ const store = compose(...metaReducers)({
     HttpModule,
     MaterialModule.forRoot(),
     FormsModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    // useHash is set to false because setting it to true breaks auth0 authentication
+    RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    AUTH_PROVIDERS
   ]
 })
 export class AppModule {

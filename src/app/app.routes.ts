@@ -10,5 +10,6 @@ export const ROUTES: Routes = [
   { path: 'top_tracks/:genre', component: TopTracksComponent },
   { path: 'track/:trackId', component: TrackDetailComponent },
   { path: 'search', component: SearchComponent },
-  { path: 'threeD', component: ThreeDComponent }
+  { path: 'threeD', component: ThreeDComponent },
+  { path: '**', redirectTo: 'home'}
 ];
