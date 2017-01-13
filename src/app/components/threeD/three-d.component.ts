@@ -38,6 +38,7 @@ export class ThreeDComponent {
     audio.src = '../../assets/sounds/Broke_For_Free_-_01_-_Night_Owl.mp3'
     var audioSrc = ctx.createMediaElementSource(audio);
     var analyser = ctx.createAnalyser();
+    analyser.smoothingTimeConstant = 0.8;
 
     audioSrc.connect(analyser);
     audioSrc.connect(ctx.destination);
