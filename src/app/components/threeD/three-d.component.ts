@@ -43,14 +43,15 @@ export class ThreeDComponent {
     // this.audio = new Audio();
     // this.audio.src = '../../assets/sounds/Broke_For_Free_-_01_-_Night_Owl.mp3'
     // this.audioSrcNode = this.audioCtx.createMediaElementSource(this.audioSrc.audioElement);
-    var analyser = this.audioCtx.createAnalyser();
-    analyser.fftSize = 2048;
-    analyser.smoothingTimeConstant = 0.8;
+    // var analyser = this.audioCtx.createAnalyser();
+    // analyser.fftSize = 2048;
+    // analyser.smoothingTimeConstant = 0.8;
 
-    this.audioSrcNode.connect(analyser);
-    this.audioSrcNode.connect(this.audioCtx.destination);
+    // this.audioSrcNode.connect(analyser);
+    // this.audioSrcNode.connect(this.audioCtx.destination);
     // // frequencyBinCount tells you how many values you'll receive from the analyser
-    var frequencyData = new Uint8Array(analyser.frequencyBinCount);
+    // var frequencyData = new Uint8Array(analyser.frequencyBinCount);
+    var frequencyData = new Uint8Array(this.audioSrc.frequencyAnalyser.frequencyBinCount);
 
     // this.audio.play();
 
@@ -165,10 +166,12 @@ export class ThreeDComponent {
     scene.add(mesh10);
 
     //RENDER LOOP
+    var context = this;
+
     requestAnimationFrame(render);
 
     function render() {
-      analyser.getByteFrequencyData(frequencyData);
+      context.audioSrc.frequencyAnalyser.getByteFrequencyData(frequencyData);
 
       function getDat(arr, startIdx, endIdx) {
         var result = 0;
@@ -178,7 +181,6 @@ export class ThreeDComponent {
         }
         return result;
       }
-
 
       var getDatBass = getDat(frequencyData, 0, 100);
       var getDatMid1 = getDat(frequencyData, 100, 200);

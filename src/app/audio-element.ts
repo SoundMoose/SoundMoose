@@ -5,6 +5,7 @@ export interface AudioStream {
   audioSrcNode: MediaElementAudioSourceNode;
   waveformBufferLength: number;
   frequencyBufferLength: number;
+  frequencyAnalyser: any;
   audioElement: any;
   audioCtx: any;
 
@@ -209,6 +210,7 @@ export const AUDIO_STREAM_PROVIDER = {
         waveformDataArray: waveformDataArray,
         waveformBufferLength: waveformBufferLength,
         frequencyBufferLength: frequencyBufferLength,
+        frequencyAnalyser: frequencyAnalyser,
 
         toggleFrequencyOrWaveform: false,
 
