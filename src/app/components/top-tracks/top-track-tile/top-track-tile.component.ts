@@ -10,6 +10,7 @@ import { PlayerService } from '../../../services/player.service';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { SpinnerState } from '../../../reducers/spinner.reducer';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
   //changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,9 +19,16 @@ import { SpinnerState } from '../../../reducers/spinner.reducer';
   templateUrl: './top-track-tile.component.html'
 })
 
-export class TopTrackTileComponent {
+export class TopTrackTileComponent{
   @Input()
-  topTrack: Track;
+  topTrack: Track = {
+    id: null,
+    title: '',
+    artist: '',
+    imgUrl: '',
+    streamUrl: '',
+    duration: 0
+  }
 
   player$: Observable<{}>;
   spinner$: Observable<{}>;
@@ -29,6 +37,8 @@ export class TopTrackTileComponent {
   isLoading$: Observable<boolean>;
   loadBuffer: boolean;
   playing: boolean;
+
+  count: number = 0;
 
   constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router) {
     // Grab the player stream from the store
