@@ -18,15 +18,24 @@ import { SpinnerState } from '../../../reducers/spinner.reducer';
   templateUrl: './top-track-tile.component.html'
 })
 
-export class TopTrackTileComponent {
+export class TopTrackTileComponent{
   @Input()
-  topTrack: Track;
+  topTrack: Track = {
+    id: null,
+    title: '',
+    artist: '',
+    imgUrl: '',
+    streamUrl: '',
+    duration: 0
+  }
 
   player$: Observable<{}>;
   spinner$: Observable<{}>;
   currentlyPlaying$: Observable<boolean>;
   selected$: Observable<boolean>;
   isLoading$: Observable<boolean>;
+  loadBuffer: boolean;
+  playing: boolean;
 
   constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router) {
     // Grab the player stream from the store
@@ -42,10 +51,16 @@ export class TopTrackTileComponent {
       .map((playerStatus: Player)=> playerStatus.currentTrack.id === this.topTrack.id);
     // Map the spinner stream to see if the song is loading
     this.isLoading$ = this.spinner$
-      .map((spinnerStatus: SpinnerState) => spinnerStatus.isSpinning);
+      .map((spinnerStatus: SpinnerState) => spinnerStatus.isLoadSpinning);
+
+    this.currentlyPlaying$
+      .subscribe(isPlaying => this.playing = isPlaying);
   }
 
   clickHandler() {
+    if (!this.playing) {
+      this.loadingNow();
+    }
     this.store$.dispatch(this.trackActions.togglePlayPause(this.topTrack));
   }
 
@@ -54,6 +69,11 @@ export class TopTrackTileComponent {
     if ($event.target.tagName != 'I') {
       this.router.navigate(['/track', this.topTrack.id]);
     }
+  }
+
+  loadingNow() {
+    this.loadBuffer = !this.loadBuffer;
+    setTimeout(() => this.loadBuffer = !this.loadBuffer, 20);
   }
 
 }

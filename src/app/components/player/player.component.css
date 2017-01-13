@@ -1,12 +1,12 @@
-  #progress {
+ .progress {
     position: relative;
     display: block;
     top: -33px;
-    width:443px;
+    width: 390px;
     left: 7px;
     height: 2px;
   }
-  #progress > span {
+  .progress > span {
     position: absolute;
     left: 0;
     top: 0;

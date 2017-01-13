@@ -8,7 +8,6 @@ import 'rxjs/add/operator/distinctUntilChanged';
 
 import { Observable } from 'rxjs/Observable';
 
-
 import { AppStore } from '../models/appstore.model';
 import { soundcloudClientId } from '../config/superSecretKeys';
 import { Track } from '../models/track.model';

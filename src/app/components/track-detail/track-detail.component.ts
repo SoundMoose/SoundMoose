@@ -137,4 +137,11 @@ export class TrackDetailComponent implements OnInit {
     let relative = millis / this.track.duration * 96;
     return relative + '%';
   }
+
+  private trim(string) {
+    var length = 100;
+    return string.length > length ?
+                    string.substring(0, length - 3) + "..." :
+                    string;
+  }
 }
