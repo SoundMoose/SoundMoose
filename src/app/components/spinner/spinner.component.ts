@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+
 import { AppStore } from './../../models/appstore.model';
 import { SpinnerState } from './../../reducers/spinner.reducer';
 

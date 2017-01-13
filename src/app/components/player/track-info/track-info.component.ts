@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
 
 import { AppState } from '../app.service';
 import { Track } from '../../../models/track.model';
 import { PlayerState } from '../../../reducers/player.reducer';
 import { AppStore } from '../../../models/appstore.model';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   //changeDetection: ChangeDetectionStrategy.OnPush,

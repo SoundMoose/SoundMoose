@@ -8,6 +8,7 @@ import { TrackActions } from '../../../actions/track.actions';
 import { Action } from '@ngrx/store';
 import { PlayerService } from '../../../services/player.service';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
 import { SpinnerState } from '../../../reducers/spinner.reducer';
 
@@ -36,6 +37,7 @@ export class TopTrackTileComponent{
   isLoading$: Observable<boolean>;
   loadBuffer: boolean;
   playing: boolean;
+  isPlayingSubscription: Subscription;
 
   constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router) {
     // Grab the player stream from the store
@@ -53,8 +55,12 @@ export class TopTrackTileComponent{
     this.isLoading$ = this.spinner$
       .map((spinnerStatus: SpinnerState) => spinnerStatus.isLoadSpinning);
 
-    this.currentlyPlaying$
+    this.isPlayingSubscription = this.currentlyPlaying$
       .subscribe(isPlaying => this.playing = isPlaying);
+  }
+
+  ngOnDestroy() {
+    this.isPlayingSubscription.unsubscribe();
   }
 
   clickHandler() {

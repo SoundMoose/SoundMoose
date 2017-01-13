@@ -1,16 +1,3 @@
-import { Component } from '@angular/core';
-import { ChangeDetectionStrategy } from '@angular/core'
-
-import { AppState } from '../app.service';
-import { PlayerService } from './../../services/player.service';
-import { Store } from '@ngrx/store';
-import { AppStore } from '../../models/appstore.model';
-import { Player } from '../../models/player.model';
-import { AudioControls } from '../../models/audio-controls.model';
-import { Observable } from 'rxjs/Observable';
-
-import { AudioControlsActions } from '../../actions/audio-controls.actions';
-
 import {
    trigger,
    state,
@@ -18,6 +5,20 @@ import {
    transition,
    animate
 } from '@angular/core';
+import { ChangeDetectionStrategy, OnDestroy } from '@angular/core'
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs/Observable';
+
+import { AppState } from '../app.service';
+import { AppStore } from '../../models/appstore.model';
+import { AudioControls } from '../../models/audio-controls.model';
+import { AudioControlsActions } from '../../actions/audio-controls.actions';
+import { Player } from '../../models/player.model';
+import { PlayerService } from './../../services/player.service';
+
+
 
 @Component({
 //  changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,11 +43,13 @@ import {
     ])
   ]
 })
-export class PlayerComponent {
+export class PlayerComponent implements OnDestroy {
   trackExists$: Observable<boolean>;
   showVisualization$: Observable<boolean>;
   toggleFrequencyOrWaveform: boolean;
   showEqualizer: boolean;
+  showEqualizerSubscription: Subscription;
+  toggleFrequencyOrWaveformSubscription: Subscription;
 
   constructor(private playerService: PlayerService, private store$: Store<AppStore>, private audioControlActions: AudioControlsActions ) {
     this.trackExists$ = this.store$.select('player')
@@ -55,13 +58,18 @@ export class PlayerComponent {
     this.showVisualization$ = this.store$.select('player')
       .map((playerStatus: Player) => playerStatus.showVisualization);
 
-    this.store$.select('audiocontrols')
+    this.showEqualizerSubscription = this.store$.select('audiocontrols')
       .map((audioControlsStatus: AudioControls) => audioControlsStatus.showEqualizer)
-      .subscribe(item=> this.showEqualizer = item);
+      .subscribe(item => this.showEqualizer = item);
 
-    this.store$.select('audiocontrols')
+    this.toggleFrequencyOrWaveformSubscription = this.store$.select('audiocontrols')
       .map((audioControlsStatus: AudioControls) => audioControlsStatus.toggleFrequencyOrWaveform)
-      .subscribe(item=> this.toggleFrequencyOrWaveform = item);
+      .subscribe(item => this.toggleFrequencyOrWaveform = item);
+  }
+
+  ngOnDestroy() {
+    this.showEqualizerSubscription.unsubscribe();
+    this.toggleFrequencyOrWaveformSubscription.unsubscribe();
   }
 
   toggleEqualizer() {

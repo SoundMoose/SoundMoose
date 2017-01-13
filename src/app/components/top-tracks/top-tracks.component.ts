@@ -8,14 +8,15 @@ import {
   animate
 } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
-import { SoundCloudService } from './../../services/soundcloud.service';
+import { Observable } from 'rxjs/Observable';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs/Subscription';
+
+import { SoundCloudService } from './../../services/soundcloud.service';
 import { AppStore } from './../../models/appstore.model';
 import { TracksState } from './../../reducers/tracks.reducer';
-import { Observable } from 'rxjs/Observable';
 import { AudioStream } from '../../audio-element';
-import { Subscription } from 'rxjs/Subscription';
-import { Router, ActivatedRoute, Params } from '@angular/router';
 
 declare var $: any;
 
