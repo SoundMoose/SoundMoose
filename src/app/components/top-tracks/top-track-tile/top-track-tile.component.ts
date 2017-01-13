@@ -38,8 +38,6 @@ export class TopTrackTileComponent{
   loadBuffer: boolean;
   playing: boolean;
 
-  count: number = 0;
-
   constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router) {
     // Grab the player stream from the store
     this.player$ = this.store$.select('player');
