@@ -23,7 +23,8 @@
       "selenium-webdriver",
       "source-map",
       "uglify-js",
-      "webpack"
+      "webpack",
+      "auth0"
     ]
   },
   "exclude": [

@@ -124,8 +124,7 @@ const store = compose(...metaReducers)({
     HttpModule,
     MaterialModule.forRoot(),
     FormsModule,
-    // useHash is set to false because setting it to true breaks auth0 authentication
-    RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
