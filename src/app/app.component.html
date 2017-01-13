@@ -7,11 +7,11 @@
           <button style="color: #fff" class="ui primary button mini" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
           <button style="color: #fff" class="ui primary button mini" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
 
-          <a href="#/threeD">
+          <a routerLink="/threeD">
             <i class="big grey lab icon" ></i>
           </a>
-          
-          <a href="#/search">
+
+          <a routerLink="/search">
             <i class="big grey search icon" ></i>
           </a>
           <a target="_blank" href="https://github.com/hrr20-over9000/SoundMoose">

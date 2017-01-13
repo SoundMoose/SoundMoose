@@ -48,7 +48,7 @@ export class ThreeDComponent {
     audio.play();
 
     var scene, light, light1, camera, renderer;
-    var geometry, material, mesh;
+    var geometry, material, mesh, mesh2, mesh3;
 
     //RENDERER
     var renderer: any = new THREE.WebGLRenderer(
@@ -88,49 +88,52 @@ export class ThreeDComponent {
     // var cubeMaterial = new THREE.MeshPhongMaterial({color:frequencyData[i]*0xff3300});
     material = new THREE.MeshLambertMaterial({color: frequencyData[0]*0xff3300}); // for non-shiny surfaces
     mesh = new THREE.Mesh(geometry, material);
+    mesh2 = new THREE.Mesh(geometry, material);
+    mesh3 = new THREE.Mesh(geometry, material);
+
     mesh.position.set(0, 0, -1000);
+    mesh2.position.set(150, 0, -1000);
+    mesh3.position.set(-150, 0, -1000);
 
     scene.add(mesh);
+    scene.add(mesh2);
+    scene.add(mesh3);
 
     //RENDER LOOP
     requestAnimationFrame(render);
 
     function render() {
-        analyser.getByteFrequencyData(frequencyData);
+      analyser.getByteFrequencyData(frequencyData);
 
-        // take in frequency data array of elements, return sum of first 150:
-        function getDatBass(arr) {
-          var result = 0;
-          var counter = 0;
+      // take in frequency data array of elements, return sum of first 150:
+      function getDatBass(arr) {
+        var result = 0;
+        var counter = 0;
 
-          while (counter < 100) {
-            result += arr[counter];
-            counter++
-          }
-          return result;
+        while (counter < 100) {
+          result += arr[counter];
+          counter++
         }
-        //make it less crazy
-        // var add = (a, b) => a + b;
-        // var sumOfAll = frequencyData.reduce(add, 0);
-        var sumOfBass = getDatBass(frequencyData);
+        return result;
+      }
+      var sumOfBass = getDatBass(frequencyData);
 
-        // var adjustment = Math.round(frequencyData[0]/100);
-        // var adjustment = Math.round(sumOfAll/10000);
-        var colorAdjustment = Math.round(sumOfBass/100);
+      // var adjustment = Math.round(frequencyData[0]/100);
+      // var adjustment = Math.round(sumOfAll/10000);
+      var colorAdjustment = Math.round(sumOfBass/100);
 
-        // var color = new THREE.Color("rgb(colorAdjustment, colorAdjustment, colorAdjustment)");
+      // mesh.material.color.setHex( adjustment*0xff3300 );
+      // mesh.material.color.set( color );
+      // mesh.material.color.set( colorAdjustment, colorAdjustment, colorAdjustment );
+      mesh.material.color.set( 'rgb(' + colorAdjustment +',' + colorAdjustment +',' + colorAdjustment +')');
 
-        // console.log(frequencyData)
-        // mesh.material.color.setHex( adjustment*0xff3300 );
-        // mesh.material.color.set( color );
-        // mesh.material.color.set( colorAdjustment, colorAdjustment, colorAdjustment );
-        mesh.material.color.set( 'rgb(' + colorAdjustment +',' + colorAdjustment +',' + colorAdjustment +')');
-        mesh.scale.y = sumOfBass/2000;
-        mesh.rotation.x += 0.01;  // this is our animation, we should be able to pull out audio spectrum data
-        mesh.rotation.y += 0.01;  // to use in modifying speed, size, or colors
-        renderer.render(scene, camera);
-        requestAnimationFrame(render);
+      ///////// Geometry methods: https://threejs.org/docs/#Reference/Core/Geometry
+      mesh.scale.y = sumOfBass/2000;
+      mesh.rotation.x += 0.01;  // this is our animation, we should be able to pull out audio spectrum data
+      mesh.rotation.y += 0.01;  // to use in modifying speed, size, or colors
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(render);
     }
-
   }
 }
