@@ -8,5 +8,6 @@ export const ROUTES: Routes = [
   { path: 'home', component: TopTracksComponent },
   { path: 'top_tracks/:genre', component: TopTracksComponent },
   { path: 'track/:trackId', component: TrackDetailComponent },
-  { path: 'search', component: SearchComponent }
+  { path: 'search', component: SearchComponent },
+  { path: '**', redirectTo: 'home'}
 ];
