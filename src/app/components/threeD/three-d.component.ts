@@ -50,9 +50,9 @@ export class ThreeDComponent {
     var geometry, material, mesh;
 
     //RENDERER
-    var renderer = new THREE.WebGLRenderer(
+    var renderer: any = new THREE.WebGLRenderer(
       {
-        canvas: document.getElementById('threeDCanvas'),
+        canvas: <HTMLCanvasElement> document.getElementById("threeDCanvas"),
         antialias: true,
         alpha: true
       }
