@@ -15,7 +15,7 @@
           inverted: true,
           huge: true,
           play: !(currentlyPlaying$ | async),
-          'notched circle loading': (isLoading$ | async) || loadBuffer,
+          'notched circle loading': ((isLoading$ | async) || loadBuffer) && (currentlyPlaying$ | async),
           pause: (currentlyPlaying$ | async) && !((isLoading$ | async) || loadBuffer),
           icon: true
         }"></i>

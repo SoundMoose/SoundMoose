@@ -18,9 +18,16 @@ import { SpinnerState } from '../../../reducers/spinner.reducer';
   templateUrl: './top-track-tile.component.html'
 })
 
-export class TopTrackTileComponent {
+export class TopTrackTileComponent{
   @Input()
-  topTrack: Track;
+  topTrack: Track = {
+    id: null,
+    title: '',
+    artist: '',
+    imgUrl: '',
+    streamUrl: '',
+    duration: 0
+  }
 
   player$: Observable<{}>;
   spinner$: Observable<{}>;
@@ -66,7 +73,7 @@ export class TopTrackTileComponent {
 
   loadingNow() {
     this.loadBuffer = !this.loadBuffer;
-    setTimeout(() => this.loadBuffer = !this.loadBuffer, 300);
+    setTimeout(() => this.loadBuffer = !this.loadBuffer, 20);
   }
 
 }
