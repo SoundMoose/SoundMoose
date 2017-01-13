@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs/Subscription';
 
 import { AppState } from '../app.service';
-
 import { AppStore } from '../../../models/appstore.model';
 import { Player } from '../../../models/player.model';
-import { Store } from '@ngrx/store';
 import { PlayerActions } from '../../../actions/player.actions';
-import { Observable } from 'rxjs/Observable';
+
 
 @Component({
   //changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,15 +23,20 @@ export class VolumeControlComponent {
   volume: number;
   isMuted: boolean;
   volumeBeforeMute: number;
+  playerSubscription: Subscription;
 
 
   constructor (private store$: Store<AppStore>, private playerActions: PlayerActions) {
     this.player$ = this.store$.select(s => s.player);
-    this.player$.subscribe(item => {
+    this.playerSubscription = this.player$.subscribe(item => {
       this.volume = item.volume;
       this.isMuted = item.isMuted;
       this.volumeBeforeMute = item.volumeBeforeMute;
     })
+  }
+
+  ngOnDestroy() {
+    this.playerSubscription.unsubscribe();
   }
 
   private handleMouseOut() {

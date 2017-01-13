@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { SoundCloudService } from '../../services/soundcloud.service';
 import { Subject } from 'rxjs/Subject';
+
+import { SoundCloudService } from '../../services/soundcloud.service';
 
 import {
   trigger,
