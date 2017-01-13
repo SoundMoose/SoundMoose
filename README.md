@@ -24,11 +24,11 @@
 
 ## Usage
 
-> Fork/Clone this repo, create a branch and hack away! Feel free to create a pull request with any suggested changes or bug-fixes.
+Fork/Clone this repo, create a branch and hack away! Feel free to create a pull request with any suggested changes or bug-fixes.
 
 ### Installing Dependencies
 
-NOTE: You will require API keys in order to make the app run on your local machine, please contact the team for help getting set up with these!
+NOTE: You will require API keys in order to make the app run on your local machine. Please contact the team for help getting set up with these!
 
 Once you have your key file, from within the root directory, to build dev version:
 
@@ -49,6 +49,10 @@ npm run server:prod
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
+## Style Guide
+
+[Angular 2 Style Guide](https://angular.io/docs/ts/latest/guide/style-guide.html#!#naming)
+
 ## Learning Resources
 
 ### Angular 2
@@ -59,7 +63,10 @@ Beginner Friendly Introduction:
 EggHead Bite Sized Snippets of Angular 2 Wisedom:
 [EggHead Web Series: Angular 2](https://egghead.io/courses/introduction-to-reactive-programming)
 
-Blog post outlining how the 'Tour of Heroes' Angular 2 Introduction is different using NGRX:
+Angular 2 Documentation Beginner Tutorial:
+[TUTORIAL: TOUR OF HEROES](https://angular.io/docs/ts/latest/tutorial/)
+
+Blog post outlining 'Tour of Heroes' Angular 2 Introduction completed using NGRX:
 [Angular 2 Tour of Heroes Tutorial With the NGRX Suite](http://bodiddlie.github.io/ng-2-toh-with-ngrx-suite/)
 
 ### RxJS
