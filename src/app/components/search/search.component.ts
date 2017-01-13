@@ -38,19 +38,6 @@ export class SearchComponent {
   items$;
 
   constructor(private soundCloudService: SoundCloudService) {
-
     this.items$ = this.soundCloudService.loadSearchResults(this.term$);
-
-    // this.soundCloudService.loadSearchResults(this.term$)
-    //   .subscribe(results => {
-    //     this.items = results;
-    //     console.log('-----', this.items);
-    //   });
   }
 }
-
-/*
-
-(item.publisher_metadata && item.publisher_metadata.artist) ? item.publisher_metadata.artist : item.user.username
-
-*/
