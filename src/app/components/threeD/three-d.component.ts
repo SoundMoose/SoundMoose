@@ -48,7 +48,7 @@ export class ThreeDComponent {
     audio.play();
 
     var scene, light, light1, camera, renderer;
-    var geometry, material, mesh, mesh2, mesh3;
+    var geometry, material1, material2, material3, mesh1, mesh2, mesh3;
 
     //RENDERER
     var renderer: any = new THREE.WebGLRenderer(
@@ -86,16 +86,18 @@ export class ThreeDComponent {
     // BoxGeometry(width, height, depth, widthSegments, heightSegments, depthSegments)
     geometry = new THREE.BoxGeometry(100, 100, 100); // segmented faces optional. Default is 1.
     // var cubeMaterial = new THREE.MeshPhongMaterial({color:frequencyData[i]*0xff3300});
-    material = new THREE.MeshLambertMaterial({color: frequencyData[0]*0xff3300}); // for non-shiny surfaces
-    mesh = new THREE.Mesh(geometry, material);
-    mesh2 = new THREE.Mesh(geometry, material);
-    mesh3 = new THREE.Mesh(geometry, material);
+    material1 = new THREE.MeshLambertMaterial({color: 0x1A1A1A}); // for non-shiny surfaces
+    material2 = new THREE.MeshLambertMaterial({color: 0x1A1A1A}); // for non-shiny surfaces
+    material3 = new THREE.MeshLambertMaterial({color: 0x1A1A1A}); // for non-shiny surfaces
+    mesh1 = new THREE.Mesh(geometry, material1);
+    mesh2 = new THREE.Mesh(geometry, material2);
+    mesh3 = new THREE.Mesh(geometry, material3);
 
-    mesh.position.set(0, 0, -1000);
-    mesh2.position.set(150, 0, -1000);
-    mesh3.position.set(-150, 0, -1000);
+    mesh1.position.set(-200, 0, -1000);
+    mesh2.position.set(0, 0, -1000);
+    mesh3.position.set(200, 0, -1000);
 
-    scene.add(mesh);
+    scene.add(mesh1);
     scene.add(mesh2);
     scene.add(mesh3);
 
@@ -105,32 +107,42 @@ export class ThreeDComponent {
     function render() {
       analyser.getByteFrequencyData(frequencyData);
 
-      // take in frequency data array of elements, return sum of first 150:
-      function getDatBass(arr) {
+      function getDat(arr, startIdx, endIdx) {
         var result = 0;
-        var counter = 0;
 
-        while (counter < 100) {
-          result += arr[counter];
-          counter++
+        for (var i = startIdx; i <= endIdx; i++) {
+          result += arr[i];
         }
         return result;
       }
-      var sumOfBass = getDatBass(frequencyData);
 
+      var getDatBass = getDat(frequencyData, 0, 100);
+      var getDatMids = getDat(frequencyData, 200, 300);
+      var getDatTreble = getDat(frequencyData, 500, 600);
+
+      // console.log(getDatBass/2000);
       // var adjustment = Math.round(frequencyData[0]/100);
       // var adjustment = Math.round(sumOfAll/10000);
-      var colorAdjustment = Math.round(sumOfBass/100);
+      var colorAdjustmentBass = Math.round(getDatBass/2000);
+      var colorAdjustmentMids = Math.round(getDatMids/2000);
+      var colorAdjustmentTreble = Math.round(getDatTreble/2000);
 
       // mesh.material.color.setHex( adjustment*0xff3300 );
       // mesh.material.color.set( color );
       // mesh.material.color.set( colorAdjustment, colorAdjustment, colorAdjustment );
-      mesh.material.color.set( 'rgb(' + colorAdjustment +',' + colorAdjustment +',' + colorAdjustment +')');
+      mesh1.material.color.set( 'rgb(' + colorAdjustmentBass + 10 +',' + colorAdjustmentBass + 10 +',' + colorAdjustmentBass + 10 +')');
+      mesh2.material.color.set( 'rgb(' + colorAdjustmentMids + 10 +',' + colorAdjustmentMids + 10 +',' + colorAdjustmentMids + 10 +')');
+      mesh3.material.color.set( 'rgb(' + colorAdjustmentTreble + 10 +',' + colorAdjustmentTreble + 10 +',' + colorAdjustmentTreble + 10 +')');
 
       ///////// Geometry methods: https://threejs.org/docs/#Reference/Core/Geometry
-      mesh.scale.y = sumOfBass/2000;
-      mesh.rotation.x += 0.01;  // this is our animation, we should be able to pull out audio spectrum data
-      mesh.rotation.y += 0.01;  // to use in modifying speed, size, or colors
+      mesh1.scale.y = getDatBass/2000 + 1;
+      mesh2.scale.y = getDatMids/2000 + 1;
+      mesh3.scale.y = getDatTreble/2000 + 1;
+
+      mesh1.rotation.y += 0.01;
+      mesh2.rotation.y += 0.01;
+      mesh3.rotation.y += 0.01;
+      // mesh1.rotation.x += 0.01;  // to use in modifying speed, size, or colors
 
       renderer.render(scene, camera);
       requestAnimationFrame(render);
