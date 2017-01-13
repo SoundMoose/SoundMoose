@@ -200,11 +200,11 @@ export class ThreeDComponent {
 
       mesh1.position.set(-350, getDatBass/110 - 200, -1000);
       mesh2.position.set(-250, getDatMid1/110 - 200, -1000);
-      mesh3.position.set(-150, getDatMid1/110 - 200, -1000);
-      mesh4.position.set(-50, getDatMid1/110 - 200, -1000);
-      mesh5.position.set(50, getDatMid1/110 - 200, -1000);
-      mesh6.position.set(150, getDatMid1/110 - 200, -1000);
-      mesh7.position.set(250, getDatMid1/110 - 200, -1000);
+      mesh3.position.set(-150, getDatMid2/110 - 200, -1000);
+      mesh4.position.set(-50, getDatMid3/110 - 200, -1000);
+      mesh5.position.set(50, getDatMid4/110 - 200, -1000);
+      mesh6.position.set(150, getDatMid5/110 - 200, -1000);
+      mesh7.position.set(250, getDatMid6/110 - 200, -1000);
       mesh8.position.set(350, getDatTreble/110 - 200, -1000);
 
       mesh1.rotation.y += 0.01;
