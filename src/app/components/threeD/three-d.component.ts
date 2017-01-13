@@ -198,14 +198,14 @@ export class ThreeDComponent {
       mesh7.scale.y = getDatMid6/3000 + 1;
       mesh8.scale.y = getDatTreble/3000 + 1;
 
-      mesh1.position.set(-350, getDatBass/120 - 200, -1000);
-      mesh2.position.set(-250, getDatMid1/120 - 200, -1000);
-      mesh3.position.set(-150, getDatMid1/120 - 200, -1000);
-      mesh4.position.set(-50, getDatMid1/120 - 200, -1000);
-      mesh5.position.set(50, getDatMid1/120 - 200, -1000);
-      mesh6.position.set(150, getDatMid1/120 - 200, -1000);
-      mesh7.position.set(250, getDatMid1/120 - 200, -1000);
-      mesh8.position.set(350, getDatTreble/120 - 200, -1000);
+      mesh1.position.set(-350, getDatBass/110 - 200, -1000);
+      mesh2.position.set(-250, getDatMid1/110 - 200, -1000);
+      mesh3.position.set(-150, getDatMid1/110 - 200, -1000);
+      mesh4.position.set(-50, getDatMid1/110 - 200, -1000);
+      mesh5.position.set(50, getDatMid1/110 - 200, -1000);
+      mesh6.position.set(150, getDatMid1/110 - 200, -1000);
+      mesh7.position.set(250, getDatMid1/110 - 200, -1000);
+      mesh8.position.set(350, getDatTreble/110 - 200, -1000);
 
       mesh1.rotation.y += 0.01;
       mesh2.rotation.y += 0.01;
