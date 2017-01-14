@@ -38,7 +38,7 @@ export class SoundCloudService {
             id: item.track.id,
             title: item.track.title,
             artist: (item.track.publisher_metadata && item.track.publisher_metadata.artist) ? item.track.publisher_metadata.artist : item.track.user.username,
-            imgUrl: item.track.artwork_url ? item.track.artwork_url.replace('large.jpg', 't200x200.jpg') : '/assets/img/moosey.png',
+            imgUrl: item.track.artwork_url ? item.track.artwork_url.replace('large.jpg', 't200x200.jpg') : 'assets/img/moosey.png',
             streamUrl: 'http://api.soundcloud.com/tracks/' + item.track.id + '/stream?client_id=' + soundcloudClientId,
             duration: item.track.full_duration
           }
@@ -58,12 +58,12 @@ export class SoundCloudService {
               id: item.id,
               title: item.title,
               artist: (item.publisher_metadata && item.publisher_metadata.artist) ? item.publisher_metadata.artist : item.user.username,
-              imgUrl: item.artwork_url ? item.artwork_url.replace('large.jpg', 't200x200.jpg') : '/assets/img/moosey.png',
+              imgUrl: item.artwork_url ? item.artwork_url.replace('large.jpg', 't200x200.jpg') : 'assets/img/moosey.png',
               streamUrl: 'http://api.soundcloud.com/tracks/' + item.id + '/stream?client_id=' + soundcloudClientId,
               duration: item.duration
             },
             waveformUrl: item.waveform_url,
-            largeArtworkUrl: item.artwork_url ? item.artwork_url.replace('large.jpg', 't500x500.jpg') : '/assets/img/moosey.png',
+            largeArtworkUrl: item.artwork_url ? item.artwork_url.replace('large.jpg', 't500x500.jpg') : 'assets/img/moosey.png',
             user: {
               id: item.user.id,
               username: item.user.username,
@@ -120,7 +120,7 @@ export class SoundCloudService {
         id: item.id,
         title: item.title,
         artist: (item.publisher_metadata && item.publisher_metadata.artist) ? item.publisher_metadata.artist : item.user.username,
-        imgUrl: item.artwork_url ? item.artwork_url.replace('large.jpg', 't200x200.jpg') : '/assets/img/moosey.png',
+        imgUrl: item.artwork_url ? item.artwork_url.replace('large.jpg', 't200x200.jpg') : 'assets/img/moosey.png',
         streamUrl: 'http://api.soundcloud.com/tracks/' + item.id + '/stream?client_id=' + soundcloudClientId,
         duration: item.duration
       })));
