@@ -1,15 +1,15 @@
 import { Input, Component, OnInit, OnDestroy } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
 import { Router, ActivatedRoute, Params } from '@angular/router';
-
-import { AppState } from '../app.service';
-import { PlayerState } from '../../../reducers/player.reducer';
-import { AppStore } from '../../../models/appstore.model';
-import { PlayerService } from '../../../services/player.service';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+
+import { AppState } from '../app.service';
+import { AppStore } from '../../../models/appstore.model';
+import { PlayerService } from '../../../services/player.service';
 import { PlayerActions } from '../../../actions/player.actions';
+import { PlayerState } from '../../../reducers/player.reducer';
 
 @Component({
  // changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,9 +32,9 @@ export class TrackProgressContainerComponent implements OnInit, OnDestroy {
   // Whether we are currently sliding.
   sliding: boolean;
   bufferedRanges: number[][] | number[];
-  s1: Subscription;
-  s2: Subscription;
-  s3: Subscription;
+  playerSubscription: Subscription;
+  progressSubscription: Subscription;
+  playerInfoSubscription: Subscription;
   // 'detail' or 'bottom'
   @Input() progressContainerType: string;
 
@@ -46,7 +46,7 @@ export class TrackProgressContainerComponent implements OnInit, OnDestroy {
     // Split this out into two separate components if the logic becomes too convoluted.
     this.player$ = this.store$.select(s => s.player);
     if (this.progressContainerType == 'detail') {
-      this.s1 = this.player$.subscribe((p) => {
+      this.playerSubscription = this.player$.subscribe((p) => {
         if (p.currentTrack && this.route.snapshot.params['trackId'] == p.currentTrack.id) {
           this.setPlayerInfo();
         }
@@ -57,19 +57,19 @@ export class TrackProgressContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.s1) {
-      this.s1.unsubscribe();
+    if (this.playerSubscription) {
+      this.playerSubscription.unsubscribe();
     }
-    if (this.s2) {
-      this.s2.unsubscribe();
+    if (this.progressSubscription) {
+      this.progressSubscription.unsubscribe();
     }
-    if (this.s3) {
-      this.s3.unsubscribe();
+    if (this.playerInfoSubscription) {
+      this.playerInfoSubscription.unsubscribe();
     }
   }
 
   private setPlayerInfo() {
-    this.s2 = this.playerService.currentProgressInSeconds$.subscribe(item => {
+    this.progressSubscription = this.playerService.currentProgressInSeconds$.subscribe(item => {
       if (this.sliding) {
         // We let the slider take over the timer while we are sliding.
         return;
@@ -78,7 +78,7 @@ export class TrackProgressContainerComponent implements OnInit, OnDestroy {
       this.progressMinutesSeconds = this.millisToMinutesSeconds(currentProgressInMilliseconds);
       this.currentProgress = Math.floor(((currentProgressInMilliseconds/this.duration)*1000)) * this.multiplier / 1000;
     });
-    this.s3 = this.player$.subscribe((item) => {
+    this.playerInfoSubscription = this.player$.subscribe((item) => {
       this.duration = +item.currentTrack.duration;
       this.durationMinutesSeconds = this.millisToMinutesSeconds(this.duration);
       this.bufferedRanges = item.bufferedRanges;

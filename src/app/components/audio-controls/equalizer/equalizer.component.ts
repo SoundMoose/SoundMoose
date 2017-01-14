@@ -1,15 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 import { AppState } from '../app.service';
-
 import { AppStore } from '../../../models/appstore.model';
 import { AudioControls } from '../../../models/audio-controls.model';
 import { AudioStream } from '../../../audio-element';
-
-import { Store } from '@ngrx/store';
 import { AudioControlsActions } from '../../../actions/audio-controls.actions';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   //changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,7 +17,7 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: './equalizer.component.html'
 })
 
-export class EqualizerComponent {
+export class EqualizerComponent implements OnDestroy {
   wrapperHovered : boolean = false;
 
   audioControls$ : Observable<AudioControls>;
@@ -36,7 +35,7 @@ export class EqualizerComponent {
   midGain9: any;
   midGain10: any;
   lowGain: any;
-
+  subscription: Subscription;
   constructor (private store$: Store<AppStore>, private audioSrc: AudioStream, private AudioControlsActions: AudioControlsActions) {
 
     this.bandRange = [
@@ -53,7 +52,7 @@ export class EqualizerComponent {
     ];
 
     this.audioControls$ = this.store$.select(item => item.audiocontrols);
-    this.audioControls$.subscribe((item) => {
+    this.subscription = this.audioControls$.subscribe((item) => {
       this.lowGain = item.lowBand.gain.value;
       this.midGain1 = item.midBand1.gain.value;
       this.midGain2 = item.midBand2.gain.value;
@@ -72,6 +71,10 @@ export class EqualizerComponent {
 
   ngOnInit() {
 
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   private handleMouseOut() {

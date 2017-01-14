@@ -1,22 +1,23 @@
 import { Component } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs/Subscription';
 
 import { AppState } from '../app.service';
 import { Player } from '../../../models/player.model';
 import { Track } from '../../../models/track.model';
 import { TracksState } from '../../../reducers/tracks.reducer';
+import { PlayerActions } from '../../../actions/player.actions';
 import { PlayerState } from '../../../reducers/player.reducer';
 import { AppStore } from '../../../models/appstore.model';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
-import { PlayerActions } from '../../../actions/player.actions';
 
 @Component({
   selector: 'player-controls',
   styleUrls: [ '../player.component.css' ],
   templateUrl: './player-controls.component.html'
 })
-export class PlayerControlsComponent {
+export class PlayerControlsComponent implements OnDestroy {
   player$: Observable<Player>;
   tracks$: Observable<Track[]>;
   isPlaying: boolean;
@@ -24,13 +25,13 @@ export class PlayerControlsComponent {
   repeatTrack: boolean;
   shuffleTracks: boolean;
   showVisualization: boolean;
-
+  playerSubscription: Subscription;
   tracksList: Track[];
 
 
   constructor (private store$: Store<AppStore>, private playerActions: PlayerActions) {
     this.player$ = this.store$.select(s => s.player);
-    this.player$.subscribe((item) => {
+    this.playerSubscription = this.player$.subscribe((item) => {
       this.isPlaying = item.isPlaying;
       this.currentTrackId = item.currentTrack.id;
       this.repeatTrack = item.repeatTrack;
@@ -38,7 +39,12 @@ export class PlayerControlsComponent {
       this.showVisualization = item.showVisualization;
     });
     this.tracks$ = this.store$.select(s => s.tracks);
-    this.tracks$.subscribe(tracksList => this.tracksList = tracksList);
+    this.tracksSubscription = this.tracks$.subscribe(tracksList => this.tracksList = tracksList);
+  }
+
+  ngOnDestroy() {
+    this.playerSubscription.unsubscribe();
+    this.tracksSubscription.unsubscribe();
   }
 
   getCurrentTrackIndex(): number {

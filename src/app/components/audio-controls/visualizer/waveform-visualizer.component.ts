@@ -1,13 +1,12 @@
-
+import { ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core'
 import { Component } from '@angular/core';
-import { ChangeDetectionStrategy } from '@angular/core'
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
 
 import { AppState } from '../app.service';
 import { AppStore } from '../../../models/appstore.model';
 import { AudioStream } from '../../../audio-element';
 
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   //changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,7 +14,7 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: './waveform-visualizer.component.html'
 })
 
-export class WaveformVisualizerComponent {
+export class WaveformVisualizerComponent implements OnInit, OnDestroy {
   // Waveform Visualization
   waveformDataArray: any;
   waveformBufferLength: number;
@@ -29,6 +28,8 @@ export class WaveformVisualizerComponent {
   waveformY: number;
   drawWaveformVisual: any;
   hasCanvas: boolean;
+  // The setInterval timer ID.
+  timer: number;
 
   constructor (private audioSrc: AudioStream, private store$: Store<AppStore>) {
 
@@ -47,10 +48,14 @@ export class WaveformVisualizerComponent {
 
     this.hasCanvas = true;
     var that = this;
-    setInterval(function() {
+    this.timer = window.setInterval(function() {
       that.waveformDataArray = that.audioSrc.waveformDataArray;
       that.drawWaveOscilliscope(that);
     }, 50);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.timer);
   }
 
   drawWaveOscilliscope(context) {

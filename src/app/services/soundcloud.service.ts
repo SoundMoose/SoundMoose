@@ -1,12 +1,11 @@
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/distinctUntilChanged';
-
-import { Observable } from 'rxjs/Observable';
 
 import { AppStore } from '../models/appstore.model';
 import { soundcloudClientId } from '../config/superSecretKeys';

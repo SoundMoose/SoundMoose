@@ -1,14 +1,3 @@
-import { Component } from '@angular/core';
-import { ChangeDetectionStrategy } from '@angular/core'
-
-import { AppState } from '../app.service';
-import { AudioControlsService } from './../../services/audio-controls.service';
-import { Store } from '@ngrx/store';
-import { AppStore } from '../../models/appstore.model';
-import { AudioControls } from '../../models/audio-controls.model';
-import { AudioControlsActions } from '../../actions/audio-controls.actions';
-import { Observable } from 'rxjs/Observable';
-
 import {
    trigger,
    state,
@@ -16,6 +5,16 @@ import {
    transition,
    animate
 } from '@angular/core';
+import { Component } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core'
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+
+import { AppState } from '../app.service';
+import { AudioControlsService } from './../../services/audio-controls.service';
+import { AppStore } from '../../models/appstore.model';
+import { AudioControls } from '../../models/audio-controls.model';
+import { AudioControlsActions } from '../../actions/audio-controls.actions';
 
 @Component({
   //changeDetection: ChangeDetectionStrategy.OnPush,
