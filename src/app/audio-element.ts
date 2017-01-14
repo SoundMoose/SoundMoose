@@ -47,7 +47,7 @@ export const AUDIO_STREAM_PROVIDER = {
       // audioSrcNode.connect(audioCtx.destination);
 
 
-/////////////// In-Development Equalizer Component  ////////////////////
+/////////////////////////////  Equalizer Component  ////////////////////////////
       let gainDb,
         bandSplit,
         defaultQValue,
@@ -71,10 +71,7 @@ export const AUDIO_STREAM_PROVIDER = {
 
        //set the filter types (you could set all to 5, for a different result, feel free to experiment)
        //https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html#BANDPASS
-      //  lowshelf.type = 3;
-      //  mid.type = 5;
-      //  highshelf.type = 4;
-      // filters with type 5 (peaking), which lets all frequencies through and only amplifies/reduce at the frequency at which you've set the respective filter.frequency.value.
+
 
       // default gain values:
       highGain = 0;
