@@ -93,6 +93,7 @@
     "ie-shim": "^0.1.0",
     "rxjs": "5.0.0-beta.12",
     "three": "^0.83.0",
+    "three-orbit-controls": "^82.1.0",
     "zone.js": "~0.6.26"
   },
   "devDependencies": {
