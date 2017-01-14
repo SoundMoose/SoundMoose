@@ -226,8 +226,8 @@ track-detail .waveform .md-slider-track {
 }
 track-detail .waveform .md-slider-track-fill {
   height: 100%;
-  background: #FBBD08;
-  border-right: 2px solid red;
+  background: #000;
+  border-right: 1px solid #000;
   opacity: 0.5;
 }
 track-detail .waveform .progress-wrapper {
@@ -259,7 +259,9 @@ track-detail .waveform .track-current-time {
 }
 track-detail .waveform .track-length {
   margin-left: 0px;
-  left: 885px;
+  left: 618px;
+  top: 0px;
+  height: 26px;
 }
 track-detail .waveform .track-current-time {
   margin-left: 0px;
@@ -281,10 +283,17 @@ equalizer md-slider {
 track-detail .track-current-time {
   top: 0px;
   height: 25px;
+  width: none
+  padding-left: 3px;
+  padding-right: 3px;
 }
 
 track-progress-container .track-comments,
 track-detail .comments,
 player {
   font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif
+}
+.waveform canvas {
+  position: absolute;
+  top: 0px;
 }
