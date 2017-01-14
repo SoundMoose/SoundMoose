@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/merge';
 
 import { SoundCloudService } from '../../services/soundcloud.service';
-
+import { SpotifyService } from '../../services/spotify.service';
+import { Track } from '../../models/track.model';
 import {
   trigger,
   state,
@@ -36,9 +39,11 @@ import {
 export class SearchComponent {
 
   term$ = new Subject<string>();
-  items$;
+  soundCloudItems$ : Observable<Track[]>;
+  spotifyItems$ : Observable<Track[]>;
 
-  constructor(private soundCloudService: SoundCloudService) {
-    this.items$ = this.soundCloudService.loadSearchResults(this.term$);
+  constructor(private soundCloudService: SoundCloudService, private spotifyService: SpotifyService) {
+    this.soundCloudItems$ = this.soundCloudService.loadSearchResults(this.term$);
+    this.spotifyItems$= this.spotifyService.loadSearchResults(this.term$);
   }
 }

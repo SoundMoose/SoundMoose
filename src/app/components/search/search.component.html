@@ -12,12 +12,19 @@
   </div>
 </div>
 
-<div id="search-results" class="ui six column grid" *ngIf="items$">
+<div id="search-results" class="ui six column grid" *ngIf="soundCloudItems$">
   <div
     [@fadeInOut]="'in'"
-    *ngFor="let item of items$ | async"
+    *ngFor="let soundCloudItem of soundCloudItems$ | async"
     class="column"
   >
-    <top-track-tile [topTrack]="item"></top-track-tile>
+    <top-track-tile [topTrack]="soundCloudItem"></top-track-tile>
+  </div>
+  <div
+    [@fadeInOut]="'in'"
+    *ngFor="let spotifyItem of spotifyItems$ | async"
+    class="column"
+  >
+    <top-track-tile [topTrack]="spotifyItem"></top-track-tile>
   </div>
 </div>
