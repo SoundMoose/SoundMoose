@@ -103,17 +103,17 @@ export class ThreeDComponent {
     // camera.position.set(0, 0, 0);
     // scene.add(camera);
 
-    //update on resize: renderer size, aspect ratio and projection matrix
-    // window.addEventListener('resize', function () {
-    //     var WIDTH = window.innerWidth,
-    //         HEIGHT = window.innerHeight;
-    //
-    //     context.renderer.setSize(WIDTH, HEIGHT);
-    //
-    //     context.camera.aspect = WIDTH / HEIGHT;
-    //     context.camera.updateProjectionMatrix();
-    //
-    // });
+    // update on resize: renderer size, aspect ratio and projection matrix
+    window.addEventListener('resize', function () {
+        var WIDTH = window.innerWidth,
+            HEIGHT = window.innerHeight;
+
+        context.renderer.setSize(WIDTH, HEIGHT);
+
+        context.camera.aspect = WIDTH / HEIGHT;
+        context.camera.updateProjectionMatrix();
+
+    });
 
     //////////////// Orbit Controls - In Development ////////////////
     /////////////////////////////////////////////////////////////////
