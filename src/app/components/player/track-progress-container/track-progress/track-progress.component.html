@@ -1,4 +1,4 @@
-<span id="track-current-time" *ngIf="progressMinutesSeconds && !isNaN(progressMinutesSeconds)" class="track-current-time">{{ progressMinutesSeconds }}</span>
+<span *ngIf="progressMinutesSeconds" class="track-current-time">{{ progressMinutesSeconds }}</span>
 
 <div class="progress-wrapper">
   <md-slider
@@ -15,4 +15,4 @@
   </div>
 </div>
 
-<span *ngIf="durationMinutesSeconds && !isNaN(durationMinutesSeconds)" class="track-length">{{ durationMinutesSeconds }}</span>
+<span *ngIf="durationMinutesSeconds" class="track-length">{{ durationMinutesSeconds }}</span>

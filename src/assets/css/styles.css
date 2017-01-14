@@ -263,9 +263,6 @@ track-detail .waveform .track-length {
   top: 0px;
   height: 26px;
 }
-track-detail .waveform .track-current-time {
-  margin-left: 0px;
-}
 equalizer .md-slider-track {
   background: #404244;
 }
@@ -280,7 +277,8 @@ equalizer md-slider {
   margin-bottom: 10px;
 }
 
-track-detail .track-current-time {
+track-detail .waveform .track-current-time {
+  margin-left: 0px;
   top: 0px;
   height: 25px;
   width: none
