@@ -26,7 +26,7 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const HMR = helpers.hasProcessFlag('hot');
 const METADATA = {
   title: 'Soundmoose.com - designed with Angular2 and ngrx - https://github.com/hrr20-over9000/9001',
-  baseUrl: '/',
+  baseUrl: './',
   isDevServer: helpers.isWebpackDevServer()
 };
 
