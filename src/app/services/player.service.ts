@@ -21,7 +21,6 @@ import { TrackActions } from '../actions/track.actions';
 
 import { Player } from './../models/player.model';
 import { Track } from './../models/track.model';
-// import { AudioStreamModel } from './../models/audioStream.model';
 
 @Injectable()
 export class PlayerService {

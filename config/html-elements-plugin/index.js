@@ -44,7 +44,9 @@ function createTag(tagName, attrMap, publicPath) {
 
   // add trailing slash if we have a publicPath and it doesn't have one.
   if (publicPath && !RE_ENDS_WITH_BS.test(publicPath)) {
-    publicPath += '/';
+    if (publicPath !== '') {
+      publicPath += '/';
+    }
   }
 
   const attributes = Object.getOwnPropertyNames(attrMap)

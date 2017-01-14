@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { Auth } from './services/auth.service';
-
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
-
 import { Store } from '@ngrx/store';
 
 import { AppStore } from './models/appstore.model';
 import { AudioControlsActions } from './actions/audio-controls.actions';
 import { AudioControls } from './models/audio-controls.model';
+import { Auth } from './services/auth.service';
 
 @Component({
   selector: 'app',
@@ -24,7 +22,6 @@ export class AppComponent {
 
   constructor( private store$: Store<AppStore>, private AudioControlsActions: AudioControlsActions, private auth: Auth) {
 
-// window.auth = auth;
     this.toggleFrequencyOrWaveform$ = this.store$.select('audiocontrols')
       .map((audiocontrols: AudioControls) => audiocontrols.toggleFrequencyOrWaveform)
   }
