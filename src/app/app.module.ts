@@ -16,6 +16,7 @@ import { MaterialModule } from '@angular/material';
 import 'hammerjs';
 
 import { SoundCloudService } from './services/soundcloud.service';
+import { SpotifyService } from './services/spotify.service';
 import { YoutubeService } from './services/youtube.service';
 import { PlayerService } from './services/player.service';
 import { AudioControlsService } from './services/audio-controls.service';
@@ -62,6 +63,7 @@ import { YoutubePipe } from './youtube.pipe';
 
 // Application wide providers
 const APP_PROVIDERS = [
+  SpotifyService,
   SoundCloudService,
   YoutubeService,
   PlayerService,

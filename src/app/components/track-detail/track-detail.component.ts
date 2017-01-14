@@ -25,6 +25,11 @@ import { SoundCloudService } from './../../services/soundcloud.service';
 import { PlayerService } from './../../services/player.service';
 import { YoutubeService } from './../../services/youtube.service';
 
+declare var $: any;
+
+declare var Waveform: any;
+
+
 
 @Component({
   selector: 'track-detail',
@@ -101,6 +106,9 @@ export class TrackDetailComponent implements OnInit {
       this.track = item.track;
       this.created = item.created;
       this.youtubeId$ = this.youtubeService.searchYoutubeVideo(this.track.title + ' ' + this.track.artist);
+      if (this.waveformUrl != '') {
+        this.getWaveform();
+      }
     });
     this.storeSubscription = this.store$.select(s => s.player)
       .map((playerStatus: PlayerState) => playerStatus.isPlaying && playerStatus.currentTrack.id === this.track.id)
@@ -109,6 +117,25 @@ export class TrackDetailComponent implements OnInit {
 
     this.secondsSubscription = this.playerService.currentProgressInSeconds$.subscribe(item => {
       this.currentProgressInMilliseconds = item * 1000;
+    });
+  }
+
+  getWaveform() {
+    // https://github.com/soundcloud/waveformjs endpoint
+    $.getJSON("http://www.soundmoose.com:9292/w?callback=?", {
+      url: this.waveformUrl.replace(/^https:\/\//i, 'http://'),
+    }, function(d){
+      var sound;
+      var waveform = new Waveform({
+        container: $(".waveform").get(0),
+        data: d
+      });
+      var ctx = waveform.context;
+      var gradient = ctx.createLinearGradient(0, 0, 0, waveform.height);
+      gradient.addColorStop(0.0, "#FBBD08");
+      gradient.addColorStop(1.0, "#FF9A00");
+      waveform.innerColor = gradient;
+      waveform.redraw();
     });
   }
 

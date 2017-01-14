@@ -34,8 +34,6 @@ export class PlayerService {
   currentProgressInSeconds$: Observable<number>;
 
   constructor(protected audioStream: AudioStream, private store$: Store<AppStore>, private playerActions: PlayerActions) {
-    console.log('player service started');
-
     // this grabs the html audio element from the audio stream
     this.audio = audioStream.audioElement;
     this.audio.crossOrigin = "anonymous"; // CORS :)

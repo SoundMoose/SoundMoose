@@ -45,7 +45,6 @@ export class ThreeDComponent {
     var scene,
         light,
         light1,
-        lightCrazyTime,
         camera,
         renderer;
 
@@ -94,10 +93,6 @@ export class ThreeDComponent {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    // shadows for point light animation
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.BasicShadowMap;
-
     // SCENE
     scene = new THREE.Scene();
 
@@ -105,8 +100,7 @@ export class ThreeDComponent {
     /////////////////////////////////////////////////////////////////
     camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 3000);
     // camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, 0.1, 3000);
-
-    camera.position.set( 0, 100, 1500 );
+    // camera.position.set(0, 0, 0);
     // scene.add(camera);
 
     // update on resize: renderer size, aspect ratio and projection matrix
@@ -133,36 +127,16 @@ export class ThreeDComponent {
     // -Point light gets emitted from a single point in all directions.
     //      PointLight( color, intensity, distance, decay )
     light = new THREE.AmbientLight(0xffffff, 0.5);
-    light1 = new THREE.PointLight(0xffffff, 0.5, -5000, 1000);  // distance default === 0, decay default === 1
+    light1 = new THREE.PointLight(0xffffff, 0.5);  // distance default === 0, decay default === 1
+    // light.position.set( 50, 50, 50 );
 
     scene.add(light);
     scene.add(light1);
-
-    //////////////////// ADD SOME CRAZY LIGHTS ////////////////////////
-		function createLightSphere( color ) {
-			var pointLight = new THREE.PointLight( color, 1, 1000 );
-			pointLight.castShadow = true;
-			// pointLight.shadow.camera.near = 1;
-			// pointLight.shadow.camera.far = 30;
-			// pointLight.shadowCameraVisible = true;
-			pointLight.shadow.bias = 0.01;
-			var geometry = new THREE.SphereGeometry( 2, 250, 100 );
-			var material = new THREE.MeshBasicMaterial( { color: color } );
-			var sphere = new THREE.Mesh( geometry, material );
-			pointLight.add( sphere );
-      console.log(pointLight);
-			return pointLight
-		}
-    lightCrazyTime = createLightSphere( 0xffffff );
-    scene.add( lightCrazyTime );
-
 
     /////////////////////////// Objects /////////////////////////////
     /////////////////////////////////////////////////////////////////
     // BoxGeometry(width, height, depth, widthSegments, heightSegments, depthSegments)
     geometry = new THREE.BoxGeometry(50, 50, 50); // segmented faces optional. Default is 1.
-    geometry.castShadow = true;
-    geometry.receiveShadow = true;
 
     // shinyMaterial = new THREE.MeshPhongMaterial({color:0x1A1A1A});
 
@@ -188,18 +162,16 @@ export class ThreeDComponent {
     mesh9 = new THREE.Mesh(geometry, material9);
     mesh10 = new THREE.Mesh(geometry, material10);
 
-    var zPosition = 0
-
-    mesh1.position.set(-450, 0, zPosition);
-    mesh2.position.set(-350, 0, zPosition);
-    mesh3.position.set(-250, 0, zPosition);
-    mesh4.position.set(-150, 0, zPosition);
-    mesh5.position.set(-50, 0, zPosition);
-    mesh6.position.set(50, 0, zPosition);
-    mesh7.position.set(150, 0, zPosition);
-    mesh8.position.set(250, 0, zPosition);
-    mesh9.position.set(350, 0, zPosition);
-    mesh10.position.set(450, 0, zPosition);
+    mesh1.position.set(-450, -150, -1000);
+    mesh2.position.set(-350, -150, -1000);
+    mesh3.position.set(-250, -150, -1000);
+    mesh4.position.set(-150, -150, -1000);
+    mesh5.position.set(-50, -150, -1000);
+    mesh6.position.set(50, -150, -1000);
+    mesh7.position.set(150, -150, -1000);
+    mesh8.position.set(250, -150, -1000);
+    mesh9.position.set(350, -150, -1000);
+    mesh10.position.set(450, -150, -1000);
 
     scene.add(mesh1);
     scene.add(mesh2);
@@ -211,21 +183,6 @@ export class ThreeDComponent {
     scene.add(mesh8);
     scene.add(mesh9);
     scene.add(mesh10);
-
-
-    ///////////////////////// Torus Knot, YOLO ///////////////////////////
-    var torusGeometry = new THREE.TorusGeometry( 600, 40, 0, 60 );
-		var torusMaterial = new THREE.MeshPhongMaterial( {
-			color: 'rgb(36, 36, 36)',
-			shininess: 100,
-			specular: 0x222222
-		} );
-		var torus = new THREE.Mesh( torusGeometry, torusMaterial );
-		// torusKnot.position.set( 0, 100, -300 );
-		torus.position.set( 0, 0, 0 );
-		torus.castShadow = true;
-		torus.receiveShadow = true;
-		// scene.add( torus );
 
     ///////////////////////// Render Loop ///////////////////////////
     /////////////////////////////////////////////////////////////////
@@ -309,19 +266,16 @@ export class ThreeDComponent {
       mesh9.scale.y = getDatMid8/3000 + 1;
       mesh10.scale.y = getDatTreble/3000 + 1;
 
-      // poisution (x, y, z)
-
-      var zPosition = 0;
-      mesh1.position.set(-450, getDatBass/120 - 100, zPosition);
-      mesh2.position.set(-350, getDatMid1/120 - 100, zPosition);
-      mesh3.position.set(-250, getDatMid2/120 - 100, zPosition);
-      mesh4.position.set(-150, getDatMid3/120 - 100, zPosition);
-      mesh5.position.set(-50, getDatMid4/120 - 100, zPosition);
-      mesh6.position.set(50, getDatMid5/120 - 100, zPosition);
-      mesh7.position.set(150, getDatMid6/120 - 100, zPosition);
-      mesh8.position.set(250, getDatMid7/120 - 100, zPosition);
-      mesh9.position.set(350, getDatMid8/120 - 100, zPosition);
-      mesh10.position.set(450, getDatTreble/120 - 100, zPosition);
+      mesh1.position.set(-450, getDatBass/120 - 100, -1000);
+      mesh2.position.set(-350, getDatMid1/120 - 100, -1000);
+      mesh3.position.set(-250, getDatMid2/120 - 100, -1000);
+      mesh4.position.set(-150, getDatMid3/120 - 100, -1000);
+      mesh5.position.set(-50, getDatMid4/120 - 100, -1000);
+      mesh6.position.set(50, getDatMid5/120 - 100, -1000);
+      mesh7.position.set(150, getDatMid6/120 - 100, -1000);
+      mesh8.position.set(250, getDatMid7/120 - 100, -1000);
+      mesh9.position.set(350, getDatMid8/120 - 100, -1000);
+      mesh10.position.set(450, getDatTreble/120 - 100, -1000);
 
       mesh1.rotation.y += 0.01;
       mesh2.rotation.y += 0.01;
@@ -335,24 +289,6 @@ export class ThreeDComponent {
       mesh10.rotation.y += 0.01;
       // mesh1.rotation.x += 0.01;  // to use in modifying speed, size, or colors
 
-
-
-      /////////////////////// Animate Light //////////////////////
-      var time = performance.now() * 0.001;
-			lightCrazyTime.position.x = Math.sin( time ) * 300;
-			lightCrazyTime.position.y = Math.sin( time * 1.1 ) * 250 + 5;
-			lightCrazyTime.position.z = Math.sin( time * 1.2 ) * 1000;
-			time += 10000;
-
-      // lightCrazyTime.color = (0xffffff);
-      // lightCrazyTime.intensity = (colorAdjBass*100);
-
-			// lightCrazyTime2.position.x = Math.sin( time ) * 9;
-			// lightCrazyTime2.position.y = Math.sin( time * 1.1 ) * 9 + 5;
-			// lightCrazyTime2.position.z = Math.sin( time * 1.2 ) * 9;
-			// torusKnot.rotation.y = time * 0.1;
-
-
       // render scene
       renderer.render(scene, camera);
 
@@ -360,9 +296,5 @@ export class ThreeDComponent {
       // context.controls.update();
       requestAnimationFrame(render);
     }
-  }
-
-  ngOnDestroy() {
-    // this.audio.pause();
   }
 }
