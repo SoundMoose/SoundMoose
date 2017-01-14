@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
@@ -27,7 +27,7 @@ export class PlayerControlsComponent implements OnDestroy {
   showVisualization: boolean;
   playerSubscription: Subscription;
   tracksList: Track[];
-
+  tracksSubscription: Subscription;
 
   constructor (private store$: Store<AppStore>, private playerActions: PlayerActions) {
     this.player$ = this.store$.select(s => s.player);

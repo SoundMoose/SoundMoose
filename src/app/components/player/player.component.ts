@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, OnDestroy } from '@angular/core'
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 import { AppState } from '../app.service';
 import { AppStore } from '../../models/appstore.model';
@@ -17,7 +17,6 @@ import { AudioControls } from '../../models/audio-controls.model';
 import { AudioControlsActions } from '../../actions/audio-controls.actions';
 import { Player } from '../../models/player.model';
 import { PlayerService } from './../../services/player.service';
-
 
 
 @Component({
