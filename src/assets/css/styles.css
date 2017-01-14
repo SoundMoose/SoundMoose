@@ -259,7 +259,7 @@ track-detail .waveform .track-current-time {
 }
 track-detail .waveform .track-length {
   margin-left: 0px;
-  left: 618px;
+  left: 619px;
   top: 0px;
   height: 26px;
 }
@@ -281,7 +281,7 @@ track-detail .waveform .track-current-time {
   margin-left: 0px;
   top: 0px;
   height: 25px;
-  width: none
+  width: auto;
   padding-left: 3px;
   padding-right: 3px;
 }
