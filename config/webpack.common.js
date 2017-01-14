@@ -293,7 +293,7 @@ module.exports = function (options) {
         helpers.root('node_modules/@angular/core/src/facade/math.js')
       ),
     ],
-
+    target: 'electron-renderer',
     /*
      * Include polyfills or mocks for various node stuff
      * Description: Node configuration
