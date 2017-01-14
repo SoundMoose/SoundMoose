@@ -7,6 +7,7 @@ import { combineReducers, StoreModule } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { compose } from '@ngrx/core/compose';
 import { MomentModule } from 'angular2-moment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {
   RouterModule,
   PreloadAllModules
