@@ -76,6 +76,7 @@
     "@ngrx/core": "^1.2.0",
     "@ngrx/store": "^2.2.1",
     "@ngrx/store-devtools": "^3.2.2",
+    "@types/auth0": "^2.3.33",
     "@types/auth0-lock": "^10.9.0",
     "@types/howler": "^2.0.0",
     "@types/jquery": "^2.0.39",
