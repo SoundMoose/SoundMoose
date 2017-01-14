@@ -11,7 +11,7 @@ import { AudioStream } from '../../audio-element';
 import { AudioControlsActions } from '../../actions/audio-controls.actions';
 
 import * as THREE from 'three';
-import * as ThreeOrbitControls from 'three-orbit-controls';
+// import * as ThreeOrbitControls from 'three-orbit-controls';
 
 
 
@@ -39,7 +39,7 @@ export class ThreeDComponent {
   constructor( private audioSrc: AudioStream, private store$: Store<AppStore> ) {
     this.audioCtx = audioSrc.audioCtx;
     this.audioSrcNode = audioSrc.audioSrcNode;
-    this.OrbitControls = ThreeOrbitControls(THREE);
+    // this.OrbitControls = ThreeOrbitControls(THREE);
   }
 
   ngOnInit(){
@@ -126,8 +126,8 @@ export class ThreeDComponent {
 
     //////////////// Orbit Controls - In Development ////////////////
     /////////////////////////////////////////////////////////////////
-    this.controls = new this.OrbitControls(camera, renderer.domElement);
-    this.controls.addEventListener('change', renderer);
+    // this.controls = new this.OrbitControls(camera, renderer.domElement);
+    // this.controls.addEventListener('change', renderer);
 
     /////////////////////////// LIGHTS //////////////////////////////
     /////////////////////////////////////////////////////////////////
@@ -136,7 +136,7 @@ export class ThreeDComponent {
     // -Point light gets emitted from a single point in all directions.
     //      PointLight( color, intensity, distance, decay )
     light = new THREE.AmbientLight(0xffffff, 0.5);
-    light1 = new THREE.PointLight(0xffffff, 0.5, -5000, 1000);  // distance default === 0, decay default === 1
+    light1 = new THREE.PointLight(0xffffff, 0.5, -50, 10);  // distance default === 0, decay default === 1
 
     scene.add(light);
     scene.add(light1);
@@ -217,17 +217,17 @@ export class ThreeDComponent {
 
 
     ///////////////////////// Torus Knot, YOLO ///////////////////////////
-    var torusGeometry = new THREE.TorusGeometry( 600, 40, 0, 60 );
-		var torusMaterial = new THREE.MeshPhongMaterial( {
-			color: 'rgb(36, 36, 36)',
-			shininess: 100,
-			specular: 0x222222
-		} );
-		var torus = new THREE.Mesh( torusGeometry, torusMaterial );
-		// torusKnot.position.set( 0, 100, -300 );
-		torus.position.set( 0, 0, 0 );
-		torus.castShadow = true;
-		torus.receiveShadow = true;
+    // var torusGeometry = new THREE.TorusGeometry( 600, 40, 0, 60 );
+		// var torusMaterial = new THREE.MeshPhongMaterial( {
+		// 	color: 'rgb(36, 36, 36)',
+		// 	shininess: 100,
+		// 	specular: 0x222222
+		// } );
+		// var torus = new THREE.Mesh( torusGeometry, torusMaterial );
+		// // torusKnot.position.set( 0, 100, -300 );
+		// torus.position.set( 0, 0, 0 );
+		// torus.castShadow = true;
+		// torus.receiveShadow = true;
 		// scene.add( torus );
 
     ///////////////////////// Render Loop ///////////////////////////
@@ -365,7 +365,4 @@ export class ThreeDComponent {
     }
   }
 
-  ngOnDestroy() {
-    // this.audio.pause();
-  }
 }
