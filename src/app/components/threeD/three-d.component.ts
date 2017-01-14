@@ -10,7 +10,8 @@ import { AppStore } from '../../models/appstore.model';
 import { AudioStream } from '../../audio-element';
 import { AudioControlsActions } from '../../actions/audio-controls.actions';
 
-import * as THREE from 'three'
+import * as THREE from 'three';
+var OrbitControls = require('three-orbit-controls')(THREE);
 
 
 @Component({
@@ -31,6 +32,7 @@ export class ThreeDComponent {
   private mesh: any;
 
   private audio: any;
+  private controls: any;
 
   constructor( private audioSrc: AudioStream, private store$: Store<AppStore> ) {
     this.audioCtx = audioSrc.audioCtx;
@@ -38,22 +40,6 @@ export class ThreeDComponent {
   }
 
   ngOnInit(){
-
-    // this.audioCtx = new AudioContext();
-    // this.audio = new Audio();
-    // this.audio.src = '../../assets/sounds/Broke_For_Free_-_01_-_Night_Owl.mp3'
-    // this.audioSrcNode = this.audioCtx.createMediaElementSource(this.audioSrc.audioElement);
-    // var analyser = this.audioCtx.createAnalyser();
-    // analyser.fftSize = 2048;
-    // analyser.smoothingTimeConstant = 0.8;
-
-    // this.audioSrcNode.connect(analyser);
-    // this.audioSrcNode.connect(this.audioCtx.destination);
-    // // frequencyBinCount tells you how many values you'll receive from the analyser
-    // var frequencyData = new Uint8Array(analyser.frequencyBinCount);
-    var frequencyData = new Uint8Array(this.audioSrc.frequencyAnalyser.frequencyBinCount);
-
-    // this.audio.play();
 
     // scene/environmental variables
     var scene,
@@ -85,7 +71,16 @@ export class ThreeDComponent {
         mesh9,
         mesh10;
 
-    //RENDERER
+    var context = this;
+
+    ////////////////////// Audio Set Up /////////////////////////////
+    /////////////////////////////////////////////////////////////////
+    // this.audioSrcNode.frequencyAnalyser.smoothingTimeConstant = 0.8;
+    var frequencyData = new Uint8Array(this.audioSrc.frequencyAnalyser.frequencyBinCount);
+
+
+    ////////////////////// Renderer and Scene ///////////////////////
+    /////////////////////////////////////////////////////////////////
     var renderer: any = new THREE.WebGLRenderer(
       {
         canvas: <HTMLCanvasElement> document.getElementById("threeDCanvas"),
@@ -98,39 +93,63 @@ export class ThreeDComponent {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    // CAMERA
-    camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 3000);
-    // camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, 0.1, 3000);
-
     // SCENE
     scene = new THREE.Scene();
 
-    // LIGHTS - Ambiant light globally illuminates all objects in the scene equally.
-    // AmbientLight( color, intensity )
-    light = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(light);
+    ////////////////////////// Camera ///////////////////////////////
+    /////////////////////////////////////////////////////////////////
+    camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 3000);
+    // camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, 0.1, 3000);
+    // camera.position.set(0, 0, 0);
+    // scene.add(camera);
 
-    // A light that gets emitted from a single point in all directions.
-    // PointLight( color, intensity, distance, decay )
-    // https://threejs.org/docs/?q=pointlight#Reference/Lights/PointLight
+    //update on resize: renderer size, aspect ratio and projection matrix
+    // window.addEventListener('resize', function () {
+    //     var WIDTH = window.innerWidth,
+    //         HEIGHT = window.innerHeight;
+    //
+    //     context.renderer.setSize(WIDTH, HEIGHT);
+    //
+    //     context.camera.aspect = WIDTH / HEIGHT;
+    //     context.camera.updateProjectionMatrix();
+    //
+    // });
+
+    //////////////// Orbit Controls - In Development ////////////////
+    /////////////////////////////////////////////////////////////////
+    this.controls = new OrbitControls(camera, renderer.domElement);
+    this.controls.addEventListener('change', renderer);
+
+    /////////////////////////// LIGHTS //////////////////////////////
+    /////////////////////////////////////////////////////////////////
+    // -Ambiant light globally illuminates all objects in the scene equally.
+    //      AmbientLight( color, intensity )
+    // -Point light gets emitted from a single point in all directions.
+    //      PointLight( color, intensity, distance, decay )
+    light = new THREE.AmbientLight(0xffffff, 0.5);
     light1 = new THREE.PointLight(0xffffff, 0.5);  // distance default === 0, decay default === 1
     // light.position.set( 50, 50, 50 );
+
+    scene.add(light);
     scene.add(light1);
 
-    // OBJECT
+    /////////////////////////// Objects /////////////////////////////
+    /////////////////////////////////////////////////////////////////
     // BoxGeometry(width, height, depth, widthSegments, heightSegments, depthSegments)
     geometry = new THREE.BoxGeometry(50, 50, 50); // segmented faces optional. Default is 1.
-    // var cubeMaterial = new THREE.MeshPhongMaterial({color:frequencyData[i]*0xff3300});
+
+    // shinyMaterial = new THREE.MeshPhongMaterial({color:0x1A1A1A});
+
     material1 = new THREE.MeshLambertMaterial({color: 0x1A1A1A}); // for non-shiny surfaces
-    material2 = new THREE.MeshLambertMaterial({color: 0x1A1A1A}); // for non-shiny surfaces
-    material3 = new THREE.MeshLambertMaterial({color: 0x1A1A1A}); // for non-shiny surfaces
-    material4 = new THREE.MeshLambertMaterial({color: 0x1A1A1A}); // for non-shiny surfaces
-    material5 = new THREE.MeshLambertMaterial({color: 0x1A1A1A}); // for non-shiny surfaces
-    material6 = new THREE.MeshLambertMaterial({color: 0xffffff}); // for non-shiny surfaces
-    material7 = new THREE.MeshLambertMaterial({color: 0x1A1A1A}); // for non-shiny surfaces
-    material8 = new THREE.MeshLambertMaterial({color: 0x1A1A1A}); // for non-shiny surfaces
-    material9 = new THREE.MeshLambertMaterial({color: 0x1A1A1A}); // for non-shiny surfaces
-    material10 = new THREE.MeshLambertMaterial({color: 0xffffff}); // for non-shiny surfaces
+    material2 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
+    material3 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
+    material4 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
+    material5 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
+    material6 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
+    material7 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
+    material8 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
+    material9 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
+    material10 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
 
     mesh1 = new THREE.Mesh(geometry, material1);
     mesh2 = new THREE.Mesh(geometry, material2);
@@ -165,12 +184,13 @@ export class ThreeDComponent {
     scene.add(mesh9);
     scene.add(mesh10);
 
-    //RENDER LOOP
-    var context = this;
-
+    ///////////////////////// Render Loop ///////////////////////////
+    /////////////////////////////////////////////////////////////////
     requestAnimationFrame(render);
 
     function render() {
+
+      //////////////////////// Generate New Data ////////////////////
       context.audioSrc.frequencyAnalyser.getByteFrequencyData(frequencyData);
 
       function getDat(arr, startIdx, endIdx) {
@@ -193,34 +213,46 @@ export class ThreeDComponent {
       var getDatMid8 = getDat(frequencyData, 800, 900);
       var getDatTreble = getDat(frequencyData, 900, 1000);
 
-      // console.log(frequencyData.length);
-      // console.log(getDatBass/2000);
-      // var adjustment = Math.round(frequencyData[0]/100);
-      // var adjustment = Math.round(sumOfAll/10000);
-      var colorAdjustmentBass = Math.round(getDatBass/3000);
-      var colorAdjustmentMid1 = Math.round(getDatMid1/3000);
-      var colorAdjustmentMid2 = Math.round(getDatMid2/3000);
-      var colorAdjustmentMid3 = Math.round(getDatMid3/3000);
-      var colorAdjustmentMid4 = Math.round(getDatMid4/3000);
-      var colorAdjustmentMid5 = Math.round(getDatMid5/3000);
-      var colorAdjustmentMid6 = Math.round(getDatMid6/3000);
-      var colorAdjustmentMid7 = Math.round(getDatMid7/3000);
-      var colorAdjustmentMid8 = Math.round(getDatMid8/3000);
-      var colorAdjustmentTreble = Math.round(getDatTreble/3000);
+      //////////////////////// Animate Color //////////////////////
+      var colorOffset = 50;
 
-      // mesh.material.color.setHex( adjustment*0xff3300 );
+      var colorAdjBass = Math.round(getDatBass/150) + colorOffset;
+      var colorAdjMid1 = Math.round(getDatMid1/150) + colorOffset;
+      var colorAdjMid2 = Math.round(getDatMid2/150) + colorOffset;
+      var colorAdjMid3 = Math.round(getDatMid2/150) + colorOffset;
+      var colorAdjMid4 = Math.round(getDatMid4/150) + colorOffset;
+      var colorAdjMid5 = Math.round(getDatMid5/150) + colorOffset;
+      var colorAdjMid6 = Math.round(getDatMid6/150) + colorOffset;
+      var colorAdjMid7 = Math.round(getDatMid7/150) + colorOffset;
+      var colorAdjMid8 = Math.round(getDatMid8/150) + colorOffset;
+      var colorAdjTreble = Math.round(getDatTreble/150) + colorOffset;
+
+      // mesh.material.color.setHex( adjment*0xff3300 );
       // mesh.material.color.set( color );
-      // mesh.material.color.set( colorAdjustment, colorAdjustment, colorAdjustment );
-      mesh1.material.color.set('rgb(' + colorAdjustmentBass + 10 +',' + colorAdjustmentBass + 10 +',' + colorAdjustmentBass + 10 +')');
-      mesh2.material.color.set('rgb(' + colorAdjustmentMid1 + 10 +',' + colorAdjustmentMid1 + 10 +',' + colorAdjustmentMid1 + 10 +')');
-      mesh3.material.color.set('rgb(' + colorAdjustmentMid2 + 10 +',' + colorAdjustmentMid2 + 10 +',' + colorAdjustmentMid2 + 10 +')');
-      mesh4.material.color.set('rgb(' + colorAdjustmentMid3 + 10 +',' + colorAdjustmentMid3 + 10 +',' + colorAdjustmentMid3 + 10 +')');
-      mesh5.material.color.set('rgb(' + colorAdjustmentMid4 + 10 +',' + colorAdjustmentMid4 + 10 +',' + colorAdjustmentMid4 + 10 +')');
-      mesh6.material.color.set('rgb(' + colorAdjustmentMid5 + 10 +',' + colorAdjustmentMid5 + 10 +',' + colorAdjustmentMid5 + 10 +')');
-      mesh7.material.color.set('rgb(' + colorAdjustmentMid6 + 10 +',' + colorAdjustmentMid6 + 10 +',' + colorAdjustmentMid6 + 10 +')');
-      mesh8.material.color.set('rgb(' + colorAdjustmentMid7 + 10 +',' + colorAdjustmentMid7 + 10 +',' + colorAdjustmentMid7 + 10 +')');
-      mesh9.material.color.set('rgb(' + colorAdjustmentMid8 + 10 +',' + colorAdjustmentMid8 + 10 +',' + colorAdjustmentMid8 + 10 +')');
-      mesh10.material.color.set('rgb(' + colorAdjustmentTreble + 10 +',' + colorAdjustmentTreble + 10 +',' + colorAdjustmentTreble + 10 +')');
+      // mesh.material.color.set( colorAdjment, colorAdjment, colorAdjment );
+      var colorString1 = 'rgb('+colorAdjBass+','+colorAdjBass+','+colorAdjBass+')';
+      var colorString2 = 'rgb('+colorAdjMid1+','+colorAdjMid1+','+colorAdjMid1+')';
+      var colorString3 = 'rgb('+colorAdjMid2+','+colorAdjMid2+','+colorAdjMid2+')';
+      var colorString4 = 'rgb('+colorAdjMid3+','+colorAdjMid3+','+colorAdjMid3+')';
+      var colorString5 = 'rgb('+colorAdjMid4+','+colorAdjMid4+','+colorAdjMid4+')';
+      var colorString6 = 'rgb('+colorAdjMid5+','+colorAdjMid5+','+colorAdjMid5+')';
+      var colorString7 = 'rgb('+colorAdjMid6+','+colorAdjMid6+','+colorAdjMid6+')';
+      var colorString8 = 'rgb('+colorAdjMid7+','+colorAdjMid7+','+colorAdjMid7+')';
+      var colorString9 = 'rgb('+colorAdjMid8+','+colorAdjMid8+','+colorAdjMid8+')';
+      var colorString10 = 'rgb('+colorAdjTreble+','+colorAdjTreble+','+colorAdjTreble+')';
+
+      mesh1.material.color.set(colorString1);
+      mesh2.material.color.set(colorString2);
+      mesh3.material.color.set(colorString3);
+      mesh4.material.color.set(colorString4);
+      mesh5.material.color.set(colorString5);
+      mesh6.material.color.set(colorString6);
+      mesh7.material.color.set(colorString7);
+      mesh8.material.color.set(colorString8);
+      mesh9.material.color.set(colorString9);
+      mesh10.material.color.set(colorString10);
+
+      /////////////////////// Animate Position //////////////////////
 
       ///////// Geometry methods: https://threejs.org/docs/#Reference/Core/Geometry
       mesh1.scale.y = getDatBass/3000 + 1;
@@ -257,7 +289,11 @@ export class ThreeDComponent {
       mesh10.rotation.y += 0.01;
       // mesh1.rotation.x += 0.01;  // to use in modifying speed, size, or colors
 
+      // render scene
       renderer.render(scene, camera);
+
+      // update orbitals
+      // context.controls.update();
       requestAnimationFrame(render);
     }
   }

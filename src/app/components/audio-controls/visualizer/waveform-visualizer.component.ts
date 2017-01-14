@@ -60,6 +60,7 @@ export class WaveformVisualizerComponent implements OnInit, OnDestroy {
 
   drawWaveOscilliscope(context) {
     if (context.hasCanvas) {
+
       context.drawWaveformVisual = requestAnimationFrame(context.drawWaveOscilliscope);
 
       let gradient = context.waveformCanvasCtx.createLinearGradient(0, 0, 0, context.waveformHEIGHT);
