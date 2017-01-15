@@ -24,6 +24,7 @@ import { AudioStream } from '../../audio-element';
 import { SoundCloudService } from './../../services/soundcloud.service';
 import { PlayerService } from './../../services/player.service';
 import { YoutubeService } from './../../services/youtube.service';
+import { LastfmService } from './../../services/lastfm.service';
 
 declare var $: any;
 
@@ -59,6 +60,7 @@ export class TrackDetailComponent implements OnInit {
     private soundCloudService: SoundCloudService,
     private playerService: PlayerService,
     private youtubeService: YoutubeService,
+    private lastfmService: LastfmService,
     private router: Router,
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
@@ -74,6 +76,7 @@ export class TrackDetailComponent implements OnInit {
   waveformUrl: string;
   track: Track;
   youtubeId$: Observable<string>;
+  similarArtists$: Observable<any>;
   created: string;
   largeArtworkUrl: string;
   hovering: {} = {};
@@ -104,6 +107,9 @@ export class TrackDetailComponent implements OnInit {
       this.largeArtworkUrl = item.largeArtworkUrl;
       this.waveformUrl = item.waveformUrl;
       this.track = item.track;
+      if (this.track.artist) {
+
+      }
       this.created = item.created;
       this.youtubeId$ = this.youtubeService.searchYoutubeVideo(this.track.title + ' ' + this.track.artist);
       if (this.waveformUrl != '') {
@@ -118,6 +124,7 @@ export class TrackDetailComponent implements OnInit {
     this.secondsSubscription = this.playerService.currentProgressInSeconds$.subscribe(item => {
       this.currentProgressInMilliseconds = item * 1000;
     });
+
   }
 
   getWaveform() {
