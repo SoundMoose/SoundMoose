@@ -1,5 +1,5 @@
 <img *ngIf="(currentTrack$ | async)?.id !== 0" class="album-art" src="{{ (currentTrack$ | async)?.imgUrl }}" />
 <div *ngIf="(currentTrack$ | async)?.id !== 0" class="current-track">
   <div class="playing">Playing track</div>
-  <div class="track-info"><a routerLink="/track/{{(currentTrack$ | async)?.id}}">{{ trim((currentTrack$ | async)?.artist + " - " + (currentTrack$ | async)?.title) }}</a></div>
+  <div class="track-info"><a routerLink="/track/{{(currentTrack$ | async)?.platform}}/{{(currentTrack$ | async)?.id}}">{{ trim((currentTrack$ | async)?.artist + " - " + (currentTrack$ | async)?.title) }}</a></div>
 </div>

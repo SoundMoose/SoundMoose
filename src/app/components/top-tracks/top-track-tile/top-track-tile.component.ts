@@ -27,6 +27,7 @@ export class TopTrackTileComponent{
     artist: '',
     imgUrl: '',
     streamUrl: '',
+    platform: '',
     duration: 0
   }
 

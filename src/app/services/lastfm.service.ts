@@ -26,7 +26,8 @@ export class LastfmService {
           trackName :item.name,
           artist: item.artist.name,
           lastfmUrl :item.url,
-          image: item.image[1]['#text']
+          image: item.image[1]['#text'],
+          searchUrl: '/search/' + item.name + ' ' + item.artist.name
         };
       }));
   }
@@ -45,7 +46,7 @@ export class LastfmService {
           artistName: item.name,
           lastfmUrl: item.url,
           image: item.image[1]['#text'],
-          searchUrl: '/search/' + encodeURIComponent(item.name)
+          searchUrl: '/search/' + item.name
         };
       }));
   }
