@@ -101,10 +101,12 @@ background: linear-gradient(to left, #232526 , #414345); margin-top: 35px;">
           <div class="column">
             <div *ngIf="description" class="ui segment" style="white-space: pre-wrap; margin-right: 20px;  background: rgba(0,0,0,0.2);">{{ description }}</div>
 
-            <div class="ui segment" style="margin-right: 20px; background: rgba(0,0,0,0.2);">
+            <div *ngIf="license" class="ui segment" style="margin-right: 20px; background: rgba(0,0,0,0.2);">
              <p>License: {{ license }}</p>
              <p>From: SoundCloud</p>
             </div>
+            <similar-artists *ngIf="track.artist" [currentArtist]="track.artist"></similar-artists>
+            <similar-tracks *ngIf="track.artist && track.title" [currentArtist]="track.artist" [currentTrack]="track.title"></similar-tracks>
           </div>
         </div>
       </div>

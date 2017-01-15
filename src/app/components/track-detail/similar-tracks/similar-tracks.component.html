@@ -1,0 +1,16 @@
+<div *ngIf="similarTracks$ | async" class="ui segment" style="margin-top: 10px; margin-right: 20px; background: rgba(0,0,0,0.2);">
+   <p>Similar tracks <img src="assets/img/last-fm-xxl.png" style="width: 10px; height: 10px;" alt="Recommendations from last.fm" /></p>
+
+      <ng-container *ngFor="let similarTrack of (similarTracks$ | async); let i = index">
+        <div class="similar-track" *ngIf="showAll || i < 5">
+          <div style="width: 6%; align-self: flex-end;">
+            <img class="similar-track" [src]="similarTrack.image" alt="similarTrack.trackName" />
+          </div>
+          <div>
+            <a routerLink="similarTrack.searchUrl">{{ similarTrack.artist }} - {{ similarTrack.trackName }}</a>
+          </div>
+        </div>
+      </ng-container>
+
+      <a *ngIf="!showAll" class="show-all" (click)="showAll = true">Show all...</a>
+</div>

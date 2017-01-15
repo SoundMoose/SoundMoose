@@ -1,0 +1,25 @@
+.similar-artist img {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+.similar-artist {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 40px;
+  display: flex;
+}
+
+a.show-all,
+.similar-artist a,
+.similar-artist a:hover,
+.similar-artist a:active
+ {
+  color: #fff;
+  margin-top: -15px;
+  margin-left: 10px;
+}
+.show-all {
+  margin-top: 10px;
+  cursor: pointer;
+}

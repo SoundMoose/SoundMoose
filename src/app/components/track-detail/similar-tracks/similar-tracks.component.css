@@ -1,0 +1,25 @@
+.similar-track img {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+.similar-track {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 40px;
+  display: flex;
+}
+
+a.show-all,
+.similar-track a,
+.similar-track a:hover,
+.similar-track a:active
+ {
+  color: #fff;
+  margin-top: -15px;
+  margin-left: 10px;
+}
+.show-all {
+  margin-top: 10px;
+  cursor: pointer;
+}
