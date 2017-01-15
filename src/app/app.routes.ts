@@ -8,8 +8,9 @@ export const ROUTES: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', component: TopTracksComponent },
   { path: 'top_tracks/:genre', component: TopTracksComponent },
-  { path: 'track/:trackId', component: TrackDetailComponent },
+  { path: 'track/:platform/:trackId', component: TrackDetailComponent },
   { path: 'search', component: SearchComponent },
+  { path: 'search/:query', component: SearchComponent },
   { path: 'threeD', component: ThreeDComponent },
   { path: '**', redirectTo: 'home'}
 ];

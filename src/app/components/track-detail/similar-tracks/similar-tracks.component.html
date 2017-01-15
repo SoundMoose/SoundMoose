@@ -7,7 +7,7 @@
             <img class="similar-track" [src]="similarTrack.image" alt="similarTrack.trackName" />
           </div>
           <div>
-            <a routerLink="similarTrack.searchUrl">{{ similarTrack.artist }} - {{ similarTrack.trackName }}</a>
+            <a [routerLink]="similarTrack.searchUrl">{{ similarTrack.artist }} - {{ similarTrack.trackName }}</a>
           </div>
         </div>
       </ng-container>

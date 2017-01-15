@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import 'rxjs/add/operator/merge';
 
 import { SoundCloudService } from '../../services/soundcloud.service';
@@ -41,9 +42,15 @@ export class SearchComponent {
   term$ = new Subject<string>();
   soundCloudItems$ : Observable<Track[]>;
   spotifyItems$ : Observable<Track[]>;
+  query: string;
 
-  constructor(private soundCloudService: SoundCloudService, private spotifyService: SpotifyService) {
+  constructor(private soundCloudService: SoundCloudService, private spotifyService: SpotifyService, private route: ActivatedRoute) {
+    this.query = this.route.snapshot.params['query'];
     this.soundCloudItems$ = this.soundCloudService.loadSearchResults(this.term$);
     this.spotifyItems$= this.spotifyService.loadSearchResults(this.term$);
+    if (this.query) {
+      // @todo figure out why this setTimeout is necessary
+      window.setTimeout(() => this.term$.next(this.query), 0);
+    }
   }
 }

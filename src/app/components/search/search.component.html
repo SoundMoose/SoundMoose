@@ -2,6 +2,7 @@
   <div class="six wide column">
     <div id="search-container" class="ui fluid inverted icon input">
     <input
+      [value]="query ? query : ''"
       (input)="term$.next($event.target.value)"
       type="text"
       placeholder="Search for track..."

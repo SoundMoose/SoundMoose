@@ -22,14 +22,16 @@ describe('Tracks Reducer', () => {
         artist: 'Mexican Food',
         imgUrl: 'http://www.google.com',
         streamUrl: 'http://www.google.com',
-        duration: 123
+        duration: 123,
+        platform: 'pizza'
       }, {
         id: 2,
         title: 'Burritos',
         artist: 'Mexican Food',
         imgUrl: 'http://www.google.com',
         streamUrl: 'http://www.google.com',
-        duration: 123
+        duration: 123,
+        platform: 'pizza'
       }
     ];
 
