@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
+import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -87,7 +87,7 @@ export class TrackDetailComponent implements OnInit {
   storeSubscription: Subscription;
   secondsSubscription: Subscription;
   platform: string;
-  spotifyEmbedUrl: string;
+  spotifyEmbedUrl: SafeResourceUrl;
 
   licenses: {} = {
     'no-rights-reserved': 'No rights reserved',
