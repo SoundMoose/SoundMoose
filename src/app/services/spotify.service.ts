@@ -9,7 +9,7 @@ import {Http, Headers, Response, Request} from '@angular/http'
 
 
 import { AppStore } from '../models/appstore.model';
-import { soundcloudClientId } from '../config/superSecretKeys';
+import { spotifyClientId } from '../config/superSecretKeys';
 import { Track } from '../models/track.model';
 import { TrackActions } from '../actions/track.actions';
 import { TrackDetailsActions } from '../actions/track-details.actions';
@@ -51,7 +51,7 @@ export class SpotifyService {
 
   constructor(private http:Http, private store: Store<AppStore>) {
     this.config = {
-      clientId: 'c4944715beef4391bdc20d1328b5c8d4',
+      clientId: spotifyClientId,
       redirectUri: 'http://localhost:3000/#/home',
       scope: '',
       // If you already have an auth token

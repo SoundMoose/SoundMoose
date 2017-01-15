@@ -17,6 +17,7 @@ import 'hammerjs';
 
 import { SoundCloudService } from './services/soundcloud.service';
 import { SpotifyService } from './services/spotify.service';
+import { LastfmService } from './services/lastfm.service';
 import { YoutubeService } from './services/youtube.service';
 import { PlayerService } from './services/player.service';
 import { AudioControlsService } from './services/audio-controls.service';
@@ -40,6 +41,8 @@ import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 
 import { TopTracksComponent } from './components/top-tracks/top-tracks.component';
+import { SimilarArtistsComponent } from './components/track-detail/similar-artists/similar-artists.component';
+import { SimilarTracksComponent } from './components/track-detail/similar-tracks/similar-tracks.component';
 import { PlayerComponent } from './components/player/player.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { PlayerControlsComponent } from './components/player/player-controls/player-controls.component';
@@ -64,6 +67,7 @@ import { YoutubePipe } from './youtube.pipe';
 // Application wide providers
 const APP_PROVIDERS = [
   SpotifyService,
+  LastfmService,
   SoundCloudService,
   YoutubeService,
   PlayerService,
@@ -106,6 +110,8 @@ const store = compose(...metaReducers)({
     WaveformVisualizerComponent,
     EqualizerComponent,
     TrackDetailComponent,
+    SimilarArtistsComponent,
+    SimilarTracksComponent,
     YoutubePipe,
     SearchComponent,
     ThreeDComponent
