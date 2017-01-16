@@ -9,8 +9,13 @@ import { Track } from '../../../models/track.model';
 })
 export class PlaylistTrackListComponent {
 
-  @Input() playlist: Track[];
+  @Input() playlist;
 
-  constructor() {}
+  // Testing
+  items;
+
+  constructor() {
+    // this.items = this.playlist.map(ele => ele);
+  }
 
 }

@@ -16,12 +16,12 @@ import { PlaylistActions } from '../../actions/playlist.actions';
 export class PlaylistComponent {
 
   playlist$: Observable<Track[]>;
+  sub;
 
   constructor(private playlistService: PlaylistService, private store: Store<AppStore>, private playlistActions: PlaylistActions) {
     this.getData(0);
 
     this.playlist$ = this.store.select('playlist');
-
   }
 
   getData(playlist_id: number) {

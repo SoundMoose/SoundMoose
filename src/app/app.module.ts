@@ -14,6 +14,7 @@ import {
 } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
+import { SortablejsModule } from 'angular-sortablejs';
 
 import { SoundCloudService } from './services/soundcloud.service';
 import { SpotifyService } from './services/spotify.service';
@@ -138,7 +139,8 @@ const store = compose(...metaReducers)({
     HttpModule,
     MaterialModule.forRoot(),
     FormsModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    SortablejsModule
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

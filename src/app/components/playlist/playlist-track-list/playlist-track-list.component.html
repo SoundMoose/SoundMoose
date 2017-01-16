@@ -1,8 +1,7 @@
 <h3>Playlist Track List</h3>
 
-<ul>
-  <playlist-track-details
-    *ngFor="let track of playlist | async"
-    [track]="track"
-  ></playlist-track-details>
-</ul>
+<div [sortablejs]="items" [sortablejsOptions]="{ animation: 150, scroll: false }">
+  <div *ngFor="let track of playlist">
+    <playlist-track-details [track]="track"></playlist-track-details>
+  </div>
+</div>
