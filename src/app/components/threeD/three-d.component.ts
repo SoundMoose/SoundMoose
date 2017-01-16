@@ -43,8 +43,8 @@ export class ThreeDComponent {
 
     // scene/environmental variables
     var scene,
-        light,
-        light1,
+        ambientLight,
+        pointLight,
         lightCrazyTime,
         camera,
         renderer;
@@ -76,7 +76,7 @@ export class ThreeDComponent {
 
     ////////////////////// Audio Set Up /////////////////////////////
     /////////////////////////////////////////////////////////////////
-    // this.audioSrcNode.frequencyAnalyser.smoothingTimeConstant = 0.8;
+    // this.audioSrcNode.frequencyAnalyser.smoothingTimeConstant = 1;
     var frequencyData = new Uint8Array(this.audioSrc.frequencyAnalyser.frequencyBinCount);
 
 
@@ -124,7 +124,6 @@ export class ThreeDComponent {
     /////////////////////////////////////////////////////////////////
     var OrbitControls = ThreeOrbitControls(THREE);
     this.controls = new OrbitControls(camera, renderer.domElement);
-    // this.controls.addEventListener('change', renderer);
 
     /////////////////////////// LIGHTS //////////////////////////////
     /////////////////////////////////////////////////////////////////
@@ -132,30 +131,11 @@ export class ThreeDComponent {
     //      AmbientLight( color, intensity )
     // -Point light gets emitted from a single point in all directions.
     //      PointLight( color, intensity, distance, decay )
-    light = new THREE.AmbientLight(0xffffff, 0.5);
-    light1 = new THREE.PointLight(0xffffff, 0.5, -50, 10);  // distance default === 0, decay default === 1
+    ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    pointLight = new THREE.PointLight(0xffffff, 0.5, -50, 10);  // distance default === 0, decay default === 1
 
-    scene.add(light);
-    scene.add(light1);
-
-    //////////////////// ADD SOME CRAZY LIGHTS ////////////////////////
-		// function createLightSphere( color ) {
-		// 	var pointLight = new THREE.PointLight( color, 1, 1000 );
-		// 	pointLight.castShadow = true;
-		// 	// pointLight.shadow.camera.near = 1;
-		// 	// pointLight.shadow.camera.far = 30;
-		// 	// pointLight.shadowCameraVisible = true;
-		// 	pointLight.shadow.bias = 0.01;
-		// 	var geometry = new THREE.SphereGeometry( 2, 250, 100 );
-		// 	var material = new THREE.MeshBasicMaterial( { color: color } );
-		// 	var sphere = new THREE.Mesh( geometry, material );
-		// 	pointLight.add( sphere );
-    //   console.log(pointLight);
-		// 	return pointLight
-		// }
-    // lightCrazyTime = createLightSphere( 0xffffff );
-    // scene.add( lightCrazyTime );
-
+    scene.add(ambientLight);
+    scene.add(pointLight);
 
     /////////////////////////// Objects /////////////////////////////
     /////////////////////////////////////////////////////////////////
@@ -163,10 +143,10 @@ export class ThreeDComponent {
     geometry = new THREE.BoxGeometry(50, 50, 50); // segmented faces optional. Default is 1.
     // geometry.castShadow = true;
     // geometry.receiveShadow = true;
-
     // shinyMaterial = new THREE.MeshPhongMaterial({color:0x1A1A1A});
 
-    material1 = new THREE.MeshLambertMaterial({color: 0x1A1A1A}); // for non-shiny surfaces
+    // for non-shiny surfaces use MeshLambertMaterial
+    material1 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
     material2 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
     material3 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
     material4 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
@@ -212,21 +192,6 @@ export class ThreeDComponent {
     scene.add(mesh9);
     scene.add(mesh10);
 
-
-    ///////////////////////// Torus Knot, YOLO ///////////////////////////
-    // var torusGeometry = new THREE.TorusGeometry( 600, 40, 0, 60 );
-		// var torusMaterial = new THREE.MeshPhongMaterial( {
-		// 	color: 'rgb(36, 36, 36)',
-		// 	shininess: 100,
-		// 	specular: 0x222222
-		// } );
-		// var torus = new THREE.Mesh( torusGeometry, torusMaterial );
-		// // torusKnot.position.set( 0, 100, -300 );
-		// torus.position.set( 0, 0, 0 );
-		// torus.castShadow = true;
-		// torus.receiveShadow = true;
-		// scene.add( torus );
-
     ///////////////////////// Render Loop ///////////////////////////
     /////////////////////////////////////////////////////////////////
     requestAnimationFrame(render);
@@ -236,9 +201,9 @@ export class ThreeDComponent {
       //////////////////////// Generate New Data ////////////////////
       context.audioSrc.frequencyAnalyser.getByteFrequencyData(frequencyData);
 
+      ///////// Helper function to sum up portions of the data array
       function getDat(arr, startIdx, endIdx) {
         var result = 0;
-
         for (var i = startIdx; i <= endIdx; i++) {
           result += arr[i];
         }
@@ -255,6 +220,8 @@ export class ThreeDComponent {
       var getDatMid7 = getDat(frequencyData, 700, 800);
       var getDatMid8 = getDat(frequencyData, 800, 900);
       var getDatTreble = getDat(frequencyData, 900, 1000);
+
+      var totalSum = getDatBass + getDatMid1 + getDatMid2 + getDatMid3 + getDatMid4 + getDatMid5 + getDatMid6 + getDatMid7 + getDatMid8 + getDatTreble;
 
       //////////////////////// Animate Color //////////////////////
       var colorOffset = 50;
@@ -309,9 +276,8 @@ export class ThreeDComponent {
       mesh9.scale.y = getDatMid8/3000 + 1;
       mesh10.scale.y = getDatTreble/3000 + 1;
 
-      // poisution (x, y, z)
-
       var zPosition = 0;
+      ////////////// position stated as (x, y, z)
       mesh1.position.set(-450, getDatBass/120 - 100, zPosition);
       mesh2.position.set(-350, getDatMid1/120 - 100, zPosition);
       mesh3.position.set(-250, getDatMid2/120 - 100, zPosition);
@@ -333,31 +299,13 @@ export class ThreeDComponent {
       mesh8.rotation.y += 0.01;
       mesh9.rotation.y += 0.01;
       mesh10.rotation.y += 0.01;
-      // mesh1.rotation.x += 0.01;  // to use in modifying speed, size, or colors
-
-
+      // mesh1.rotation.x += 0.01;  // rotate about x to spin vertically
 
       /////////////////////// Animate Light //////////////////////
-      // var time = performance.now() * 0.001;
-			// lightCrazyTime.position.x = Math.sin( time ) * 300;
-			// lightCrazyTime.position.y = Math.sin( time * 1.1 ) * 250 + 5;
-			// lightCrazyTime.position.z = Math.sin( time * 1.2 ) * 1000;
-			// time += 10000;
+      ambientLight.intensity = totalSum / 400000;  // strobe effect?
+      // pointLight.intensity = totalSum / 100000;
 
-      // lightCrazyTime.color = (0xffffff);
-      // lightCrazyTime.intensity = (colorAdjBass*100);
-
-			// lightCrazyTime2.position.x = Math.sin( time ) * 9;
-			// lightCrazyTime2.position.y = Math.sin( time * 1.1 ) * 9 + 5;
-			// lightCrazyTime2.position.z = Math.sin( time * 1.2 ) * 9;
-			// torusKnot.rotation.y = time * 0.1;
-
-
-      // render scene
       renderer.render(scene, camera);
-
-      // update orbitals
-      // context.controls.update();
       requestAnimationFrame(render);
     }
   }

@@ -168,12 +168,12 @@ export const AUDIO_STREAM_PROVIDER = {
       midBand10.connect( highBand );
       highBand.connect( audioCtx.destination );
 
-////////// End of In-Development Equalizer Component ////////////////
+//////////////// Create Frequency and Waveform data for visualizations!  ///////
 
       // https://developer.mozilla.org/en/docs/Web/API/AnalyserNode
       frequencyAnalyser = audioCtx.createAnalyser();
       waveformAnalyser = audioCtx.createAnalyser();
-      frequencyAnalyser.smoothingTimeConstant = 0.5;
+      frequencyAnalyser.smoothingTimeConstant = 0.6;
       // audioSrcNode.connect(frequencyAnalyser);
       // audioSrcNode.connect(waveformAnalyser);
       highBand.connect(frequencyAnalyser);
@@ -187,17 +187,16 @@ export const AUDIO_STREAM_PROVIDER = {
       frequencyDataArray = new Uint8Array(frequencyBufferLength);
       waveformDataArray = new Uint8Array(waveformBufferLength);
 
-      // audioSrcNode.connect(audioCtx.destination);
-
       frequencyAnalyser.getByteFrequencyData(frequencyDataArray);
       waveformAnalyser.getByteTimeDomainData(waveformDataArray);
 
-
-
-      setInterval(function() {
-        frequencyAnalyser.getByteFrequencyData(frequencyDataArray);
-        waveformAnalyser.getByteTimeDomainData(waveformDataArray);
-      }, 50);
+      ////// Is it better to serve up the data as an array of the audio stream?
+      ////// 3d generates audio data for every render frame currently,
+      ////// so no immediate easy solution on how to dampen those data points
+      // setInterval(function() {
+      //   frequencyAnalyser.getByteFrequencyData(frequencyDataArray);
+      //   waveformAnalyser.getByteTimeDomainData(waveformDataArray);
+      // }, 50);
 
       return {
         audioSrcNode: audioSrcNode,
@@ -208,6 +207,7 @@ export const AUDIO_STREAM_PROVIDER = {
         waveformBufferLength: waveformBufferLength,
         frequencyBufferLength: frequencyBufferLength,
         frequencyAnalyser: frequencyAnalyser,
+        waveformAnalyser: waveformAnalyser,
 
         toggleFrequencyOrWaveform: false,
 
