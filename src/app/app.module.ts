@@ -58,6 +58,10 @@ import { AudioControlsComponent } from './components/audio-controls/audio-contro
 import { FrequencyVisualizerComponent } from './components/audio-controls/visualizer/frequency-visualizer.component';
 import { WaveformVisualizerComponent } from './components/audio-controls/visualizer/waveform-visualizer.component';
 import { EqualizerComponent } from './components/audio-controls/equalizer/equalizer.component';
+import { PlaylistComponent } from './components/playlist/playlist.component';
+import { PlaylistTrackDetailsComponent } from './components/playlist/playlist-track-details/playlist-track-details.component';
+import { PlaylistTrackListComponent } from './components/playlist/playlist-track-list/playlist-track-list.component';
+
 
 import { TrackActions } from './actions/track.actions';
 import { PlayerActions } from './actions/player.actions';
@@ -115,7 +119,10 @@ const store = compose(...metaReducers)({
     SimilarTracksComponent,
     YoutubePipe,
     SearchComponent,
-    ThreeDComponent
+    ThreeDComponent,
+    PlaylistComponent,
+    PlaylistTrackDetailsComponent,
+    PlaylistTrackListComponent
   ],
   imports: [
     MomentModule,
