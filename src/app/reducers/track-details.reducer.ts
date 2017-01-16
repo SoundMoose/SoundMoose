@@ -13,7 +13,8 @@ const initialState: TrackDetailsState = {
     artist: '',
     imgUrl: '',
     streamUrl: '',
-    duration: 0
+    duration: 0,
+    platform: ''
   },
   user: {
     id: 0,

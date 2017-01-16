@@ -66,17 +66,54 @@ export class SpotifyService {
                 .switchMap(term => this.doSearch(term));
   }
 
+ loadTrackDetails(trackId) {
+    return this.api({
+        method: 'get',
+        url: `/tracks/${trackId}`
+      })
+      .map(res => res.json())
+      .map(item => {
+        console.log(item)
+        return {
+            track: {
+              id: item.id,
+              title: item.name,
+              artist: item.artists[0].name,
+              imgUrl: item.album.images[0].url,
+              streamUrl: item.preview_url,
+              duration: 30000,
+              platform: 'spotify'
+            },
+            waveformUrl: '',
+            largeArtworkUrl: item.album.images[0].url,
+            user: {
+              id: 0,
+              username: '',
+              avatarUrl: ''
+            },
+            license: '',
+            commentCount: 0,
+            playbackCount: 0,
+            favoriteCount: 0,
+            description: '',
+            created: ''
+          };
+      })
+      .map(payload => ({ type: TrackDetailsActions.LOAD_TRACK_DETAILS_SUCCESS, payload }))
+      .subscribe(action => this.store.dispatch(action));
+  }
 
   doSearch(term: string) {
     return this.search(term, 'track')
     .map(data => data.tracks.items)
     .map(items => items.map(item => ({
-        id: 'spotify-' + item.id,
+        id: item.id,
         title: item.name,
         artist: item.artists[0].name,
         imgUrl: item.album.images[0].url,
         streamUrl: item.preview_url,
-        duration: 30000
+        duration: 30000,
+        platform: 'spotify'
     })));
   }
 

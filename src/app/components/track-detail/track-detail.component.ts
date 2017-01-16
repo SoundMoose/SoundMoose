@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
+import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -22,6 +22,7 @@ import { PlayerState } from './../../reducers/player.reducer';
 import { TrackDetailsState } from '../../reducers/track-details.reducer';
 import { AudioStream } from '../../audio-element';
 import { SoundCloudService } from './../../services/soundcloud.service';
+import { SpotifyService } from './../../services/spotify.service';
 import { PlayerService } from './../../services/player.service';
 import { YoutubeService } from './../../services/youtube.service';
 import { LastfmService } from './../../services/lastfm.service';
@@ -60,6 +61,7 @@ export class TrackDetailComponent implements OnInit {
     private soundCloudService: SoundCloudService,
     private playerService: PlayerService,
     private youtubeService: YoutubeService,
+    private spotifyService: SpotifyService,
     private lastfmService: LastfmService,
     private router: Router,
     private route: ActivatedRoute,
@@ -84,6 +86,8 @@ export class TrackDetailComponent implements OnInit {
   trackDetailsSubscription: Subscription;
   storeSubscription: Subscription;
   secondsSubscription: Subscription;
+  platform: string;
+  spotifyEmbedUrl: SafeResourceUrl;
 
   licenses: {} = {
     'no-rights-reserved': 'No rights reserved',
@@ -98,8 +102,14 @@ export class TrackDetailComponent implements OnInit {
 
   ngOnInit() {
     let trackId = this.route.snapshot.params['trackId'];
-    this.soundCloudService.loadTrackDetails(trackId);
-    this.soundCloudService.loadComments(trackId);
+    this.platform = this.route.snapshot.params['platform'];
+    if (this.platform == 'soundcloud') {
+      this.soundCloudService.loadTrackDetails(trackId);
+      this.soundCloudService.loadComments(trackId);
+    } else if (this.platform == 'spotify') {
+      this.spotifyService.loadTrackDetails(trackId);
+      this.spotifyEmbedUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://embed.spotify.com/?uri=spotify:track:' + trackId);
+    }
     this.trackDetails$ = this.store$.select(s => s.trackDetails);
     this.trackDetailsSubscription = this.trackDetails$.subscribe(item => {
       this.description = item.description;
@@ -110,7 +120,9 @@ export class TrackDetailComponent implements OnInit {
       if (this.track.artist) {
 
       }
-      this.created = item.created;
+      if (item.created) {
+        this.created = new Date(item.created).toISOString();
+      }
       this.youtubeId$ = this.youtubeService.searchYoutubeVideo(this.track.title + ' ' + this.track.artist);
       if (this.waveformUrl != '') {
         this.getWaveform();

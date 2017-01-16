@@ -18,7 +18,8 @@ describe('Track-Details Reducer', () => {
         artist: '',
         imgUrl: '',
         streamUrl: '',
-        duration: 0
+        duration: 0,
+        platform: ''
       },
       user: {
         id: 0,
@@ -42,7 +43,8 @@ describe('Track-Details Reducer', () => {
         artist: 'Mexican Food',
         imgUrl: 'http://www.google.com',
         streamUrl: 'http://www.google.com',
-        duration: 123
+        duration: 123,
+        platform: 'pizza'
       },
       user: {
         id: 1,

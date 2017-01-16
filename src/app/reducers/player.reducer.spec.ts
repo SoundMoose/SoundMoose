@@ -27,7 +27,8 @@ describe('Player Reducer', () => {
         artist: '',
         imgUrl: '',
         streamUrl: '',
-        duration: 0
+        duration: 0,
+        platform: ''
       },
       volume: 100,
 

@@ -5,4 +5,5 @@ export interface Track {
   imgUrl: string;
   streamUrl: string;
   duration: number;
+  platform: string;
 }
