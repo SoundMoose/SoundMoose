@@ -11,9 +11,7 @@ import { AudioStream } from '../../audio-element';
 import { AudioControlsActions } from '../../actions/audio-controls.actions';
 
 import * as THREE from 'three';
-// import * as ThreeOrbitControls from 'three-orbit-controls';
-
-
+import * as ThreeOrbitControls from 'three-orbit-controls';
 
 @Component({
   selector: 'three-d',
@@ -39,7 +37,6 @@ export class ThreeDComponent {
   constructor( private audioSrc: AudioStream, private store$: Store<AppStore> ) {
     this.audioCtx = audioSrc.audioCtx;
     this.audioSrcNode = audioSrc.audioSrcNode;
-    // this.OrbitControls = ThreeOrbitControls(THREE);
   }
 
   ngOnInit(){
@@ -125,7 +122,8 @@ export class ThreeDComponent {
 
     //////////////// Orbit Controls - In Development ////////////////
     /////////////////////////////////////////////////////////////////
-    // this.controls = new this.OrbitControls(camera, renderer.domElement);
+    var OrbitControls = ThreeOrbitControls(THREE);
+    this.controls = new OrbitControls(camera, renderer.domElement);
     // this.controls.addEventListener('change', renderer);
 
     /////////////////////////// LIGHTS //////////////////////////////
