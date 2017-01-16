@@ -35,17 +35,63 @@ export class ThreeDParticlesComponent {
   private audio: any;
   private controls: any;
 
+  private SEPARATION: number;
+  private AMOUNTX: number;
+  private AMOUNTY: number;
+  private particles: number;
+  private particle: number;
+  private count: number;
+  private windowHalfX: number;
+  private windowHalfY: number;
+
   constructor( private audioSrc: AudioStream, private store$: Store<AppStore> ) {
     this.audioCtx = audioSrc.audioCtx;
     this.audioSrcNode = audioSrc.audioSrcNode;
+
+    this.SEPARATION = 100;
+    this.AMOUNTX = 50;
+    this.AMOUNTY = 50;
+
+		this.particles = 0;
+    this.particle = 0;
+    this.count = 0;
+		this.windowHalfX = window.innerWidth / 2;
+		this.windowHalfY = window.innerHeight / 2;
+
   }
 
   ngOnInit(){
 
     // scene/environmental variables
     var scene,
+        ambientLight,
+        pointLight,
+        lightCrazyTime,
         camera,
         renderer;
+
+    // object/animation variables
+    var geometry,
+        material1,
+        material2,
+        material3,
+        material4,
+        material5,
+        material6,
+        material7,
+        material8,
+        material9,
+        material10,
+        mesh1,
+        mesh2,
+        mesh3,
+        mesh4,
+        mesh5,
+        mesh6,
+        mesh7,
+        mesh8,
+        mesh9,
+        mesh10;
 
     var context = this;
 
