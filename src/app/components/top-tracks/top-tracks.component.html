@@ -1,3 +1,6 @@
+
+<div class="overview ui container">
+
  <h3 class="top-tracks-header ui header">Top tracks in
    <select id="genre-select" class="ui dropdown" (change)="navigateToGenre($event.target.value)" style="background: #1a1a1a;">
      <option *ngFor="let genre of genres; let last = last"
@@ -10,8 +13,10 @@
  </h3>
 
   <div id="top-tracks" class="ui six column grid" *ngIf="topTracks$">
-    <div [@fadeInOut]="'in'" *ngFor="let topTrack of topTracks$ | async" class="column">
+    <div [@fadeInOut]="'in'" *ngFor="let topTrack of topTracks$ | async" class="column"  style="min-width: 148.48px;">
       <top-track-tile [topTrack]="topTrack">
       </top-track-tile>
     </div>
   </div>
+
+</div>

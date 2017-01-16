@@ -117,11 +117,10 @@ export class ThreeDComponent {
         var WIDTH = window.innerWidth,
             HEIGHT = window.innerHeight;
 
-        context.renderer.setSize(WIDTH, HEIGHT);
+        renderer.setSize(WIDTH, HEIGHT);
 
-        context.camera.aspect = WIDTH / HEIGHT;
-        context.camera.updateProjectionMatrix();
-
+        camera.aspect = WIDTH / HEIGHT;
+        camera.updateProjectionMatrix();
     });
 
     //////////////// Orbit Controls - In Development ////////////////
