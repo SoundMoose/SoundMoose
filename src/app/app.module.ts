@@ -20,6 +20,7 @@ import { SpotifyService } from './services/spotify.service';
 import { LastfmService } from './services/lastfm.service';
 import { YoutubeService } from './services/youtube.service';
 import { PlayerService } from './services/player.service';
+import { PlaylistService } from './services/playlist.service';
 import { AudioControlsService } from './services/audio-controls.service';
 import { Auth } from './services/auth.service';
 import { AUDIO_STREAM_PROVIDER } from './audio-element';
@@ -30,6 +31,7 @@ import spinner from './reducers/spinner.reducer';
 import audiocontrols from './reducers/audio-controls.reducer';
 import trackDetails from './reducers/track-details.reducer';
 import comments from './reducers/comments.reducer';
+import playlist from './reducers/playlist.reducer';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -66,6 +68,7 @@ import { PlaylistTrackListComponent } from './components/playlist/playlist-track
 import { TrackActions } from './actions/track.actions';
 import { PlayerActions } from './actions/player.actions';
 import { AudioControlsActions } from './actions/audio-controls.actions';
+import { PlaylistActions } from './actions/playlist.actions';
 import { YoutubePipe } from './youtube.pipe';
 
 
@@ -80,7 +83,9 @@ const APP_PROVIDERS = [
   AUDIO_STREAM_PROVIDER,
   TrackActions,
   PlayerActions,
-  AudioControlsActions
+  AudioControlsActions,
+  PlaylistService,
+  PlaylistActions
 ];
 
 const metaReducers = (ENV !== 'production') ? [storeFreeze, combineReducers] : [combineReducers];
@@ -91,7 +96,8 @@ const store = compose(...metaReducers)({
   spinner: spinner,
   audiocontrols: audiocontrols,
   trackDetails: trackDetails,
-  comments: comments
+  comments: comments,
+  playlist: playlist
 });
 
 /**
