@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { Track } from '../../../models/track.model';
 
 @Component({
   selector: 'playlist-track-list',
@@ -7,8 +9,8 @@ import { Component } from '@angular/core';
 })
 export class PlaylistTrackListComponent {
 
-  constructor() {
+  @Input() playlist: Track[];
 
-  }
+  constructor() {}
 
 }

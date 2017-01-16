@@ -1,9 +1,8 @@
 <h3>Playlist Track List</h3>
 
 <ul>
-  <playlist-track-details></playlist-track-details>
-  <playlist-track-details></playlist-track-details>
-  <playlist-track-details></playlist-track-details>
-  <playlist-track-details></playlist-track-details>
-  <playlist-track-details></playlist-track-details>
+  <playlist-track-details
+    *ngFor="let track of playlist | async"
+    [track]="track"
+  ></playlist-track-details>
 </ul>

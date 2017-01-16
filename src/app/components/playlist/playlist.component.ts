@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { AppStore } from '../../models/appstore.model';
@@ -15,15 +15,21 @@ import { PlaylistActions } from '../../actions/playlist.actions';
 })
 export class PlaylistComponent {
 
-  playlist$: Observable<string>;
+  playlist$: Observable<Track[]>;
 
   constructor(private playlistService: PlaylistService, private store: Store<AppStore>, private playlistActions: PlaylistActions) {
-    this.playlist$ = this.playlistService.getPlaylist(0);
+    this.getData(0);
 
-    this.playlist$
-      // .take(1)
-      .subscribe(playlist => this.store.dispatch(playlistActions.loadTracks(playlist)));
-      // .subscribe(playlist => console.log(playlist));
+    this.playlist$ = this.store.select('playlist');
+
+  }
+
+  getData(playlist_id: number) {
+    this.playlistService.getPlaylist(playlist_id)
+      .first()
+      .subscribe(playlist => {
+        this.store.dispatch(this.playlistActions.loadTracks(playlist));
+      });
   }
 
 }

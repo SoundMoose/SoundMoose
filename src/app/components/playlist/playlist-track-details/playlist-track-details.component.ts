@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { Track } from '../../../models/track.model';
 
 @Component({
   selector: 'playlist-track-details',
@@ -6,6 +8,8 @@ import { Component } from '@angular/core';
   templateUrl: './playlist-track-details.component.html',
 })
 export class PlaylistTrackDetailsComponent {
+
+  @Input() track: Track;
 
   constructor() {
 
