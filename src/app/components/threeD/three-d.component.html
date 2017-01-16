@@ -1,6 +1,10 @@
 
 <div id="controlPanel">
-  <a href="changeVis('frequencyBar');" id="playButton">Frequency Bars</a>
+
+  <div id="three-d-selectors" (click)="changeVis('showThreeDFrequency')">
+    Frequency Bars
+  </div>
+
 
   <div id="hide" (click)="toggleControlPanel()">
     <i *ngIf="showControlPanel"
@@ -11,8 +15,7 @@
   </div>
 </div>
 
-<div [ngStyle]="{width: '100%'}">
-  <canvas id="threeDCanvas"
-    [ngStyle]="{width: '100%'}">
-  </canvas>
-<div>
+<three-d-frequencyBars
+    *ngIf="currentVisualization === 'showThreeDFrequency'"
+>
+</three-d-frequencyBars>

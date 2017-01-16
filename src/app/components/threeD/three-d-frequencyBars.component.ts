@@ -14,11 +14,11 @@ import * as THREE from 'three';
 import * as ThreeOrbitControls from 'three-orbit-controls';
 
 @Component({
-  selector: 'three-d',
-  styleUrls: [ './three-d.component.css' ],
-  templateUrl: './three-d.component.html'
+  selector: 'three-d-frequencyBars',
+  // styleUrls: [ './three-d-frequencyBars.component.css' ],
+  templateUrl: './three-d-frequencyBars.component.html'
 })
-export class ThreeDComponent {
+export class ThreeDFrequencyBarsComponent {
 
   private audioCtx: any;
   private audioSrcNode: any;
@@ -33,26 +33,10 @@ export class ThreeDComponent {
 
   private audio: any;
   private controls: any;
-  private showControlPanel:any;
 
   constructor( private audioSrc: AudioStream, private store$: Store<AppStore> ) {
-    this.showControlPanel = false;
     this.audioCtx = audioSrc.audioCtx;
     this.audioSrcNode = audioSrc.audioSrcNode;
-
-  }
-
-  toggleControlPanel () {
-    var controlPanel = document.getElementById('controlPanel');
-    var actionBtn = document.getElementById('hide');
-
-    var left = controlPanel.style.left;
-    if (left == '0px' || left == '') {
-      controlPanel.style.left = '-180px';
-    } else {
-      controlPanel.style.left = '0px';
-    };
-    this.showControlPanel = !this.showControlPanel;
   }
 
   ngOnInit(){
