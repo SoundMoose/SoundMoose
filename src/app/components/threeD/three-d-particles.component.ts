@@ -126,27 +126,10 @@ export class ThreeDParticlesComponent {
     var OrbitControls = ThreeOrbitControls(THREE);
     this.controls = new OrbitControls(camera, renderer.domElement);
 
-    /////////////////////////// LIGHTS //////////////////////////////
+    ///////////////////////// Particles /////////////////////////////
     /////////////////////////////////////////////////////////////////
-    // -Ambiant light globally illuminates all objects in the scene equally.
-    //      AmbientLight( color, intensity )
-    // -Point light gets emitted from a single point in all directions.
-    //      PointLight( color, intensity, distance, decay )
-    ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    pointLight = new THREE.PointLight(0xffffff, 0.5, -50, 10);  // distance default === 0, decay default === 1
 
-    scene.add(ambientLight);
-    scene.add(pointLight);
-
-    /////////////////////////// Objects /////////////////////////////
-    /////////////////////////////////////////////////////////////////
-    // BoxGeometry(width, height, depth, widthSegments, heightSegments, depthSegments)
-    geometry = new THREE.BoxGeometry(50, 50, 50); // segmented faces optional. Default is 1.
-    // geometry.castShadow = true;
-    // geometry.receiveShadow = true;
-    // shinyMaterial = new THREE.MeshPhongMaterial({color:0x1A1A1A});
-
-    var material = new THREE.PointCloudMaterial({
+    var material = new THREE.PointsMaterial({
       size: 5,
       vertexColors: THREE.VertexColors
     });
@@ -162,7 +145,7 @@ export class ThreeDParticlesComponent {
       geometry.colors.push(new THREE.Color(Math.random(), Math.random(), Math.random()));
     });
 
-    var pointCloud = new THREE.PointCloud(geometry, material);
+    var pointCloud = new THREE.Points(geometry, material);
     scene.add(pointCloud);
 
 
@@ -184,93 +167,26 @@ export class ThreeDParticlesComponent {
         return result;
       }
 
-      var getDatBass = getDat(frequencyData, 0, 100);
-      var getDatMid1 = getDat(frequencyData, 100, 200);
-      var getDatMid2 = getDat(frequencyData, 200, 300);
-      var getDatMid3 = getDat(frequencyData, 300, 400);
-      var getDatMid4 = getDat(frequencyData, 400, 500);
-      var getDatMid5 = getDat(frequencyData, 500, 600);
-      var getDatMid6 = getDat(frequencyData, 600, 700);
-      var getDatMid7 = getDat(frequencyData, 700, 800);
-      var getDatMid8 = getDat(frequencyData, 800, 900);
-      var getDatTreble = getDat(frequencyData, 900, 1000);
+      var totalSum = getDat(frequencyData, 0, 1000) / 100000;
+      if (totalSum > 1) {
+        totalSum = 1;
+      }
 
-      var totalSum = getDatBass + getDatMid1 + getDatMid2 + getDatMid3 + getDatMid4 + getDatMid5 + getDatMid6 + getDatMid7 + getDatMid8 + getDatTreble;
-
-      //////////////////////// Animate Color //////////////////////
-      var colorOffset = 50;
-
-      var colorAdjBass = Math.round(getDatBass/150) + colorOffset;
-      var colorAdjMid1 = Math.round(getDatMid1/150) + colorOffset;
-      var colorAdjMid2 = Math.round(getDatMid2/150) + colorOffset;
-      var colorAdjMid3 = Math.round(getDatMid2/150) + colorOffset;
-      var colorAdjMid4 = Math.round(getDatMid4/150) + colorOffset;
-      var colorAdjMid5 = Math.round(getDatMid5/150) + colorOffset;
-      var colorAdjMid6 = Math.round(getDatMid6/150) + colorOffset;
-      var colorAdjMid7 = Math.round(getDatMid7/150) + colorOffset;
-      var colorAdjMid8 = Math.round(getDatMid8/150) + colorOffset;
-      var colorAdjTreble = Math.round(getDatTreble/150) + colorOffset;
-
-      // mesh.material.color.setHex( adjment*0xff3300 );
-      // mesh.material.color.set( color );
-      // mesh.material.color.set( colorAdjment, colorAdjment, colorAdjment );
-      var colorString1 = 'rgb('+colorAdjBass+','+colorAdjBass+','+colorAdjBass+')';
-      var colorString2 = 'rgb('+colorAdjMid1+','+colorAdjMid1+','+colorAdjMid1+')';
-      var colorString3 = 'rgb('+colorAdjMid2+','+colorAdjMid2+','+colorAdjMid2+')';
-      var colorString4 = 'rgb('+colorAdjMid3+','+colorAdjMid3+','+colorAdjMid3+')';
-      var colorString5 = 'rgb('+colorAdjMid4+','+colorAdjMid4+','+colorAdjMid4+')';
-      var colorString6 = 'rgb('+colorAdjMid5+','+colorAdjMid5+','+colorAdjMid5+')';
-      var colorString7 = 'rgb('+colorAdjMid6+','+colorAdjMid6+','+colorAdjMid6+')';
-      var colorString8 = 'rgb('+colorAdjMid7+','+colorAdjMid7+','+colorAdjMid7+')';
-      var colorString9 = 'rgb('+colorAdjMid8+','+colorAdjMid8+','+colorAdjMid8+')';
-      var colorString10 = 'rgb('+colorAdjTreble+','+colorAdjTreble+','+colorAdjTreble+')';
-
-      /////////////////////// Animate Position //////////////////////
-
-
+      //////////////////////////////// Animate ///////////////////////////////
 
       _.forEach(geometry.vertices, function(particle, index){
         var dX, dY, dZ;
-        dX = Math.random() * 2 - 1;
-        dY = Math.random() * 2 - 1;
-        dZ = Math.random() * 2 - 1;
+        dX = (Math.random() * 2 - 1) * totalSum * 5;
+        dY = (Math.random() * 2 - 1) * totalSum * 5;
+        dZ = (Math.random() * 2 - 1) * totalSum * 5;
 
         particle.add(new THREE.Vector3(dX, dY, dZ));
-        geometry.colors[index] = new THREE.Color(Math.random(), Math.random(), Math.random());
+        geometry.colors[index] = new THREE.Color(Math.random() * totalSum, Math.random() * totalSum, Math.random() * totalSum);
       });
       geometry.verticesNeedUpdate = true;
       geometry.colorsNeedUpdate = true;
 
-      ///////// Geometry methods: https://threejs.org/docs/#Reference/Core/Geometry
-      // mesh1.scale.y = getDatBass/3000 + 1;
-      // mesh2.scale.y = getDatMid1/3000 + 1;
-      // mesh3.scale.y = getDatMid2/3000 + 1;
-      // mesh4.scale.y = getDatMid3/3000 + 1;
-      // mesh5.scale.y = getDatMid4/3000 + 1;
-      // mesh6.scale.y = getDatMid5/3000 + 1;
-      // mesh7.scale.y = getDatMid6/3000 + 1;
-      // mesh8.scale.y = getDatMid7/3000 + 1;
-      // mesh9.scale.y = getDatMid8/3000 + 1;
-      // mesh10.scale.y = getDatTreble/3000 + 1;
-
-      // var zPosition = 0;
-      ////////////// position stated as (x, y, z)
-      // mesh1.position.set(-450, getDatBass/120 - 100, zPosition);
-      // mesh2.position.set(-350, getDatMid1/120 - 100, zPosition);
-      // mesh3.position.set(-250, getDatMid2/120 - 100, zPosition);
-      // mesh4.position.set(-150, getDatMid3/120 - 100, zPosition);
-      // mesh5.position.set(-50, getDatMid4/120 - 100, zPosition);
-      // mesh6.position.set(50, getDatMid5/120 - 100, zPosition);
-      // mesh7.position.set(150, getDatMid6/120 - 100, zPosition);
-      // mesh8.position.set(250, getDatMid7/120 - 100, zPosition);
-      // mesh9.position.set(350, getDatMid8/120 - 100, zPosition);
-      // mesh10.position.set(450, getDatTreble/120 - 100, zPosition);
-
-      // mesh1.rotation.x += 0.01;  // rotate about x to spin vertically
-
-      /////////////////////// Animate Light //////////////////////
-      // ambientLight.intensity = totalSum / 400000;  // strobe effect?
-      // pointLight.intensity = totalSum / 100000;
+      ///////////////////////////// Re-Render Canvas ////////////////////////
 
       renderer.render(scene, camera);
       requestAnimationFrame(render);
