@@ -1,8 +1,12 @@
 
 <div id="controlPanel">
 
-  <div id="three-d-selectors" (click)="changeVis('showThreeDFrequency')">
+  <div class="three-d-selectors" (click)="changeVis('showThreeDFrequency')">
     Frequency Bars
+  </div>
+
+  <div class="three-d-selectors" (click)="changeVis('showThreeDParticles')">
+    Particles
   </div>
 
 
@@ -19,3 +23,8 @@
     *ngIf="currentVisualization === 'showThreeDFrequency'"
 >
 </three-d-frequencyBars>
+
+<three-d-particles
+    *ngIf="currentVisualization === 'showThreeDParticles'"
+>
+</three-d-particles>

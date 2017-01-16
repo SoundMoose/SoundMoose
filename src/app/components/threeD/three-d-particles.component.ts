@@ -13,11 +13,13 @@ import { AudioControlsActions } from '../../actions/audio-controls.actions';
 import * as THREE from 'three';
 import * as ThreeOrbitControls from 'three-orbit-controls';
 
+import * as _ from 'lodash'
+
 @Component({
-  selector: 'three-d-frequencyBars',
+  selector: 'three-d-particles',
   templateUrl: './three-d-sharedCanvas.component.html'
 })
-export class ThreeDFrequencyBarsComponent {
+export class ThreeDParticlesComponent {
 
   private audioCtx: any;
   private audioSrcNode: any;
@@ -105,7 +107,7 @@ export class ThreeDFrequencyBarsComponent {
     camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 3000);
     // camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, 0.1, 3000);
 
-    camera.position.set( 0, 100, 1500 );
+    camera.position.set( 0, 100, 500 );
     // scene.add(camera);
 
     // update on resize: renderer size, aspect ratio and projection matrix
@@ -144,52 +146,25 @@ export class ThreeDFrequencyBarsComponent {
     // geometry.receiveShadow = true;
     // shinyMaterial = new THREE.MeshPhongMaterial({color:0x1A1A1A});
 
-    // for non-shiny surfaces use MeshLambertMaterial
-    material1 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
-    material2 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
-    material3 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
-    material4 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
-    material5 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
-    material6 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
-    material7 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
-    material8 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
-    material9 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
-    material10 = new THREE.MeshLambertMaterial({color: 0x1A1A1A});
+    var material = new THREE.PointCloudMaterial({
+      size: 5,
+      vertexColors: THREE.VertexColors
+    });
 
-    mesh1 = new THREE.Mesh(geometry, material1);
-    mesh2 = new THREE.Mesh(geometry, material2);
-    mesh3 = new THREE.Mesh(geometry, material3);
-    mesh4 = new THREE.Mesh(geometry, material4);
-    mesh5 = new THREE.Mesh(geometry, material5);
-    mesh6 = new THREE.Mesh(geometry, material6);
-    mesh7 = new THREE.Mesh(geometry, material7);
-    mesh8 = new THREE.Mesh(geometry, material8);
-    mesh9 = new THREE.Mesh(geometry, material9);
-    mesh10 = new THREE.Mesh(geometry, material10);
+    var geometry = new THREE.Geometry();
+    var x, y, z;
+    _.times(1000, function(n){
+      x = (Math.random() * 800) - 400;
+      y = (Math.random() * 800) - 400;
+      z = (Math.random() * 800) - 400;
 
-    var zPosition = 0
+      geometry.vertices.push(new THREE.Vector3(x, y, z));
+      geometry.colors.push(new THREE.Color(Math.random(), Math.random(), Math.random()));
+    });
 
-    mesh1.position.set(-450, 0, zPosition);
-    mesh2.position.set(-350, 0, zPosition);
-    mesh3.position.set(-250, 0, zPosition);
-    mesh4.position.set(-150, 0, zPosition);
-    mesh5.position.set(-50, 0, zPosition);
-    mesh6.position.set(50, 0, zPosition);
-    mesh7.position.set(150, 0, zPosition);
-    mesh8.position.set(250, 0, zPosition);
-    mesh9.position.set(350, 0, zPosition);
-    mesh10.position.set(450, 0, zPosition);
+    var pointCloud = new THREE.PointCloud(geometry, material);
+    scene.add(pointCloud);
 
-    scene.add(mesh1);
-    scene.add(mesh2);
-    scene.add(mesh3);
-    scene.add(mesh4);
-    scene.add(mesh5);
-    scene.add(mesh6);
-    scene.add(mesh7);
-    scene.add(mesh8);
-    scene.add(mesh9);
-    scene.add(mesh10);
 
     ///////////////////////// Render Loop ///////////////////////////
     /////////////////////////////////////////////////////////////////
@@ -250,58 +225,51 @@ export class ThreeDFrequencyBarsComponent {
       var colorString9 = 'rgb('+colorAdjMid8+','+colorAdjMid8+','+colorAdjMid8+')';
       var colorString10 = 'rgb('+colorAdjTreble+','+colorAdjTreble+','+colorAdjTreble+')';
 
-      mesh1.material.color.set(colorString1);
-      mesh2.material.color.set(colorString2);
-      mesh3.material.color.set(colorString3);
-      mesh4.material.color.set(colorString4);
-      mesh5.material.color.set(colorString5);
-      mesh6.material.color.set(colorString6);
-      mesh7.material.color.set(colorString7);
-      mesh8.material.color.set(colorString8);
-      mesh9.material.color.set(colorString9);
-      mesh10.material.color.set(colorString10);
-
       /////////////////////// Animate Position //////////////////////
 
+
+
+      _.forEach(geometry.vertices, function(particle, index){
+        var dX, dY, dZ;
+        dX = Math.random() * 2 - 1;
+        dY = Math.random() * 2 - 1;
+        dZ = Math.random() * 2 - 1;
+
+        particle.add(new THREE.Vector3(dX, dY, dZ));
+        geometry.colors[index] = new THREE.Color(Math.random(), Math.random(), Math.random());
+      });
+      geometry.verticesNeedUpdate = true;
+      geometry.colorsNeedUpdate = true;
+
       ///////// Geometry methods: https://threejs.org/docs/#Reference/Core/Geometry
-      mesh1.scale.y = getDatBass/3000 + 1;
-      mesh2.scale.y = getDatMid1/3000 + 1;
-      mesh3.scale.y = getDatMid2/3000 + 1;
-      mesh4.scale.y = getDatMid3/3000 + 1;
-      mesh5.scale.y = getDatMid4/3000 + 1;
-      mesh6.scale.y = getDatMid5/3000 + 1;
-      mesh7.scale.y = getDatMid6/3000 + 1;
-      mesh8.scale.y = getDatMid7/3000 + 1;
-      mesh9.scale.y = getDatMid8/3000 + 1;
-      mesh10.scale.y = getDatTreble/3000 + 1;
+      // mesh1.scale.y = getDatBass/3000 + 1;
+      // mesh2.scale.y = getDatMid1/3000 + 1;
+      // mesh3.scale.y = getDatMid2/3000 + 1;
+      // mesh4.scale.y = getDatMid3/3000 + 1;
+      // mesh5.scale.y = getDatMid4/3000 + 1;
+      // mesh6.scale.y = getDatMid5/3000 + 1;
+      // mesh7.scale.y = getDatMid6/3000 + 1;
+      // mesh8.scale.y = getDatMid7/3000 + 1;
+      // mesh9.scale.y = getDatMid8/3000 + 1;
+      // mesh10.scale.y = getDatTreble/3000 + 1;
 
-      var zPosition = 0;
+      // var zPosition = 0;
       ////////////// position stated as (x, y, z)
-      mesh1.position.set(-450, getDatBass/120 - 100, zPosition);
-      mesh2.position.set(-350, getDatMid1/120 - 100, zPosition);
-      mesh3.position.set(-250, getDatMid2/120 - 100, zPosition);
-      mesh4.position.set(-150, getDatMid3/120 - 100, zPosition);
-      mesh5.position.set(-50, getDatMid4/120 - 100, zPosition);
-      mesh6.position.set(50, getDatMid5/120 - 100, zPosition);
-      mesh7.position.set(150, getDatMid6/120 - 100, zPosition);
-      mesh8.position.set(250, getDatMid7/120 - 100, zPosition);
-      mesh9.position.set(350, getDatMid8/120 - 100, zPosition);
-      mesh10.position.set(450, getDatTreble/120 - 100, zPosition);
+      // mesh1.position.set(-450, getDatBass/120 - 100, zPosition);
+      // mesh2.position.set(-350, getDatMid1/120 - 100, zPosition);
+      // mesh3.position.set(-250, getDatMid2/120 - 100, zPosition);
+      // mesh4.position.set(-150, getDatMid3/120 - 100, zPosition);
+      // mesh5.position.set(-50, getDatMid4/120 - 100, zPosition);
+      // mesh6.position.set(50, getDatMid5/120 - 100, zPosition);
+      // mesh7.position.set(150, getDatMid6/120 - 100, zPosition);
+      // mesh8.position.set(250, getDatMid7/120 - 100, zPosition);
+      // mesh9.position.set(350, getDatMid8/120 - 100, zPosition);
+      // mesh10.position.set(450, getDatTreble/120 - 100, zPosition);
 
-      mesh1.rotation.y += 0.01;
-      mesh2.rotation.y += 0.01;
-      mesh3.rotation.y += 0.01;
-      mesh4.rotation.y += 0.01;
-      mesh5.rotation.y += 0.01;
-      mesh6.rotation.y += 0.01;
-      mesh7.rotation.y += 0.01;
-      mesh8.rotation.y += 0.01;
-      mesh9.rotation.y += 0.01;
-      mesh10.rotation.y += 0.01;
       // mesh1.rotation.x += 0.01;  // rotate about x to spin vertically
 
       /////////////////////// Animate Light //////////////////////
-      ambientLight.intensity = totalSum / 400000;  // strobe effect?
+      // ambientLight.intensity = totalSum / 400000;  // strobe effect?
       // pointLight.intensity = totalSum / 100000;
 
       renderer.render(scene, camera);

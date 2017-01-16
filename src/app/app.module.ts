@@ -64,6 +64,7 @@ import { EqualizerComponent } from './components/audio-controls/equalizer/equali
 // 3d visualizations
 import { ThreeDComponent } from './components/threeD/three-d.component';
 import { ThreeDFrequencyBarsComponent } from './components/threeD/three-d-frequencyBars.component';
+import { ThreeDParticlesComponent } from './components/threeD/three-d-particles.component';
 
 
 import { TrackActions } from './actions/track.actions';
@@ -123,7 +124,8 @@ const store = compose(...metaReducers)({
     YoutubePipe,
     SearchComponent,
     ThreeDComponent,
-    ThreeDFrequencyBarsComponent
+    ThreeDFrequencyBarsComponent,
+    ThreeDParticlesComponent
   ],
   imports: [
     MomentModule,
