@@ -1,3 +1,16 @@
+
+<div id="controlPanel">
+  <a href="changeVis('frequencyBar');" id="playButton">Frequency Bars</a>
+
+  <div id="hide" (click)="toggleControlPanel()">
+    <i *ngIf="showControlPanel"
+        class="grey chevron right icon"></i>
+
+    <i *ngIf="!showControlPanel"
+        class="yellow chevron left icon"></i>
+  </div>
+</div>
+
 <div [ngStyle]="{width: '100%'}">
   <canvas id="threeDCanvas"
     [ngStyle]="{width: '100%'}">
