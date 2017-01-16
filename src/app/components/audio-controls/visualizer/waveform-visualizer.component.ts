@@ -29,11 +29,11 @@ export class WaveformVisualizerComponent implements OnInit, OnDestroy {
   drawWaveformVisual: any;
   hasCanvas: boolean;
   // The setInterval timer ID.
-  timer: number;
+  renderWaveInterval: number;
+  audioCtx: any;
+  audioSrcNode: any;
 
-  constructor (private audioSrc: AudioStream, private store$: Store<AppStore>) {
-
-  }
+  constructor (private audioSrc: AudioStream, private store$: Store<AppStore>) { }
 
   ngOnInit() {
     this.waveformBufferLength = this.audioSrc.waveformBufferLength;
@@ -45,21 +45,23 @@ export class WaveformVisualizerComponent implements OnInit, OnDestroy {
     this.waveformHEIGHT = this.waveformCanvas.height;
     this.waveformCanvasCtx.clearRect(0, 0, this.waveformWIDTH, this.waveformHEIGHT);
 
+    this.waveformDataArray = new Uint8Array(this.waveformBufferLength);
 
     this.hasCanvas = true;
     var that = this;
-    this.timer = window.setInterval(function() {
-      that.waveformDataArray = that.audioSrc.waveformDataArray;
+    this.renderWaveInterval = window.setInterval(function() {
+      // that.waveformDataArray = that.audioSrc.waveformDataArray;
       that.drawWaveOscilliscope(that);
     }, 50);
   }
 
   ngOnDestroy() {
-    clearInterval(this.timer);
+    clearInterval(this.renderWaveInterval);
   }
 
   drawWaveOscilliscope(context) {
     if (context.hasCanvas) {
+      context.audioSrc.waveformAnalyser.getByteTimeDomainData(context.waveformDataArray);
 
       context.drawWaveformVisual = requestAnimationFrame(context.drawWaveOscilliscope);
 
