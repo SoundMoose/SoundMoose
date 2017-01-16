@@ -15,7 +15,6 @@ import * as ThreeOrbitControls from 'three-orbit-controls';
 
 @Component({
   selector: 'three-d-frequencyBars',
-  // styleUrls: [ './three-d-frequencyBars.component.css' ],
   templateUrl: './three-d-frequencyBars.component.html'
 })
 export class ThreeDFrequencyBarsComponent {
@@ -92,7 +91,7 @@ export class ThreeDFrequencyBarsComponent {
 
     renderer.setClearColor( 0x000000, 0 );
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(window.innerWidth, window.innerHeight-5); // -5 to keep from showing scroll bar on right
 
     // shadows for point light animation
     renderer.shadowMap.enabled = true;
@@ -114,7 +113,7 @@ export class ThreeDFrequencyBarsComponent {
         var WIDTH = window.innerWidth,
             HEIGHT = window.innerHeight;
 
-        renderer.setSize(WIDTH, HEIGHT);
+        renderer.setSize(WIDTH, HEIGHT-5); // -5 to keep from showing scroll bar on right
 
         camera.aspect = WIDTH / HEIGHT;
         camera.updateProjectionMatrix();
