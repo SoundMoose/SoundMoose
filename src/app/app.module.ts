@@ -65,6 +65,7 @@ import { EqualizerComponent } from './components/audio-controls/equalizer/equali
 import { ThreeDComponent } from './components/threeD/three-d.component';
 import { ThreeDFrequencyBarsComponent } from './components/threeD/three-d-frequencyBars.component';
 import { ThreeDParticlesComponent } from './components/threeD/three-d-particles.component';
+import { ThreeDTerrainComponent } from './components/threeD/three-d-terrain.component';
 
 
 import { TrackActions } from './actions/track.actions';
@@ -125,7 +126,8 @@ const store = compose(...metaReducers)({
     SearchComponent,
     ThreeDComponent,
     ThreeDFrequencyBarsComponent,
-    ThreeDParticlesComponent
+    ThreeDParticlesComponent,
+    ThreeDTerrainComponent
   ],
   imports: [
     MomentModule,

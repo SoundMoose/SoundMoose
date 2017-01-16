@@ -9,6 +9,10 @@
     Particles
   </div>
 
+  <div class="three-d-selectors" (click)="changeVis('showThreeDTerrain')">
+    Particles
+  </div>
+
 
   <div id="hide" (click)="toggleControlPanel()">
     <i *ngIf="showControlPanel"
@@ -28,3 +32,8 @@
     *ngIf="currentVisualization === 'showThreeDParticles'"
 >
 </three-d-particles>
+
+<three-d-terrain
+    *ngIf="currentVisualization === 'showThreeDTerrain'"
+>
+</three-d-terrain>

@@ -11,15 +11,16 @@ import { AudioStream } from '../../audio-element';
 import { AudioControlsActions } from '../../actions/audio-controls.actions';
 
 import * as THREE from 'three';
+// import * as THREE from 'three-canvas-renderer';
 import * as ThreeOrbitControls from 'three-orbit-controls';
 
 import * as _ from 'lodash'
 
 @Component({
-  selector: 'three-d-particles',
+  selector: 'three-d-terrain',
   templateUrl: './three-d-sharedCanvas.component.html'
 })
-export class ThreeDParticlesComponent {
+export class ThreeDTerrainComponent {
 
   private audioCtx: any;
   private audioSrcNode: any;
@@ -35,63 +36,41 @@ export class ThreeDParticlesComponent {
   private audio: any;
   private controls: any;
 
-  private SEPARATION: number;
-  private AMOUNTX: number;
-  private AMOUNTY: number;
-  private particles: number;
-  private particle: number;
-  private count: number;
-  private windowHalfX: number;
-  private windowHalfY: number;
+  // private SEPARATION: number;
+  // private AMOUNTX: number;
+  // private AMOUNTY: number;
+  // private particles: number;
+  // private particle: number;
+  // private count: number;
+  // private windowHalfX: number;
+  // private windowHalfY: number;
 
   constructor( private audioSrc: AudioStream, private store$: Store<AppStore> ) {
     this.audioCtx = audioSrc.audioCtx;
     this.audioSrcNode = audioSrc.audioSrcNode;
 
-    this.SEPARATION = 100;
-    this.AMOUNTX = 50;
-    this.AMOUNTY = 50;
-
-		this.particles = 0;
-    this.particle = 0;
-    this.count = 0;
-		this.windowHalfX = window.innerWidth / 2;
-		this.windowHalfY = window.innerHeight / 2;
+    // this.SEPARATION = 100;
+    // this.AMOUNTX = 50;
+    // this.AMOUNTY = 50;
+    //
+		// this.particles = 0;
+    // this.particle = 0;
+    // this.count = 0;
+		// this.windowHalfX = window.innerWidth / 2;
+		// this.windowHalfY = window.innerHeight / 2;
 
   }
 
   ngOnInit(){
 
     // scene/environmental variables
-    var scene,
-        ambientLight,
-        pointLight,
-        lightCrazyTime,
-        camera,
-        renderer;
-
-    // object/animation variables
-    var geometry,
-        material1,
-        material2,
-        material3,
-        material4,
-        material5,
-        material6,
-        material7,
-        material8,
-        material9,
-        material10,
-        mesh1,
-        mesh2,
-        mesh3,
-        mesh4,
-        mesh5,
-        mesh6,
-        mesh7,
-        mesh8,
-        mesh9,
-        mesh10;
+    var SEPARATION = 100, AMOUNTX = 50, AMOUNTY = 50;
+		var container, stats;
+		var camera, scene, renderer;
+		var particles, particle, count = 0;
+		var mouseX = 0, mouseY = 0;
+		var windowHalfX = window.innerWidth / 2;
+		var windowHalfY = window.innerHeight / 2;
 
     var context = this;
 
@@ -103,31 +82,31 @@ export class ThreeDParticlesComponent {
 
     ////////////////////// Renderer and Scene ///////////////////////
     /////////////////////////////////////////////////////////////////
-    var renderer: any = new THREE.WebGLRenderer(
-      {
-        canvas: <HTMLCanvasElement> document.getElementById("threeDCanvas"),
-        antialias: true,
-        alpha: true
-      }
-    );
+    // var renderer: any = new THREE.CanvasRenderer(
+    //   {
+    //     canvas: <HTMLCanvasElement> document.getElementById("threeDCanvas"),
+    //     antialias: true,
+    //     alpha: true
+    //   }
+    // );
 
-    renderer.setClearColor( 0x000000, 0 );
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight-5); // -5 to keep from showing scroll bar on right
+    // renderer.setClearColor( 0x000000, 0 );
+    // renderer.setPixelRatio(window.devicePixelRatio);
+    // renderer.setSize(window.innerWidth, window.innerHeight-5); // -5 to keep from showing scroll bar on right
 
     // shadows for point light animation
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.BasicShadowMap;
+    // renderer.shadowMap.enabled = true;
+    // renderer.shadowMap.type = THREE.BasicShadowMap;
 
     // SCENE
     scene = new THREE.Scene();
 
     ////////////////////////// Camera ///////////////////////////////
     /////////////////////////////////////////////////////////////////
-    camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 3000);
+    camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
     // camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, 0.1, 3000);
 
-    camera.position.set( 0, 100, 500 );
+    camera.position.set( 0, 100, 1000 );
     // scene.add(camera);
 
     // update on resize: renderer size, aspect ratio and projection matrix
@@ -148,27 +127,36 @@ export class ThreeDParticlesComponent {
 
     ///////////////////////// Particles /////////////////////////////
     /////////////////////////////////////////////////////////////////
+    particles = new Array();
 
-    var material = new THREE.PointsMaterial({
-      size: 5,
-      vertexColors: THREE.VertexColors
-    });
+    var PI2 = Math.PI * 2;
+    var material = new THREE.SpriteCanvasMaterial( {
+      color: 0xffffff,
+      program: function ( context ) {
+        context.beginPath();
+        context.arc( 0, 0, 0.5, 0, PI2, true );
+        context.fill();
+      }
+    } );
 
-    var geometry = new THREE.Geometry();
-    var x, y, z;
-    _.times(1000, function(n){
-      x = (Math.random() * 800) - 400;
-      y = (Math.random() * 800) - 400;
-      z = (Math.random() * 800) - 400;
+    var i = 0;
 
-      geometry.vertices.push(new THREE.Vector3(x, y, z));
-      geometry.colors.push(new THREE.Color(Math.random(), Math.random(), Math.random()));
-    });
+    for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
+			for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
+				particle = particles[ i ++ ] = new THREE.Sprite( material );
+				particle.position.x = ix * SEPARATION - ( ( AMOUNTX * SEPARATION ) / 2 );
+				particle.position.z = iy * SEPARATION - ( ( AMOUNTY * SEPARATION ) / 2 );
+				scene.add( particle );
+			}
+		}
 
-    var pointCloud = new THREE.Points(geometry, material);
-    scene.add(pointCloud);
-
-
+    container = document.createElement( 'div' );
+		document.body.appendChild( container );
+    renderer = new THREE.CanvasRenderer();
+    console.log(renderer);
+    renderer.setPixelRatio( window.devicePixelRatio );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		container.appendChild( renderer.domElement );
     ///////////////////////// Render Loop ///////////////////////////
     /////////////////////////////////////////////////////////////////
     requestAnimationFrame(render);
@@ -194,18 +182,18 @@ export class ThreeDParticlesComponent {
 
       //////////////////////////////// Animate ///////////////////////////////
 
-      _.forEach(geometry.vertices, function(particle, index){
-        var dX, dY, dZ;
-        dX = (Math.random() * 2 - 1) * totalSum * 5;
-        dY = (Math.random() * 2 - 1) * totalSum * 5;
-        dZ = (Math.random() * 2 - 1) * totalSum * 5;
-
-        particle.add(new THREE.Vector3(dX, dY, dZ));
-        geometry.colors[index] = new THREE.Color(Math.random() * totalSum, Math.random() * totalSum, Math.random() * totalSum);
-      });
-      geometry.verticesNeedUpdate = true;
-      geometry.colorsNeedUpdate = true;
-
+      // var i = 0;
+			// for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
+			// 	for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
+			// 		particle = particles[ i++ ];
+			// 		particle.position.y = ( Math.sin( ( ix + count ) * 0.3 ) * 50 ) +
+			// 			( Math.sin( ( iy + count ) * 0.5 ) * 50 );
+			// 		particle.scale.x = particle.scale.y = ( Math.sin( ( ix + count ) * 0.3 ) + 1 ) * 4 +
+			// 			( Math.sin( ( iy + count ) * 0.5 ) + 1 ) * 4;
+			// 	}
+			// }
+      // count += 0.1;
+      //
       ///////////////////////////// Re-Render Canvas ////////////////////////
 
       renderer.render(scene, camera);
