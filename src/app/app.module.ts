@@ -53,11 +53,19 @@ import { TrackProgressContainerComponent } from './components/player/track-progr
 import { TopTrackTileComponent } from './components/top-tracks/top-track-tile/top-track-tile.component';
 import { TrackDetailComponent } from './components/track-detail/track-detail.component';
 import { SearchComponent } from './components/search/search.component';
-import { ThreeDComponent } from './components/threeD/three-d.component';
+
+
+// 2d visualizations and audio controls deck
 import { AudioControlsComponent } from './components/audio-controls/audio-controls.component';
 import { FrequencyVisualizerComponent } from './components/audio-controls/visualizer/frequency-visualizer.component';
 import { WaveformVisualizerComponent } from './components/audio-controls/visualizer/waveform-visualizer.component';
 import { EqualizerComponent } from './components/audio-controls/equalizer/equalizer.component';
+
+// 3d visualizations
+import { ThreeDComponent } from './components/threeD/three-d.component';
+import { ThreeDFrequencyBarsComponent } from './components/threeD/three-d-frequencyBars.component';
+import { ThreeDParticlesComponent } from './components/threeD/three-d-particles.component';
+
 
 import { TrackActions } from './actions/track.actions';
 import { PlayerActions } from './actions/player.actions';
@@ -114,7 +122,9 @@ const store = compose(...metaReducers)({
     SimilarTracksComponent,
     YoutubePipe,
     SearchComponent,
-    ThreeDComponent
+    ThreeDComponent,
+    ThreeDFrequencyBarsComponent,
+    ThreeDParticlesComponent
   ],
   imports: [
     MomentModule,

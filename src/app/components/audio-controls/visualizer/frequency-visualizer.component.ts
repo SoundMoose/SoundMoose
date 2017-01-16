@@ -24,31 +24,41 @@ export class FrequencyVisualizerComponent {
   barHeight: number;
   x: number;
   hasfrequencyCanvas: boolean;
+  audioCtx: any;
+  audioSrcNode: any;
+  renderFreqInterval: number;
 
-  constructor (private audioSrc: AudioStream, private store$: Store<AppStore>) {
-  }
+  constructor (private audioSrc: AudioStream, private store$: Store<AppStore>) { }
 
   ngOnInit() {
     this.frequencyBufferLength = this.audioSrc.frequencyBufferLength;
     this.hasfrequencyCanvas = false;
 
-      this.frequencyCanvas = document.getElementById('visualizerFrequencyCanvas');
-      this.frequencyCanvasCtx = this.frequencyCanvas.getContext("2d");
-      this.WIDTH = this.frequencyCanvas.width;
-      this.HEIGHT = this.frequencyCanvas.height;
-      this.frequencyCanvasCtx.clearRect(0, 0, this.WIDTH, this.HEIGHT);
+    this.frequencyCanvas = document.getElementById('visualizerFrequencyCanvas');
+    this.frequencyCanvasCtx = this.frequencyCanvas.getContext("2d");
+    this.WIDTH = this.frequencyCanvas.width;
+    this.HEIGHT = this.frequencyCanvas.height;
+    this.frequencyCanvasCtx.clearRect(0, 0, this.WIDTH, this.HEIGHT);
 
-      this.hasfrequencyCanvas = true;
-      var that = this;
-      setInterval(function() {
-        that.frequencyDataArray = that.audioSrc.frequencyDataArray;
-        that.drawFrequencyBars(that);
-      }, 50);
+    this.hasfrequencyCanvas = true;
+
+    this.frequencyDataArray = new Uint8Array(this.audioSrc.frequencyAnalyser.frequencyBinCount);
+    var that = this;
+    this.renderFreqInterval = window.setInterval(function() {
+      // that.frequencyDataArray = that.audioSrc.frequencyDataArray;
+      that.drawFrequencyBars(that);
+    }, 50);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.renderFreqInterval);
   }
 
   drawFrequencyBars(context) {
     if (context.hasfrequencyCanvas) {
-      // console.log('DRAWING FREQUENCY');
+
+      context.audioSrc.frequencyAnalyser.getByteFrequencyData(context.frequencyDataArray);
+
       context.drawFrequencyVisual = requestAnimationFrame(context.drawFrequencyBars);
 
       let gradient = context.frequencyCanvasCtx.createLinearGradient(0, 0, 0, context.HEIGHT);
