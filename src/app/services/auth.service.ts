@@ -3,6 +3,8 @@ import { Injectable }      from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
 import { auth0Key, auth0Domain } from '../config/superSecretKeys';
 import { Router } from '@angular/router';
+import 'rxjs/add/operator/take';
+
 
 let Auth0Lock = require('auth0-lock').default;
 let Auth0 = require('auth0-js').WebAuth;
@@ -29,12 +31,16 @@ export class Auth {
           console.log(error);
           return;
         }
-        this.handleRedirectWithHash();
         profile.user_metadata = profile.user_metadata || {};
         localStorage.setItem('profile', JSON.stringify(profile));
         this.userProfile = profile;
       });
     });
+    this.lock.on('authorization_error', authResult => {
+      console.log(authResult);
+    });
+
+    //this.handleRedirectWithHash();
   }
 
   private handleRedirectWithHash() {
@@ -42,7 +48,7 @@ export class Auth {
     this.router.events.take(1).subscribe(event => {
       if (/access_token/.test(event.url) || /error/.test(event.url)) {
 
-        let authResult = this.auth0.parseHash(window.location.hash);
+        let authResult = this.auth0.parseHash(window.location.hash, (err) => console.log(err.error, err.errorDescription));
 
         if (authResult && authResult.idToken) {
           this.lock.emit('authenticated', authResult);
