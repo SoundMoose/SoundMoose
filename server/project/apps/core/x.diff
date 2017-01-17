@@ -1,0 +1,25 @@
+diff --git a/server/project/apps/core/serializers.py b/server/project/apps/core/serializers.py
+index 99622a2..d60a978 100644
+--- a/server/project/apps/core/serializers.py
++++ b/server/project/apps/core/serializers.py
+@@ -11,7 +11,7 @@ class PlaylistSerializer(serializers.ModelSerializer):
+
+     class Meta:
+         model = Playlist
+-        fields = ('playlist_name', 'user_id', 'tracks')
++        fields = ('id', 'playlist_name', 'user_id', 'tracks')
+
+     def create(self, validated_data):
+         tracks_data = validated_data.pop('tracks')
+@@ -28,7 +28,10 @@ class PlaylistSerializer(serializers.ModelSerializer):
+         Track.objects.filter(playlist=instance.id).delete()
+
+         for track_data in tracks_data:
+-            Track.objects.create(**track_data)
++            track_id = Track.objects.create(**track_data)
++            instance.tracks.add(track_id)
++
++        instance.save()
+         return Playlist.objects.get(pk=instance.id)
+
+
