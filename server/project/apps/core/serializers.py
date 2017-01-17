@@ -28,7 +28,7 @@ class PlaylistSerializer(serializers.ModelSerializer):
         Track.objects.filter(playlist=instance.id).delete()
 
         for track_data in tracks_data:
-            Track.objects.create(**track_data)
+            track_id = Track.objects.create(**track_data)
             instance.tracks.add(track_id)
 
         instance.save()
