@@ -1,59 +1,76 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Headers, Http, RequestOptions } from '@angular/http';
+
+import { AppStore } from '../models/appstore.model';
+import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs/Observable';
+import { Playlist } from '../models/playlist.model';
 
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/skip';
 
 @Injectable()
 export class PlaylistService {
 
-  constructor(private http: Http) {}
+  playlist;
 
-  // Temporary testing function until backend is in place.
-  testingStub() {
-    return JSON.stringify([
-      {
-        id: 1,
-        title: 'Tacos',
-        artist: 'Mexican Food',
-        imgUrl: 'http://www.google.com',
-        streamUrl: 'http://www.google.com',
-        duration: 826928,
-        platform: 'pizza'
-      }, {
-        id: 2,
-        title: 'Burritos',
-        artist: 'Mexican Food',
-        imgUrl: 'http://www.google.com',
-        streamUrl: 'http://www.google.com',
-        duration: 836541,
-        platform: 'pizza'
-      }, {
-        id: 3,
-        title: 'Churros',
-        artist: 'Mexican Food',
-        imgUrl: 'http://www.google.com',
-        streamUrl: 'http://www.google.com',
-        duration: 517352,
-        platform: 'pizza'
-      }, {
-        id: 4,
-        title: 'Flan',
-        artist: 'Mexican Food',
-        imgUrl: 'http://www.google.com',
-        streamUrl: 'http://www.google.com',
-        duration: 253637,
-        platform: 'pizza'
-      }
-    ]);
+  constructor(private http: Http, private store: Store<AppStore>) {
+    this.playlist = this.store.select('playlist')
+      .skip(2)
+      .subscribe((playlist: Playlist) => {
+        console.log(playlist);
+        this.updatePlaylist(this.buildData(playlist));
+      });
+  }
+
+  updatePlaylist(playlistToUpdate: any) {
+    console.log('put playlist ', playlistToUpdate);
+    this.http.put(`http://www.soundmoose.com:8000/api/playlists/2/`, playlistToUpdate)
+      .subscribe(res => console.log(res));
+  }
+
+  buildData(playlist: Playlist) {
+    let tracks = playlist.tracks.map((ele, i) => JSON.stringify({
+      id: ele.id,
+      order: i,
+      track_id: ele.trackId,
+      title: ele.title,
+      artist: ele.artist,
+      img_url: ele.imgUrl,
+      stream_url: ele.streamUrl,
+      duration: ele.duration,
+      platform: ele.platform
+    }));
+    console.log(tracks);
+    return {
+      playlist_name: playlist.name,
+      user_id: playlist.id,
+      tracks: [JSON.stringify(tracks)]
+    };
   }
 
   // Make API request to backend.
   getPlaylist(playlist_id: number) {
-    let data = this.testingStub();
-    return Observable.of(data)
-      .map(res => JSON.parse(res));
+    return this.http.get(`http://www.soundmoose.com:8000/api/playlists/${playlist_id}/`)
+      .map(res => res.json())
+      .map(res => {
+        res.tracks.sort((a, b) => a.order - b.order);
+        return {
+          id: res.user_id,
+          name: res.playlist_name,
+          tracks: res.tracks.map(ele => ({
+            id: ele.id,
+            trackId: ele.track_id,
+            title: ele.title,
+            artist: ele.artist,
+            imgUrl: ele.img_url,
+            streamUrl: ele.stream_url,
+            duration: ele.duration,
+            platform: ele.platform
+          }))
+        }
+      });
   }
 
 }

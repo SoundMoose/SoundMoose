@@ -6,4 +6,5 @@ export interface Track {
   streamUrl: string;
   duration: number;
   platform: string;
+  trackId: number;
 }

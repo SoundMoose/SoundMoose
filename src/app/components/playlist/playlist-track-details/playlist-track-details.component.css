@@ -7,11 +7,11 @@
 }
 
 .align {
-  width: 60%;
+  width: 40%;
   display: flex;
   justify-content: space-between;
 }
 
 .title {
-  width: 40%;
+  width: 60%;
 }

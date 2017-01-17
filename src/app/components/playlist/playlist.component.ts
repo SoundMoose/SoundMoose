@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 
 import { PlaylistActions } from '../../actions/playlist.actions';
 import { PlaylistService } from '../../services/playlist.service';
+import { Playlist } from '../../models/playlist.model';
 import { Track } from '../../models/track.model';
 
 @Component({
@@ -20,10 +21,11 @@ export class PlaylistComponent {
 
   constructor(private playlistService: PlaylistService, private store: Store<AppStore>, private playlistActions: PlaylistActions) {
     // Get playlist data on load.
-    this.getData(0);
+    this.getData(2);
 
     // Grab playlist info from state.
-    this.playlist$ = this.store.select('playlist');
+    this.playlist$ = this.store.select('playlist')
+      .map((playlist: Playlist) => playlist.tracks);
   }
 
   // Request data from API and update the state when it responds.
