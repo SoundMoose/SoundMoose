@@ -39,43 +39,6 @@ function createWindow () {
 
 // Menu template start
 let template = [{
-  label: 'File',
-  submenu: [{
-    label: 'Open',
-    accelerator: 'CmdOrCtrl+O'
-  }, {
-    label: 'Save As...',
-    accelerator: 'CmdOrCtrl+S'
-  }]
-  // label: 'Edit',
-  // submenu: [{
-  //   label: 'Undo',
-  //   accelerator: 'CmdOrCtrl+Z',
-  //   role: 'undo'
-  // }, {
-  //   label: 'Redo',
-  //   accelerator: 'Shift+CmdOrCtrl+Z',
-  //   role: 'redo'
-  // }, {
-  //   type: 'separator'
-  // }, {
-  //   label: 'Cut',
-  //   accelerator: 'CmdOrCtrl+X',
-  //   role: 'cut'
-  // }, {
-  //   label: 'Copy',
-  //   accelerator: 'CmdOrCtrl+C',
-  //   role: 'copy'
-  // }, {
-  //   label: 'Paste',
-  //   accelerator: 'CmdOrCtrl+V',
-  //   role: 'paste'
-  // }, {
-  //   label: 'Select All',
-  //   accelerator: 'CmdOrCtrl+A',
-  //   role: 'selectall'
-  // }]
-}, {
   label: 'View',
   submenu: [{
     label: 'Reload',
@@ -124,19 +87,6 @@ let template = [{
     }
   }, {
     type: 'separator'
-  }, {
-    label: 'App Menu Demo',
-    click: function (item, focusedWindow) {
-      if (focusedWindow) {
-        const options = {
-          type: 'info',
-          title: 'Application Menu Demo',
-          buttons: ['Ok'],
-          message: 'This demo is for the Menu section, showing how to create a clickable menu item in the application menu.'
-        }
-        electron.dialog.showMessageBox(focusedWindow, options, function () {})
-      }
-    }
   }]
 }, {
   label: 'Window',
@@ -164,9 +114,22 @@ let template = [{
   label: 'Help',
   role: 'help',
   submenu: [{
-    label: 'Learn More',
+    label: "Visit Site",
     click: function () {
-      electron.shell.openExternal('http://electron.atom.io')
+      electron.shell.openExternal('http://www.soundmoose.com')
+    }
+  },{
+    label: 'About',
+    click: function (item, focusedWindow) {
+      if (focusedWindow) {
+        const options = {
+          type: 'info',
+          title: 'Soundmoose Team',
+          buttons: ['Ok'],
+          message: 'Members: Stefan Ruijsenaars, Cal Holloway, Doug Vaughn and Howard Xue'
+        }
+        electron.dialog.showMessageBox(focusedWindow, options, function () {})
+      }
     }
   }]
 }]
@@ -257,7 +220,7 @@ if (process.platform === 'darwin') {
   })
 
   // Window menu.
-  template[3].submenu.push({
+  template[2].submenu.push({
     type: 'separator'
   }, {
     label: 'Bring All to Front',
@@ -272,15 +235,6 @@ if (process.platform === 'win32') {
   addUpdateMenuItems(helpMenu, 0)
 }
 // Menu template end
-
-// let setMenu = () => {
-//   let fileMenu = template.find(item => item.label === 'File');
-
-//   fileMenu.submenu.find(item => item.label === 'Open').click = () => mainWindow.webContents.send('open-file')
-
-//   fileMenu.submenu.find(item => item.label === 'Save As...').click = () => mainWindow.webContents.send('save-file')
-// }
-
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
