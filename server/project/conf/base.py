@@ -79,8 +79,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'soundmoose',
-        'USER': 'sr',
-        'PASSWORD': '',
+        'USER': 'postgres',
+        'PASSWORD': 'hrr20soundmoose',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
