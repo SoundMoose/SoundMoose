@@ -24,6 +24,7 @@ import { AudioControlsService } from './services/audio-controls.service';
 import { Auth } from './services/auth.service';
 import { AUDIO_STREAM_PROVIDER } from './audio-element';
 
+import soundmooseUser from './reducers/soundmoose-user.reducer';
 import player from './reducers/player.reducer';
 import tracks from './reducers/tracks.reducer';
 import spinner from './reducers/spinner.reducer';
@@ -67,6 +68,7 @@ import { ThreeDFrequencyBarsComponent } from './components/threeD/three-d-freque
 import { ThreeDParticlesComponent } from './components/threeD/three-d-particles.component';
 
 
+import { SoundmooseUserActions } from './actions/soundmoose-user.actions';
 import { TrackActions } from './actions/track.actions';
 import { PlayerActions } from './actions/player.actions';
 import { AudioControlsActions } from './actions/audio-controls.actions';
@@ -83,7 +85,8 @@ const APP_PROVIDERS = [
   AUDIO_STREAM_PROVIDER,
   TrackActions,
   PlayerActions,
-  AudioControlsActions
+  AudioControlsActions,
+  SoundmooseUserActions
 ];
 
 const metaReducers = (ENV !== 'production') ? [storeFreeze, combineReducers] : [combineReducers];
@@ -94,7 +97,8 @@ const store = compose(...metaReducers)({
   spinner: spinner,
   audiocontrols: audiocontrols,
   trackDetails: trackDetails,
-  comments: comments
+  comments: comments,
+  soundmooseUser: soundmooseUser
 });
 
 /**

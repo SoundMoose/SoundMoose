@@ -3,7 +3,7 @@
       <a routerLink="/home"><img class="logo" src="assets/img/logo.png"></a>
 
 
-      <div class="right-icons" [ngStyle]="{'margin':'8px'}"><img *ngIf="auth.userProfile" [src]="auth.userProfile.picture" alt="User avatar" style="width: 20px; height: 20px; border-radius: 50%; position: relative; left: -5px; top: 5px;"/><span style="margin-right: 5px;" *ngIf="auth.userProfile">{{auth.userProfile.name}}</span>
+      <div class="right-icons" [ngStyle]="{'margin':'8px'}"><img *ngIf="(soundmooseUser$ | async).loggedIn" [src]="auth.userProfile.picture" alt="User avatar" style="width: 20px; height: 20px; border-radius: 50%; position: relative; left: -5px; top: 5px;"/><span style="margin-right: 5px;" *ngIf="(soundmooseUser$ | async).name">{{(soundmooseUser$ | async).name}}</span>
         <button style="color: #fff" class="ui primary button mini" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
         <button style="color: #fff" class="ui primary button mini" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
 
