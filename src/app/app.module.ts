@@ -72,7 +72,6 @@ import { PlayerActions } from './actions/player.actions';
 import { AudioControlsActions } from './actions/audio-controls.actions';
 import { YoutubePipe } from './youtube.pipe';
 
-
 // Application wide providers
 const APP_PROVIDERS = [
   SpotifyService,
