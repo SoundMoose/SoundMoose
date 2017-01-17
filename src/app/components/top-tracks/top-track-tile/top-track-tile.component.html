@@ -5,8 +5,28 @@
     selected: (selected$ | async) && (currentlyPlaying$ | async)
   }"
 >
+
+  <div (mouseover)="bottomIconHover = true" class="bottom-icons">
+    <i [ngClass]="{
+     big: true,
+     icon: true,
+     soundcloud: topTrack.platform == 'soundcloud',
+     spotify: topTrack.platform == 'spotify'
+    }" style="position: absolute; bottom: 20px; left: 10px;"></i>
+    <i *ngIf="bottomIconHover" (click)="toggleFavorite()" [ngClass]="{
+       big: true,
+       icon: true,
+       heart: true,
+       empty: isFavorited
+    }" style="cursor: pointer; position: absolute; bottom: 20px; left: 60px;"></i>
+    <i *ngIf="bottomIconHover" (click)="addToPlaylist()" [ngClass]="{
+       big: true,
+       icon: true,
+       list: true
+    }" style="cursor: pointer; position: absolute; bottom: 20px; left: 110px;"></i>
+  </div>
   <img class="album-art" src="{{topTrack.imgUrl}}">
-  <a (click)="goToDetail($event)">
+  <a style="bottom: 40px" (click)="goToDetail($event)">
     <span>
       <i class="icons">
         <i class="massive circle icon"></i>
