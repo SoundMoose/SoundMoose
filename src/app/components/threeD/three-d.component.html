@@ -1,6 +1,30 @@
 
-    <canvas id="threeDCanvas"
-      [ngStyle]="{
-        width: '100%'
-      }"
-    ></canvas>
+<div id="controlPanel">
+
+  <div class="three-d-selectors" (click)="changeVis('showThreeDFrequency')">
+    Frequency Bars
+  </div>
+
+  <div class="three-d-selectors" (click)="changeVis('showThreeDParticles')">
+    Particles
+  </div>
+
+
+  <div id="hide" (click)="toggleControlPanel()">
+    <i *ngIf="showControlPanel"
+        class="grey chevron right icon"></i>
+
+    <i *ngIf="!showControlPanel"
+        class="yellow chevron left icon"></i>
+  </div>
+</div>
+
+<three-d-frequencyBars
+    *ngIf="currentVisualization === 'showThreeDFrequency'"
+>
+</three-d-frequencyBars>
+
+<three-d-particles
+    *ngIf="currentVisualization === 'showThreeDParticles'"
+>
+</three-d-particles>

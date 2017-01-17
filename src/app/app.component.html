@@ -1,34 +1,30 @@
-    <div class="ui borderless main menu container">
-      <div id="page-header" class="ui container">
-        <a routerLink="/home"><img class="logo" src="assets/img/logo.png"></a>
+  <div class="ui borderless main menu container">
+    <div id="page-header" class="ui container">
+      <a routerLink="/home"><img class="logo" src="assets/img/logo.png"></a>
 
 
-        <div class="right-icons" [ngStyle]="{'margin':'8px'}"><img *ngIf="auth.userProfile" [src]="auth.userProfile.picture" alt="User avatar" style="width: 20px; height: 20px; border-radius: 50%; position: relative; left: -5px; top: 5px;"/><span style="margin-right: 5px;" *ngIf="auth.userProfile">{{auth.userProfile.name}}</span>
-          <button style="color: #fff" class="ui primary button mini" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
-          <button style="color: #fff" class="ui primary button mini" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
+      <div class="right-icons" [ngStyle]="{'margin':'8px'}"><img *ngIf="auth.userProfile" [src]="auth.userProfile.picture" alt="User avatar" style="width: 20px; height: 20px; border-radius: 50%; position: relative; left: -5px; top: 5px;"/><span style="margin-right: 5px;" *ngIf="auth.userProfile">{{auth.userProfile.name}}</span>
+        <button style="color: #fff" class="ui primary button mini" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
+        <button style="color: #fff" class="ui primary button mini" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
 
-          <a routerLink="/threeD">
-            <i class="big grey lab icon" ></i>
-          </a>
+        <a routerLink="/threeD">
+          <i class="big grey lab icon" ></i>
+        </a>
 
-          <a routerLink="/search">
-            <i class="big grey search icon" ></i>
-          </a>
-          <a target="_blank" href="https://github.com/hrr20-over9000/SoundMoose">
-            <i class="big yellow github icon" ></i>
-          </a>
-        </div>
-
+        <a routerLink="/search">
+          <i class="big grey search icon" ></i>
+        </a>
+        <a target="_blank" href="https://github.com/hrr20-over9000/SoundMoose">
+          <i class="big yellow github icon" ></i>
+        </a>
       </div>
+
     </div>
+  </div>
 
 
-    <spinner></spinner>
+  <spinner></spinner>
 
-    <div
-      class="overview ui container"
-    >
-      <router-outlet></router-outlet>
-    </div>
+  <router-outlet></router-outlet>
 
   <player></player>

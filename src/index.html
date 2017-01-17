@@ -14,10 +14,12 @@
   <% } %>
 
   <!-- remove this -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" onload="window.$ = window.jQuery"></script>
+  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" onload="window.$ = window.jQuery"|script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" onload="window.$ = window.jQuery"></script>
 
-    <script src="assets/semantic-ui/semantic.min.js"></script>
-    <script src="assets/waveform/waveform.js"></script>
+  <script src="assets/semantic-ui/semantic.min.js"></script>
+  <script src="assets/waveform/waveform.js"></script>
+  <script>if (window.module) module = window.module;</script>
   <!-- /remove this -->
 
   <!-- base url -->
