@@ -45,6 +45,7 @@ npm run build:prod
 npm run server:prod
 ```
 
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
@@ -94,3 +95,27 @@ Blog containing list of great resources:
 
 Youtube Video Series Episode related to Web Audio Visualization
 [Learning THREE.js - 11 -- Live Web Audio Visualizations](https://www.youtube.com/watch?v=tdtaihSNfMY)
+
+
+## Server Maintenance
+### Note: The below is provided for team reference.
+
+To start forwarding proxy from project root:
+```
+node proxy/proxy.js
+```
+
+Using a clone of https://github.com/soundcloud/waveformjs with the dependancies and gems installed, to start Ruby Waveform service from /var/waveformjs:
+```
+bundle exec rackup
+```
+
+With Python and Django installed, to start Django REST server within /var/www/soundmoose.com/server/project/ directory:
+```
+python manage.py runserver 0.0.0.0:8000
+```
+> Note: for info on how the virtual environment was set up visit http://docs.python-guide.org/en/latest/dev/virtualenvs/
+
+To manage Django server, visit http://138.197.88.233:8000/admin/
+
+To view API information, visit http://138.197.88.233:8000/api/
