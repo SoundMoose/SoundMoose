@@ -23,4 +23,12 @@ export class PlaylistActions {
     };
   }
 
+  static REMOVE_TRACK = '[Playlist] Remove Track';
+  removeTrack(trackId: number, trackPlatform: string) {
+    return {
+      type: PlaylistActions.REMOVE_TRACK,
+      payload: { trackId, trackPlatform }
+    };
+  }
+
 }

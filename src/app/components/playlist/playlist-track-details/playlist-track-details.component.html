@@ -1,7 +1,15 @@
 <div class="track">
-  <div class="title">{{track.title}}</div>
-  <div class="align">
-    <div>{{track.artist}}</div>
-    <div>{{millisToMinutesSeconds(track.duration)}}</div>
+  <div class="play-pause">
+    <i class="play large icon"></i>
+  </div>
+  <div class="info">
+    <div class="title">{{track.title}}</div>
+    <div class="align">
+      <div>{{track.artist}}</div>
+      <div>{{millisToMinutesSeconds(track.duration)}}</div>
+    </div>
+  </div>
+  <div class="delete">
+    <i class="remove large grey icon"></i>
   </div>
 </div>

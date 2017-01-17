@@ -21,7 +21,7 @@ export class PlaylistComponent {
 
   constructor(private playlistService: PlaylistService, private store: Store<AppStore>, private playlistActions: PlaylistActions) {
     // Get playlist data on load.
-    this.getData(2);
+    this.getData(8); // User id is in state, get playlist id from GET /api/playlists/?user_id=[user id]
 
     // Grab playlist info from state.
     this.playlist$ = this.store.select('playlist')
@@ -33,6 +33,7 @@ export class PlaylistComponent {
     this.playlistService.getPlaylist(playlist_id)
       .first()
       .subscribe(playlist => {
+        console.log(playlist);
         this.store.dispatch(this.playlistActions.loadTracks(playlist));
       });
   }
