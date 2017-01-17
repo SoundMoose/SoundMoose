@@ -9,8 +9,8 @@
     Particles
   </div>
 
-  <div class="three-d-selectors" (click)="changeVis('showThreeDTerrain')">
-    Particles
+  <div class="three-d-selectors" (click)="changeVis('showThreeDSphere')">
+    Sphere
   </div>
 
 
@@ -33,7 +33,7 @@
 >
 </three-d-particles>
 
-<three-d-terrain
-    *ngIf="currentVisualization === 'showThreeDTerrain'"
+<three-d-sphere
+    *ngIf="currentVisualization === 'showThreeDSphere'"
 >
-</three-d-terrain>
+</three-d-sphere>
