@@ -16,10 +16,10 @@ import * as ThreeOrbitControls from 'three-orbit-controls';
 import * as _ from 'lodash'
 
 @Component({
-  selector: 'three-d-particles',
+  selector: 'three-d-sphere',
   templateUrl: './three-d-sharedCanvas.component.html'
 })
-export class ThreeDParticlesComponent {
+export class ThreeDSphereComponent {
 
   private audioCtx: any;
   private audioSrcNode: any;
@@ -43,9 +43,14 @@ export class ThreeDParticlesComponent {
   ngOnInit(){
 
     // scene/environmental variables
-    var scene,
-        camera,
-        renderer;
+		var SCREEN_WIDTH = window.innerWidth,
+			SCREEN_HEIGHT = window.innerHeight,
+  		r = 450,
+      windowHalfX = window.innerWidth / 2,
+  		windowHalfY = window.innerHeight / 2,
+      camera,
+      scene,
+      renderer;
 
     var context = this;
 
@@ -69,10 +74,6 @@ export class ThreeDParticlesComponent {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight-5); // -5 to keep from showing scroll bar on right
 
-    // shadows for point light animation
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.BasicShadowMap;
-
     // SCENE
     scene = new THREE.Scene();
 
@@ -81,7 +82,7 @@ export class ThreeDParticlesComponent {
     camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 3000);
     // camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, 0.1, 3000);
 
-    camera.position.set( 0, 100, 500 );
+    camera.position.set( 0, 100, 1000 );
     // scene.add(camera);
 
     // update on resize: renderer size, aspect ratio and projection matrix
@@ -102,26 +103,48 @@ export class ThreeDParticlesComponent {
 
     ///////////////////////// Particles /////////////////////////////
     /////////////////////////////////////////////////////////////////
+    function createGeometry() {
+			var geometry = new THREE.Geometry();
+			for ( i = 0; i < 1500; i ++ ) {
+				var vertex1 = new THREE.Vector3();
+				vertex1.x = Math.random() * 2 - 1;
+				vertex1.y = Math.random() * 2 - 1;
+				vertex1.z = Math.random() * 2 - 1;
+				vertex1.normalize();
+				vertex1.multiplyScalar( r );
+				vertex2 = vertex1.clone();
+				vertex2.multiplyScalar( Math.random() * 0.09 + 1 );
+				geometry.vertices.push( vertex1 );
+				geometry.vertices.push( vertex2 );
+			}
+			return geometry;
+		}
 
-    var material = new THREE.PointsMaterial({
-      size: 5,
-      vertexColors: THREE.VertexColors
-    });
+    var i, line, vertex1, vertex2, material, p,
+    parameters = [
+      [ 0.25, 0xb70000, 1, 2 ], // inner most sphere
+      [ 0.5, 0xffffff, 1, 1 ],
+      [ 0.75, 0xADBBC2, 0.75, 1 ],
+      [ 1, 0x767676, 0.5, 1 ],
+      [ 1.25, 0x2E2E2E, 0.8, 1 ], // outer most sphere
+      [ 3.0, 0xaaaaaa, 0.75, 2 ],
+      [ 3.5, 0xffffff, 0.5, 1 ],
+      [ 4.5, 0xffffff, 0.25, 1 ],
+      [ 5.5, 0xffffff, 0.125, 1 ]
+    ];
 
-    var geometry = new THREE.Geometry();
-    var x, y, z;
-    _.times(1000, function(n){
-      x = (Math.random() * 800) - 400;
-      y = (Math.random() * 800) - 400;
-      z = (Math.random() * 800) - 400;
+    var geometry = createGeometry();
 
-      geometry.vertices.push(new THREE.Vector3(x, y, z));
-      geometry.colors.push(new THREE.Color(Math.random(), Math.random(), Math.random()));
-    });
-
-    var pointCloud = new THREE.Points(geometry, material);
-    scene.add(pointCloud);
-
+		for( i = 0; i < parameters.length; ++ i ) {
+			p = parameters[ i ];
+			material = new THREE.LineBasicMaterial( { color: p[ 1 ], opacity: p[ 2 ], linewidth: p[ 3 ] } );
+			line = new THREE.LineSegments( geometry, material );
+			line.scale.x = line.scale.y = line.scale.z = p[ 0 ];
+			line.originalScale = p[ 0 ];
+			line.rotation.y = Math.random() * Math.PI;
+			line.updateMatrix();
+			scene.add( line );
+		}
 
     ///////////////////////// Render Loop ///////////////////////////
     /////////////////////////////////////////////////////////////////
@@ -141,24 +164,66 @@ export class ThreeDParticlesComponent {
         return result;
       }
 
+      var getDatBass = getDat(frequencyData, 0, 200) / 50000;
+      var getDatMid1 = getDat(frequencyData, 200, 400) / 40000;
+      var getDatMid2 = getDat(frequencyData, 400, 600) / 30000;
+      var getDatMid3 = getDat(frequencyData, 600, 800) / 20000;
+      var getDatTreble = getDat(frequencyData, 800, 1000) / 10000;
+
       var totalSum = getDat(frequencyData, 0, 1000) / 100000;
-      if (totalSum > 1) {
-        totalSum = 1;
-      }
+      // if (totalSum > 1) { totalSum = 1; }
+      if (totalSum < 0.3) { totalSum = 0.3; }
+
+      // if (getDatBass > 1) { getDatBass = 1; }
+      if (getDatBass < 0.3) { getDatBass = 0.3; }
+
+      // if (getDatMid1 > 1) { getDatMid1 = 1; }
+      if (getDatMid1 < 0.3) { getDatMid1 = 0.3; }
+
+      // if (getDatMid2 > 1) { getDatMid2 = 1; }
+      if (getDatMid2 < 0.3) { getDatMid2 = 0.3; }
+
+      // if (getDatMid3 > 1) { getDatMid3 = 1; }
+      if (getDatMid3 < 0.3) { getDatMid3 = 0.3; }
+
+      // if (getDatTreble > 1) { getDatTreble = 1; }
+      if (getDatTreble < 0.3) { getDatTreble = 0.3; }
 
       //////////////////////////////// Animate ///////////////////////////////
 
-      _.forEach(geometry.vertices, function(particle, index){
-        var dX, dY, dZ;
-        dX = (Math.random() * 2 - 1) * totalSum * 5;
-        dY = (Math.random() * 2 - 1) * totalSum * 5;
-        dZ = (Math.random() * 2 - 1) * totalSum * 5;
-
-        particle.add(new THREE.Vector3(dX, dY, dZ));
-        geometry.colors[index] = new THREE.Color(Math.random() * totalSum, Math.random() * totalSum, Math.random() * totalSum);
-      });
-      geometry.verticesNeedUpdate = true;
-      geometry.colorsNeedUpdate = true;
+				var time = Date.now() * 0.0001;
+				for ( var i = 0; i < scene.children.length; i ++ ) {
+					var object = scene.children[ i ];
+					if ( object instanceof THREE.Line ) {
+						object.rotation.y = time * ( i < 4 ? ( i + 1 + totalSum ) : - ( i + 1  + totalSum ) );
+						if ( i === 0 ) {
+              object.scale.x =
+              object.scale.y =
+              object.scale.z =
+              object.originalScale * getDatBass * (i/5+1) * (1 + 0.5 * Math.sin( 7*time ));
+            } else if ( i === 1 ) {
+              object.scale.x =
+              object.scale.y =
+              object.scale.z =
+              object.originalScale * getDatMid1 * (i/5+1) * (1 + 0.5 * Math.sin( 7*time ));
+            } else if ( i === 2 ) {
+              object.scale.x =
+              object.scale.y =
+              object.scale.z =
+              object.originalScale * getDatMid2 * (i/5+1) * (1 + 0.5 * Math.sin( 7*time ));
+            } else if ( i === 3 ) {
+              object.scale.x =
+              object.scale.y =
+              object.scale.z =
+              object.originalScale * getDatMid3 * (i/5+1) * (1 + 0.5 * Math.sin( 7*time ));
+            } else if ( i === 4 ) {
+              object.scale.x =
+              object.scale.y =
+              object.scale.z =
+              object.originalScale * getDatTreble * (i/5+1) * (1 + 0.5 * Math.sin( 7*time ));
+            }
+					}
+				}
 
       ///////////////////////////// Re-Render Canvas ////////////////////////
 
