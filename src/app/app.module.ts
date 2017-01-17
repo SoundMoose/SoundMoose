@@ -69,6 +69,10 @@ import { ThreeDParticlesComponent } from './components/threeD/three-d-particles.
 import { ThreeDSphereComponent } from './components/threeD/three-d-sphere.component';
 
 
+// options slider
+import { OptionsComponent } from './components/options/options.component';
+
+
 import { SoundmooseUserActions } from './actions/soundmoose-user.actions';
 import { TrackActions } from './actions/track.actions';
 import { PlayerActions } from './actions/player.actions';
@@ -130,7 +134,8 @@ const store = compose(...metaReducers)({
     ThreeDComponent,
     ThreeDFrequencyBarsComponent,
     ThreeDParticlesComponent,
-    ThreeDSphereComponent
+    ThreeDSphereComponent,
+    OptionsComponent
   ],
   imports: [
     MomentModule,

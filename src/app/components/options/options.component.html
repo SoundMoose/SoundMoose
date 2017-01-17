@@ -1,0 +1,39 @@
+
+<div id="optionsPanel">
+  In Development!
+  <div class="ui checked checkbox" style="display:block">
+    <input type="checkbox" name="example">
+    <label>Soundcloud</label>
+  </div>
+
+  <div class="ui checked checkbox" style="display:block">
+    <input type="checkbox" name="example">
+    <label>Spotify</label>
+  </div>
+
+  <div class="ui checked checkbox" style="display:block">
+    <input type="checkbox" name="example">
+    <label>LastFM</label>
+  </div>
+
+  <!-- <div class="options-selectors" >
+    Soundcloud
+  </div>
+
+  <div class="options-selectors" >
+    Spotify
+  </div>
+
+  <div class="options-selectors" >
+    LastFM
+  </div> -->
+
+
+  <div id="hide" (click)="toggleOptionsPanel()">
+    <i *ngIf="!showOptionsPanel"
+        class="grey chevron right icon"></i>
+
+    <i *ngIf="showOptionsPanel"
+        class="yellow chevron left icon"></i>
+  </div>
+</div>
