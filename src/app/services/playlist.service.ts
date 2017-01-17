@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/map';
@@ -9,6 +10,7 @@ export class PlaylistService {
 
   constructor(private http: Http) {}
 
+  // Temporary testing function until backend is in place.
   testingStub() {
     return JSON.stringify([
       {
@@ -47,9 +49,11 @@ export class PlaylistService {
     ]);
   }
 
+  // Make API request to backend.
   getPlaylist(playlist_id: number) {
     let data = this.testingStub();
     return Observable.of(data)
       .map(res => JSON.parse(res));
   }
+
 }

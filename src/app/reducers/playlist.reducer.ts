@@ -1,7 +1,6 @@
 import { Action } from '@ngrx/store';
-
-import { Track } from '../models/track.model';
 import { PlaylistActions } from '../actions/playlist.actions';
+import { Track } from '../models/track.model';
 
 export type PlaylistState = Track[];
 
@@ -9,6 +8,7 @@ const initialState: PlaylistState = [];
 
 export default function (state = initialState, action: Action): PlaylistState {
   switch (action.type) {
+
     case PlaylistActions.LOAD_TRACKS: {
       return action.payload;
     }
@@ -23,5 +23,7 @@ export default function (state = initialState, action: Action): PlaylistState {
     default: {
       return state;
     }
+
   }
+
 }
