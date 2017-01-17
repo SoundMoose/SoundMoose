@@ -3,6 +3,16 @@ i.icons .loading {
   left: 15%;
 }
 
+i.icons {
+  transform: scale(0.8);
+  top: -5px;
+  position: relative;
+}
+
+.bottom-icons i {
+  transform: scale(0.8);
+}
+
 .spinner {
   margin: 100px auto 0;
   width: 70px;
