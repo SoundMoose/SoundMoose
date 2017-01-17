@@ -31,20 +31,22 @@ export class TopTrackTileComponent{
     duration: 0
   }
 
-  player$: Observable<{}>;
-  spinner$: Observable<{}>;
+  player$: Observable<Player>;
+  spinner$: Observable<SpinnerState>;
   currentlyPlaying$: Observable<boolean>;
+  isFavorited: boolean;
   selected$: Observable<boolean>;
   isLoading$: Observable<boolean>;
   loadBuffer: boolean;
   playing: boolean;
   isPlayingSubscription: Subscription;
+  bottomIconHover: boolean = false;
 
   constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router) {
     // Grab the player stream from the store
-    this.player$ = this.store$.select('player');
+    this.player$ = this.store$.select(s => s.player);
     // Grab the spinner stream
-    this.spinner$ = this.store$.select('spinner');
+    this.spinner$ = this.store$.select(s => s.spinner);
 
     // Map the player stream to see if the player is playing
     this.currentlyPlaying$ = this.player$
@@ -83,4 +85,11 @@ export class TopTrackTileComponent{
     setTimeout(() => this.loadBuffer = !this.loadBuffer, 20);
   }
 
+  toggleFavorite() {
+    this.isFavorited = !this.isFavorited;
+  }
+
+  addToPlaylist() {
+
+  }
 }
