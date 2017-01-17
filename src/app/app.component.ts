@@ -19,14 +19,18 @@ import { Auth } from './services/auth.service';
 
 export class AppComponent {
   toggleFrequencyOrWaveform$: Observable<boolean>;
+  openDialogActive: boolean = false;
+  saveDialogActive: boolean = false;
 
   constructor( private store$: Store<AppStore>, private AudioControlsActions: AudioControlsActions, private auth: Auth) {
 
     this.toggleFrequencyOrWaveform$ = this.store$.select('audiocontrols')
       .map((audiocontrols: AudioControls) => audiocontrols.toggleFrequencyOrWaveform)
+
   }
 
   toggleAudioControls() {
     this.store$.dispatch(this.AudioControlsActions.toggleVisualizersFreqWave());
   }
+
 }
