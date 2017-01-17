@@ -74,10 +74,6 @@ export class ThreeDSphereComponent {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight-5); // -5 to keep from showing scroll bar on right
 
-    // shadows for point light animation
-    // renderer.shadowMap.enabled = true;
-    // renderer.shadowMap.type = THREE.BasicShadowMap;
-
     // SCENE
     scene = new THREE.Scene();
 
