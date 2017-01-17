@@ -33,11 +33,11 @@ export class OptionsComponent {
     var optionsPanel = document.getElementById('optionsPanel');
     var actionBtn = document.getElementById('hide');
 
-    var left = optionsPanel.style.left;
-    if (left == '0px' || left == '') {
-      optionsPanel.style.left = '-180px';
+    var right = optionsPanel.style.right;
+    if (right == '0px' || right == '') {
+      optionsPanel.style.right = '-180px';
     } else {
-      optionsPanel.style.left = '0px';
+      optionsPanel.style.right = '0px';
     };
     this.showOptionsPanel = !this.showOptionsPanel;
   }
