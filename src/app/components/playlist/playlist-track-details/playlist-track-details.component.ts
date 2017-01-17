@@ -15,4 +15,14 @@ export class PlaylistTrackDetailsComponent {
 
   }
 
+  millisToMinutesSeconds(millis) {
+    let minutes = Math.floor(millis / 60000);
+    let seconds = +((millis % 60000) / 1000).toFixed(0);
+    if (seconds === 60) {
+      seconds = 0;
+      minutes++;
+    }
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  }
+
 }

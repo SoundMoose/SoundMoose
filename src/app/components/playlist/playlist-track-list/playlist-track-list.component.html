@@ -1,6 +1,4 @@
-<h3>Playlist Track List</h3>
-
-<div [sortablejs]="items" [sortablejsOptions]="{ animation: 150, scroll: false }">
+<div [sortablejs]="items" [sortablejsOptions]="{ animation: 150, scroll: false, onUpdate: updateList.bind(this) }">
   <div *ngFor="let track of playlist">
     <playlist-track-details [track]="track"></playlist-track-details>
   </div>

@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
 
+import { Store } from '@ngrx/store';
+import { AppStore } from '../../../models/appstore.model';
 import { Track } from '../../../models/track.model';
+import { PlaylistActions } from '../../../actions/playlist.actions';
 
 @Component({
   selector: 'playlist-track-list',
@@ -9,13 +12,12 @@ import { Track } from '../../../models/track.model';
 })
 export class PlaylistTrackListComponent {
 
-  @Input() playlist;
+  @Input() playlist: Track[];
 
-  // Testing
-  items;
+  constructor(private store: Store<AppStore>, private playlistActions: PlaylistActions) {}
 
-  constructor() {
-    // this.items = this.playlist.map(ele => ele);
+  updateList(event) {
+    this.store.dispatch(this.playlistActions.changeOrder(event.oldIndex, event.newIndex));
   }
 
 }

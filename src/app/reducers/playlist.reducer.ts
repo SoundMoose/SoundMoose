@@ -13,6 +13,13 @@ export default function (state = initialState, action: Action): PlaylistState {
       return action.payload;
     }
 
+    case PlaylistActions.CHANGE_ORDER: {
+      let newState = state.slice();
+      let trackToMove = newState.splice(action.payload.oldIndex, 1);
+      newState.splice(action.payload.newIndex, 0, trackToMove[0]);
+      return newState;
+    }
+
     default: {
       return state;
     }

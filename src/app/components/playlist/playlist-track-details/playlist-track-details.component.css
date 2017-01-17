@@ -1,0 +1,21 @@
+.track {
+  margin-bottom: 5px;
+  background-color: #2E2E2E;
+  padding: 5px 20px;
+  border-radius: 5px;
+  display: flex;
+}
+
+.align {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  width: 40%;
+}
+
+.track-hover {
+  background-color: #767676;
+}

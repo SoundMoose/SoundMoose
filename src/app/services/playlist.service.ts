@@ -17,7 +17,7 @@ export class PlaylistService {
         artist: 'Mexican Food',
         imgUrl: 'http://www.google.com',
         streamUrl: 'http://www.google.com',
-        duration: 123,
+        duration: 826928,
         platform: 'pizza'
       }, {
         id: 2,
@@ -25,7 +25,7 @@ export class PlaylistService {
         artist: 'Mexican Food',
         imgUrl: 'http://www.google.com',
         streamUrl: 'http://www.google.com',
-        duration: 123,
+        duration: 836541,
         platform: 'pizza'
       }, {
         id: 3,
@@ -33,7 +33,7 @@ export class PlaylistService {
         artist: 'Mexican Food',
         imgUrl: 'http://www.google.com',
         streamUrl: 'http://www.google.com',
-        duration: 123,
+        duration: 517352,
         platform: 'pizza'
       }, {
         id: 4,
@@ -41,7 +41,7 @@ export class PlaylistService {
         artist: 'Mexican Food',
         imgUrl: 'http://www.google.com',
         streamUrl: 'http://www.google.com',
-        duration: 123,
+        duration: 253637,
         platform: 'pizza'
       }
     ]);

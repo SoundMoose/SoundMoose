@@ -14,4 +14,12 @@ export class PlaylistActions {
     };
   }
 
+  static CHANGE_ORDER = '[Playlist] Change Order';
+  changeOrder(oldIndex: number, newIndex: number) {
+    return {
+      type: PlaylistActions.CHANGE_ORDER,
+      payload: { oldIndex, newIndex }
+    };
+  }
+
 }
