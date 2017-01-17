@@ -11,7 +11,7 @@ class PlaylistSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Playlist
-        fields = ('playlist_name', 'user_id', 'tracks')
+        fields = ('id', 'playlist_name', 'user_id', 'tracks')
 
     def create(self, validated_data):
         tracks_data = validated_data.pop('tracks')
@@ -29,6 +29,9 @@ class PlaylistSerializer(serializers.ModelSerializer):
 
         for track_data in tracks_data:
             Track.objects.create(**track_data)
+            instance.tracks.add(track_id)
+
+        instance.save()
         return Playlist.objects.get(pk=instance.id)
         
 
