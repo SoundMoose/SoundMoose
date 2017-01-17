@@ -6,7 +6,7 @@
   }"
 >
 
-  <div (mouseover)="bottomIconHover = true" class="bottom-icons">
+  <div class="bottom-icons">
     <i [ngClass]="{
      big: true,
      icon: true,
@@ -25,7 +25,8 @@
        list: true
     }" style="cursor: pointer; position: absolute; bottom: 20px; left: 110px;"></i>
   </div>
-  <img class="album-art" src="{{topTrack.imgUrl}}">
+  <img class="album-art" src="{{topTrack.imgUrl}}" (mouseenter)="bottomIconHover = true"
+  (mouseout)="bottomIconHover = false">
   <a style="bottom: 40px" (click)="goToDetail($event)">
     <span>
       <i class="icons">
