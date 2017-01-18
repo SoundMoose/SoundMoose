@@ -32,14 +32,23 @@ class Playlist(models.Model):
 
 
 class Favorite(models.Model):
-  user_id = models.CharField(max_length=250)
   track_id = models.CharField(max_length=50)
   platform = models.CharField(max_length=50)
 
   class Meta:
-    unique_together = ('user_id', 'track_id',)
     verbose_name = "Favorite"
-    verbose_name_plural = "Favorites"
+    verbose_name_plural = "Favorite"
 
   def __unicode__(self):
-    return '%s <3 %s' % (self.user_id, self.track_id)
+    return '%s - %s' % (self.track_id, self.platform)
+
+class FavoritesList(models.Model):
+  user_id = models.CharField(max_length=250, primary_key=True)
+  favorites = models.ManyToManyField(Favorite)
+
+  class Meta:
+    verbose_name = "Favorites list"
+    verbose_name_plural = "Favorites lists"
+
+  def __unicode__(self):
+    return 'Favorites list for %s' % (self.user_id)
