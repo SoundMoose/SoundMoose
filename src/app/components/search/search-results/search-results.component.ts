@@ -9,6 +9,7 @@ import { SearchActions } from '../../../actions/search.actions';
 import { AppStore } from '../../../models/appstore.model';
 import { SoundCloudService } from '../../../services/soundcloud.service';
 import { SpotifyService } from '../../../services/spotify.service';
+import { TrackActions } from '../../../actions/track.actions';
 import { Track } from '../../../models/track.model';
 import {
   trigger,
@@ -45,7 +46,7 @@ export class SearchResultsComponent {
   results$ : Observable<Track[]>;
   query: string;
 
-  constructor(private store$: Store<AppStore>, private route: ActivatedRoute, private spotifyService: SpotifyService, private soundCloudService: SoundCloudService, private searchActions: SearchActions) {
+  constructor(private store$: Store<AppStore>, private route: ActivatedRoute, private spotifyService: SpotifyService, private soundCloudService: SoundCloudService, private searchActions: SearchActions, private trackActions: TrackActions) {
 
     this.query = this.route.snapshot.params['query'];
     if (this.query) {
@@ -60,5 +61,10 @@ export class SearchResultsComponent {
 
   private search(terms) {
     this.store$.dispatch(this.searchActions.search(terms));
+  }
+
+  //////////////////// Howard look here!!!
+  clickHandler(track, tracks) {
+    this.store$.dispatch(this.trackActions.togglePlayPause(track, tracks));
   }
 }
