@@ -41,7 +41,11 @@ export default function (state = initialState, action: Action): PlaylistState {
 
     case PlaylistActions.ADD_TRACK: {
       let newTracks = state.tracks.slice();
-      newTracks.push(action.payload);
+
+      // Check to see if Track already exists in playlist before adding.
+      if (!newTracks.some(ele => ele.trackId === action.payload.trackId && ele.platform === action.payload.platform)) {
+        newTracks.push(action.payload);
+      }
 
       let newState = Object.assign({}, state, {
         tracks: newTracks
