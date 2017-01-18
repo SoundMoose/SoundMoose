@@ -3,12 +3,11 @@
 <div (mouseenter)="wrapperHovered = true" (mouseleave)="wrapperHovered = false" class="track-info-wrapper">
 
   <div (mouseenter)="wrapperHovered = true" [hidden]="!wrapperHovered" class="ui basic bottom pointing label song-queue-wrapper">
-    <p>SONG QUEUE GOES HERE</p>
-    <p>SONG QUEUE GOES HERE</p>
-    <p>SONG QUEUE GOES HERE</p>
-    <p>SONG QUEUE GOES HERE</p>
-    <p>SONG QUEUE GOES HERE</p>
-    <p>SONG QUEUE GOES HERE</p>
+
+    <div *ngFor="let song of songQueue">
+      <p>{{song}}</p>
+    </div>
+
   </div>
 
   <img *ngIf="(currentTrack$ | async)?.id !== 0" class="album-art" src="{{ (currentTrack$ | async)?.imgUrl }}" />
