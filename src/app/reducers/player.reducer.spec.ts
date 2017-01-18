@@ -39,7 +39,9 @@ describe('Player Reducer', () => {
       repeatTrack: false,
       shuffleTracks: false,
       bufferedRanges: [],
-      showVisualization: false
+      showVisualization: false,
+      currentId: 0,
+      songQueue: []
     },
 
     tracks = [
@@ -77,7 +79,7 @@ describe('Player Reducer', () => {
 
   it('should add a track', () => {
     // Simulate click on Track-Tile.
-    let actual = playerReducer(state, trackActions.togglePlayPause(tracks[0]));
+    let actual = playerReducer(state, trackActions.togglePlayPause(tracks[0], tracks));
 
     // Current Track should now be the Track what we clicked on.
     expect(actual.currentTrack).toEqual(tracks[0]);
@@ -85,7 +87,7 @@ describe('Player Reducer', () => {
 
   it('should start playing the track', () => {
     // Simulate click on Track-Tile.
-    let actual = playerReducer(state, trackActions.togglePlayPause(tracks[0]));
+    let actual = playerReducer(state, trackActions.togglePlayPause(tracks[0], tracks));
 
     // isPlaying should now be set to true so that the track we clicked on starts playing.
     expect(actual.isPlaying).toBe(true);
@@ -93,9 +95,9 @@ describe('Player Reducer', () => {
 
   it('should pause track on track-tile', () => {
     // Simulate click on Track-Tile.
-    let actual1 = playerReducer(state, trackActions.togglePlayPause(tracks[0]));
+    let actual1 = playerReducer(state, trackActions.togglePlayPause(tracks[0], tracks));
     // Simulate click on Track-Tile
-    let actual2 = playerReducer(actual1, trackActions.togglePlayPause(tracks[0]));
+    let actual2 = playerReducer(actual1, trackActions.togglePlayPause(tracks[0], tracks));
 
     // Current Track should now be the Track what we clicked on.
     expect(actual2.currentTrack).toEqual(tracks[0]);
@@ -105,7 +107,7 @@ describe('Player Reducer', () => {
 
   it('should pause track on player', () => {
     // Simulate click on Track-Tile.
-    let actual1 = playerReducer(state, trackActions.togglePlayPause(tracks[0]));
+    let actual1 = playerReducer(state, trackActions.togglePlayPause(tracks[0], tracks));
     // Simulate click on Play/Pause button in Player.
     let actual2 = playerReducer(actual1, playerActions.togglePlayPause());
 
@@ -115,7 +117,7 @@ describe('Player Reducer', () => {
 
   it('should play a paused track on the player', () => {
     // Simulate click on Track-Tile.
-    let actual1 = playerReducer(state, trackActions.togglePlayPause(tracks[0]));
+    let actual1 = playerReducer(state, trackActions.togglePlayPause(tracks[0], tracks));
     // Simulate click on Play/Pause button in Player.
     let actual2 = playerReducer(actual1, playerActions.togglePlayPause());
     // Simulate click on Play/Pause button in Player.
@@ -181,9 +183,9 @@ describe('Player Reducer', () => {
 
   it('should play the next track', () => {
     // Simulate click on Track-Tile.
-    let actual1 = playerReducer(state, trackActions.togglePlayPause(tracks[0]));
+    let actual1 = playerReducer(state, trackActions.togglePlayPause(tracks[0], tracks));
     // Simulate click on Next button.
-    let actual2 = playerReducer(actual1, playerActions.jumpToNext(tracks[1]));
+    let actual2 = playerReducer(actual1, playerActions.jumpToNext(tracks[1], 1));
 
     // Should now be playing the track passed to the next function.
     expect(actual2.currentTrack).toEqual(tracks[1]);
@@ -191,9 +193,9 @@ describe('Player Reducer', () => {
 
   it('should play the previous track', () => {
     // Simulate click on Track-Tile.
-    let actual1 = playerReducer(state, trackActions.togglePlayPause(tracks[1]));
+    let actual1 = playerReducer(state, trackActions.togglePlayPause(tracks[1], tracks));
     // Sumulate click on Previous button.
-    let actual2 = playerReducer(actual1, playerActions.jumpToPrevious(tracks[0]));
+    let actual2 = playerReducer(actual1, playerActions.jumpToPrevious(tracks[0], 0));
 
     // Should now be playing the track passed to the previous function.
     expect(actual2.currentTrack).toEqual(tracks[0]);

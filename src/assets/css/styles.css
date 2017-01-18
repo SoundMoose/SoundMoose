@@ -169,6 +169,7 @@ player-controls .icon:hover {
 .footer, .main.menu {
   z-index: 2;
 }
+
 .footer .current-track {
   display: inline-block;
   margin-left: 10px;

@@ -81,6 +81,8 @@ import { ThreeDFrequencyBarsComponent } from './components/threeD/three-d-freque
 import { ThreeDParticlesComponent } from './components/threeD/three-d-particles.component';
 import { ThreeDSphereComponent } from './components/threeD/three-d-sphere.component';
 
+import { SongQueueComponent } from './components/song-queue/song-queue.component';
+
 import { SoundmooseUserActions } from './actions/soundmoose-user.actions';
 import { SearchActions } from './actions/search.actions';
 import { TrackActions } from './actions/track.actions';
@@ -158,6 +160,7 @@ const store = compose(...metaReducers)({
     ThreeDFrequencyBarsComponent,
     ThreeDParticlesComponent,
     ThreeDSphereComponent,
+    SongQueueComponent,
     FavoritesComponent,
     UserComponent
   ],

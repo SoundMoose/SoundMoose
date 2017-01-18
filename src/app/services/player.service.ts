@@ -33,6 +33,14 @@ export class PlayerService {
   progressInfo: {};
   currentProgressInSeconds$: Observable<number>;
 
+  player$: Observable<Player>;
+  playerSubscription: Subscription;
+  isPlaying: boolean;
+  repeatTrack: boolean;
+  shuffleTracks: boolean;
+  currentId: number;
+  songQueue: Track[];
+
   constructor(protected audioStream: AudioStream, private store$: Store<AppStore>, private playerActions: PlayerActions) {
     // this grabs the html audio element from the audio stream
     this.audio = audioStream.audioElement;
@@ -44,6 +52,25 @@ export class PlayerService {
     this.currentTrack$ = this.store$.select('player')
       .map((player: Player) => player.currentTrack)
       .distinctUntilChanged();
+
+      //////////////////////////////////////////////
+    // this.currentId = this.store$.select('player')
+    //   .map((player: Player) => player.currentId)
+    //   .distinctUntilChanged();
+    //
+    // this.songQueue = this.store$.select('player')
+    //   .map((player: Player) => player.songQueue)
+    //   .distinctUntilChanged();
+    this.player$ = this.store$.select(s => s.player);
+
+    this.playerSubscription = this.player$.subscribe((item) => {
+      this.isPlaying = item.isPlaying;
+      this.repeatTrack = item.repeatTrack;
+      this.shuffleTracks = item.shuffleTracks;
+      this.currentId = item.currentId;
+      this.songQueue = item.songQueue;
+    });
+    //////////////////////////////////////////////
 
     this.playingSubscription = Observable.fromEvent(this.audio, 'playing')
       .subscribe(() => this.store$.dispatch(playerActions.startAudioPlaying({
@@ -72,7 +99,13 @@ export class PlayerService {
       .subscribe(item => this.volume(item));
 
     Observable.fromEvent(this.audio, 'ended')
-      .subscribe(() => this.store$.dispatch(playerActions.jumpToNext(this.tracksList[this.getCurrentTrackIndex() + 1])));
+      .subscribe(() => this.jumpToNext()
+
+      // this.store$
+      //   .dispatch(playerActions
+      //     .jumpToNext(this.tracksList[this.getCurrentTrackIndex() + 1])
+      //   )
+      );
 
     Observable.fromEvent(this.audio, 'progress')
       .subscribe(() => {
@@ -113,21 +146,55 @@ export class PlayerService {
 
     // See http://stackoverflow.com/questions/36803176/how-to-prevent-the-play-request-was-interrupted-by-a-call-to-pause-error
     // Give the timeout enough time to avoid the race conflict.
-    let waitTime = 150;
+    let waitTime = 200;
 
     setTimeout(() => {
-      // Resume play if the element if is paused.
       if (this.audio.paused) {
-
-
-
         this.audio.play();
       }
-    }, 150);
+    }, waitTime);
   }
 
   pause(): void {
     this.audio.pause();
+  }
+
+  jumpToPrevious() {
+    if (this.shuffleTracks) {
+      // generate a random index number between 0 and the length of the playlist
+      let max = this.songQueue.length;
+      let randomIdx = Math.floor(Math.random() * max);
+      this.store$.dispatch(this.playerActions
+        .jumpToNext(this.songQueue[randomIdx], randomIdx));
+    } else {
+      // Check to make sure that we are not at the end of list
+      if (this.currentId !== 0) {
+        this.store$.dispatch(this.playerActions
+          .jumpToPrevious(this.songQueue[this.currentId - 1], this.currentId - 1));
+      } else {
+        this.store$.dispatch(this.playerActions
+          .jumpToPrevious(this.songQueue[this.songQueue.length - 1], this.songQueue.length - 1));
+      }
+    }
+  }
+
+  jumpToNext() {
+    if (this.shuffleTracks) {
+      // generate a random index number between 0 and the length of the playlist
+      let max = this.songQueue.length;
+      let randomIdx = Math.floor(Math.random() * max);
+      this.store$.dispatch(this.playerActions
+        .jumpToNext(this.songQueue[randomIdx], randomIdx)
+      );
+    } else {
+      if (this.currentId < this.songQueue.length - 1) {
+        this.store$.dispatch(this.playerActions
+          .jumpToNext(this.songQueue[this.currentId + 1], this.currentId + 1));
+      } else {
+        this.store$.dispatch(this.playerActions
+          .jumpToNext(this.songQueue[0], 0));
+      }
+    }
   }
 
   // takes a value from 0 - 100

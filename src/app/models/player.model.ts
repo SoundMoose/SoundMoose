@@ -13,4 +13,6 @@ export interface Player {
   shuffleTracks: boolean;
   bufferedRanges: Array<number>;
   showVisualization: boolean;
+  currentId: number;
+  songQueue: Track[];
 }
