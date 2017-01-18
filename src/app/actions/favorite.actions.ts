@@ -26,4 +26,11 @@ export class FavoriteActions {
     };
   }
 
+  static LOAD_FAVORITES_LIST = '[Favorite] Load Favorites List';
+  loadFavoritesList(favorites): Action {
+    return {
+      type: FavoriteActions.LOAD_FAVORITES_LIST,
+      payload: favorites
+    };
+  }
 }
