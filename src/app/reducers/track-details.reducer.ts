@@ -15,7 +15,7 @@ const initialState: TrackDetailsState = {
     streamUrl: '',
     duration: 0,
     platform: '',
-    trackId: 0
+    trackId: '0'
   },
   user: {
     id: 0,

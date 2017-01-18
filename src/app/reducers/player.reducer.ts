@@ -19,7 +19,7 @@ const initialState: PlayerState = {
     streamUrl: '',
     duration: 0,
     platform: '',
-    trackId: 0
+    trackId: '0'
   },
   volume: 100,
 
