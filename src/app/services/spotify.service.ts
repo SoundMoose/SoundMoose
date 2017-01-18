@@ -82,7 +82,8 @@ export class SpotifyService {
               imgUrl: item.album.images[0].url,
               streamUrl: item.preview_url,
               duration: 30000,
-              platform: 'spotify'
+              platform: 'spotify',
+              trackId: item.id.toString()
             },
             waveformUrl: '',
             largeArtworkUrl: item.album.images[0].url,
@@ -113,7 +114,8 @@ export class SpotifyService {
         imgUrl: item.album.images[0].url,
         streamUrl: item.preview_url,
         duration: 30000,
-        platform: 'spotify'
+        platform: 'spotify',
+        trackId: item.id.toString()
     })));
   }
 
