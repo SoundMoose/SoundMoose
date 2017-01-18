@@ -1,6 +1,7 @@
 import { TracksState } from '../reducers/tracks.reducer';
 import { TrackDetailsState } from '../reducers/track-details.reducer';
 import { PlayerState } from '../reducers/player.reducer';
+import { PlaylistState } from '../reducers/playlist.reducer';
 import { SpinnerState } from '../reducers/spinner.reducer';
 import { SoundmooseUser } from '../models/soundmoose-user.model';
 
@@ -13,6 +14,7 @@ export interface AppStore {
   audiocontrols: AudioControls;
   trackDetails: TrackDetailsState;
   comments: CommentsState;
+  playlist: PlaylistState;
   soundmooseUser: SoundmooseUser;
   spinner: SpinnerState;
 };
