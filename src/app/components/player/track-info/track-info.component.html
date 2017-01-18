@@ -4,9 +4,30 @@
 
   <div (mouseenter)="wrapperHovered = true" [hidden]="!wrapperHovered" class="ui basic bottom pointing label song-queue-wrapper">
 
-    <div *ngFor="let song of songQueue">
-      <p>{{song}}</p>
-    </div>
+
+
+        <div *ngFor="let song of songQueue">
+          <div >
+            <div class="track">
+              <!-- <div class="play-pause">
+                <i class="play large icon"></i>
+              </div> -->
+              <div class="info">
+                <div class="title">{{song.title}}</div>
+                <div class="align">
+                  <div>{{song.artist}} </div>
+                  <div>{{millisToMinutesSeconds(song.duration)}}</div>
+                </div>
+              </div>
+              <!-- <div class="delete" (click)="removeMe()">
+                <i class="remove large grey icon"></i>
+              </div> -->
+            </div>
+
+          </div>
+        </div>
+
+
 
   </div>
 

@@ -197,4 +197,5 @@ export class TrackDetailComponent implements OnInit {
                     string.substring(0, length - 3) + "..." :
                     string;
   }
+  
 }
