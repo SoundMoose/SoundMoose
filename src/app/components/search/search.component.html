@@ -1,34 +1,10 @@
-<div class="overview ui container">
-
-  <div class="ui centered grid">
-    <div class="six wide column">
-      <div id="search-container" class="ui fluid inverted icon input">
+    <div id="search-container" class="ui inverted icon input">
       <input
         [value]="query ? query : ''"
-        (input)="term$.next($event.target.value)"
+        (input)="handleInput($event)"
         type="text"
-        placeholder="Search for track..."
-        id="track-search"
+        placeholder="Search for artists, tracks"
+        class="track-search"
       />
-      <i class="big search icon"></i>
-      </div>
+      <i class="search icon"></i>
     </div>
-  </div>
-
-  <div id="search-results" class="ui six column grid" *ngIf="soundCloudItems$">
-    <div
-      [@fadeInOut]="'in'"
-      *ngFor="let soundCloudItem of soundCloudItems$ | async"
-      class="column"
-    >
-      <top-track-tile [topTrack]="soundCloudItem"></top-track-tile>
-    </div>
-    <div
-      [@fadeInOut]="'in'"
-      *ngFor="let spotifyItem of spotifyItems$ | async"
-      class="column"
-    >
-      <top-track-tile [topTrack]="spotifyItem"></top-track-tile>
-    </div>
-  </div>
-</div>
