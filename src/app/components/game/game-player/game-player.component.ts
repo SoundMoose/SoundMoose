@@ -12,6 +12,7 @@ import { SoundCloudService } from './../../../services/soundcloud.service';
 import { SpotifyService } from './../../../services/spotify.service';
 
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 
 @Component({
   selector: 'game-player',
@@ -30,9 +31,9 @@ export class GamePlayerComponent implements OnInit {
   platform: string;
   trackId: string;
   audioSrc: string;
-  hashForCurrentUrl: string;
+  chatIframeUrl: SafeResourceUrl;
 
-  constructor(private route: ActivatedRoute, private store: Store<AppStore>, private soundCloudService: SoundCloudService, private spotifyService: SpotifyService) {
+  constructor(private route: ActivatedRoute, private store: Store<AppStore>, private soundCloudService: SoundCloudService, private spotifyService: SpotifyService, private sanitizer: DomSanitizer) {
     this.store.select(s => s.soundmooseUser)
       .first()
       .subscribe(userInfo => this.userId = userInfo.userId);
@@ -43,7 +44,8 @@ export class GamePlayerComponent implements OnInit {
     this.trackId = this.route.snapshot.params.trackId;
     this.hostId = this.route.snapshot.params.hostId;
 
-    this.hashForCurrentUrl = Md5.hashStr(this.start + '/' + this.end + '/' + this.platform + '/' + this.trackId + '/' + this.hostId);
+    let hashForCurrentUrl = Md5.hashStr(this.start + '/' + this.end + '/' + this.platform + '/' + this.trackId + '/' + this.hostId).slice(0, -3);
+    this.chatIframeUrl = sanitizer.bypassSecurityTrustResourceUrl('https://tlk.io/' + hashForCurrentUrl);
 
     this.fetchAudioSrc(this.platform, this.trackId);
 
