@@ -1,33 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
+import { Track } from '../models/track.model';
 
 @Injectable()
 export class FavoriteActions {
 
   static ADD_FAVORITE = '[Favorite] Add Favorite';
-  addFavorite(track: string, platform: string): Action {
+  addFavorite(track: Track): Action {
     return {
       type: FavoriteActions.ADD_FAVORITE,
-      payload: {
-        trackId,
-        platform
-      }
+      payload: track
     };
   }
 
   static REMOVE_FAVORITE = '[Favorite] Remove Favorite';
-  removeFavorite(tracId: string, platform: string): Action {
+  removeFavorite(track: Track): Action {
     return {
       type: FavoriteActions.REMOVE_FAVORITE,
-      payload: {
-        trackId,
-        platform
-      }
+      payload: track
     };
   }
 
   static LOAD_FAVORITES_LIST = '[Favorite] Load Favorites List';
-  loadFavoritesList(favorites): Action {
+  loadFavoritesList(favorites: Track[]): Action {
     return {
       type: FavoriteActions.LOAD_FAVORITES_LIST,
       payload: favorites

@@ -34,8 +34,23 @@ export class FavoriteService {
       })
   }
 
-  updateFavoritesList(favorites: FavoritesState) {
-    this.http.put(`http://www.soundmoose.com:8000/api/favorites/${this.userId}/`, favorites)
+  buildData(favoriteList) {
+    let favorites = favoriteList.map((ele) => ({
+      track_id: ele.trackId,
+      title: ele.title,
+      artist: ele.artist,
+      img_url: ele.imgUrl,
+      stream_url: ele.streamUrl,
+      duration: ele.duration,
+      platform: ele.platform
+    }));
+    return favorites;
+  }
+
+
+  updateFavoritesList(favoriteList: FavoritesState) {
+    console.log(this.buildData(favoriteList));
+    this.http.put(`http://www.soundmoose.com:8000/api/favorites/${this.userId}/`, this.buildData(favoriteList))
       .subscribe(res => console.log(res));
   }
 

@@ -43,6 +43,8 @@ export class TopTrackTileComponent{
   playing: boolean;
   isPlayingSubscription: Subscription;
   bottomIconHover: boolean = false;
+  favorites$;
+  favoritesSubscription: Subscription;
 
   constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router, private favoriteActions: FavoriteActions) {
     // Grab the player stream from the store
@@ -67,12 +69,12 @@ export class TopTrackTileComponent{
       .subscribe(favorites => {
         let favorited = false;
         favorites.forEach((favorite) => {
-          if (favorite.trackId == this.topTrack.trackId) {
+          if (favorite.id == this.topTrack.id) {
             favorited = true;
           }
         });
         this.isFavorited = favorited;
-        });
+      });
   }
 
 
@@ -103,9 +105,9 @@ export class TopTrackTileComponent{
   toggleFavorite() {
     this.isFavorited = !this.isFavorited;
     if (this.isFavorited) {
-      this.favoriteActions.addFavorite(this.topTrack);
+      this.store$.dispatch(this.favoriteActions.addFavorite(this.topTrack));
     } else {
-      this.favoriteActions.removeFavorite(this.topTrack);
+      this.store$.dispatch(this.favoriteActions.removeFavorite(this.topTrack));
     }
   }
 

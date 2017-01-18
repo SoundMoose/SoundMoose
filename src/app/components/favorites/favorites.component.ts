@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
+import { AppStore } from '../../models/appstore.model';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+import { FavoriteService } from '../../services/favorite.service';
 
 @Component({
   selector: 'favorites',
-  templateUrl: './favorites.component.html',
+  templateUrl: './favorites.component.html'
+})
 export class FavoritesComponent {
 
-  constructor(private favoritesService: FavoritesService, private store: Store<AppStore>) {
-    // Get playlist data on load.
-    this.getData(8); // User id is in state, get playlist id from GET /api/playlists/?user_id=[user id]
+  favorites$;
 
-    // Grab playlist info from state.
-    this.playlist$ = this.store.select('playlist')
-      .map((playlist: Playlist) => playlist.tracks);
+  constructor(private favoritesService: FavoriteService, private store: Store<AppStore>) {
+    this.favorites$ = this.store.select(s => s.favorites);
   }
 
 }

@@ -4,6 +4,7 @@ import { TrackDetailComponent } from './components/track-detail/track-detail.com
 import { SearchComponent } from './components/search/search.component';
 import { ThreeDComponent } from './components/threeD/three-d.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
+import { UserComponent } from './components/user/user.component';
 
 export const ROUTES: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
