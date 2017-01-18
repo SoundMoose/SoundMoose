@@ -28,7 +28,8 @@ describe('Player Reducer', () => {
         imgUrl: '',
         streamUrl: '',
         duration: 0,
-        platform: ''
+        platform: '',
+        trackId: 0
       },
       volume: 100,
 
@@ -48,14 +49,18 @@ describe('Player Reducer', () => {
         artist: 'Mexican Food',
         imgUrl: 'http://www.google.com',
         streamUrl: 'http://www.google.com',
-        duration: 123
+        duration: 123,
+        platform: 'abc',
+        trackId: 0
       }, {
         id: 2,
         title: 'Burritos',
         artist: 'Mexican Food',
         imgUrl: 'http://www.google.com',
         streamUrl: 'http://www.google.com',
-        duration: 123
+        duration: 123,
+        platform: 'abc',
+        trackId: 0
       }
     ];
 

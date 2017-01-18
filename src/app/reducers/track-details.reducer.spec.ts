@@ -19,7 +19,8 @@ describe('Track-Details Reducer', () => {
         imgUrl: '',
         streamUrl: '',
         duration: 0,
-        platform: ''
+        platform: '',
+        trackId: 0
       },
       user: {
         id: 0,
