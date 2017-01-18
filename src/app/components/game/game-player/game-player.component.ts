@@ -4,9 +4,12 @@ import { Store } from '@ngrx/store';
 // import { Observable } from 'rxjs/Observable';
 // import { Subscription } from 'rxjs/Subscription';
 
-import { AppStore } from './../../models/appstore.model';
+import { AppStore } from './../../../models/appstore.model';
 
-import { DOCUMENT } from '@angular/platform-browser';
+import { SoundCloudService } from './../../../services/soundcloud.service';
+import { SpotifyService } from './../../../services/spotify.service';
+
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'game-player',
@@ -16,34 +19,50 @@ import { DOCUMENT } from '@angular/platform-browser';
 
 export class GamePlayerComponent implements OnInit {
 
-  // start: number = 0;
-  // end: number = 0;
-  // audio;
-  // absoluteGameUrl: string;
-  // relativeGameUrl: string;
-  // userId: string;
-  // @Input() audioSrc: string;
-  // @Input() platform: string;
-  // @Input() trackId: string;
+
+  start: number;
+  end: number;
+  audio;
+  userId: string;
+  hostId: string;
+  platform: string;
+  trackId: string;
+  audioSrc: string;
 
 
-  constructor(@Inject(DOCUMENT) private document: any, private store: Store<AppStore>) {
-    // this.store.select(s => s.soundmooseUser)
-    //   .subscribe(userInfo => this.userId = userInfo.userId);
+  constructor(private route: ActivatedRoute, private store: Store<AppStore>, private soundCloudService: SoundCloudService, private spotifyService: SpotifyService) {
+    this.store.select(s => s.soundmooseUser)
+      .first()
+      .subscribe(userInfo => this.userId = userInfo.userId);
+
+    this.start = this.route.snapshot.params.start;
+    this.end = this.route.snapshot.params.end;
+    this.platform = this.route.snapshot.params.platform;
+    this.trackId = this.route.snapshot.params.trackId;
+    this.hostId = this.route.snapshot.params.hostId;
+
+    this.fetchAudioSrc(this.platform, this.trackId);
+
+    this.store.select(s => s.trackDetails)
+      .subscribe(trackDetails => this.audioSrc = trackDetails.track.streamUrl);
   }
 
   ngOnInit() {
-    // this.audio = new Audio(this.audioSrc);
+    this.audio = new Audio(this.audioSrc);
   }
 
-  // handleClick() {
-  //   this.audio.currentTime = this.start;
-  //   this.audio.play();
-  //   setTimeout(() => this.audio.pause(), (this.end - this.start) * 1000);
-  //   this.relativeGameUrl = `/game/${this.platform}/${this.trackId}/${this.start}/${this.end}/${this.userId}`;
-  //   this.absoluteGameUrl = this.document.location.origin + this.relativeGameUrl;
-  //   console.log(this.absoluteGameUrl);
-  // }
+  fetchAudioSrc(platform: string, trackId: string) {
+    if (platform === 'soundcloud') {
+      this.soundCloudService.loadTrackDetails(trackId);
+    } else if (platform === 'spotify') {
+      this.spotifyService.loadTrackDetails(trackId);
+    }
+  }
 
-  // /game/:platform/:trackId/:start/:end/:hostId
+  playClip() {
+    this.audio.currentTime = this.start;
+    this.audio.play();
+    setTimeout(() => this.audio.pause(), (this.end - this.start) * 1000);
+  }
+
 }

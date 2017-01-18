@@ -29,6 +29,7 @@ export class GameComponent implements OnInit {
 
   constructor(@Inject(DOCUMENT) private document: any, private store: Store<AppStore>) {
     this.store.select(s => s.soundmooseUser)
+      .first()
       .subscribe(userInfo => this.userId = userInfo.userId);
   }
 
@@ -46,5 +47,4 @@ export class GameComponent implements OnInit {
     console.log(this.absoluteGameUrl);
   }
 
-  // /game/:platform/:trackId/:start/:end/:hostId
 }

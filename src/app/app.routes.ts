@@ -16,6 +16,7 @@ export const ROUTES: Routes = [
   { path: 'search/:query', component: SearchResultsComponent },
   { path: 'threeD', component: ThreeDComponent },
   { path: 'user', component: UserComponent},
-  { path: '**', redirectTo: 'home'},
-  { path: 'game/:platform/:trackId/:start/:end/:hostId', component: GamePlayerComponent }
+  { path: 'game/:platform/:trackId/:start/:end/:hostId', component: GamePlayerComponent },
+  { path: '**', redirectTo: 'home'}
+
 ];
