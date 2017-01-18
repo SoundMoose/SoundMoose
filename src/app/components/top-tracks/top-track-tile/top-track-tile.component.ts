@@ -91,6 +91,6 @@ export class TopTrackTileComponent{
   }
 
   addToPlaylist() {
-
+    console.log(this.topTrack);
   }
 }

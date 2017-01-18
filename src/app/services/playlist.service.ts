@@ -14,6 +14,7 @@ import 'rxjs/add/operator/skip';
 export class PlaylistService {
 
   playlist;
+  // userInfo;
 
   constructor(private http: Http, private store: Store<AppStore>) {
     // skip(2) because we want to ignore first 2 events that come through this observable.  The first event is an emtpy object and the second is the initial object we recieve from the server.
@@ -22,6 +23,20 @@ export class PlaylistService {
       .subscribe((playlist: Playlist) => {
         this.updatePlaylist(this.buildData(playlist));
       });
+  }
+
+  getUserPlaylists(userId: string) {
+    return this.http.get(`http://www.soundmoose.com:8000/api/playlists/?user_id=${userId}`)
+      .map(res => res.json());
+  }
+
+  createNewPlaylist(userId: string) {
+    return this.http.post('http://www.soundmoose.com:8000/api/playlists/', {
+      user_id: userId,
+      playlist_name: 'Default',
+      tracks: []
+    })
+    .map(res => res.json());
   }
 
   updatePlaylist(playlistToUpdate: any) {
