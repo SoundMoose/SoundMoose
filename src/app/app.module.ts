@@ -77,7 +77,7 @@ import { ThreeDSphereComponent } from './components/threeD/three-d-sphere.compon
 
 
 // options slider
-import { OptionsComponent } from './components/options/options.component';
+import { SongQueueComponent } from './components/song-queue/song-queue.component';
 
 
 import { SoundmooseUserActions } from './actions/soundmoose-user.actions';
@@ -149,7 +149,7 @@ const store = compose(...metaReducers)({
     ThreeDFrequencyBarsComponent,
     ThreeDParticlesComponent,
     ThreeDSphereComponent,
-    OptionsComponent
+    SongQueueComponent
   ],
   imports: [
     MomentModule,

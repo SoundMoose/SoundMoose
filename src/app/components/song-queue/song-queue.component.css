@@ -1,16 +1,16 @@
-#optionsPanel {
+#song-queue {
     width: 200px;
     min-height: 230px;
     padding-left: 25px;
     padding-top: 5px;
     position: fixed;
 
-    bottom: 80px;
-    top: 60px;
-    right: -1px;
+    bottom: 70px;
+    /*top: 60px;*/
+    right: 20%;
     /*box-shadow: 0 0 30px #555;*/
     z-index: 1;
-    background-color: rgba(39, 40, 34, 0.8);
+    background-color: rgba(39, 40, 34, 0.9);
     transition: all 0.5s ease-in-out;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;

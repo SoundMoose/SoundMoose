@@ -1,6 +1,20 @@
 
+
+<div (mouseenter)="wrapperHovered = true" (mouseleave)="wrapperHovered = false" class="track-info-wrapper">
+
+  <div (mouseenter)="wrapperHovered = true" [hidden]="!wrapperHovered" class="ui basic bottom pointing label song-queue-wrapper">
+    <p>SONG QUEUE GOES HERE</p>
+    <p>SONG QUEUE GOES HERE</p>
+    <p>SONG QUEUE GOES HERE</p>
+    <p>SONG QUEUE GOES HERE</p>
+    <p>SONG QUEUE GOES HERE</p>
+    <p>SONG QUEUE GOES HERE</p>
+  </div>
+
   <img *ngIf="(currentTrack$ | async)?.id !== 0" class="album-art" src="{{ (currentTrack$ | async)?.imgUrl }}" />
   <div *ngIf="(currentTrack$ | async)?.id !== 0" class="current-track" >
     <div class="playing">Playing track</div>
     <div class="track-info"><a routerLink="/track/{{(currentTrack$ | async)?.platform}}/{{(currentTrack$ | async)?.id}}">{{ trim((currentTrack$ | async)?.artist + " - " + (currentTrack$ | async)?.title) }}</a></div>
   </div>
+
+</div>

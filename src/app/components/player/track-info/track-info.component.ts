@@ -17,10 +17,14 @@ import { AppStore } from '../../../models/appstore.model';
 export class TrackInfoComponent {
   player$: Observable<PlayerState>;
   currentTrack$: Observable<Track>;
+  wrapperHovered : boolean = false;
 
   constructor (private store$: Store<AppStore>) {
     this.player$ = this.store$.select(s => s.player);
     this.currentTrack$ = this.player$.map((item : PlayerState) => item.currentTrack);
+  }
+  private handleMouseOut() {
+    window.setTimeout(() => { this.wrapperHovered = false; }, 1000);
   }
 
   private trim(string) {
