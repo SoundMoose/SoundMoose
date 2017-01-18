@@ -1,0 +1,14 @@
+<h3>Hi from game.</h3>
+
+<input type="number" name="start" [(ngModel)]="start" />
+<input type="number" name="end" [(ngModel)]="end" />
+
+<button (click)="handleClick()">Preview</button>
+
+<h2>start {{start}}</h2>
+<h2>end {{end}}</h2>
+
+<input type="text" name="link" value="{{absoluteGameUrl}}" />
+<a routerLink="{{relativeGameUrl}}">
+  Go to Game
+</a>

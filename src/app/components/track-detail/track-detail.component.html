@@ -101,6 +101,19 @@ background: linear-gradient(to left, #232526 , #414345); margin-top: 35px;">
       <div class="column">
         <div style="margin-left: 20px;">
           <iframe width="520" height="390" [src]="youtubeId$ | async | youtube" frameborder="0" allowfullscreen></iframe>
+
+
+          <!-- GAME -->
+          <button (click)="gameToggle()">Create Game</button>
+          <game
+            *ngIf="gameToggled && audioSrc"
+            [audioSrc]="audioSrc"
+            [platform]="platform"
+            [trackId]="trackId"
+          ></game>
+          <!-- GAME -->
+
+
         </div>
       </div>
       <div class="column" style="min-width: 500px;">

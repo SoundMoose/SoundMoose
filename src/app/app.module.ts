@@ -63,6 +63,8 @@ import { SearchComponent } from './components/search/search.component';
 import { SearchResultsComponent } from './components/search/search-results/search-results.component';
 import { UserComponent } from './components/user/user.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
+import { GameComponent } from './components/game/game.component';
+import { GamePlayerComponent } from './components/game/game-player/game-player.component';
 
 
 // 2d visualizations and audio controls deck
@@ -162,7 +164,9 @@ const store = compose(...metaReducers)({
     ThreeDSphereComponent,
     SongQueueComponent,
     FavoritesComponent,
-    UserComponent
+    UserComponent,
+    GameComponent,
+    GamePlayerComponent
   ],
   imports: [
     MomentModule,
