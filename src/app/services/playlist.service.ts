@@ -69,9 +69,7 @@ export class PlaylistService {
   }
 
   updatePlaylist(playlistToUpdate: any) {
-    console.log('object to put ', playlistToUpdate);
-    this.http.put(`http://www.soundmoose.com:8000/api/playlists/${playlistToUpdate.id}/`, playlistToUpdate)
-      .subscribe(res => console.log(res));
+    this.http.put(`http://www.soundmoose.com:8000/api/playlists/${playlistToUpdate.id}/`, playlistToUpdate);
   }
 
   buildData(playlist: Playlist) {

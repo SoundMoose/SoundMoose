@@ -49,14 +49,11 @@ export class FavoriteService {
 
 
   updateFavoritesList(favoriteList: FavoritesState) {
-    console.log(this.buildData(favoriteList));
-    this.http.put(`http://www.soundmoose.com:8000/api/favorites/${this.userId}/`, this.buildData(favoriteList))
-      .subscribe(res => console.log(res));
+    this.http.put(`http://www.soundmoose.com:8000/api/favorites/${this.userId}/`, this.buildData(favoriteList));
   }
 
   createFavoritesList() {
-    this.http.post(`http://www.soundmoose.com:8000/api/favorites/${this.userId}/`, {})
-      .subscribe(res => console.log(res));
+    this.http.post(`http://www.soundmoose.com:8000/api/favorites/${this.userId}/`, {});
   }
 
   setFavoritesList() {

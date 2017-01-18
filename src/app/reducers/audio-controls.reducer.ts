@@ -103,8 +103,6 @@ export default function (state = initialState, action: Action): AudioControlsSta
           "value": action.payload.mids
         }
       };
-      console.log(JSON.stringify(newState, null, 2));
-
       return Object.assign({}, state, newState);
     }
     case AudioControlsActions.ADJUST_TREBLE:  {

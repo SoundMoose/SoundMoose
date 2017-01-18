@@ -43,8 +43,6 @@ export class GameComponent implements OnInit {
     setTimeout(() => this.audio.pause(), (this.end - this.start) * 1000);
     this.relativeGameUrl = `/game/${this.platform}/${this.trackId}/${this.start}/${this.end}/${this.userId}`;
     this.absoluteGameUrl = this.document.location.origin + this.relativeGameUrl;
-    console.log(this.relativeGameUrl);
-    console.log(this.absoluteGameUrl);
   }
 
 }

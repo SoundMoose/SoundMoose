@@ -89,9 +89,6 @@ export class EqualizerComponent implements OnDestroy {
   midSlideHandler($event, i) {
     let frequencyBandId = i+1;
     this["midGain" + frequencyBandId] = $event.value;
-    // console.log('event: ',$event);
-    // console.log('band: ', band);
-    // console.log('i: ', i);
     this.store$.dispatch(this.AudioControlsActions.adjustMids($event.value, frequencyBandId));
   }
 
