@@ -1,3 +1,24 @@
+
+.track-info-wrapper {
+  position: relative;
+  top: 0px;
+  margin-top: -250px;
+  width: 280px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+
+.song-queue-wrapper {
+  background: #404040;
+  cursor: pointer;
+  width: 280px;
+/*  height: 200px;*/
+  opacity: 0.98;
+  box-shadow: 0 2px 4px black;
+}
+
 .track {
   margin-bottom: 5px;
   background-color: #2E2E2E;
