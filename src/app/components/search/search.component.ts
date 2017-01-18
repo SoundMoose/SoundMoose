@@ -17,15 +17,14 @@ export class SearchComponent {
 
   query: string;
 
-  constructor(private route: ActivatedRoute, private searchActions: SearchActions, private store$: Store<AppStore>) {
-    this.query = this.route.snapshot.params['query'];
-    if (this.query) {
-      // @todo figure out why this setTimeout is necessary
-      window.setTimeout(() => this.search(this.query), 0);
-    }
+  constructor(private router: Router, private searchActions: SearchActions, private store$: Store<AppStore>) {
+    window
   }
 
   handleInput($event) {
+    if (this.router.url !== '/search' && this.router.url.indexOf('/search/') !== 0) {
+      this.router.navigate(['/search']);
+    }
     this.search($event.target.value)
   }
 

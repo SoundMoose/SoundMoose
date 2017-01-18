@@ -21,9 +21,6 @@ export class SoundCloudService {
   constructor(private _http:Http, private store: Store<AppStore>, private searchActions: SearchActions) {
     this.store.select(s => s.search)
       .map(item => item.query)
-      .subscribe((item) => console.log(item));
-    this.store.select(s => s.search)
-      .map(item => item.query)
       .debounceTime(400)
       .distinctUntilChanged()
       .subscribe(query => this.search(query));
@@ -118,6 +115,9 @@ export class SoundCloudService {
   }
 
   search(term: string) {
+    if (!term) {
+      return;
+    }
     const searchUrl = 'http://api.soundcloud.com/tracks/?q=' + term + '&client_id=' + soundcloudClientId;
 
     this._http.get(searchUrl)

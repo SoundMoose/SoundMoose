@@ -1,10 +1,10 @@
-.track-search {
+#track-search {
   background-color:  #2E2E2E;
   border: 1px solid white;
   font-size: 12px;
   margin-top: 10px;
   font-family: Interstate;
   position: relative;
-  top: 8px;
-  left: 60px;
+  top: -4px;
+  width: 400px;
 }

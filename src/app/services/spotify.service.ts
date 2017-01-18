@@ -54,7 +54,6 @@ export class SpotifyService {
   searchResults$: Observable<Track[]>;
 
   constructor(private http:Http, private store: Store<AppStore>, private searchActions: SearchActions) {
-    console.log('spotify service started');
     this.config = {
       clientId: spotifyClientId,
       redirectUri: 'http://localhost:3000/#/home',
@@ -77,7 +76,6 @@ export class SpotifyService {
       })
       .map(res => res.json())
       .map(item => {
-        console.log(item)
         return {
             track: {
               id: item.id,
@@ -108,8 +106,10 @@ export class SpotifyService {
       .subscribe(action => this.store.dispatch(action));
   }
 
-<<<<<<< HEAD
   search(term: string) {
+    if (!term) {
+      return;
+    }
     this.spotifySearch(term, 'track')
       .map(data => data.tracks.items)
       .map(items => items.map(item => ({

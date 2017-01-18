@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/map';
 
+import { SearchActions } from '../../../actions/search.actions';
 import { AppStore } from '../../../models/appstore.model';
 import { SoundCloudService } from '../../../services/soundcloud.service';
 import { SpotifyService } from '../../../services/spotify.service';
@@ -42,12 +43,22 @@ import {
 export class SearchResultsComponent {
 
   results$ : Observable<Track[]>;
+  query: string;
 
-  constructor(private store$: Store<AppStore>, private spotifyService: SpotifyService, private soundCloudService: SoundCloudService) {
+  constructor(private store$: Store<AppStore>, private route: ActivatedRoute, private spotifyService: SpotifyService, private soundCloudService: SoundCloudService, private searchActions: SearchActions) {
+
+    this.query = this.route.snapshot.params['query'];
+    if (this.query) {
+      // @todo figure out why this setTimeout is necessary
+      window.setTimeout(() => this.search(this.query), 0);
+    }
+
     // ensure all search services (soundcloud, spotify) are being loaded on the search results page
-    this.spotifyService;
-    this.soundCloudService;
     let search$ = this.store$.select(s => s.search);
     this.results$ = search$.map(item => item.results);
+  }
+
+  private search(terms) {
+    this.store$.dispatch(this.searchActions.search(terms));
   }
 }
