@@ -1,0 +1,18 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    {% block css %}{% endblock css %}
+    
+</head>
+
+<body>
+    {% block content %}{% endblock content %}
+    <script type="text/javascript" src="{% static "js/app.js" %}"></script>
+    {% block js %}{% endblock js %}
+</body>
+</html>

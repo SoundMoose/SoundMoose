@@ -26,6 +26,7 @@ import { AudioControlsService } from './services/audio-controls.service';
 import { Auth } from './services/auth.service';
 import { AUDIO_STREAM_PROVIDER } from './audio-element';
 
+import soundmooseUser from './reducers/soundmoose-user.reducer';
 import player from './reducers/player.reducer';
 import tracks from './reducers/tracks.reducer';
 import spinner from './reducers/spinner.reducer';
@@ -56,7 +57,9 @@ import { TrackProgressContainerComponent } from './components/player/track-progr
 import { TopTrackTileComponent } from './components/top-tracks/top-track-tile/top-track-tile.component';
 import { TrackDetailComponent } from './components/track-detail/track-detail.component';
 import { SearchComponent } from './components/search/search.component';
-import { ThreeDComponent } from './components/threeD/three-d.component';
+
+
+// 2d visualizations and audio controls deck
 import { AudioControlsComponent } from './components/audio-controls/audio-controls.component';
 import { FrequencyVisualizerComponent } from './components/audio-controls/visualizer/frequency-visualizer.component';
 import { WaveformVisualizerComponent } from './components/audio-controls/visualizer/waveform-visualizer.component';
@@ -66,12 +69,19 @@ import { PlaylistTrackDetailsComponent } from './components/playlist/playlist-tr
 import { PlaylistTrackListComponent } from './components/playlist/playlist-track-list/playlist-track-list.component';
 
 
+// 3d visualizations
+import { ThreeDComponent } from './components/threeD/three-d.component';
+import { ThreeDFrequencyBarsComponent } from './components/threeD/three-d-frequencyBars.component';
+import { ThreeDParticlesComponent } from './components/threeD/three-d-particles.component';
+import { ThreeDSphereComponent } from './components/threeD/three-d-sphere.component';
+
+
+import { SoundmooseUserActions } from './actions/soundmoose-user.actions';
 import { TrackActions } from './actions/track.actions';
 import { PlayerActions } from './actions/player.actions';
 import { AudioControlsActions } from './actions/audio-controls.actions';
 import { PlaylistActions } from './actions/playlist.actions';
 import { YoutubePipe } from './youtube.pipe';
-
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -87,6 +97,7 @@ const APP_PROVIDERS = [
   AudioControlsActions,
   PlaylistService,
   PlaylistActions
+  SoundmooseUserActions
 ];
 
 const metaReducers = (ENV !== 'production') ? [storeFreeze, combineReducers] : [combineReducers];
@@ -99,6 +110,7 @@ const store = compose(...metaReducers)({
   trackDetails: trackDetails,
   comments: comments,
   playlist: playlist
+  soundmooseUser: soundmooseUser
 });
 
 /**
@@ -130,6 +142,9 @@ const store = compose(...metaReducers)({
     PlaylistComponent,
     PlaylistTrackDetailsComponent,
     PlaylistTrackListComponent
+    ThreeDFrequencyBarsComponent,
+    ThreeDParticlesComponent,
+    ThreeDSphereComponent
   ],
   imports: [
     MomentModule,
@@ -141,6 +156,7 @@ const store = compose(...metaReducers)({
     FormsModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     SortablejsModule
+    RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

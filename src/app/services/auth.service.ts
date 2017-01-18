@@ -3,6 +3,10 @@ import { Injectable }      from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
 import { auth0Key, auth0Domain } from '../config/superSecretKeys';
 import { Router } from '@angular/router';
+import 'rxjs/add/operator/take';
+import { Store } from '@ngrx/store';
+import { AppStore } from '../models/appstore.model';
+import { SoundmooseUserActions } from '../actions/soundmoose-user.actions';
 
 let Auth0Lock = require('auth0-lock').default;
 let Auth0 = require('auth0-js').WebAuth;
@@ -16,9 +20,11 @@ export class Auth {
   // Store profile object in auth class
   userProfile: any;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private store: Store<AppStore>, private soundmooseUserActions: SoundmooseUserActions) {
     // Set userProfile attribute if already saved profile
-    this.userProfile = JSON.parse(localStorage.getItem('profile'));
+    if (this.authenticated()) {
+      this.setUserProfile(JSON.parse(localStorage.getItem('profile')));
+    }
     // Add callback for lock `authenticated` event
     this.lock.on("authenticated", (authResult) => {
       localStorage.setItem('id_token', authResult.idToken);
@@ -29,12 +35,26 @@ export class Auth {
           console.log(error);
           return;
         }
-        this.handleRedirectWithHash();
         profile.user_metadata = profile.user_metadata || {};
         localStorage.setItem('profile', JSON.stringify(profile));
-        this.userProfile = profile;
+        this.setUserProfile(profile);
       });
     });
+    this.lock.on('authorization_error', authResult => {
+      console.log(authResult);
+    });
+
+    //this.handleRedirectWithHash();
+  }
+
+  private setUserProfile(profile) {
+    this.userProfile = profile;
+    this.store.dispatch(this.soundmooseUserActions.setProfileData({
+      loggedIn: this.authenticated(),
+      userId: profile.identities[0].user_id,
+      name: profile.name,
+      avatarUrl: profile.picture
+    }));
   }
 
   private handleRedirectWithHash() {
@@ -42,7 +62,7 @@ export class Auth {
     this.router.events.take(1).subscribe(event => {
       if (/access_token/.test(event.url) || /error/.test(event.url)) {
 
-        let authResult = this.auth0.parseHash(window.location.hash);
+        let authResult = this.auth0.parseHash(window.location.hash, (err) => console.log(err.error, err.errorDescription));
 
         if (authResult && authResult.idToken) {
           this.lock.emit('authenticated', authResult);
@@ -68,6 +88,12 @@ export class Auth {
   }
 
   public logout() {
+    this.store.dispatch(this.soundmooseUserActions.setProfileData({
+      loggedIn: false,
+      userId: '',
+      name: '',
+      avatarUrl: ''
+    }));
     // Remove token from localStorage
     localStorage.removeItem('id_token');
     this.userProfile = undefined;
