@@ -86,7 +86,8 @@ export class SpotifyService {
               imgUrl: item.album.images[0].url,
               streamUrl: item.preview_url,
               duration: 30000,
-              platform: 'spotify'
+              platform: 'spotify',
+              trackId: item.id.toString()
             },
             waveformUrl: '',
             largeArtworkUrl: item.album.images[0].url,
@@ -107,6 +108,7 @@ export class SpotifyService {
       .subscribe(action => this.store.dispatch(action));
   }
 
+<<<<<<< HEAD
   search(term: string) {
     this.spotifySearch(term, 'track')
       .map(data => data.tracks.items)
@@ -117,7 +119,8 @@ export class SpotifyService {
           imgUrl: item.album.images[0].url,
           streamUrl: item.preview_url,
           duration: 30000,
-          platform: 'spotify'
+          platform: 'spotify',
+          trackId: item.id.toString()
       })))
       .first()
       .subscribe(tracks => this.store.dispatch(this.searchActions.searchSuccess(tracks)));

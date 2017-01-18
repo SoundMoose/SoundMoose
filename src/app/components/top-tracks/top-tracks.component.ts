@@ -14,6 +14,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
 
 import { SoundCloudService } from './../../services/soundcloud.service';
+import { PlaylistService } from './../../services/playlist.service';
 import { AppStore } from './../../models/appstore.model';
 import { TracksState } from './../../reducers/tracks.reducer';
 import { AudioStream } from '../../audio-element';
@@ -83,7 +84,8 @@ export class TopTracksComponent implements OnInit {
     private store$: Store<AppStore>,
     private soundCloudService: SoundCloudService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private playlistService: PlaylistService
   ) {
   }
 

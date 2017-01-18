@@ -49,7 +49,8 @@ export class SoundCloudService {
             imgUrl: item.track.artwork_url ? item.track.artwork_url.replace('large.jpg', 't200x200.jpg') : 'assets/img/moosey.png',
             streamUrl: 'http://api.soundcloud.com/tracks/' + item.track.id + '/stream?client_id=' + soundcloudClientId,
             duration: item.track.full_duration,
-            platform: 'soundcloud'
+            platform: 'soundcloud',
+            trackId: item.track.id.toString()
           }
         })
       })
@@ -70,7 +71,8 @@ export class SoundCloudService {
               imgUrl: item.artwork_url ? item.artwork_url.replace('large.jpg', 't200x200.jpg') : 'assets/img/moosey.png',
               streamUrl: 'http://api.soundcloud.com/tracks/' + item.id + '/stream?client_id=' + soundcloudClientId,
               duration: item.duration,
-              platform: 'soundcloud'
+              platform: 'soundcloud',
+              trackId: item.id.toString()
             },
             waveformUrl: item.waveform_url,
             largeArtworkUrl: item.artwork_url ? item.artwork_url.replace('large.jpg', 't500x500.jpg') : 'assets/img/moosey.png',
@@ -127,7 +129,8 @@ export class SoundCloudService {
         imgUrl: item.artwork_url ? item.artwork_url.replace('large.jpg', 't200x200.jpg') : 'assets/img/moosey.png',
         streamUrl: 'http://api.soundcloud.com/tracks/' + item.id + '/stream?client_id=' + soundcloudClientId,
         duration: item.duration,
-        platform: 'soundcloud'
+        platform: 'soundcloud',
+        trackId: item.id.toString()
       })))
       .first()
       .subscribe(tracks => this.store.dispatch(this.searchActions.searchSuccess(tracks)));
