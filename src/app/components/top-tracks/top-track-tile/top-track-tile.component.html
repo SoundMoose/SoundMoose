@@ -4,6 +4,9 @@
     hover: !(currentlyPlaying$ | async),
     selected: (selected$ | async) && (currentlyPlaying$ | async)
   }"
+
+  (mouseenter)="bottomIconHover = true"
+  (mouseleave)="bottomIconHover = false"
 >
 
   <div class="bottom-icons">
@@ -13,20 +16,19 @@
      soundcloud: topTrack.platform == 'soundcloud',
      spotify: topTrack.platform == 'spotify'
     }" style="position: absolute; bottom: 20px; left: 10px;"></i>
-    <i *ngIf="bottomIconHover" (click)="toggleFavorite()" [ngClass]="{
+    <a *ngIf="isFavorited !== null" (click)="toggleFavorite()"><i *ngIf="bottomIconHover" [ngClass]="{
        big: true,
        icon: true,
        heart: true,
-       empty: isFavorited
-    }" style="cursor: pointer; position: absolute; bottom: 20px; left: 60px;"></i>
+       empty: !isFavorited
+    }" style="cursor: pointer; position: absolute; bottom: 20px; left: 60px;"></i></a>
     <i *ngIf="bottomIconHover" (click)="addToPlaylist()" [ngClass]="{
        big: true,
        icon: true,
        list: true
     }" style="cursor: pointer; position: absolute; bottom: 20px; left: 110px;"></i>
   </div>
-  <img class="album-art" src="{{topTrack.imgUrl}}" (mouseenter)="bottomIconHover = true"
-  (mouseout)="bottomIconHover = false">
+  <img class="album-art" src="{{topTrack.imgUrl}}">
   <a style="bottom: 40px" (click)="goToDetail($event)">
     <span>
       <i class="icons">

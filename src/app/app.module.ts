@@ -16,6 +16,7 @@ import { MaterialModule } from '@angular/material';
 import 'hammerjs';
 import { SortablejsModule } from 'angular-sortablejs';
 
+import { FavoriteService } from './services/favorite.service';
 import { SoundCloudService } from './services/soundcloud.service';
 import { SpotifyService } from './services/spotify.service';
 import { LastfmService } from './services/lastfm.service';
@@ -33,6 +34,7 @@ import spinner from './reducers/spinner.reducer';
 import audiocontrols from './reducers/audio-controls.reducer';
 import trackDetails from './reducers/track-details.reducer';
 import comments from './reducers/comments.reducer';
+import favorites from './reducers/favorites.reducer';
 import playlist from './reducers/playlist.reducer';
 
 /*
@@ -57,6 +59,8 @@ import { TrackProgressContainerComponent } from './components/player/track-progr
 import { TopTrackTileComponent } from './components/top-tracks/top-track-tile/top-track-tile.component';
 import { TrackDetailComponent } from './components/track-detail/track-detail.component';
 import { SearchComponent } from './components/search/search.component';
+import { UserComponent } from './components/user/user.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
 
 
 // 2d visualizations and audio controls deck
@@ -75,16 +79,17 @@ import { ThreeDFrequencyBarsComponent } from './components/threeD/three-d-freque
 import { ThreeDParticlesComponent } from './components/threeD/three-d-particles.component';
 import { ThreeDSphereComponent } from './components/threeD/three-d-sphere.component';
 
-
 import { SoundmooseUserActions } from './actions/soundmoose-user.actions';
 import { TrackActions } from './actions/track.actions';
 import { PlayerActions } from './actions/player.actions';
+import { FavoriteActions } from './actions/favorite.actions';
 import { AudioControlsActions } from './actions/audio-controls.actions';
 import { PlaylistActions } from './actions/playlist.actions';
 import { YoutubePipe } from './youtube.pipe';
 
 // Application wide providers
 const APP_PROVIDERS = [
+  FavoriteService,
   SpotifyService,
   LastfmService,
   SoundCloudService,
@@ -95,6 +100,7 @@ const APP_PROVIDERS = [
   TrackActions,
   PlayerActions,
   AudioControlsActions,
+  FavoriteActions,
   PlaylistService,
   PlaylistActions,
   SoundmooseUserActions
@@ -109,8 +115,9 @@ const store = compose(...metaReducers)({
   audiocontrols: audiocontrols,
   trackDetails: trackDetails,
   comments: comments,
-  playlist: playlist,
-  soundmooseUser: soundmooseUser
+  soundmooseUser: soundmooseUser,
+  favorites: favorites,
+  playlist: playlist
 });
 
 /**
@@ -144,7 +151,9 @@ const store = compose(...metaReducers)({
     PlaylistTrackListComponent,
     ThreeDFrequencyBarsComponent,
     ThreeDParticlesComponent,
-    ThreeDSphereComponent
+    ThreeDSphereComponent,
+    FavoritesComponent,
+    UserComponent
   ],
   imports: [
     MomentModule,

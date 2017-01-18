@@ -29,7 +29,7 @@ describe('Player Reducer', () => {
         streamUrl: '',
         duration: 0,
         platform: '',
-        trackId: 0
+        trackId: '0'
       },
       volume: 100,
 
@@ -51,7 +51,7 @@ describe('Player Reducer', () => {
         streamUrl: 'http://www.google.com',
         duration: 123,
         platform: 'abc',
-        trackId: 0
+        trackId: '0'
       }, {
         id: 2,
         title: 'Burritos',
@@ -60,7 +60,7 @@ describe('Player Reducer', () => {
         streamUrl: 'http://www.google.com',
         duration: 123,
         platform: 'abc',
-        trackId: 0
+        trackId: '0'
       }
     ];
 

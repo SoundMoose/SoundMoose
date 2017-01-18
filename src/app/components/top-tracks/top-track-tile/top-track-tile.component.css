@@ -9,6 +9,10 @@ i.icons {
   position: relative;
 }
 
+.bottom-icons {
+  z-index: 2000;
+}
+
 .bottom-icons i {
   transform: scale(0.8);
 }

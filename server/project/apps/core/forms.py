@@ -1,6 +1,6 @@
 import django_filters
 
-from .models import Playlist, Favorite
+from .models import Playlist, FavoritesList
 
 
 class PlaylistFilter(django_filters.FilterSet):
@@ -9,8 +9,8 @@ class PlaylistFilter(django_filters.FilterSet):
         model = Playlist
         fields = ('user_id', )
 
-class FavoriteFilter(django_filters.FilterSet):
+class FavoritesListFilter(django_filters.FilterSet):
 
     class Meta:
-        model = Favorite
+        model = FavoritesList
         fields = ('user_id', )
