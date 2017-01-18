@@ -11,6 +11,7 @@ import { Player } from '../../../models/player.model';
 import { Subscription} from 'rxjs/Subscription';
 
 import { TrackActions } from '../../../actions/track.actions';
+import { FavoriteActions } from '../../../actions/favorite.actions';
 
 
 @Component({
@@ -22,21 +23,40 @@ import { TrackActions } from '../../../actions/track.actions';
 export class TrackInfoComponent {
   player$: Observable<PlayerState>;
   currentTrack$: Observable<Track>;
+  currentTrack: Track;
   playerSubscription: Subscription;
   wrapperHovered : boolean = false;
   songQueue: Track[];
   currentId: number;
+  isFavorited: boolean = null;
+  favorites$;
+  favoritesSubscription: Subscription;
 
-  constructor (private store$: Store<AppStore>, private trackActions: TrackActions) {
+  constructor (private store$: Store<AppStore>, private trackActions: TrackActions, private favoriteActions: FavoriteActions) {
     this.player$ = this.store$.select(s => s.player);
     this.currentTrack$ = this.player$.map((item : PlayerState) => item.currentTrack);
+
+    this.favorites$ = this.store$.select(s => s.favorites);
 
     // grab the array of tracks from the store
     this.playerSubscription = this.player$.subscribe((item) => {
       this.songQueue = item.songQueue;
       this.currentId = item.currentId;
+      this.currentTrack = item.currentTrack;
     });
+
+    this.favoritesSubscription = this.favorites$
+      .subscribe(favorites => {
+        let favorited = false;
+        favorites.forEach((favorite) => {
+          if (favorite.id == this.currentTrack.id) {
+            favorited = true;
+          }
+        });
+        this.isFavorited = favorited;
+      });
   }
+
   private handleMouseOut() {
     window.setTimeout(() => { this.wrapperHovered = false; }, 1000);
   }
@@ -59,8 +79,22 @@ export class TrackInfoComponent {
 
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
   }
-  
+
   clickHandler(track, tracklist) {
     this.store$.dispatch(this.trackActions.togglePlayPause(track, tracklist));
+  }
+
+  toggleFavorite() {
+    this.isFavorited = !this.isFavorited;
+    if (this.isFavorited) {
+      this.store$.dispatch(this.favoriteActions.addFavorite(this.currentTrack));
+    } else {
+      this.store$.dispatch(this.favoriteActions.removeFavorite(this.currentTrack));
+    }
+  }
+
+  ngOnDestroy() {
+    this.favoritesSubscription.unsubscribe();
+    this.playerSubscription.unsubscribe();
   }
 }
