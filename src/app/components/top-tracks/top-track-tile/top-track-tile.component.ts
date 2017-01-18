@@ -7,6 +7,7 @@ import { Player } from '../../../models/player.model';
 import { TrackActions } from '../../../actions/track.actions';
 import { Action } from '@ngrx/store';
 import { PlayerService } from '../../../services/player.service';
+import { FavoriteService } from '../../../services/favorite.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
@@ -42,7 +43,7 @@ export class TopTrackTileComponent{
   isPlayingSubscription: Subscription;
   bottomIconHover: boolean = false;
 
-  constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router) {
+  constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router, private favoriteService: FavoriteService) {
     // Grab the player stream from the store
     this.player$ = this.store$.select(s => s.player);
     // Grab the spinner stream
@@ -87,6 +88,11 @@ export class TopTrackTileComponent{
 
   toggleFavorite() {
     this.isFavorited = !this.isFavorited;
+    if (this.isFavorited) {
+      this.favoriteActions.addFavorite(this.topTrack.id, this.topTrack.platform);
+    } else {
+      this.favoriteActions.removeFavorite(this.topTrack.id, this.topTrack.platform);
+    }
   }
 
   addToPlaylist() {

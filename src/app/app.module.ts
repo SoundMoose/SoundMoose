@@ -15,6 +15,7 @@ import {
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
 
+import { FavoriteService } from './services/favorite.service';
 import { SoundCloudService } from './services/soundcloud.service';
 import { SpotifyService } from './services/spotify.service';
 import { LastfmService } from './services/lastfm.service';
@@ -31,6 +32,7 @@ import spinner from './reducers/spinner.reducer';
 import audiocontrols from './reducers/audio-controls.reducer';
 import trackDetails from './reducers/track-details.reducer';
 import comments from './reducers/comments.reducer';
+import favorites from './reducers/favorites.reducer';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -68,15 +70,16 @@ import { ThreeDFrequencyBarsComponent } from './components/threeD/three-d-freque
 import { ThreeDParticlesComponent } from './components/threeD/three-d-particles.component';
 import { ThreeDSphereComponent } from './components/threeD/three-d-sphere.component';
 
-
 import { SoundmooseUserActions } from './actions/soundmoose-user.actions';
 import { TrackActions } from './actions/track.actions';
 import { PlayerActions } from './actions/player.actions';
+import { FavoriteActions } from './actions/favorite.actions';
 import { AudioControlsActions } from './actions/audio-controls.actions';
 import { YoutubePipe } from './youtube.pipe';
 
 // Application wide providers
 const APP_PROVIDERS = [
+  FavoriteService,
   SpotifyService,
   LastfmService,
   SoundCloudService,
@@ -87,7 +90,8 @@ const APP_PROVIDERS = [
   TrackActions,
   PlayerActions,
   AudioControlsActions,
-  SoundmooseUserActions
+  SoundmooseUserActions,
+  FavoriteActions
 ];
 
 const metaReducers = (ENV !== 'production') ? [storeFreeze, combineReducers] : [combineReducers];
@@ -99,7 +103,8 @@ const store = compose(...metaReducers)({
   audiocontrols: audiocontrols,
   trackDetails: trackDetails,
   comments: comments,
-  soundmooseUser: soundmooseUser
+  soundmooseUser: soundmooseUser,
+  favorites: favorites
 });
 
 /**
