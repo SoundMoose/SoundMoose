@@ -2,6 +2,7 @@
     <div id="page-header" class="ui container">
       <a routerLink="/home"><img class="logo" src="assets/img/logo.png"></a>
 
+     <search></search>
 
       <div class="right-icons" [ngStyle]="{'margin':'8px'}"><img *ngIf="(soundmooseUser$ | async).loggedIn" [src]="auth.userProfile.picture" alt="User avatar" style="width: 20px; height: 20px; border-radius: 50%; position: relative; left: -5px; top: 5px;"/><span style="margin-right: 5px;" *ngIf="(soundmooseUser$ | async).name">{{(soundmooseUser$ | async).name}}</span>
         <button style="color: #fff" class="ui primary button mini" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
@@ -15,9 +16,6 @@
             <i class="big grey lab icon" ></i>
           </a>
 
-          <a routerLink="/search">
-            <i class="big grey search icon" ></i>
-          </a>
           <a target="_blank" href="https://github.com/hrr20-over9000/SoundMoose">
             <i class="big yellow github icon" ></i>
           </a>

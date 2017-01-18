@@ -1,6 +1,7 @@
 import { TracksState } from '../reducers/tracks.reducer';
 import { TrackDetailsState } from '../reducers/track-details.reducer';
 import { PlayerState } from '../reducers/player.reducer';
+import { SearchState } from '../reducers/search.reducer';
 import { PlaylistState } from '../reducers/playlist.reducer';
 import { SpinnerState } from '../reducers/spinner.reducer';
 import { FavoritesState } from '../reducers/favorites.reducer';
@@ -19,4 +20,5 @@ export interface AppStore {
   soundmooseUser: SoundmooseUser;
   spinner: SpinnerState;
   favorites: FavoritesState;
+  search: SearchState;
 };

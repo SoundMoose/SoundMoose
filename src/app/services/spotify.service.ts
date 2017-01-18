@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
@@ -12,6 +13,7 @@ import { AppStore } from '../models/appstore.model';
 import { spotifyClientId } from '../config/superSecretKeys';
 import { Track } from '../models/track.model';
 import { TrackActions } from '../actions/track.actions';
+import { SearchActions } from '../actions/search.actions';
 import { TrackDetailsActions } from '../actions/track-details.actions';
 
 export interface SpotifyConfig {
@@ -48,8 +50,10 @@ interface HttpRequestOptions {
 export class SpotifyService {
   spotifyService: any;
   config: SpotifyConfig;
+  searchTerms$ = new Subject<string>();
+  searchResults$: Observable<Track[]>;
 
-  constructor(private http:Http, private store: Store<AppStore>) {
+  constructor(private http:Http, private store: Store<AppStore>, private searchActions: SearchActions) {
     this.config = {
       clientId: spotifyClientId,
       redirectUri: 'http://localhost:3000/#/home',
@@ -58,22 +62,20 @@ export class SpotifyService {
       authToken: localStorage.getItem('angular2-spotify-token'),
       apiBase:  'https://api.spotify.com/v1'
     };
+    this.store.select(s => s.search)
+      .map(item => item.query)
+      .debounceTime(400)
+      .distinctUntilChanged()
+      .subscribe(query => this.search(query));
   }
 
-  loadSearchResults(terms: Observable<string>, debounceMs: number = 400) {
-    return terms.debounceTime(debounceMs)
-                .distinctUntilChanged()
-                .switchMap(term => this.doSearch(term));
-  }
-
- loadTrackDetails(trackId) {
+  loadTrackDetails(trackId) {
     return this.api({
         method: 'get',
         url: `/tracks/${trackId}`
       })
       .map(res => res.json())
       .map(item => {
-        console.log(item)
         return {
             track: {
               id: item.id,
@@ -104,19 +106,24 @@ export class SpotifyService {
       .subscribe(action => this.store.dispatch(action));
   }
 
-  doSearch(term: string) {
-    return this.search(term, 'track')
-    .map(data => data.tracks.items)
-    .map(items => items.map(item => ({
-        id: item.id,
-        title: item.name,
-        artist: item.artists[0].name,
-        imgUrl: item.album.images[0].url,
-        streamUrl: item.preview_url,
-        duration: 30000,
-        platform: 'spotify',
-        trackId: item.id.toString()
-    })));
+  search(term: string) {
+    if (!term) {
+      return;
+    }
+    this.spotifySearch(term, 'track')
+      .map(data => data.tracks.items)
+      .map(items => items.map(item => ({
+          id: item.id,
+          title: item.name,
+          artist: item.artists[0].name,
+          imgUrl: item.album.images[0].url,
+          streamUrl: item.preview_url,
+          duration: 30000,
+          platform: 'spotify',
+          trackId: item.id.toString()
+      })))
+      .first()
+      .subscribe(tracks => this.store.dispatch(this.searchActions.searchSuccess(tracks)));
   }
 
  /**
@@ -124,7 +131,7 @@ export class SpotifyService {
   * q = search query
   * type = artist, album or track
   */
-  private search(q: string, type: string, options?: SpotifyOptions) {
+  private spotifySearch(q: string, type: string, options?: SpotifyOptions) {
     options = options || {};
     options.q = q;
     options.type = type;
@@ -157,7 +164,7 @@ export class SpotifyService {
     }).map(res => res.json());
   }
 
-    private toQueryString(obj: Object): string {
+  private toQueryString(obj: Object): string {
     var parts = [];
     for (let key in obj) {
       if (obj.hasOwnProperty(key)) {

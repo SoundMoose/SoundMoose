@@ -1,0 +1,12 @@
+
+<div class="overview ui container">
+  <div id="search-results" class="ui six column grid" *ngIf="results$">
+    <div
+      [@fadeInOut]="'in'"
+      *ngFor="let result of results$ | async"
+      class="column"
+    >
+      <top-track-tile [topTrack]="result"></top-track-tile>
+    </div>
+  </div>
+</div>
