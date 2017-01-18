@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Action } from '@ngrx/store';
 import { Playlist } from '../models/playlist.model';
+import { Track } from '../models/track.model';
 
 
 @Injectable()
@@ -24,10 +25,18 @@ export class PlaylistActions {
   }
 
   static REMOVE_TRACK = '[Playlist] Remove Track';
-  removeTrack(trackId: number, trackPlatform: string) {
+  removeTrack(trackId: string, trackPlatform: string) {
     return {
       type: PlaylistActions.REMOVE_TRACK,
       payload: { trackId, trackPlatform }
+    };
+  }
+
+  static ADD_TRACK = '[Playlist] Add Track';
+  addTrack(trackInfo: Track) {
+    return {
+      type: PlaylistActions.ADD_TRACK,
+      payload: trackInfo
     };
   }
 
