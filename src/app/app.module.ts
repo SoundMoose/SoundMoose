@@ -59,6 +59,8 @@ import { TrackProgressContainerComponent } from './components/player/track-progr
 import { TopTrackTileComponent } from './components/top-tracks/top-track-tile/top-track-tile.component';
 import { TrackDetailComponent } from './components/track-detail/track-detail.component';
 import { SearchComponent } from './components/search/search.component';
+import { UserComponent } from './components/user/user.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
 
 
 // 2d visualizations and audio controls deck
@@ -149,7 +151,9 @@ const store = compose(...metaReducers)({
     PlaylistTrackListComponent,
     ThreeDFrequencyBarsComponent,
     ThreeDParticlesComponent,
-    ThreeDSphereComponent
+    ThreeDSphereComponent,
+    FavoritesComponent,
+    UserComponent
   ],
   imports: [
     MomentModule,

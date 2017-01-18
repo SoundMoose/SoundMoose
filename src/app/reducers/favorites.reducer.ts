@@ -1,10 +1,10 @@
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { TrackInfo } from '../models/track-info.model';
+import { Track } from '../models/track.model';
 import { FavoriteActions } from '../actions/favorite.actions';
 
-export type FavoritesState = TrackInfo[];
+export type FavoritesState = Track[];
 
 const initialState: FavoritesState = [];
 

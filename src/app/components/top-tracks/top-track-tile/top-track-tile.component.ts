@@ -36,7 +36,7 @@ export class TopTrackTileComponent{
   player$: Observable<Player>;
   spinner$: Observable<SpinnerState>;
   currentlyPlaying$: Observable<boolean>;
-  isFavorited: boolean;
+  isFavorited: boolean = null;
   selected$: Observable<boolean>;
   isLoading$: Observable<boolean>;
   loadBuffer: boolean;
@@ -49,7 +49,7 @@ export class TopTrackTileComponent{
     this.player$ = this.store$.select(s => s.player);
     // Grab the spinner stream
     this.spinner$ = this.store$.select(s => s.spinner);
-
+    this.favorites$ = this.store$.select(s => s.favorites);
     // Map the player stream to see if the player is playing
     this.currentlyPlaying$ = this.player$
       .map((playerStatus: Player) => playerStatus.isPlaying && playerStatus.currentTrack.id === this.topTrack.id);
@@ -62,10 +62,23 @@ export class TopTrackTileComponent{
 
     this.isPlayingSubscription = this.currentlyPlaying$
       .subscribe(isPlaying => this.playing = isPlaying);
+
+    this.favoritesSubscription = this.favorites$
+      .subscribe(favorites => {
+        let favorited = false;
+        favorites.forEach((favorite) => {
+          if (favorite.trackId == this.topTrack.trackId) {
+            favorited = true;
+          }
+        });
+        this.isFavorited = favorited;
+        });
   }
+
 
   ngOnDestroy() {
     this.isPlayingSubscription.unsubscribe();
+    this.favoritesSubscription.unsubscribe();
   }
 
   clickHandler() {
@@ -90,9 +103,9 @@ export class TopTrackTileComponent{
   toggleFavorite() {
     this.isFavorited = !this.isFavorited;
     if (this.isFavorited) {
-      this.favoriteActions.addFavorite(this.topTrack.trackId, this.topTrack.platform);
+      this.favoriteActions.addFavorite(this.topTrack);
     } else {
-      this.favoriteActions.removeFavorite(this.topTrack.trackId, this.topTrack.platform);
+      this.favoriteActions.removeFavorite(this.topTrack);
     }
   }
 

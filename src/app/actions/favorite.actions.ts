@@ -5,7 +5,7 @@ import { Action } from '@ngrx/store';
 export class FavoriteActions {
 
   static ADD_FAVORITE = '[Favorite] Add Favorite';
-  addFavorite(trackId: string, platform: string): Action {
+  addFavorite(track: string, platform: string): Action {
     return {
       type: FavoriteActions.ADD_FAVORITE,
       payload: {
@@ -16,7 +16,7 @@ export class FavoriteActions {
   }
 
   static REMOVE_FAVORITE = '[Favorite] Remove Favorite';
-  removeFavorite(trackId: string, platform: string): Action {
+  removeFavorite(tracId: string, platform: string): Action {
     return {
       type: FavoriteActions.REMOVE_FAVORITE,
       payload: {
