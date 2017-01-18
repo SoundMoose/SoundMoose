@@ -61,14 +61,15 @@ export class PlayerService {
     // this.songQueue = this.store$.select('player')
     //   .map((player: Player) => player.songQueue)
     //   .distinctUntilChanged();
+    this.player$ = this.store$.select(s => s.player);
 
-      this.playerSubscription = this.player$.subscribe((item) => {
-        this.isPlaying = item.isPlaying;
-        this.repeatTrack = item.repeatTrack;
-        this.shuffleTracks = item.shuffleTracks;
-        this.currentId = item.currentId;
-        this.songQueue = item.songQueue;
-      });
+    this.playerSubscription = this.player$.subscribe((item) => {
+      this.isPlaying = item.isPlaying;
+      this.repeatTrack = item.repeatTrack;
+      this.shuffleTracks = item.shuffleTracks;
+      this.currentId = item.currentId;
+      this.songQueue = item.songQueue;
+    });
     //////////////////////////////////////////////
 
     this.playingSubscription = Observable.fromEvent(this.audio, 'playing')

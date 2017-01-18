@@ -36,15 +36,27 @@ export default function (state = initialState, action: Action): PlayerState {
   switch (action.type) {
 
     case TrackActions.TOGGLE_PLAY_PAUSE: {
+
+      // check if songQueue === tracklist that was clicked
+      if (state.songQueue !== action.payload[1]) {
+
+        // if not equal, assign songQueue to selected track list
+        return Object.assign({}, state, {
+          currentTrack: action.payload[0],
+          songQueue: action.payload[1],
+          isPlaying: true
+       });
+      }
+
       // Pause Track because we clicked the track that was already playing.
-      if (state.currentTrack.id === action.payload.id) {
+      if (state.currentTrack.id === action.payload[0].id) {
          return Object.assign({}, state, {
           isPlaying: !state.isPlaying,
         });
       } else {  // Change Track and keep playing.
         return Object.assign({}, state, {
           isPlaying: true,
-          currentTrack: action.payload
+          currentTrack: action.payload[0]
         });
       }
     }
