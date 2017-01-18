@@ -1,10 +1,12 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 
+import { Md5 } from 'ts-md5/dist/md5';
 import { Store } from '@ngrx/store';
 // import { Observable } from 'rxjs/Observable';
 // import { Subscription } from 'rxjs/Subscription';
 
 import { AppStore } from './../../../models/appstore.model';
+
 
 import { SoundCloudService } from './../../../services/soundcloud.service';
 import { SpotifyService } from './../../../services/spotify.service';
@@ -28,7 +30,7 @@ export class GamePlayerComponent implements OnInit {
   platform: string;
   trackId: string;
   audioSrc: string;
-
+  hashForCurrentUrl: string;
 
   constructor(private route: ActivatedRoute, private store: Store<AppStore>, private soundCloudService: SoundCloudService, private spotifyService: SpotifyService) {
     this.store.select(s => s.soundmooseUser)
@@ -40,6 +42,8 @@ export class GamePlayerComponent implements OnInit {
     this.platform = this.route.snapshot.params.platform;
     this.trackId = this.route.snapshot.params.trackId;
     this.hostId = this.route.snapshot.params.hostId;
+
+    this.hashForCurrentUrl = Md5.hashStr(this.start + '/' + this.end + '/' + this.platform + '/' + this.trackId + '/' + this.hostId);
 
     this.fetchAudioSrc(this.platform, this.trackId);
 
