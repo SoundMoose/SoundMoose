@@ -1,13 +1,15 @@
 #optionsPanel {
     width: 200px;
-    height: 80%;
+    min-height: 230px;
     padding-left: 25px;
     padding-top: 5px;
-    position: absolute;
+    position: fixed;
+
+    bottom: 80px;
     top: 60px;
     right: -1px;
     /*box-shadow: 0 0 30px #555;*/
-    z-index: 99;
+    z-index: 1;
     background-color: rgba(39, 40, 34, 0.8);
     transition: all 0.5s ease-in-out;
     -webkit-transition: all 0.5s ease-in-out;
@@ -22,8 +24,6 @@
     top: 0;
     background: #2E2E2E;
     height: 100%;
-    padding-top: 100%;
-    padding-bottom: 100%;
     cursor: pointer;
 }
 
