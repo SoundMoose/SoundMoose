@@ -34,11 +34,8 @@ import spinner from './reducers/spinner.reducer';
 import audiocontrols from './reducers/audio-controls.reducer';
 import trackDetails from './reducers/track-details.reducer';
 import comments from './reducers/comments.reducer';
-<<<<<<< HEAD
 import favorites from './reducers/favorites.reducer';
-=======
 import playlist from './reducers/playlist.reducer';
->>>>>>> 19055f542b434ccaec8132eebe23d0fcf86badac
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -117,7 +114,7 @@ const store = compose(...metaReducers)({
   trackDetails: trackDetails,
   comments: comments,
   soundmooseUser: soundmooseUser,
-  favorites: favorites
+  favorites: favorites,
   playlist: playlist
 });
 

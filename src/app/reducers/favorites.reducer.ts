@@ -2,6 +2,7 @@ import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { TrackInfo } from '../models/track-info.model';
+import { FavoriteActions } from '../actions/favorite.actions';
 
 export type FavoritesState = TrackInfo[];
 
