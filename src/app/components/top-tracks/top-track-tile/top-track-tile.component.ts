@@ -102,7 +102,7 @@ export class TopTrackTileComponent{
   goToDetail($event) {
     // Only go to detail page if we clicked outside of the play icon
     if ($event.target.tagName != 'I') {
-      this.router.navigate(['/track', this.topTrack.id]);
+      this.router.navigate(['/track/soundcloud', this.topTrack.id]);
     }
   }
 
