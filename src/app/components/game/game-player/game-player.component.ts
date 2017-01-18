@@ -38,11 +38,11 @@ export class GamePlayerComponent implements OnInit {
       .first()
       .subscribe(userInfo => this.userId = userInfo.userId);
 
-    this.start = this.route.snapshot.params.start;
-    this.end = this.route.snapshot.params.end;
-    this.platform = this.route.snapshot.params.platform;
-    this.trackId = this.route.snapshot.params.trackId;
-    this.hostId = this.route.snapshot.params.hostId;
+    this.start = this.route.snapshot.params['start'];
+    this.end = this.route.snapshot.params['end'];
+    this.platform = this.route.snapshot.params['platform'];
+    this.trackId = this.route.snapshot.params['trackId'];
+    this.hostId = this.route.snapshot.params['hostId'];
 
     let hashForCurrentUrl = Md5.hashStr(this.start + '/' + this.end + '/' + this.platform + '/' + this.trackId + '/' + this.hostId).slice(0, -3);
     this.chatIframeUrl = sanitizer.bypassSecurityTrustResourceUrl('https://tlk.io/' + hashForCurrentUrl);
