@@ -68,8 +68,23 @@ export default function (state = initialState, action: Action): PlayerState {
           isPlaying: !state.isPlaying,
         });
       } else {  // Change Track and keep playing.
+
+        var getCurrentTrackIndex = function() {
+          return action.payload[1].reduce((acc, cur, index) => {
+            if (acc !== null) {
+              return acc;
+            } else if (cur.id === action.payload[0].id) {
+              return index;
+            } else {
+              return null;
+            }
+          }, null);
+        };
+        var idx = getCurrentTrackIndex();
+
         return Object.assign({}, state, {
           isPlaying: true,
+          currentId: idx,
           currentTrack: action.payload[0]
         });
       }
