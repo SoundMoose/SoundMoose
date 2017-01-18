@@ -59,18 +59,18 @@ export class PlayerActions {
   }
 
   static JUMP_TO_NEXT = '[Player] Jump To Next';
-  jumpToNext(nextTrack: Track): Action {
+  jumpToNext(nextTrack: Track, trackId: number): Action {
     return {
       type: PlayerActions.JUMP_TO_NEXT,
-      payload: nextTrack
+      payload: [nextTrack, trackId]
     };
   }
 
   static JUMP_TO_PREVIOUS = '[Player] Jump To Previous';
-  jumpToPrevious(previousTrack: Track): Action {
+  jumpToPrevious(previousTrack: Track, trackId: number): Action {
     return {
       type: PlayerActions.JUMP_TO_PREVIOUS,
-      payload: previousTrack
+      payload: [previousTrack, trackId]
     };
   }
 

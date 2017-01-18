@@ -22,14 +22,14 @@ const initialState: PlayerState = {
     trackId: 0
   },
   volume: 100,
-
   isMuted: false,
   volumeBeforeMute: 5,
-
   repeatTrack: false,
   shuffleTracks: false,
   bufferedRanges: [],
-  showVisualization: false
+  showVisualization: false,
+  currentId: 0,
+  songQueue: []
 };
 
 export default function (state = initialState, action: Action): PlayerState {
@@ -93,14 +93,16 @@ export default function (state = initialState, action: Action): PlayerState {
 
     case PlayerActions.JUMP_TO_NEXT: {
       return Object.assign({}, state, {
-        currentTrack: action.payload,
+        currentTrack: action.payload[0],
+        currentId: action.payload[1],
         isPlaying: true
       });
     }
 
     case PlayerActions.JUMP_TO_PREVIOUS: {
       return Object.assign({}, state, {
-        currentTrack: action.payload,
+        currentTrack: action.payload[0],
+        currentId: action.payload[1],
         isPlaying: true
       });
     }

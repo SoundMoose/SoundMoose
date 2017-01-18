@@ -7,7 +7,6 @@ import { SoundmooseUser } from '../models/soundmoose-user.model';
 
 import { CommentsState } from '../reducers/comments.reducer';
 import { AudioControls } from './audio-controls.model'
-import { SongQueue } from './song-queue.model'
 
 export interface AppStore {
   tracks: TracksState;
@@ -18,5 +17,4 @@ export interface AppStore {
   playlist: PlaylistState;
   soundmooseUser: SoundmooseUser;
   spinner: SpinnerState;
-  songQueue: SongQueue;
 };

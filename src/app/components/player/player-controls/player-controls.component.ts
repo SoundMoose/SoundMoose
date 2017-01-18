@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
 
 import { AppState } from '../app.service';
+import { PlayerService } from '../../../services/player.service';
 import { Player } from '../../../models/player.model';
 import { Track } from '../../../models/track.model';
 import { TracksState } from '../../../reducers/tracks.reducer';
@@ -28,8 +29,10 @@ export class PlayerControlsComponent implements OnDestroy {
   playerSubscription: Subscription;
   tracksList: Track[];
   tracksSubscription: Subscription;
+  currentId: number;
+  songQueue: Track[];
 
-  constructor (private store$: Store<AppStore>, private playerActions: PlayerActions) {
+  constructor (private store$: Store<AppStore>, private playerActions: PlayerActions, private playerService: PlayerService) {
     this.player$ = this.store$.select(s => s.player);
     this.playerSubscription = this.player$.subscribe((item) => {
       this.isPlaying = item.isPlaying;
@@ -37,6 +40,8 @@ export class PlayerControlsComponent implements OnDestroy {
       this.repeatTrack = item.repeatTrack;
       this.shuffleTracks = item.shuffleTracks;
       this.showVisualization = item.showVisualization;
+      this.currentId = item.currentId;
+      this.songQueue = item.songQueue;
     });
     this.tracks$ = this.store$.select(s => s.tracks);
     this.tracksSubscription = this.tracks$.subscribe(tracksList => this.tracksList = tracksList);
@@ -47,17 +52,60 @@ export class PlayerControlsComponent implements OnDestroy {
     this.tracksSubscription.unsubscribe();
   }
 
-  getCurrentTrackIndex(): number {
-    return this.tracksList.reduce((acc, cur, index) => {
-      if (acc !== null) {
-        return acc;
-      } else if (cur.id === this.currentTrackId) {
-        return index;
-      } else {
-        return null;
-      }
-    }, null);
+  jumpToPrevious() {
+    this.playerService.jumpToPrevious();
+    //
+    // if (this.shuffleTracks) {
+    //   // generate a random index number between 0 and the length of the playlist
+    //   let max = this.songQueue.length;
+    //   let randomIdx = Math.floor(Math.random() * max);
+    //   this.store$.dispatch(this.playerActions
+    //     .jumpToNext(this.songQueue[randomIdx], randomIdx));
+    // } else {
+    //   // Check to make sure that we are not at the end of list
+    //   if (this.currentId !== 0) {
+    //     this.store$.dispatch(this.playerActions
+    //       .jumpToPrevious(this.songQueue[this.currentId - 1], this.currentId - 1));
+    //   } else {
+    //     this.store$.dispatch(this.playerActions
+    //       .jumpToPrevious(this.songQueue[this.songQueue.length - 1], this.songQueue.length - 1));
+    //   }
+    // }
+
   }
+
+  jumpToNext() {
+    this.playerService.jumpToNext();
+
+  //   if (this.shuffleTracks) {
+  //     // generate a random index number between 0 and the length of the playlist
+  //     let max = this.songQueue.length;
+  //     let randomIdx = Math.floor(Math.random() * max);
+  //     this.store$.dispatch(this.playerActions
+  //       .jumpToNext(this.songQueue[randomIdx], randomIdx)
+  //     );
+  //   } else {
+  //     if (this.currentId < this.songQueue.length - 1) {
+  //       this.store$.dispatch(this.playerActions
+  //         .jumpToNext(this.songQueue[this.currentId + 1], this.currentId + 1));
+  //     } else {
+  //       this.store$.dispatch(this.playerActions
+  //         .jumpToNext(this.songQueue[0], 0));
+  //     }
+  //   }
+  // }
+
+  // getCurrentTrackIndex(): number {
+  //   return this.tracksList.reduce((acc, cur, index) => {
+  //     if (acc !== null) {
+  //       return acc;
+  //     } else if (cur.id === this.currentTrackId) {
+  //       return index;
+  //     } else {
+  //       return null;
+  //     }
+  //   }, null);
+  // }
 
   toggleRepeat() {
     this.store$.dispatch(this.playerActions.toggleRepeat());
@@ -75,41 +123,41 @@ export class PlayerControlsComponent implements OnDestroy {
     this.store$.dispatch(this.playerActions.togglePlayPause());
   }
 
-  jumpToPrevious() {
-    // Find the index of the current track
-    let currentTrackIndex: number = this.getCurrentTrackIndex();
-
-    if (this.shuffleTracks) {
-      // generate a random index number between 0 and the length of the playlist
-      let max = this.tracksList.length;
-      let randomIdx = Math.floor(Math.random() * max);
-      this.store$.dispatch(this.playerActions.jumpToNext(this.tracksList[randomIdx]));
-    } else {
-      // Check to make sure that we are not at the end of list
-      if (currentTrackIndex !== 0) {
-        this.store$.dispatch(this.playerActions.jumpToPrevious(this.tracksList[currentTrackIndex - 1]));
-      } else {
-        // Stop playing because you've reach the beginning of your playlist and there is nowhere to go.
-        this.store$.dispatch(this.playerActions.jumpToPrevious(this.tracksList[this.tracksList.length - 1]));
-      }
-    }
-  }
-
-  jumpToNext() {
-    // Find the index of the current track
-    let currentTrackIndex: number = this.getCurrentTrackIndex();
-
-    if (this.shuffleTracks) {
-      // generate a random index number between 0 and the length of the playlist
-      let max = this.tracksList.length;
-      let randomIdx = Math.floor(Math.random() * max);
-      this.store$.dispatch(this.playerActions.jumpToNext(this.tracksList[randomIdx]));
-    } else {
-      if (currentTrackIndex < this.tracksList.length - 1) {
-        this.store$.dispatch(this.playerActions.jumpToNext(this.tracksList[currentTrackIndex + 1]));
-      } else {
-        this.store$.dispatch(this.playerActions.jumpToNext(this.tracksList[0]));
-      }
-    }
-  }
+  // jumpToPrevious() {
+  //   // Find the index of the current track
+  //   let currentTrackIndex: number = this.getCurrentTrackIndex();
+  //
+  //   if (this.shuffleTracks) {
+  //     // generate a random index number between 0 and the length of the playlist
+  //     let max = this.tracksList.length;
+  //     let randomIdx = Math.floor(Math.random() * max);
+  //     this.store$.dispatch(this.playerActions.jumpToNext(this.tracksList[randomIdx]));
+  //   } else {
+  //     // Check to make sure that we are not at the end of list
+  //     if (currentTrackIndex !== 0) {
+  //       this.store$.dispatch(this.playerActions.jumpToPrevious(this.tracksList[currentTrackIndex - 1]));
+  //     } else {
+  //       // Stop playing because you've reach the beginning of your playlist and there is nowhere to go.
+  //       this.store$.dispatch(this.playerActions.jumpToPrevious(this.tracksList[this.tracksList.length - 1]));
+  //     }
+  //   }
+  // }
+  //
+  // jumpToNext() {
+  //   // Find the index of the current track
+  //   let currentTrackIndex: number = this.getCurrentTrackIndex();
+  //
+  //   if (this.shuffleTracks) {
+  //     // generate a random index number between 0 and the length of the playlist
+  //     let max = this.tracksList.length;
+  //     let randomIdx = Math.floor(Math.random() * max);
+  //     this.store$.dispatch(this.playerActions.jumpToNext(this.tracksList[randomIdx]));
+  //   } else {
+  //     if (currentTrackIndex < this.tracksList.length - 1) {
+  //       this.store$.dispatch(this.playerActions.jumpToNext(this.tracksList[currentTrackIndex + 1]));
+  //     } else {
+  //       this.store$.dispatch(this.playerActions.jumpToNext(this.tracksList[0]));
+  //     }
+  //   }
+  // }
 }
