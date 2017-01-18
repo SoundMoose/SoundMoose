@@ -14,12 +14,14 @@ import {
 } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
+import { SortablejsModule } from 'angular-sortablejs';
 
 import { SoundCloudService } from './services/soundcloud.service';
 import { SpotifyService } from './services/spotify.service';
 import { LastfmService } from './services/lastfm.service';
 import { YoutubeService } from './services/youtube.service';
 import { PlayerService } from './services/player.service';
+import { PlaylistService } from './services/playlist.service';
 import { AudioControlsService } from './services/audio-controls.service';
 import { Auth } from './services/auth.service';
 import { AUDIO_STREAM_PROVIDER } from './audio-element';
@@ -31,6 +33,7 @@ import spinner from './reducers/spinner.reducer';
 import audiocontrols from './reducers/audio-controls.reducer';
 import trackDetails from './reducers/track-details.reducer';
 import comments from './reducers/comments.reducer';
+import playlist from './reducers/playlist.reducer';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -61,6 +64,10 @@ import { AudioControlsComponent } from './components/audio-controls/audio-contro
 import { FrequencyVisualizerComponent } from './components/audio-controls/visualizer/frequency-visualizer.component';
 import { WaveformVisualizerComponent } from './components/audio-controls/visualizer/waveform-visualizer.component';
 import { EqualizerComponent } from './components/audio-controls/equalizer/equalizer.component';
+import { PlaylistComponent } from './components/playlist/playlist.component';
+import { PlaylistTrackDetailsComponent } from './components/playlist/playlist-track-details/playlist-track-details.component';
+import { PlaylistTrackListComponent } from './components/playlist/playlist-track-list/playlist-track-list.component';
+
 
 // 3d visualizations
 import { ThreeDComponent } from './components/threeD/three-d.component';
@@ -77,6 +84,7 @@ import { SoundmooseUserActions } from './actions/soundmoose-user.actions';
 import { TrackActions } from './actions/track.actions';
 import { PlayerActions } from './actions/player.actions';
 import { AudioControlsActions } from './actions/audio-controls.actions';
+import { PlaylistActions } from './actions/playlist.actions';
 import { YoutubePipe } from './youtube.pipe';
 
 // Application wide providers
@@ -91,6 +99,8 @@ const APP_PROVIDERS = [
   TrackActions,
   PlayerActions,
   AudioControlsActions,
+  PlaylistService,
+  PlaylistActions,
   SoundmooseUserActions
 ];
 
@@ -103,6 +113,7 @@ const store = compose(...metaReducers)({
   audiocontrols: audiocontrols,
   trackDetails: trackDetails,
   comments: comments,
+  playlist: playlist,
   soundmooseUser: soundmooseUser
 });
 
@@ -132,6 +143,9 @@ const store = compose(...metaReducers)({
     YoutubePipe,
     SearchComponent,
     ThreeDComponent,
+    PlaylistComponent,
+    PlaylistTrackDetailsComponent,
+    PlaylistTrackListComponent,
     ThreeDFrequencyBarsComponent,
     ThreeDParticlesComponent,
     ThreeDSphereComponent,
@@ -145,6 +159,8 @@ const store = compose(...metaReducers)({
     HttpModule,
     MaterialModule.forRoot(),
     FormsModule,
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    SortablejsModule,
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
