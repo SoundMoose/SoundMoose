@@ -105,7 +105,7 @@ export class PlayerControlsComponent implements OnDestroy {
   //       return null;
   //     }
   //   }, null);
-  // }
+  }
 
   toggleRepeat() {
     this.store$.dispatch(this.playerActions.toggleRepeat());

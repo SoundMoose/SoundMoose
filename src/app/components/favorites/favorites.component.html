@@ -1,0 +1,3 @@
+<div class="overview ui container">
+  <div *ngFor="let favorite of favorites$ | async">{{ favorite.artist }} - {{ favorite.title }}</div>
+</div>

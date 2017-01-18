@@ -7,6 +7,7 @@ import { Player } from '../../../models/player.model';
 import { TrackActions } from '../../../actions/track.actions';
 import { Action } from '@ngrx/store';
 import { PlayerService } from '../../../services/player.service';
+import { FavoriteActions } from '../../../actions/favorite.actions';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
@@ -29,26 +30,28 @@ export class TopTrackTileComponent{
     streamUrl: '',
     platform: '',
     duration: 0,
-    trackId: 0
+    trackId: '0'
   }
 
   player$: Observable<Player>;
   spinner$: Observable<SpinnerState>;
   currentlyPlaying$: Observable<boolean>;
-  isFavorited: boolean;
+  isFavorited: boolean = null;
   selected$: Observable<boolean>;
   isLoading$: Observable<boolean>;
   loadBuffer: boolean;
   playing: boolean;
   isPlayingSubscription: Subscription;
   bottomIconHover: boolean = false;
+  favorites$;
+  favoritesSubscription: Subscription;
 
-  constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router) {
+  constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router, private favoriteActions: FavoriteActions) {
     // Grab the player stream from the store
     this.player$ = this.store$.select(s => s.player);
     // Grab the spinner stream
     this.spinner$ = this.store$.select(s => s.spinner);
-
+    this.favorites$ = this.store$.select(s => s.favorites);
     // Map the player stream to see if the player is playing
     this.currentlyPlaying$ = this.player$
       .map((playerStatus: Player) => playerStatus.isPlaying && playerStatus.currentTrack.id === this.topTrack.id);
@@ -61,10 +64,23 @@ export class TopTrackTileComponent{
 
     this.isPlayingSubscription = this.currentlyPlaying$
       .subscribe(isPlaying => this.playing = isPlaying);
+
+    this.favoritesSubscription = this.favorites$
+      .subscribe(favorites => {
+        let favorited = false;
+        favorites.forEach((favorite) => {
+          if (favorite.id == this.topTrack.id) {
+            favorited = true;
+          }
+        });
+        this.isFavorited = favorited;
+      });
   }
+
 
   ngOnDestroy() {
     this.isPlayingSubscription.unsubscribe();
+    this.favoritesSubscription.unsubscribe();
   }
 
   clickHandler() {
@@ -88,6 +104,11 @@ export class TopTrackTileComponent{
 
   toggleFavorite() {
     this.isFavorited = !this.isFavorited;
+    if (this.isFavorited) {
+      this.store$.dispatch(this.favoriteActions.addFavorite(this.topTrack));
+    } else {
+      this.store$.dispatch(this.favoriteActions.removeFavorite(this.topTrack));
+    }
   }
 
   addToPlaylist() {

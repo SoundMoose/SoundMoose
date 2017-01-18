@@ -3,6 +3,7 @@ import { TrackDetailsState } from '../reducers/track-details.reducer';
 import { PlayerState } from '../reducers/player.reducer';
 import { PlaylistState } from '../reducers/playlist.reducer';
 import { SpinnerState } from '../reducers/spinner.reducer';
+import { FavoritesState } from '../reducers/favorites.reducer';
 import { SoundmooseUser } from '../models/soundmoose-user.model';
 
 import { CommentsState } from '../reducers/comments.reducer';
@@ -17,4 +18,5 @@ export interface AppStore {
   playlist: PlaylistState;
   soundmooseUser: SoundmooseUser;
   spinner: SpinnerState;
+  favorites: FavoritesState;
 };

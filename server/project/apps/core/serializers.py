@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Playlist, Track, Favorite
+from .models import Playlist, Track, Favorite, FavoritesList
 
 class TrackSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,7 +18,9 @@ class PlaylistSerializer(serializers.ModelSerializer):
         playlist = Playlist.objects.create(**validated_data)
 
         for track_data in tracks_data:
-            Track.objects.create(**track_data)
+            track_id = Track.objects.create(**track_data)
+            playlist.tracks.add(track_id)
+
         return playlist 
 
     def update(self, instance, validated_data):
@@ -40,3 +42,31 @@ class FavoriteSerializer(serializers.ModelSerializer):
         model = Favorite 
         fields = '__all__' 
 
+class FavoritesListSerializer(serializers.ModelSerializer):
+    favorites = FavoriteSerializer(many = True)
+
+    class Meta:
+        model = FavoritesList
+        fields = ('user_id', 'favorites')
+
+    def create(self, validated_data):
+          favorites_data = validated_data.pop('favorites')
+          favorites_list = FavoritesList.objects.create(**validated_data)
+
+          for favorite_data in favorites_data:
+              favorite_id = Favorite.objects.create(**favorite_data)
+              favorites_list.favorites.add(favorite_id)
+              
+          favorites_list.save()
+          return favorites_list 
+
+    def update(self, instance, validated_data):
+           favorites_data = validated_data.pop('favorites')
+           Favorite.objects.filter(favoriteslist=instance.user_id).delete()
+
+           for favorite_data in favorites_data:
+               favorite_id = Favorite.objects.create(**favorite_data)
+               instance.favorites.add(favorite_id)
+
+           instance.save()
+           return FavoritesList.objects.get(pk=instance.user_id) 

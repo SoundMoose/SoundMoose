@@ -33,6 +33,7 @@ export class PlayerService {
   progressInfo: {};
   currentProgressInSeconds$: Observable<number>;
 
+  player$: Observable<Player>;
   playerSubscription: Subscription;
   isPlaying: boolean;
   repeatTrack: boolean;
@@ -97,7 +98,7 @@ export class PlayerService {
       .subscribe(item => this.volume(item));
 
     Observable.fromEvent(this.audio, 'ended')
-      .subscribe(() => this.jumpToNext();
+      .subscribe(() => this.jumpToNext()
 
       // this.store$
       //   .dispatch(playerActions
