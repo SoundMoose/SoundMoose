@@ -15,7 +15,7 @@ import { Subscription} from 'rxjs/Subscription';
 @Component({
   //changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'track-info',
-  styleUrls: [ '../player.component.css' ],
+  styleUrls: [ './track-info.component.css' ],
   templateUrl: './track-info.component.html'
 })
 export class TrackInfoComponent {
@@ -24,6 +24,7 @@ export class TrackInfoComponent {
   playerSubscription: Subscription;
   wrapperHovered : boolean = false;
   songQueue: Track[];
+  currentId: number;
 
   constructor (private store$: Store<AppStore>) {
     this.player$ = this.store$.select(s => s.player);
@@ -32,6 +33,7 @@ export class TrackInfoComponent {
     // grab the array of tracks from the store
     this.playerSubscription = this.player$.subscribe((item) => {
       this.songQueue = item.songQueue;
+      this.currentId = item.currentId;
     });
   }
   private handleMouseOut() {

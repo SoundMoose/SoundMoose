@@ -40,10 +40,24 @@ export default function (state = initialState, action: Action): PlayerState {
       // check if songQueue === tracklist that was clicked
       if (state.songQueue !== action.payload[1]) {
 
+        var getCurrentTrackIndex = function() {
+          return action.payload[1].reduce((acc, cur, index) => {
+            if (acc !== null) {
+              return acc;
+            } else if (cur.id === action.payload[0].id) {
+              return index;
+            } else {
+              return null;
+            }
+          }, null);
+        };
+        var idx = getCurrentTrackIndex();
+
         // if not equal, assign songQueue to selected track list
         return Object.assign({}, state, {
           currentTrack: action.payload[0],
           songQueue: action.payload[1],
+          currentId: idx,
           isPlaying: true
        });
       }

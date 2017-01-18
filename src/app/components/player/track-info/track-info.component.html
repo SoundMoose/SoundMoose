@@ -3,31 +3,26 @@
 <div (mouseenter)="wrapperHovered = true" (mouseleave)="wrapperHovered = false" class="track-info-wrapper">
 
   <div (mouseenter)="wrapperHovered = true" [hidden]="!wrapperHovered" class="ui basic bottom pointing label song-queue-wrapper">
+    Up Next:
+      <div *ngFor="let song of songQueue; let i=index">
 
-
-
-        <div *ngFor="let song of songQueue">
-          <div >
+        <div *ngIf="i > curentId && i < currentId + 3">
+        <!-- <div *ngIf="i > 4 && i < 4 + 3"> -->
+          <div>
             <div class="track">
-              <!-- <div class="play-pause">
-                <i class="play large icon"></i>
-              </div> -->
               <div class="info">
-                <div class="title">{{song.title}}</div>
+                <div class="title">
+                  {{song.title}}
+                </div>
                 <div class="align">
-                  <div>{{song.artist}} </div>
+                  <!-- <div>{{song.artist}} </div> -->
                   <div>{{millisToMinutesSeconds(song.duration)}}</div>
                 </div>
               </div>
-              <!-- <div class="delete" (click)="removeMe()">
-                <i class="remove large grey icon"></i>
-              </div> -->
             </div>
-
           </div>
         </div>
-
-
+      </div>
 
   </div>
 
