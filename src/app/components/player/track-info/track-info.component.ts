@@ -10,6 +10,7 @@ import { AppStore } from '../../../models/appstore.model';
 import { Player } from '../../../models/player.model';
 import { Subscription} from 'rxjs/Subscription';
 
+import { TrackActions } from '../../../actions/track.actions';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class TrackInfoComponent {
   songQueue: Track[];
   currentId: number;
 
-  constructor (private store$: Store<AppStore>) {
+  constructor (private store$: Store<AppStore>, private trackActions: TrackActions) {
     this.player$ = this.store$.select(s => s.player);
     this.currentTrack$ = this.player$.map((item : PlayerState) => item.currentTrack);
 
@@ -58,5 +59,8 @@ export class TrackInfoComponent {
 
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
   }
-
+  
+  clickHandler(track, tracklist) {
+    this.store$.dispatch(this.trackActions.togglePlayPause(track, tracklist));
+  }
 }

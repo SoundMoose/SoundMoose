@@ -4,20 +4,18 @@
 
   <div (mouseenter)="wrapperHovered = true" [hidden]="!wrapperHovered" class="ui basic bottom pointing label song-queue-wrapper">
     Up Next:
-      <div *ngFor="let song of songQueue; let i=index">
+      <div *ngFor="let song of songQueue; let i=index" >
 
-        <div *ngIf="i > currentId && i < currentId + 4">
-        <!-- <div *ngIf="i > 4 && i < 4 + 3"> -->
-          <div>
-            <div class="track">
-              <div class="info">
-                <div class="title">
-                  {{song.title}}
-                </div>
-                <div class="align">
-                  <!-- <div>{{song.artist}} </div> -->
-                  <div>{{millisToMinutesSeconds(song.duration)}}</div>
-                </div>
+        <div
+            *ngIf="i > currentId && i < currentId + 4"
+            (click)="clickHandler(song, songQueue)">
+          <div class="track">
+            <div class="info">
+              <div class="title">
+                {{song.title}}
+              </div>
+              <div class="align">
+                <div>{{millisToMinutesSeconds(song.duration)}}</div>
               </div>
             </div>
           </div>
