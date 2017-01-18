@@ -28,7 +28,8 @@ export class TopTrackTileComponent{
     imgUrl: '',
     streamUrl: '',
     platform: '',
-    duration: 0
+    duration: 0,
+    trackId: 0
   }
 
   player$: Observable<Player>;
