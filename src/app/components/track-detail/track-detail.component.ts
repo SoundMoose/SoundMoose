@@ -57,6 +57,7 @@ declare var Waveform: any;
 })
 export class TrackDetailComponent implements OnInit {
   tracksList: Track[];
+  gameToggled: boolean = false;
 
   constructor(
     private store$: Store<AppStore>,
@@ -94,7 +95,9 @@ export class TrackDetailComponent implements OnInit {
   storeSubscription: Subscription;
   secondsSubscription: Subscription;
   platform: string;
+  trackId: string;
   spotifyEmbedUrl: SafeResourceUrl;
+  audioSrc: string;
 
   licenses: {} = {
     'no-rights-reserved': 'No rights reserved',
@@ -119,6 +122,8 @@ export class TrackDetailComponent implements OnInit {
     }
     this.trackDetails$ = this.store$.select(s => s.trackDetails);
     this.trackDetailsSubscription = this.trackDetails$.subscribe(item => {
+      this.audioSrc = item.track.streamUrl;
+      this.trackId = item.track.trackId;
       this.description = item.description;
       this.license = this.licenses[item.license] ? this.licenses[item.license] : item.license;
       this.largeArtworkUrl = item.largeArtworkUrl;
@@ -197,5 +202,9 @@ export class TrackDetailComponent implements OnInit {
                     string.substring(0, length - 3) + "..." :
                     string;
   }
-  
+
+  gameToggle() {
+    this.gameToggled = !this.gameToggled;
+  }
+
 }
