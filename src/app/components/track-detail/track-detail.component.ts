@@ -56,7 +56,9 @@ declare var Waveform: any;
   ]
 })
 export class TrackDetailComponent implements OnInit {
- constructor(
+  tracksList: Track[];
+
+  constructor(
     private store$: Store<AppStore>,
     private soundCloudService: SoundCloudService,
     private playerService: PlayerService,
@@ -68,6 +70,11 @@ export class TrackDetailComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private trackActions: TrackActions
   ) {
+
+    // grab the array of tracks from the store to be passed in when clicking play
+    this.store$.select('tracks')
+      .subscribe((item: Track[]) => this.tracksList = item);
+
   }
   currentlyPlaying: boolean;
   trackDetails$: Observable<TrackDetailsState>;
@@ -165,7 +172,7 @@ export class TrackDetailComponent implements OnInit {
   }
 
   clickHandler() {
-    this.store$.dispatch(this.trackActions.togglePlayPause(this.track));
+    this.store$.dispatch(this.trackActions.togglePlayPause(this.track, this.tracksList));
   }
 
   private getTrackTime(millis) {
@@ -190,4 +197,5 @@ export class TrackDetailComponent implements OnInit {
                     string.substring(0, length - 3) + "..." :
                     string;
   }
+  
 }

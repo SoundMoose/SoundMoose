@@ -39,6 +39,16 @@ export default function (state = initialState, action: Action): PlaylistState {
       return newState;
     }
 
+    case PlaylistActions.ADD_TRACK: {
+      let newTracks = state.tracks.slice();
+      newTracks.push(action.payload);
+
+      let newState = Object.assign({}, state, {
+        tracks: newTracks
+      });
+      return newState;
+    }
+
     default: {
       return state;
     }

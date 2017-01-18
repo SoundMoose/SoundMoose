@@ -8,10 +8,13 @@ import { TrackActions } from '../../../actions/track.actions';
 import { Action } from '@ngrx/store';
 import { PlayerService } from '../../../services/player.service';
 import { FavoriteActions } from '../../../actions/favorite.actions';
+import { PlaylistActions } from '../../../actions/playlist.actions';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
 import { SpinnerState } from '../../../reducers/spinner.reducer';
+import { TracksState } from './../../../reducers/tracks.reducer';
+
 
 @Component({
   //changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,6 +35,7 @@ export class TopTrackTileComponent{
     duration: 0,
     trackId: '0'
   }
+  tracksList: Track[];
 
   player$: Observable<Player>;
   spinner$: Observable<SpinnerState>;
@@ -46,9 +50,14 @@ export class TopTrackTileComponent{
   favorites$;
   favoritesSubscription: Subscription;
 
-  constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router, private favoriteActions: FavoriteActions) {
+  constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router, private favoriteActions: FavoriteActions, private playlistActions: PlaylistActions) {
     // Grab the player stream from the store
     this.player$ = this.store$.select(s => s.player);
+
+    // grab the array of tracks from the store
+    this.store$.select('tracks')
+      .subscribe((item: Track[]) => this.tracksList = item);
+
     // Grab the spinner stream
     this.spinner$ = this.store$.select(s => s.spinner);
     this.favorites$ = this.store$.select(s => s.favorites);
@@ -87,7 +96,7 @@ export class TopTrackTileComponent{
     if (!this.playing) {
       this.loadingNow();
     }
-    this.store$.dispatch(this.trackActions.togglePlayPause(this.topTrack));
+    this.store$.dispatch(this.trackActions.togglePlayPause(this.topTrack, this.tracksList));
   }
 
   goToDetail($event) {
@@ -113,6 +122,6 @@ export class TopTrackTileComponent{
   }
 
   addToPlaylist() {
-
+    this.store$.dispatch(this.playlistActions.addTrack(this.topTrack));
   }
 }

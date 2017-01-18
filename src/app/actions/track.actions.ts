@@ -23,10 +23,10 @@ export class TrackActions {
   // different from Player Actions in that it will pass along a track ID
   // pause if track id is same as current track, play if new track id
   static TOGGLE_PLAY_PAUSE = '[Track] Toggle Track Play/Pause';
-  togglePlayPause(currentTrack: Track): Action {
+  togglePlayPause(currentTrack: Track, tracksList: Track[]): Action {
     return {
       type: TrackActions.TOGGLE_PLAY_PAUSE,
-      payload: currentTrack
+      payload: [currentTrack, tracksList]
     };
   }
 

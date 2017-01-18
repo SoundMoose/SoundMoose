@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'core.middleware.corsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -78,8 +79,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'soundmoose',
-        'USER': 'sr',
-        'PASSWORD': '',
+        'USER': 'postgres',
+        'PASSWORD': 'hrr20soundmoose',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -200,3 +201,22 @@ REST_FRAMEWORK = {
 TEMPLATE_LOADERS = [
 'django.template.loaders.eggs.Loader',
 ]
+
+# CORS Middleware https://github.com/ottoyiu/django-cors-headers/
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ORIGIN_WHITELIST = (
+    'soundmoose.com',
+    'www.soundmoose.com',
+    'localhost:3000',
+)
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+)

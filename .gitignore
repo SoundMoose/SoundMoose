@@ -90,3 +90,6 @@ superSecretKeys.ts
 # Floobits
 .floo
 .flooignore
+
+# server config
+/server/project/conf/base.py

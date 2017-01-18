@@ -1,6 +1,11 @@
 import { Component, Input } from '@angular/core';
 
+import { AppStore } from '../../../models/appstore.model';
+import { PlaylistActions } from '../../../actions/playlist.actions';
+import { TrackActions } from '../../../actions/track.actions';
+import { Store } from '@ngrx/store';
 import { Track } from '../../../models/track.model';
+import { Playlist } from '../../../models/playlist.model';
 
 @Component({
   selector: 'playlist-track-details',
@@ -12,6 +17,9 @@ export class PlaylistTrackDetailsComponent {
 
   // Track info that is being passed in from the parent component.
   @Input() track: Track;
+  @Input() playlist: Track[];
+
+  constructor(private store: Store<AppStore>, private playlistActions: PlaylistActions, private trackActions: TrackActions) {}
 
   // Convert time in milliseconds to M:SS format.
   millisToMinutesSeconds(millis) {
@@ -27,7 +35,11 @@ export class PlaylistTrackDetailsComponent {
   }
 
   removeMe() {
-    console.log(this.track);
+    this.store.dispatch(this.playlistActions.removeTrack(this.track.trackId, this.track.platform));
+  }
+
+  clickHandler() {
+    this.store.dispatch(this.trackActions.togglePlayPause(this.track, this.playlist));
   }
 
 }

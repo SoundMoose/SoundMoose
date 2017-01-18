@@ -1,6 +1,7 @@
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
@@ -12,13 +13,20 @@ import { soundcloudClientId } from '../config/superSecretKeys';
 import { Track } from '../models/track.model';
 import { TrackActions } from '../actions/track.actions';
 import { TrackDetailsActions } from '../actions/track-details.actions';
+import { SearchActions } from '../actions/search.actions';
 
 @Injectable()
 export class SoundCloudService {
-  tracks: any;
 
-  constructor(private _http:Http, private store: Store<AppStore>) {
-    this.tracks = store.select('tracks');
+  constructor(private _http:Http, private store: Store<AppStore>, private searchActions: SearchActions) {
+    this.store.select(s => s.search)
+      .map(item => item.query)
+      .debounceTime(400)
+      .distinctUntilChanged()
+      .subscribe(query => {
+        this.store.dispatch(searchActions.clearSearch('soundcloud'));
+        this.search(query);
+      });
   }
 
   loadTopTracks(genre) {
@@ -41,7 +49,8 @@ export class SoundCloudService {
             imgUrl: item.track.artwork_url ? item.track.artwork_url.replace('large.jpg', 't200x200.jpg') : 'assets/img/moosey.png',
             streamUrl: 'http://api.soundcloud.com/tracks/' + item.track.id + '/stream?client_id=' + soundcloudClientId,
             duration: item.track.full_duration,
-            platform: 'soundcloud'
+            platform: 'soundcloud',
+            trackId: item.track.id.toString()
           }
         })
       })
@@ -62,7 +71,8 @@ export class SoundCloudService {
               imgUrl: item.artwork_url ? item.artwork_url.replace('large.jpg', 't200x200.jpg') : 'assets/img/moosey.png',
               streamUrl: 'http://api.soundcloud.com/tracks/' + item.id + '/stream?client_id=' + soundcloudClientId,
               duration: item.duration,
-              platform: 'soundcloud'
+              platform: 'soundcloud',
+              trackId: item.id.toString()
             },
             waveformUrl: item.waveform_url,
             largeArtworkUrl: item.artwork_url ? item.artwork_url.replace('large.jpg', 't500x500.jpg') : 'assets/img/moosey.png',
@@ -107,16 +117,13 @@ export class SoundCloudService {
       .subscribe(action => this.store.dispatch(action));
   }
 
-  loadSearchResults(terms: Observable<string>, debounceMs: number = 400) {
-    return terms.debounceTime(debounceMs)
-                .distinctUntilChanged()
-                .switchMap(term => this.search(term));
-  }
-
   search(term: string) {
+    if (!term) {
+      return;
+    }
     const searchUrl = 'http://api.soundcloud.com/tracks/?q=' + term + '&client_id=' + soundcloudClientId;
 
-    return this._http.get(searchUrl)
+    this._http.get(searchUrl)
       .map(res => res.json())
       .map(items => items.map(item => ({
         id: item.id,
@@ -125,8 +132,11 @@ export class SoundCloudService {
         imgUrl: item.artwork_url ? item.artwork_url.replace('large.jpg', 't200x200.jpg') : 'assets/img/moosey.png',
         streamUrl: 'http://api.soundcloud.com/tracks/' + item.id + '/stream?client_id=' + soundcloudClientId,
         duration: item.duration,
-        platform: 'soundcloud'
-      })));
+        platform: 'soundcloud',
+        trackId: item.id.toString()
+      })))
+      .first()
+      .subscribe(tracks => this.store.dispatch(this.searchActions.searchSuccess(tracks)));
   }
 
 }

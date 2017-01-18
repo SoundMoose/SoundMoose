@@ -1,5 +1,35 @@
-<img *ngIf="(currentTrack$ | async)?.id !== 0" class="album-art" src="{{ (currentTrack$ | async)?.imgUrl }}" />
-<div *ngIf="(currentTrack$ | async)?.id !== 0" class="current-track">
-  <div class="playing">Playing track</div>
-  <div class="track-info"><a routerLink="/track/{{(currentTrack$ | async)?.platform}}/{{(currentTrack$ | async)?.id}}">{{ trim((currentTrack$ | async)?.artist + " - " + (currentTrack$ | async)?.title) }}</a></div>
+
+
+<div (mouseenter)="wrapperHovered = true" (mouseleave)="wrapperHovered = false" class="track-info-wrapper">
+
+  <div (mouseenter)="wrapperHovered = true" [hidden]="!wrapperHovered" class="ui basic bottom pointing label song-queue-wrapper">
+    Up Next:
+      <div *ngFor="let song of songQueue; let i=index">
+
+        <div *ngIf="i > currentId && i < currentId + 4">
+        <!-- <div *ngIf="i > 4 && i < 4 + 3"> -->
+          <div>
+            <div class="track">
+              <div class="info">
+                <div class="title">
+                  {{song.title}}
+                </div>
+                <div class="align">
+                  <!-- <div>{{song.artist}} </div> -->
+                  <div>{{millisToMinutesSeconds(song.duration)}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+
+  <img *ngIf="(currentTrack$ | async)?.id !== 0" class="album-art" src="{{ (currentTrack$ | async)?.imgUrl }}" />
+  <div *ngIf="(currentTrack$ | async)?.id !== 0" class="current-track" >
+    <div class="playing">Playing track</div>
+    <div class="track-info"><a routerLink="/track/{{(currentTrack$ | async)?.platform}}/{{(currentTrack$ | async)?.id}}">{{ trim((currentTrack$ | async)?.artist + " - " + (currentTrack$ | async)?.title) }}</a></div>
+  </div>
+
 </div>

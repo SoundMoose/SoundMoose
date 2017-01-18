@@ -1,0 +1,33 @@
+#song-queue {
+    width: 200px;
+    min-height: 230px;
+    padding-left: 25px;
+    padding-top: 5px;
+    position: fixed;
+
+    bottom: 70px;
+    /*top: 60px;*/
+    right: 20%;
+    /*box-shadow: 0 0 30px #555;*/
+    z-index: 1;
+    background-color: rgba(39, 40, 34, 0.9);
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+}
+
+#hide {
+    position: absolute;
+    left: 0;
+    width: 20px;
+    top: 0;
+    background: #2E2E2E;
+    height: 100%;
+    cursor: pointer;
+}
+
+.options-selectors {
+    padding: 10px;
+    cursor: pointer;
+}

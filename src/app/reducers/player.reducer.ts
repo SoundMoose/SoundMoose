@@ -22,29 +22,70 @@ const initialState: PlayerState = {
     trackId: '0'
   },
   volume: 100,
-
   isMuted: false,
   volumeBeforeMute: 5,
-
   repeatTrack: false,
   shuffleTracks: false,
   bufferedRanges: [],
-  showVisualization: false
+  showVisualization: false,
+  currentId: 0,
+  songQueue: []
 };
 
 export default function (state = initialState, action: Action): PlayerState {
   switch (action.type) {
 
     case TrackActions.TOGGLE_PLAY_PAUSE: {
+
+      // check if songQueue === tracklist that was clicked
+      if (state.songQueue !== action.payload[1]) {
+
+        var getCurrentTrackIndex = function() {
+          return action.payload[1].reduce((acc, cur, index) => {
+            if (acc !== null) {
+              return acc;
+            } else if (cur.id === action.payload[0].id) {
+              return index;
+            } else {
+              return null;
+            }
+          }, null);
+        };
+        var idx = getCurrentTrackIndex();
+
+        // if not equal, assign songQueue to selected track list
+        return Object.assign({}, state, {
+          currentTrack: action.payload[0],
+          songQueue: action.payload[1],
+          currentId: idx,
+          isPlaying: true
+       });
+      }
+
       // Pause Track because we clicked the track that was already playing.
-      if (state.currentTrack.id === action.payload.id) {
+      if (state.currentTrack.id === action.payload[0].id) {
          return Object.assign({}, state, {
           isPlaying: !state.isPlaying,
         });
       } else {  // Change Track and keep playing.
+
+        var getCurrentTrackIndex = function() {
+          return action.payload[1].reduce((acc, cur, index) => {
+            if (acc !== null) {
+              return acc;
+            } else if (cur.id === action.payload[0].id) {
+              return index;
+            } else {
+              return null;
+            }
+          }, null);
+        };
+        var idx = getCurrentTrackIndex();
+
         return Object.assign({}, state, {
           isPlaying: true,
-          currentTrack: action.payload
+          currentId: idx,
+          currentTrack: action.payload[0]
         });
       }
     }
@@ -93,14 +134,16 @@ export default function (state = initialState, action: Action): PlayerState {
 
     case PlayerActions.JUMP_TO_NEXT: {
       return Object.assign({}, state, {
-        currentTrack: action.payload,
+        currentTrack: action.payload[0],
+        currentId: action.payload[1],
         isPlaying: true
       });
     }
 
     case PlayerActions.JUMP_TO_PREVIOUS: {
       return Object.assign({}, state, {
-        currentTrack: action.payload,
+        currentTrack: action.payload[0],
+        currentId: action.payload[1],
         isPlaying: true
       });
     }

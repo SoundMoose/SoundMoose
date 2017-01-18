@@ -36,6 +36,7 @@ import trackDetails from './reducers/track-details.reducer';
 import comments from './reducers/comments.reducer';
 import favorites from './reducers/favorites.reducer';
 import playlist from './reducers/playlist.reducer';
+import search from './reducers/search.reducer';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -59,6 +60,7 @@ import { TrackProgressContainerComponent } from './components/player/track-progr
 import { TopTrackTileComponent } from './components/top-tracks/top-track-tile/top-track-tile.component';
 import { TrackDetailComponent } from './components/track-detail/track-detail.component';
 import { SearchComponent } from './components/search/search.component';
+import { SearchResultsComponent } from './components/search/search-results/search-results.component';
 import { UserComponent } from './components/user/user.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 
@@ -79,7 +81,10 @@ import { ThreeDFrequencyBarsComponent } from './components/threeD/three-d-freque
 import { ThreeDParticlesComponent } from './components/threeD/three-d-particles.component';
 import { ThreeDSphereComponent } from './components/threeD/three-d-sphere.component';
 
+import { SongQueueComponent } from './components/song-queue/song-queue.component';
+
 import { SoundmooseUserActions } from './actions/soundmoose-user.actions';
+import { SearchActions } from './actions/search.actions';
 import { TrackActions } from './actions/track.actions';
 import { PlayerActions } from './actions/player.actions';
 import { FavoriteActions } from './actions/favorite.actions';
@@ -103,6 +108,7 @@ const APP_PROVIDERS = [
   FavoriteActions,
   PlaylistService,
   PlaylistActions,
+  SearchActions,
   SoundmooseUserActions
 ];
 
@@ -117,7 +123,8 @@ const store = compose(...metaReducers)({
   comments: comments,
   soundmooseUser: soundmooseUser,
   favorites: favorites,
-  playlist: playlist
+  playlist: playlist,
+  search: search
 });
 
 /**
@@ -145,6 +152,7 @@ const store = compose(...metaReducers)({
     SimilarTracksComponent,
     YoutubePipe,
     SearchComponent,
+    SearchResultsComponent,
     ThreeDComponent,
     PlaylistComponent,
     PlaylistTrackDetailsComponent,
@@ -152,6 +160,7 @@ const store = compose(...metaReducers)({
     ThreeDFrequencyBarsComponent,
     ThreeDParticlesComponent,
     ThreeDSphereComponent,
+    SongQueueComponent,
     FavoritesComponent,
     UserComponent
   ],
