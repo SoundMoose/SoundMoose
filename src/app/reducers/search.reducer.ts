@@ -30,8 +30,7 @@ export default function (state = initialState, action: Action): SearchState {
     }
     case SearchActions.CLEAR_SEARCH: {
       let newState = Object.assign({}, state, {
-        query: '',
-        results: []
+        results: state.results.filter(ele => ele.platform !== action.payload)
       });
       return newState;
     }

@@ -24,9 +24,10 @@ export class SearchActions {
   }
 
   static CLEAR_SEARCH = '[Search] Clear search';
-  clearSearch() {
+  clearSearch(platform: string) {
     return {
-      type: SearchActions.CLEAR_SEARCH
+      type: SearchActions.CLEAR_SEARCH,
+      payload: platform
     };
   }
 

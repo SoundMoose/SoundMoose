@@ -66,7 +66,10 @@ export class SpotifyService {
       .map(item => item.query)
       .debounceTime(400)
       .distinctUntilChanged()
-      .subscribe(query => this.search(query));
+      .subscribe(query => {
+        this.store.dispatch(searchActions.clearSearch('spotify'));
+        this.search(query);
+      });
   }
 
   loadTrackDetails(trackId) {
