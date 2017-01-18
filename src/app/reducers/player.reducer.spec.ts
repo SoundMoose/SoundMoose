@@ -39,7 +39,9 @@ describe('Player Reducer', () => {
       repeatTrack: false,
       shuffleTracks: false,
       bufferedRanges: [],
-      showVisualization: false
+      showVisualization: false,
+      currentId: 0,
+      songQueue: []
     },
 
     tracks = [
