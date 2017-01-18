@@ -13,6 +13,6 @@ export const ROUTES: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'search/:query', component: SearchComponent },
   { path: 'threeD', component: ThreeDComponent },
-  { path: 'playlists', component: PlaylistComponent},
+  { path: 'user', component: UserComponent},
   { path: '**', redirectTo: 'home'}
 ];
