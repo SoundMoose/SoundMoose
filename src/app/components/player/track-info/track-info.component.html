@@ -29,5 +29,23 @@
     <div class="playing">Playing track</div>
     <div class="track-info"><a routerLink="/track/{{(currentTrack$ | async)?.platform}}/{{(currentTrack$ | async)?.id}}">{{ trim((currentTrack$ | async)?.artist + " - " + (currentTrack$ | async)?.title) }}</a></div>
   </div>
+  <div style="position: relative;
+    right: -110px;
+    top: -5px;">
+   <a
+      *ngIf="isFavorited !== null"
+      (click)="toggleFavorite()"
+    >
+      <i
+        [ngClass]="{
+          icon: true,
+          heart: true,
+          empty: !isFavorited
+        }"
+        style="cursor: pointer; position: absolute; bottom: 20px; left: 60px;"
+      >
+      </i>
+    </a>
+  </div>
 
 </div>
