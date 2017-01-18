@@ -96,7 +96,7 @@ const APP_PROVIDERS = [
   PlayerActions,
   AudioControlsActions,
   PlaylistService,
-  PlaylistActions
+  PlaylistActions,
   SoundmooseUserActions
 ];
 
@@ -109,7 +109,7 @@ const store = compose(...metaReducers)({
   audiocontrols: audiocontrols,
   trackDetails: trackDetails,
   comments: comments,
-  playlist: playlist
+  playlist: playlist,
   soundmooseUser: soundmooseUser
 });
 
@@ -141,7 +141,7 @@ const store = compose(...metaReducers)({
     ThreeDComponent,
     PlaylistComponent,
     PlaylistTrackDetailsComponent,
-    PlaylistTrackListComponent
+    PlaylistTrackListComponent,
     ThreeDFrequencyBarsComponent,
     ThreeDParticlesComponent,
     ThreeDSphereComponent
@@ -155,7 +155,7 @@ const store = compose(...metaReducers)({
     MaterialModule.forRoot(),
     FormsModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
-    SortablejsModule
+    SortablejsModule,
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
