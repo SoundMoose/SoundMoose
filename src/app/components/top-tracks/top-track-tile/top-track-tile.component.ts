@@ -8,6 +8,7 @@ import { TrackActions } from '../../../actions/track.actions';
 import { Action } from '@ngrx/store';
 import { PlayerService } from '../../../services/player.service';
 import { FavoriteActions } from '../../../actions/favorite.actions';
+import { PlaylistActions } from '../../../actions/playlist.actions';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
@@ -49,7 +50,7 @@ export class TopTrackTileComponent{
   favorites$;
   favoritesSubscription: Subscription;
 
-  constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router, private favoriteActions: FavoriteActions) {
+  constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router, private favoriteActions: FavoriteActions, private playlistActions: PlaylistActions) {
     // Grab the player stream from the store
     this.player$ = this.store$.select(s => s.player);
 
@@ -120,6 +121,6 @@ export class TopTrackTileComponent{
   }
 
   addToPlaylist() {
-
+    this.store$.dispatch(this.playlistActions.addTrack(this.topTrack));
   }
 }

@@ -6,6 +6,8 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs/Observable';
 import { Playlist } from '../models/playlist.model';
+import { SoundmooseUser } from '../models/soundmoose-user.model';
+import { PlaylistActions } from '../actions/playlist.actions';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/skip';
@@ -14,17 +16,60 @@ import 'rxjs/add/operator/skip';
 export class PlaylistService {
 
   playlist;
+  // userInfo;
 
-  constructor(private http: Http, private store: Store<AppStore>) {
+  constructor(private http: Http, private store: Store<AppStore>, private playlistActions: PlaylistActions) {
     // skip(2) because we want to ignore first 2 events that come through this observable.  The first event is an emtpy object and the second is the initial object we recieve from the server.
     this.playlist = this.store.select('playlist')
       .skip(2)
       .subscribe((playlist: Playlist) => {
         this.updatePlaylist(this.buildData(playlist));
       });
+
+    this.store.select('soundmooseUser')
+      .subscribe((userInfo: SoundmooseUser) => this.getPlaylistIds(userInfo.userId));
+  }
+
+  getPlaylistIds(userId: string) {
+    this.getUserPlaylists(userId)
+      .subscribe(data => {
+        if (data.length === 0) {
+          this.newPlaylist(userId);
+        } else {
+          this.getData(data[0].id);
+        }
+      });
+  }
+
+  newPlaylist(userId: string) {
+    this.createNewPlaylist(userId)
+      .subscribe((newPlaylist: Playlist) => this.getData(newPlaylist.id));
+  }
+
+  getData(playlist_id: number) {
+    this.getPlaylist(playlist_id)
+      .first()
+      .subscribe(playlist => {
+        this.store.dispatch(this.playlistActions.loadTracks(playlist))
+      });
+  }
+
+  getUserPlaylists(userId: string) {
+    return this.http.get(`http://www.soundmoose.com:8000/api/playlists/?user_id=${userId}`)
+      .map(res => res.json());
+  }
+
+  createNewPlaylist(userId: string) {
+    return this.http.post('http://www.soundmoose.com:8000/api/playlists/', {
+      user_id: userId,
+      playlist_name: 'Default',
+      tracks: []
+    })
+    .map(res => res.json());
   }
 
   updatePlaylist(playlistToUpdate: any) {
+    console.log('object to put ', playlistToUpdate);
     this.http.put(`http://www.soundmoose.com:8000/api/playlists/${playlistToUpdate.id}/`, playlistToUpdate)
       .subscribe(res => console.log(res));
   }
