@@ -3,7 +3,7 @@
   <div id="page-header" class="ui container">
     <a routerLink="/home"><img class="logo" src="assets/img/logo.png"></a>
     <search></search>
-    <div class="right-icons" [ngStyle]="{'margin':'8px'}">
+    <div class="right-icons" [ngStyle]="{'margin':'8px', 'position':'relative'}">
 
       <button style="color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; padding: 8px; top: -2px; position: relative;" class="ui primary button mini" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
 
@@ -23,11 +23,24 @@
            icon: true
           }"></i>
 
-          <div *ngIf="showUserDropdown" class="user-dropdown" style="position: absolute; width: 250px; height: 100px; color: #fff; background-color: #000; opacity: 0.9; cursor: pointer;">
-            <ul>
-              <li><a routerLink="/user">Favorites/playlists</a></li>
-              <li><a (click)="auth.logout()">Log out</a></li>
-            </ul>
+          <div *ngIf="showUserDropdown" class="user-dropdown" style="position: absolute; left:-80px; top:30px; width: 170px; height: 80px; color: #ffffff; background-color: #000; opacity: 0.8; border-radius:5px;">
+
+            <div class="ui middle aligned animated list">
+              <div class="item">
+                <div class="content" style="padding-left:10px; padding-top:10px;">
+                  <div class="header">
+                    <a routerLink="/user" style="color: #ffffff;">Favorites/playlists</a>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="content" style="padding-left:10px; padding-top:10px;">
+                  <div class="header">
+                    <a (click)="auth.logout()" style="color: #ffffff;">Log out</a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -48,9 +61,9 @@
           }"
         ></i>
 
-        <div *ngIf="showActionsDropdown" class="actions-dropdown" style="position: absolute; width: 250px; height: 100px; color: #ffffff; background-color: #000; opacity: 0.9;">
+        <div *ngIf="showActionsDropdown" class="actions-dropdown" style="position: absolute; left:-50px; width: 170px; height: 80px; color: #ffffff; background-color: #000; opacity: 0.8; border-radius:5px;">
 
-          <div class="ui big middle aligned animated list">
+          <div class="ui middle aligned animated list">
             <div class="item">
               <i class="large sound icon" style="padding-left:10px; padding-top:10px;"></i>
               <div class="content">
@@ -58,7 +71,7 @@
                   <a
                     routerLink="/threeD"
                     style="color: #ffffff;">
-                    3D experiments
+                    3D Experiments
                   </a>
                 </div>
               </div>
