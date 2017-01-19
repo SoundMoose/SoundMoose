@@ -22,6 +22,10 @@ export class AppComponent {
   openDialogActive: boolean = false;
   saveDialogActive: boolean = false;
   soundmooseUser$: Observable<SoundmooseUser>;
+  showActionsDropdown: boolean = false;
+  showUserDropdown: boolean = false;
+  actionsHovering: boolean = false;
+  userHovering: boolean = false;
 
   constructor( private store$: Store<AppStore>, private AudioControlsActions: AudioControlsActions, private auth: Auth) {
 
