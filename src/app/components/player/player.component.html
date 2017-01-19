@@ -1,49 +1,9 @@
-<div [@fadeInOut]="'in'" class="ui footer segment"
-  *ngIf="trackExists$ | async"
->
-  <div class="ui container"
-  [ngStyle]="{'min-width': '1127px'}">
-
+<div [@fadeInOut]="'in'" class="ui footer segment" *ngIf="trackExists$ | async">
+  <div class="ui container" style="min-width: 1127px">
     <player-controls></player-controls>
-
     <track-progress-container [progressContainerType]="'bottom'"></track-progress-container>
-
     <volume-control></volume-control>
-    
     <track-info></track-info>
-
-    <div
-      class="ui container segment"
-      *ngIf="showVisualization$ | async"
-      [ngStyle]="{'background-color': '#222', 'min-width':'1127px'}">
-
-      <div [ngStyle]="{'width': '40px', 'height': '115px', 'display':'inline-block'}">
-        <i [ngClass]="{
-             'area chart icon': true,
-             yellow: !toggleFrequencyOrWaveform
-             }"
-          (click)="toggleVisualization('wave')"
-        ></i>
-        <i [ngClass]="{
-             'bar chart icon': true,
-             yellow: toggleFrequencyOrWaveform
-             }"
-          (click)="toggleVisualization('freq')"
-        ></i>
-        <i [ngClass]="{
-            'large clockwise rotated options icon': true,
-             yellow: showEqualizer
-             }"
-          (click)="toggleEqualizer()"
-          [ngStyle]="{'margin-left': '5px'}"
-        ></i>
-      </div>
-
-      <audio-controls
-          [@fadeInOut]="'in'"
-          [ngStyle]="{'width': '1040px'}"
-      ></audio-controls>
-    </div>
-
-    </div>
+    <visualization-control *ngIf="showVisualization$ | async"></visualization-control>
   </div>
+</div>
