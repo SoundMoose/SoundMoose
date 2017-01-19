@@ -18,6 +18,8 @@ import { PlaylistService } from './../../services/playlist.service';
 import { AppStore } from './../../models/appstore.model';
 import { TracksState } from './../../reducers/tracks.reducer';
 import { AudioStream } from '../../audio-element';
+import { Track } from '../../models/track.model';
+
 
 declare var $: any;
 
@@ -45,6 +47,7 @@ declare var $: any;
 export class TopTracksComponent implements OnInit {
   topTracks$: Observable<TracksState>;
   buttonToggled: boolean = false;
+  tracksList: Track[];
   genres = [
     ['all-music', 'All music'],
     ['alternativerock','Alternative Rock'],
@@ -87,6 +90,9 @@ export class TopTracksComponent implements OnInit {
     private route: ActivatedRoute,
     private playlistService: PlaylistService
   ) {
+    // grab the array of tracks from the store
+    this.store$.select('tracks')
+      .subscribe((item: Track[]) => this.tracksList = item);
   }
 
   ngOnInit() {
