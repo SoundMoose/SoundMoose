@@ -9,7 +9,6 @@ import { AppStore } from '../../../models/appstore.model';
 import { Player } from '../../../models/player.model';
 import { PlayerActions } from '../../../actions/player.actions';
 
-
 @Component({
   //changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'volume-control',
@@ -17,6 +16,7 @@ import { PlayerActions } from '../../../actions/player.actions';
   templateUrl: './volume-control.component.html'
 })
 export class VolumeControlComponent {
+
   wrapperHovered : boolean = false;
 
   player$ : Observable<Player>;
@@ -24,7 +24,6 @@ export class VolumeControlComponent {
   isMuted: boolean;
   volumeBeforeMute: number;
   playerSubscription: Subscription;
-
 
   constructor (private store$: Store<AppStore>, private playerActions: PlayerActions) {
     this.player$ = this.store$.select(s => s.player);

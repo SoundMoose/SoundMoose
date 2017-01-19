@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-
-import { AppStore } from '../../models/appstore.model';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
+import { AppStore } from '../../models/appstore.model';
 import { PlaylistActions } from '../../actions/playlist.actions';
 import { PlaylistService } from '../../services/playlist.service';
 import { Playlist } from '../../models/playlist.model';
@@ -14,7 +13,6 @@ import { Track } from '../../models/track.model';
   selector: 'playlist',
   templateUrl: './playlist.component.html',
 })
-
 export class PlaylistComponent {
 
   // Observable to be passed down to child component.
@@ -26,5 +24,4 @@ export class PlaylistComponent {
     this.playlist$ = this.store.select('playlist')
       .map((playlist: Playlist) => playlist.tracks);
   }
-
 }

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-
 import { Action } from '@ngrx/store';
+
 import { Playlist } from '../models/playlist.model';
 import { Track } from '../models/track.model';
-
 
 @Injectable()
 export class PlaylistActions {
@@ -39,5 +38,4 @@ export class PlaylistActions {
       payload: trackInfo
     };
   }
-
 }

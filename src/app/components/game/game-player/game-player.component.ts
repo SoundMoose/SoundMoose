@@ -1,27 +1,19 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-
 import { Md5 } from 'ts-md5/dist/md5';
 import { Store } from '@ngrx/store';
-// import { Observable } from 'rxjs/Observable';
-// import { Subscription } from 'rxjs/Subscription';
-
-import { AppStore } from './../../../models/appstore.model';
-
-
-import { SoundCloudService } from './../../../services/soundcloud.service';
-import { SpotifyService } from './../../../services/spotify.service';
-
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
+
+import { AppStore } from './../../../models/appstore.model';
+import { SoundCloudService } from './../../../services/soundcloud.service';
+import { SpotifyService } from './../../../services/spotify.service';
 
 @Component({
   selector: 'game-player',
   styleUrls: ['./game-player.component.css'],
   templateUrl: './game-player.component.html'
 })
-
 export class GamePlayerComponent implements OnInit {
-
 
   start: number;
   end: number;
@@ -50,6 +42,7 @@ export class GamePlayerComponent implements OnInit {
     this.fetchAudioSrc(this.platform, this.trackId);
 
     this.store.select(s => s.trackDetails)
+      .first()
       .subscribe(trackDetails => this.audioSrc = trackDetails.track.streamUrl);
   }
 
@@ -70,5 +63,4 @@ export class GamePlayerComponent implements OnInit {
     this.audio.play();
     setTimeout(() => this.audio.pause(), (this.end - this.start) * 1000);
   }
-
 }

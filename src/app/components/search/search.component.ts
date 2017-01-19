@@ -5,7 +5,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { AppStore } from '../../models/appstore.model';
-
 import { SearchActions } from '../../actions/search.actions';
 
 @Component({
@@ -18,7 +17,6 @@ export class SearchComponent {
   query: string;
 
   constructor(private router: Router, private searchActions: SearchActions, private store$: Store<AppStore>) {
-    window
   }
 
   handleInput($event) {

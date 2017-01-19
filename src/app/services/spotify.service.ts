@@ -8,7 +8,6 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/distinctUntilChanged';
 import {Http, Headers, Response, Request} from '@angular/http'
 
-
 import { AppStore } from '../models/appstore.model';
 import { spotifyClientId } from '../config/superSecretKeys';
 import { Track } from '../models/track.model';
@@ -48,7 +47,6 @@ interface HttpRequestOptions {
 
 @Injectable()
 export class SpotifyService {
-  spotifyService: any;
   config: SpotifyConfig;
   searchTerms$ = new Subject<string>();
   searchResults$: Observable<Track[]>;

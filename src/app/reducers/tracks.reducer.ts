@@ -14,8 +14,6 @@ export default function (state = initialState, action: Action): TracksState {
       return [];
     case TrackActions.LOAD_TRACKS_SUCCESS:
       return action.payload;
-    // case TrackActions.TOGGLE_PLAY_PAUSE:
-    //   return state;
     default:
       return state;
   }

@@ -1,22 +1,38 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-
-import { AppStore } from '../models/appstore.model';
 import { Store } from '@ngrx/store';
-
-import { Observable } from 'rxjs/Observable';
-import { Playlist } from '../models/playlist.model';
-import { SoundmooseUser } from '../models/soundmoose-user.model';
-import { PlaylistActions } from '../actions/playlist.actions';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/skip';
+
+import { Observable } from 'rxjs/Observable';
+import { AppStore } from '../models/appstore.model';
+import { Playlist } from '../models/playlist.model';
+import { Track } from '../models/track.model';
+import { SoundmooseUser } from '../models/soundmoose-user.model';
+import { PlaylistActions } from '../actions/playlist.actions';
+
+type BackendTrack = {
+  track_id: string,
+  title: string,
+  artist: string,
+  img_url: string,
+  stream_url: string,
+  duration: number,
+  platform: string
+};
+
+type BackendPlaylist = {
+  id: string,
+  playlist_name: string,
+  user_id: string,
+  tracks: BackendTrack[]
+};
 
 @Injectable()
 export class PlaylistService {
 
   playlist;
-  // userInfo;
 
   constructor(private http: Http, private store: Store<AppStore>, private playlistActions: PlaylistActions) {
     // skip(2) because we want to ignore first 2 events that come through this observable.  The first event is an emtpy object and the second is the initial object we recieve from the server.
@@ -68,7 +84,7 @@ export class PlaylistService {
     .map(res => res.json());
   }
 
-  updatePlaylist(playlistToUpdate: any) {
+  updatePlaylist(playlistToUpdate: BackendPlaylist) {
     this.http.put(`http://www.soundmoose.com:8000/api/playlists/${playlistToUpdate.id}/`, playlistToUpdate);
   }
 
@@ -114,5 +130,4 @@ export class PlaylistService {
         }
       });
   }
-
 }

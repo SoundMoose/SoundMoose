@@ -1,5 +1,4 @@
 import 'rxjs/add/operator/let';
-// import 'rxjs/add/operator/pluck';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
@@ -18,7 +17,6 @@ import { PlayerState } from '../reducers/player.reducer';
 import { AudioStream } from '../audio-element';
 import { PlayerActions } from '../actions/player.actions';
 import { TrackActions } from '../actions/track.actions';
-
 import { Player } from './../models/player.model';
 import { Track } from './../models/track.model';
 
@@ -28,11 +26,10 @@ export class PlayerService {
   currentTrack$: Observable<Track>;
   tracksList: Track[];
   currentTrackId: number;
-  audio: any;
+  audio: HTMLAudioElement;
   playingSubscription: Subscription;
   progressInfo: {};
   currentProgressInSeconds$: Observable<number>;
-
   player$: Observable<Player>;
   playerSubscription: Subscription;
   isPlaying: boolean;

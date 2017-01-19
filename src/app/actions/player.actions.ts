@@ -28,6 +28,7 @@ export class PlayerActions {
       }
     };
   }
+
   // Duplicate code in Track Action for ease of implementation.
   // fix later by tying both together
   static TOGGLE_PLAY_PAUSE = '[Player] Toggle Play/Pause';
@@ -74,19 +75,6 @@ export class PlayerActions {
     };
   }
 
-
-/*
-  static UPDATE_CURRENT_TIME = '[Player] Update current time';
-  // time in seconds
-  updateCurrentTime(currentTime: number): Action {
-    return {
-      type: PlayerActions.UPDATE_CURRENT_TIME,
-      payload: currentTime
-    };
-  }
-  */
-
-
   static START_AUDIO_PLAYING = '[Player] Start <audio> playing';
   startAudioPlaying(timerInfo : {}): Action {
     return {
@@ -108,18 +96,4 @@ export class PlayerActions {
       payload: regions
     };
   }
-  // static PAUSED_AUDIO = '[Player] Pause Audio';
-  // pauseAudio(): Action {
-  //   return {
-  //     type: PlayerActions.PAUSED_AUDIO
-  //   };
-  // }
-
-  // static PLAYING_AUDIO = '[Player] Play Audio';
-  // playAudio(): Action {
-  //   return {
-  //     type: PlayerActions.PLAYING_AUDIO
-  //   };
-  // }
-
 }
