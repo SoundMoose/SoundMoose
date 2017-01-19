@@ -2,7 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { TopTracksComponent } from './components/top-tracks/top-tracks.component';
 import { TrackDetailComponent } from './components/track-detail/track-detail.component';
 import { SearchResultsComponent } from './components/search/search-results/search-results.component';
-import { ThreeDComponent } from './components/threeD/three-d.component';
+import { ThreeDComponent } from './components/three-d/three-d.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
 import { UserComponent } from './components/user/user.component';
 import { GamePlayerComponent } from './components/game/game-player/game-player.component';

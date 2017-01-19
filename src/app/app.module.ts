@@ -76,10 +76,10 @@ import { PlaylistTrackDetailsComponent } from './components/playlist/playlist-tr
 import { PlaylistTrackListComponent } from './components/playlist/playlist-track-list/playlist-track-list.component';
 
 // 3d visualizations
-import { ThreeDComponent } from './components/threeD/three-d.component';
-import { ThreeDFrequencyBarsComponent } from './components/threeD/three-d-frequencyBars.component';
-import { ThreeDParticlesComponent } from './components/threeD/three-d-particles.component';
-import { ThreeDSphereComponent } from './components/threeD/three-d-sphere.component';
+import { ThreeDComponent } from './components/three-d/three-d.component';
+import { ThreeDFrequencyBarsComponent } from './components/three-d/three-d-frequencyBars.component';
+import { ThreeDParticlesComponent } from './components/three-d/three-d-particles.component';
+import { ThreeDSphereComponent } from './components/three-d/three-d-sphere.component';
 
 // Actions
 import { SoundmooseUserActions } from './actions/soundmoose-user.actions';
