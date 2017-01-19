@@ -16,7 +16,6 @@ import { Auth } from './services/auth.service';
  // changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['app.component.css'],
   templateUrl: 'app.component.html',
-  providers: [Auth]
 })
 
 export class AppComponent {
