@@ -1,11 +1,29 @@
-<i (click)="toggleVisualization()"
-*ngIf="showVisualization"
-class="yellow chevron down icon">
-</i>
 
-<i (click)="toggleVisualization()"
-*ngIf="!showVisualization"
-class="green chevron up icon"></i>
+<div (click)="toggleVisualization()" *ngIf="showVisualization"
+ style="
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    position: relative;
+    top: -5px;" class="hvr-wobble-vertical">
+   <i
+    (click)="toggleVisualization()"
+    class="yellow chevron down icon"
+  >
+  </i>
+</div>
+
+<div (click)="toggleVisualization()" *ngIf="!showVisualization"
+ style="
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    position: relative;
+    top: -5px;" class="hvr-wobble-vertical">
+  <i class="yellow chevron up icon "></i>
+</div>
 
 <i (click)="jumpToPrevious()" class="step backward icon"></i>
 
