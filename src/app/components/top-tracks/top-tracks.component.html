@@ -14,7 +14,7 @@
 
   <div id="top-tracks" class="ui six column grid" *ngIf="topTracks$">
     <div [@fadeInOut]="'in'" *ngFor="let topTrack of topTracks$ | async" class="column"  style="min-width: 148.48px;">
-      <top-track-tile [topTrack]="topTrack">
+      <top-track-tile [topTrack]="topTrack" [tracksList]="tracksList">
       </top-track-tile>
     </div>
   </div>

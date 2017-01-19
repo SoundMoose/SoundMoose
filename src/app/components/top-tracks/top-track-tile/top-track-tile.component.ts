@@ -34,7 +34,9 @@ export class TopTrackTileComponent{
     platform: '',
     duration: 0,
     trackId: '0'
-  }
+  };
+
+  @Input()
   tracksList: Track[];
 
   player$: Observable<Player>;
@@ -54,9 +56,7 @@ export class TopTrackTileComponent{
     // Grab the player stream from the store
     this.player$ = this.store$.select(s => s.player);
 
-    // grab the array of tracks from the store
-    this.store$.select('tracks')
-      .subscribe((item: Track[]) => this.tracksList = item);
+
 
     // Grab the spinner stream
     this.spinner$ = this.store$.select(s => s.spinner);
