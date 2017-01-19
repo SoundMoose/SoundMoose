@@ -1,0 +1,33 @@
+  <div class ="ui container" style="min-height: 410px; background: #232526; background: -webkit-linear-gradient(to left, #232526 , #414345);
+background: linear-gradient(to left, #232526 , #414345); margin-top: 35px;">
+    <div class="ui two column very relaxed grid">
+      <div class="column">
+        <div style="margin-left: 20px;">
+          <iframe width="520" height="390" [src]="youtubeId$ | async | youtube" frameborder="0" allowfullscreen></iframe>
+
+
+          <!-- GAME -->
+          <button (click)="gameToggle()">Create Game</button>
+          <game
+            *ngIf="gameToggled && audioSrc"
+            [audioSrc]="audioSrc"
+            [platform]="platform"
+            [trackId]="trackId"
+          ></game>
+          <!-- GAME -->
+
+
+        </div>
+      </div>
+      <div class="column" style="min-width: 500px;">
+        <div *ngIf="description" class="ui segment" style="white-space: pre-wrap; margin-right: 20px;  background: rgba(0,0,0,0.2);">{{ description }}</div>
+
+        <div *ngIf="license" class="ui segment" style="margin-right: 20px; background: rgba(0,0,0,0.2);">
+         <p>License: {{ license }}</p>
+         <p>From: SoundCloud</p>
+        </div>
+        <similar-artists *ngIf="track.artist" [currentArtist]="track.artist"></similar-artists>
+        <similar-tracks *ngIf="track.artist && track.title" [currentArtist]="track.artist" [currentTrack]="track.title"></similar-tracks>
+      </div>
+    </div>
+  </div>

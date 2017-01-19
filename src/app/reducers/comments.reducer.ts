@@ -11,7 +11,8 @@ export default function (state = initialState, action: Action): CommentsState {
   switch (action.type) {
     case TrackDetailsActions.LOAD_COMMENTS_SUCCESS:
       return action.payload;
-
+    case TrackDetailsActions.LEAVE_TRACK_DETAILS_PAGE:
+      return [];
     default:
       return state;
   }
