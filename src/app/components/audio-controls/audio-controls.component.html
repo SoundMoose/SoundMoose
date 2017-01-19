@@ -1,18 +1,17 @@
+<visualizer-2D-frequency
+    *ngIf="toggleVisualizersFreqWave$ | async"
+    (click)="toggleVisualizersFreqWave()"
+>
+</visualizer-2D-frequency>
 
-    <visualizer-2D-frequency
-        *ngIf="toggleVisualizersFreqWave$ | async"
-        (click)="toggleVisualizersFreqWave()"
-    >
-    </visualizer-2D-frequency>
+<visualizer-2D-waveform
+    *ngIf="!(toggleVisualizersFreqWave$ | async)"
+    (click)="toggleVisualizersFreqWave()"
+>
+</visualizer-2D-waveform>
 
-    <visualizer-2D-waveform
-        *ngIf="!(toggleVisualizersFreqWave$ | async)"
-        (click)="toggleVisualizersFreqWave()"
-    >
-    </visualizer-2D-waveform>
-
-  <div [@fadeInOut]="'in'" class="ui container equalizer">
-    <equalizer
-      *ngIf="showEqualizer$ | async"
-    ></equalizer>
-  </div>
+<div [@fadeInOut]="'in'" class="ui container equalizer">
+<equalizer
+  *ngIf="showEqualizer$ | async"
+></equalizer>
+</div>
