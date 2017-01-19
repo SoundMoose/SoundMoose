@@ -42,7 +42,7 @@ export class HeaderComponent {
     this.showUserDropdown = !this.showUserDropdown;
   }
 
-  toggleActionDropdown() {
+  toggleActionsDropdown() {
     this.showUserDropdown = false;
     this.showActionsDropdown = !this.showActionsDropdown;
   }
