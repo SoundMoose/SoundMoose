@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Store } from '@ngrx/store';
+import { Http, Headers, Response, Request } from '@angular/http'
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/distinctUntilChanged';
-import {Http, Headers, Response, Request} from '@angular/http'
 
 import { AppStore } from '../models/appstore.model';
 import { spotifyClientId } from '../config/superSecretKeys';

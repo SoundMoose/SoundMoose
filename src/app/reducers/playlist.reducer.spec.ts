@@ -1,8 +1,7 @@
-import playlistReducer from './playlist.reducer';
-
-import { PlaylistActions } from '../actions/playlist.actions';
-
 'use strict';
+
+import playlistReducer from './playlist.reducer';
+import { PlaylistActions } from '../actions/playlist.actions';
 
 describe('Playlist Reducer', () => {
 

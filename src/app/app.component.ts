@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
-import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
+
+import 'rxjs/add/operator/map';
+
 import { SoundmooseUser } from './models/soundmoose-user.model';
 import { AppStore } from './models/appstore.model';
 import { AudioControlsActions } from './actions/audio-controls.actions';
@@ -19,13 +21,7 @@ import { Auth } from './services/auth.service';
 
 export class AppComponent {
   toggleFrequencyOrWaveform$: Observable<boolean>;
-  openDialogActive: boolean = false;
-  saveDialogActive: boolean = false;
   soundmooseUser$: Observable<SoundmooseUser>;
-  showActionsDropdown: boolean = false;
-  showUserDropdown: boolean = false;
-  actionsHovering: boolean = false;
-  userHovering: boolean = false;
 
   constructor( private store$: Store<AppStore>, private AudioControlsActions: AudioControlsActions, private auth: Auth) {
     this.soundmooseUser$ = this.store$.select(s => s.soundmooseUser);

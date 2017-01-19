@@ -1,8 +1,7 @@
-import trackDetailsReducer from './track-details.reducer';
-
-import { TrackDetailsActions } from '../actions/track-details.actions';
-
 'use strict';
+
+import trackDetailsReducer from './track-details.reducer';
+import { TrackDetailsActions } from '../actions/track-details.actions';
 
 describe('Track-Details Reducer', () => {
 

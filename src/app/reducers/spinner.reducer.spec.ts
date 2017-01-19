@@ -1,9 +1,8 @@
-import spinnerReducer from './spinner.reducer';
+'use strict';
 
+import spinnerReducer from './spinner.reducer';
 import { TrackActions } from '../actions/track.actions';
 import { PlayerActions } from '../actions/player.actions';
-
-'use strict';
 
 describe('Spinner Reducer', () => {
 

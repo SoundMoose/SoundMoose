@@ -1,11 +1,7 @@
-
-
 <div (mouseenter)="wrapperHovered = true" (mouseleave)="wrapperHovered = false" class="track-info-wrapper">
-
   <div (mouseenter)="wrapperHovered = true" [hidden]="!wrapperHovered" class="ui basic bottom pointing label song-queue-wrapper">
     Up Next:
       <div *ngFor="let song of songQueue; let i=index" >
-
         <div
             *ngIf="i > currentId && i < currentId + 4"
             (click)="clickHandler(song, songQueue)">
@@ -21,7 +17,6 @@
           </div>
         </div>
       </div>
-
   </div>
 
   <img *ngIf="(currentTrack$ | async)?.id !== 0" class="album-art" src="{{ (currentTrack$ | async)?.imgUrl }}" />
@@ -47,5 +42,4 @@
       </i>
     </a>
   </div>
-
 </div>

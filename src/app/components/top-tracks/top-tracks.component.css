@@ -60,3 +60,10 @@ i.pause {
   opacity: 0.95;
 }
 
+.top-track-tile {
+  min-width: 148.48px;
+}
+
+#genre-select {
+  background: #1a1a1a;
+}
