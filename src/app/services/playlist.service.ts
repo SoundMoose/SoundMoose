@@ -19,11 +19,12 @@ type BackendTrack = {
   img_url: string,
   stream_url: string,
   duration: number,
-  platform: string
+  platform: string,
+  order: number
 };
 
 type BackendPlaylist = {
-  id: string,
+  id: number,
   playlist_name: string,
   user_id: string,
   tracks: BackendTrack[]
