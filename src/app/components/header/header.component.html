@@ -1,0 +1,60 @@
+  <div class="ui borderless main menu container">
+    <div id="page-header" class="ui container">
+      <a routerLink="/home"><img class="logo" src="assets/img/logo.png"></a>
+      <search></search>
+      <div class="right-icons" [ngStyle]="{'margin':'8px'}">
+
+        <button style="color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; padding: 8px; top: -2px; position: relative;" class="ui primary button mini" (click)="authService.login()" *ngIf="!authService.authenticated()">Log In</button>
+
+          <div
+            style="display: inline-block; cursor: pointer;"
+            *ngIf="authService.authenticated()"
+            (click)="showUserDropdown = !showUserDropdown"
+            (mouseenter)="userHovering = true"
+            (mouseleave)="userHovering = false"
+          >
+            <img [src]="authService.userProfile.picture" alt="User avatar" style="width: 20px; height: 20px; border-radius: 50%; position: relative; left: -5px; top: 5px;"/><span style="margin-right: 5px; font-family: Interstate; font-size: 14px;" *ngIf="authService.userProfile">{{authService.userProfile['given_name']}}</span>
+            <i [ngClass]="{
+             grey: !userHovering,
+             white: userHovering,
+             chevron: true,
+             down: true,
+             icon: true
+            }"></i>
+
+            <div *ngIf="showUserDropdown" class="user-dropdown" style="position: absolute; width: 250px; height: 100px; color: #fff; background-color: #000; opacity: 0.9; cursor: pointer;">
+              <ul>
+                <li><a routerLink="/user">Favorites/playlists</a></li>
+                <li><a routerLink="/threeD">Log out</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            style="display: inline-block; cursor: pointer;"
+            *ngIf="authService.authenticated()"
+            (click)="showUserDropdown = !showUserDropdown"
+            (mouseenter)="actionsHovering = true"
+            (mouseleave)="actionsHovering = false"
+          >
+           <i
+            [ngClass]="{
+             grey: !actionsHovering,
+             white: actionsHovering,
+             ellipsis: true,
+             horizontal: true,
+             big: true,
+             icon: true
+            }"
+          ></i>
+
+          <div *ngIf="showActionsDropdown" class="actions-dropdown" style="position: absolute; width: 250px; height: 100px; color: #fff; background-color: #000; opacity: 0.9;">
+            <ul>
+              <li><a target="_blank" href="https://github.com/hrr20-over9000/SoundMoose">About</a></li>
+              <li><a routerLink="/threeD">3D experiments</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
