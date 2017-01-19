@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/skip';
 
 import { AppStore } from '../models/appstore.model';
 import { FavoritesState } from '../reducers/favorites.reducer';
 import { FavoriteActions } from '../actions/favorite.actions';
-import { Store } from '@ngrx/store';
-
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
 import { Playlist } from '../models/playlist.model';
-
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/skip';
 
 @Injectable()
 export class FavoriteService {
@@ -47,7 +45,6 @@ export class FavoriteService {
     return favorites;
   }
 
-
   updateFavoritesList(favoriteList: FavoritesState) {
     this.http.put(`http://www.soundmoose.com:8000/api/favorites/${this.userId}/`, this.buildData(favoriteList));
   }
@@ -66,5 +63,4 @@ export class FavoriteService {
         this.favoriteActions.loadFavoritesList(res);
       });
   }
-
 }

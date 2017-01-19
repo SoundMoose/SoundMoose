@@ -3,9 +3,9 @@ import {
    state,
    style,
    transition,
-   animate
+   animate,
+   Component
 } from '@angular/core';
-import { Component } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
@@ -55,5 +55,4 @@ export class AudioControlsComponent {
   toggleVisualizersFreqWave() {
     this.store$.dispatch(this.audioControlActions.toggleVisualizersFreqWave());
   }
-
 }

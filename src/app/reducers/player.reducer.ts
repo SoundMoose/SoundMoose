@@ -8,9 +8,6 @@ export type PlayerState = Player;
 
 const initialState: PlayerState = {
   isPlaying: false,
-  // currentTime: 0,
-  // millisecondProgressWhenStartedPlaying: 0,
-  // timestampWhenStartedPlaying: Date.now(),
   currentTrack: {
     id: 0,
     title: '',
@@ -147,14 +144,6 @@ export default function (state = initialState, action: Action): PlayerState {
         isPlaying: true
       });
     }
-
-/*
-    case PlayerActions.UPDATE_CURRENT_TIME: {
-      return Object.assign({}, state, {
-        currentTime: action.payload
-      });
-    }
-    */
 
     case PlayerActions.TOGGLE_REPEAT: {
       return Object.assign({}, state, {

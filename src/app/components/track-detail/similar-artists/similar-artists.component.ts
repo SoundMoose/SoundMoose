@@ -8,7 +8,6 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { LastfmService } from './../../../services/lastfm.service';
 
-
 @Component({
   selector: 'similar-artists',
   templateUrl: 'similar-artists.component.html',
@@ -24,7 +23,6 @@ export class SimilarArtistsComponent {
     private lastfmService: LastfmService,
   ) {
   }
-
 
   ngOnInit() {
     this.similarArtists$ = this.lastfmService.getSimilarArtists(this.currentArtist);

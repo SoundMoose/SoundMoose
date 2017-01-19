@@ -13,5 +13,4 @@ export class SoundmooseUserActions {
       payload: data
     };
   }
-
 }

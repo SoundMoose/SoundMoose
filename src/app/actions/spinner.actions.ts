@@ -17,5 +17,4 @@ export class SpinnerActions {
       type: SpinnerActions.SPINNER_OFF
     };
   }
-
 }

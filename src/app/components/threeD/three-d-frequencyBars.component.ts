@@ -1,17 +1,13 @@
-
 import { Component } from '@angular/core';
 import { state } from '@angular/core';
-
 import { Observable } from 'rxjs/Observable';
-
 import { Store } from '@ngrx/store';
+import * as THREE from 'three';
+import * as ThreeOrbitControls from 'three-orbit-controls';
 
 import { AppStore } from '../../models/appstore.model';
 import { AudioStream } from '../../audio-element';
 import { AudioControlsActions } from '../../actions/audio-controls.actions';
-
-import * as THREE from 'three';
-import * as ThreeOrbitControls from 'three-orbit-controls';
 
 @Component({
   selector: 'three-d-frequencyBars',
@@ -39,7 +35,6 @@ export class ThreeDFrequencyBarsComponent {
   }
 
   ngOnInit(){
-
     // scene/environmental variables
     var scene,
         ambientLight,
@@ -308,5 +303,4 @@ export class ThreeDFrequencyBarsComponent {
       requestAnimationFrame(render);
     }
   }
-
 }

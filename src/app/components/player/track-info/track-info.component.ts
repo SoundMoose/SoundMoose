@@ -13,7 +13,6 @@ import { Subscription} from 'rxjs/Subscription';
 import { TrackActions } from '../../../actions/track.actions';
 import { FavoriteActions } from '../../../actions/favorite.actions';
 
-
 @Component({
   //changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'track-info',

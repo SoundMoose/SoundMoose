@@ -104,10 +104,10 @@ export class TopTracksComponent implements OnInit {
       this.setCurrentGenre(genre);
     }
   }
+
   setCurrentGenre(genre = 'all-music') {
     this.currentGenre = genre;
     this.soundCloudService.loadTopTracks(this.currentGenre);
     this.topTracks$ = this.store$.select(s => s.tracks);
   }
-
 }

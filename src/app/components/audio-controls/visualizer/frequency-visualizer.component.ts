@@ -1,12 +1,10 @@
-
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
 import { AppState } from '../app.service';
 import { AppStore } from '../../../models/appstore.model';
 import { AudioStream } from '../../../audio-element';
-
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'visualizer-2D-frequency',
@@ -69,13 +67,11 @@ export class FrequencyVisualizerComponent {
       context.frequencyCanvasCtx.fillStyle = gradient;
       context.frequencyCanvasCtx.fillRect(0, 0, context.WIDTH, context.HEIGHT);
 
-      // context.frequencyCanvasCtx.fillStyle = 'rgb(46, 46, 46)';
-      // context.frequencyCanvasCtx.fillRect(0, 0, context.WIDTH, context.HEIGHT);
       context.barWidth = (context.WIDTH / context.frequencyBufferLength) * 2.5;
       context.barHeight;
       context.x = 0;
 
-      for(var i = 0; i < context.frequencyBufferLength; i++) {
+      for (let i = 0; i < context.frequencyBufferLength; i++) {
         context.barHeight = context.frequencyDataArray[i];
         context.frequencyCanvasCtx.fillStyle = 'rgb('+ (context.barHeight+0) + ','+ (context.barHeight+0) + ','+ (context.barHeight+0) + ')';
         context.frequencyCanvasCtx.fillRect(context.x, context.HEIGHT-context.barHeight/2, context.barWidth, context.barHeight/2);

@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
-
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'track-progress',
@@ -23,5 +22,4 @@ export class TrackProgressComponent {
   handleSliderStart($event) {
     this.sliderStarted.emit($event);
   }
-
 }

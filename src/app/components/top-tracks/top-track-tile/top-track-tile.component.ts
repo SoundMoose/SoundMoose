@@ -1,20 +1,20 @@
 import { Component, Input } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
 import { Store } from '@ngrx/store';
+import { Action } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import { Router } from '@angular/router';
+
 import { AppStore } from './../../../models/appstore.model';
 import { Track } from '../../../models/track.model';
 import { Player } from '../../../models/player.model';
 import { TrackActions } from '../../../actions/track.actions';
-import { Action } from '@ngrx/store';
 import { PlayerService } from '../../../services/player.service';
 import { FavoriteActions } from '../../../actions/favorite.actions';
 import { PlaylistActions } from '../../../actions/playlist.actions';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
-import { Router } from '@angular/router';
 import { SpinnerState } from '../../../reducers/spinner.reducer';
 import { TracksState } from './../../../reducers/tracks.reducer';
-
 
 @Component({
   //changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,8 +22,8 @@ import { TracksState } from './../../../reducers/tracks.reducer';
   styleUrls: ['../top-tracks.component.css', './top-track-tile.component.css'],
   templateUrl: './top-track-tile.component.html'
 })
-
 export class TopTrackTileComponent{
+
   @Input()
   topTrack: Track = {
     id: null,
@@ -85,7 +85,6 @@ export class TopTrackTileComponent{
         this.isFavorited = favorited;
       });
   }
-
 
   ngOnDestroy() {
     this.isPlayingSubscription.unsubscribe();

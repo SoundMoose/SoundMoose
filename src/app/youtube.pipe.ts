@@ -11,5 +11,4 @@ export class YoutubePipe implements PipeTransform {
   transform (videoId: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}`);
   }
-
 }

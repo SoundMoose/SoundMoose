@@ -4,13 +4,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/map';
-
-import { SearchActions } from '../../../actions/search.actions';
-import { AppStore } from '../../../models/appstore.model';
-import { SoundCloudService } from '../../../services/soundcloud.service';
-import { SpotifyService } from '../../../services/spotify.service';
-import { TrackActions } from '../../../actions/track.actions';
-import { Track } from '../../../models/track.model';
 import {
   trigger,
   state,
@@ -18,6 +11,13 @@ import {
   transition,
   animate
 } from '@angular/core';
+
+import { SearchActions } from '../../../actions/search.actions';
+import { AppStore } from '../../../models/appstore.model';
+import { SoundCloudService } from '../../../services/soundcloud.service';
+import { SpotifyService } from '../../../services/spotify.service';
+import { TrackActions } from '../../../actions/track.actions';
+import { Track } from '../../../models/track.model';
 import { SearchState } from './../../../reducers/search.reducer';
 
 @Component({
@@ -41,7 +41,6 @@ import { SearchState } from './../../../reducers/search.reducer';
     ])
   ]
 })
-
 export class SearchResultsComponent {
 
   results$ : Observable<Track[]>;

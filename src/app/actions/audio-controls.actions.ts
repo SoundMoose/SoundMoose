@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
-import { AudioControls } from '../models/audio-controls.model';
 
+import { AudioControls } from '../models/audio-controls.model';
 
 @Injectable()
 export class AudioControlsActions {
@@ -50,5 +50,4 @@ export class AudioControlsActions {
       }
     };
   }
-
 }
