@@ -310,3 +310,8 @@ search i.search.icon {
   position: absolute;
   top: 1px;
 }
+
+.ui.selection.dropdown.active,
+.ui.selection.dropdown.visible {
+  z-index: 2001 !important;
+}
