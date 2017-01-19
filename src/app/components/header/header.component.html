@@ -9,7 +9,7 @@
 
         <div
           style="display: inline-block; cursor: pointer;"
-          *ngIf="auth.authenticated()"
+          *ngIf="auth.authenticated() && auth.userProfile"
           (click)="toggleUserDropdown()"
           (mouseenter)="userHovering = true"
           (mouseleave)="userHovering = false"
