@@ -36,6 +36,7 @@ export class EqualizerComponent implements OnDestroy {
   midGain10: any;
   lowGain: any;
   subscription: Subscription;
+
   constructor (private store$: Store<AppStore>, private audioSrc: AudioStream, private AudioControlsActions: AudioControlsActions) {
 
     this.bandRange = [
@@ -69,10 +70,6 @@ export class EqualizerComponent implements OnDestroy {
 
   }
 
-  ngOnInit() {
-
-  }
-
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
@@ -91,7 +88,6 @@ export class EqualizerComponent implements OnDestroy {
     this["midGain" + frequencyBandId] = $event.value;
     this.store$.dispatch(this.AudioControlsActions.adjustMids($event.value, frequencyBandId));
   }
-
 
   trebleSlideHandler($event) {
     this.highGain = $event.value;

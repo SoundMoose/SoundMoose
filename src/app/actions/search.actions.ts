@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-
 import { Action } from '@ngrx/store';
-import { Track } from '../models/track.model';
 
+import { Track } from '../models/track.model';
 
 @Injectable()
 export class SearchActions {
@@ -30,5 +29,4 @@ export class SearchActions {
       payload: platform
     };
   }
-
 }

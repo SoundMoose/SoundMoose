@@ -14,6 +14,9 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
+declare var $: any;
+declare var Waveform: any;
+
 import { AppStore } from './../../models/appstore.model';
 import { Track } from './../../models/track.model';
 import { TrackActions } from './../../actions/track.actions';
@@ -26,12 +29,6 @@ import { SpotifyService } from './../../services/spotify.service';
 import { PlayerService } from './../../services/player.service';
 import { YoutubeService } from './../../services/youtube.service';
 import { LastfmService } from './../../services/lastfm.service';
-
-declare var $: any;
-
-declare var Waveform: any;
-
-
 
 @Component({
   selector: 'track-detail',
@@ -58,26 +55,7 @@ declare var Waveform: any;
 export class TrackDetailComponent implements OnInit {
   tracksList: Track[];
   gameToggled: boolean = false;
-
-  constructor(
-    private store$: Store<AppStore>,
-    private soundCloudService: SoundCloudService,
-    private playerService: PlayerService,
-    private youtubeService: YoutubeService,
-    private spotifyService: SpotifyService,
-    private lastfmService: LastfmService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private sanitizer: DomSanitizer,
-    private trackActions: TrackActions
-  ) {
-
-    // grab the array of tracks from the store to be passed in when clicking play
-    this.store$.select('tracks')
-      .subscribe((item: Track[]) => this.tracksList = item);
-
-  }
-  currentlyPlaying: boolean;
+currentlyPlaying: boolean;
   trackDetails$: Observable<TrackDetailsState>;
   comments$: Observable<any>;
   license: string;
@@ -109,6 +87,25 @@ export class TrackDetailComponent implements OnInit {
     'cc-by-nc-nd': 'CC BY NC ND',
     'cc-by-nc-sa': 'CC BY NC SA'
   };
+
+  constructor(
+    private store$: Store<AppStore>,
+    private soundCloudService: SoundCloudService,
+    private playerService: PlayerService,
+    private youtubeService: YoutubeService,
+    private spotifyService: SpotifyService,
+    private lastfmService: LastfmService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer,
+    private trackActions: TrackActions
+  ) {
+    // grab the array of tracks from the store to be passed in when clicking play
+    this.store$.select('tracks')
+      .subscribe((item: Track[]) => this.tracksList = item);
+
+  }
+
 
   ngOnInit() {
     let trackId = this.route.snapshot.params['trackId'];

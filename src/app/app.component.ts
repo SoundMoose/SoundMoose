@@ -28,16 +28,12 @@ export class AppComponent {
   userHovering: boolean = false;
 
   constructor( private store$: Store<AppStore>, private AudioControlsActions: AudioControlsActions, private auth: Auth) {
-
     this.soundmooseUser$ = this.store$.select(s => s.soundmooseUser);
-
     this.toggleFrequencyOrWaveform$ = this.store$.select('audiocontrols')
       .map((audiocontrols: AudioControls) => audiocontrols.toggleFrequencyOrWaveform)
-
   }
 
   toggleAudioControls() {
     this.store$.dispatch(this.AudioControlsActions.toggleVisualizersFreqWave());
   }
-
 }

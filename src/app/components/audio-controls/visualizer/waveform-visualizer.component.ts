@@ -73,8 +73,6 @@ export class WaveformVisualizerComponent implements OnInit, OnDestroy {
       context.waveformCanvasCtx.fillStyle = gradient;
       context.waveformCanvasCtx.fillRect(0, 0, context.waveformWIDTH, context.waveformHEIGHT);
 
-      // context.waveformCanvasCtx.fillStyle = 'rgb(0, 0, 0)';
-      // context.waveformCanvasCtx.fillRect(0, 0, context.waveformWIDTH, context.waveformHEIGHT);
       context.waveformCanvasCtx.lineWidth = 2;
       context.waveformCanvasCtx.strokeStyle = 'rgb(173, 187, 194)';;
       context.waveformCanvasCtx.beginPath();
@@ -82,7 +80,7 @@ export class WaveformVisualizerComponent implements OnInit, OnDestroy {
       context.sliceWidth = context.waveformWIDTH * 1.0 / context.waveformBufferLength;
       context.waveformX = 0;
 
-      for (var j = 0; j < context.waveformBufferLength; j++) {
+      for (let j = 0; j < context.waveformBufferLength; j++) {
 
         context.waveformV = context.waveformDataArray[j] / 128.0;
         context.waveformY = context.waveformV * context.waveformHEIGHT/2;

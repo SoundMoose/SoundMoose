@@ -1,19 +1,16 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-
+import { DOCUMENT } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { AppStore } from './../../models/appstore.model';
 
-import { DOCUMENT } from '@angular/platform-browser';
-
 @Component({
   selector: 'game',
   styleUrls: ['./game.component.css'],
   templateUrl: './game.component.html'
 })
-
 export class GameComponent implements OnInit {
 
   start: number = 0;
@@ -26,8 +23,7 @@ export class GameComponent implements OnInit {
   @Input() platform: string;
   @Input() trackId: string;
 
-
-  constructor(@Inject(DOCUMENT) private document: any, private store: Store<AppStore>) {
+  constructor(@Inject(DOCUMENT) private document: Document, private store: Store<AppStore>) {
     this.store.select(s => s.soundmooseUser)
       .first()
       .subscribe(userInfo => this.userId = userInfo.userId);
@@ -44,5 +40,4 @@ export class GameComponent implements OnInit {
     this.relativeGameUrl = `/game/${this.platform}/${this.trackId}/${this.start}/${this.end}/${this.userId}`;
     this.absoluteGameUrl = this.document.location.origin + this.relativeGameUrl;
   }
-
 }

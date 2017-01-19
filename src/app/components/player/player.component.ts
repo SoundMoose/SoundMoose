@@ -18,7 +18,6 @@ import { AudioControlsActions } from '../../actions/audio-controls.actions';
 import { Player } from '../../models/player.model';
 import { PlayerService } from './../../services/player.service';
 
-
 @Component({
 //  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'player',
@@ -82,5 +81,4 @@ export class PlayerComponent implements OnDestroy {
       this.store$.dispatch(this.audioControlActions.toggleVisualizersFreqWave());
     }
   }
-
 }

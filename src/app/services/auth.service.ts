@@ -1,10 +1,10 @@
-
 import { Injectable }      from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
 import { auth0Key, auth0Domain } from '../config/superSecretKeys';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/take';
 import { Store } from '@ngrx/store';
+
 import { AppStore } from '../models/appstore.model';
 import { SoundmooseUserActions } from '../actions/soundmoose-user.actions';
 
@@ -13,12 +13,13 @@ let Auth0 = require('auth0-js').WebAuth;
 
 @Injectable()
 export class Auth {
+
   // Configure Auth0
   lock = new Auth0Lock(auth0Key, auth0Domain, {});
   auth0 = new Auth0({clientID: auth0Key, domain: auth0Domain});
 
   // Store profile object in auth class
-  userProfile: any;
+  userProfile: {};
 
   constructor(private router: Router, private store: Store<AppStore>, private soundmooseUserActions: SoundmooseUserActions) {
     // Set userProfile attribute if already saved profile
@@ -74,7 +75,6 @@ export class Auth {
       }
     });
   }
-
 
   public login() {
     // Call the show method to display the widget.

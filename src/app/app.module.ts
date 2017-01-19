@@ -46,7 +46,6 @@ import { ROUTES } from './app.routes';
 
 // App is our top level component
 import { AppComponent } from './app.component';
-
 import { TopTracksComponent } from './components/top-tracks/top-tracks.component';
 import { SimilarArtistsComponent } from './components/track-detail/similar-artists/similar-artists.component';
 import { SimilarTracksComponent } from './components/track-detail/similar-tracks/similar-tracks.component';
@@ -65,7 +64,7 @@ import { UserComponent } from './components/user/user.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { GameComponent } from './components/game/game.component';
 import { GamePlayerComponent } from './components/game/game-player/game-player.component';
-
+import { SongQueueComponent } from './components/song-queue/song-queue.component';
 
 // 2d visualizations and audio controls deck
 import { AudioControlsComponent } from './components/audio-controls/audio-controls.component';
@@ -76,15 +75,13 @@ import { PlaylistComponent } from './components/playlist/playlist.component';
 import { PlaylistTrackDetailsComponent } from './components/playlist/playlist-track-details/playlist-track-details.component';
 import { PlaylistTrackListComponent } from './components/playlist/playlist-track-list/playlist-track-list.component';
 
-
 // 3d visualizations
 import { ThreeDComponent } from './components/threeD/three-d.component';
 import { ThreeDFrequencyBarsComponent } from './components/threeD/three-d-frequencyBars.component';
 import { ThreeDParticlesComponent } from './components/threeD/three-d-particles.component';
 import { ThreeDSphereComponent } from './components/threeD/three-d-sphere.component';
 
-import { SongQueueComponent } from './components/song-queue/song-queue.component';
-
+// Actions
 import { SoundmooseUserActions } from './actions/soundmoose-user.actions';
 import { SearchActions } from './actions/search.actions';
 import { TrackActions } from './actions/track.actions';

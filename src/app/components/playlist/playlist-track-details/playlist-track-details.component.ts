@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { AppStore } from '../../../models/appstore.model';
 import { PlaylistActions } from '../../../actions/playlist.actions';
 import { TrackActions } from '../../../actions/track.actions';
-import { Store } from '@ngrx/store';
 import { Track } from '../../../models/track.model';
 import { Playlist } from '../../../models/playlist.model';
 
@@ -12,7 +12,6 @@ import { Playlist } from '../../../models/playlist.model';
   styleUrls: [ './playlist-track-details.component.css' ],
   templateUrl: './playlist-track-details.component.html',
 })
-
 export class PlaylistTrackDetailsComponent {
 
   // Track info that is being passed in from the parent component.
@@ -41,5 +40,4 @@ export class PlaylistTrackDetailsComponent {
   clickHandler() {
     this.store.dispatch(this.trackActions.togglePlayPause(this.track, this.playlist));
   }
-
 }

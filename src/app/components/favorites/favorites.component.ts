@@ -15,6 +15,5 @@ export class FavoritesComponent {
   constructor(private favoritesService: FavoriteService, private store: Store<AppStore>) {
     this.favorites$ = this.store.select(s => s.favorites);
   }
-
 }
 
