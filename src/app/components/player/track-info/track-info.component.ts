@@ -1,3 +1,10 @@
+import {
+   trigger,
+   state,
+   style,
+   transition,
+   animate
+} from '@angular/core';
 import { Component } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
 import { Observable } from 'rxjs/Observable';
@@ -17,14 +24,32 @@ import { FavoriteActions } from '../../../actions/favorite.actions';
   //changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'track-info',
   styleUrls: [ './track-info.component.css' ],
-  templateUrl: './track-info.component.html'
+  templateUrl: './track-info.component.html',
+  animations: [
+    trigger('fadeInOut', [
+      state('in', style({transform: 'translateY(0)', opacity: 0.98})),
+      transition('void => *', [
+        style({
+          transform: 'translateY(100%)',
+          opacity: 0
+        }),
+        animate('0.2s ease-in')
+      ]),
+      transition('* => void', [
+        animate('0.2s 10 ease-out', style({
+          opacity: 0,
+        }))
+      ])
+    ])
+  ]
 })
 export class TrackInfoComponent {
   player$: Observable<PlayerState>;
   currentTrack$: Observable<Track>;
   currentTrack: Track;
   playerSubscription: Subscription;
-  wrapperHovered : boolean = false;
+  playingTrackHovered : boolean = false;
+  songQueueHovered : boolean = false;
   songQueue: Track[];
   currentId: number;
   isFavorited: boolean = null;
@@ -54,10 +79,6 @@ export class TrackInfoComponent {
         });
         this.isFavorited = favorited;
       });
-  }
-
-  private handleMouseOut() {
-    window.setTimeout(() => { this.wrapperHovered = false; }, 1000);
   }
 
   private trim(string) {
@@ -95,5 +116,9 @@ export class TrackInfoComponent {
   ngOnDestroy() {
     this.favoritesSubscription.unsubscribe();
     this.playerSubscription.unsubscribe();
+  }
+
+  playingTrackLeave() {
+    window.setTimeout(() => this.playingTrackHovered = false, 500);
   }
 }

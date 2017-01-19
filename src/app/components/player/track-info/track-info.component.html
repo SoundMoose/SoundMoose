@@ -1,5 +1,11 @@
-<div (mouseenter)="wrapperHovered = true" (mouseleave)="wrapperHovered = false" class="track-info-wrapper">
-  <div (mouseenter)="wrapperHovered = true" [hidden]="!wrapperHovered" class="ui basic bottom pointing label song-queue-wrapper">
+<div class="track-info-wrapper">
+  <div
+    [@fadeInOut]="'in'"
+    (mouseenter)="songQueueHovered = true"
+    (mouseleave)="songQueueHovered = false"
+    *ngIf="songQueue.length && (playingTrackHovered  || songQueueHovered)"
+    class="ui basic bottom pointing label song-queue-wrapper"
+  >
     <div class="up-next">Up Next</div>
     <div *ngFor="let song of songQueue; let i=index" >
       <div
@@ -21,7 +27,7 @@
 
 <img *ngIf="(currentTrack$ | async)?.id !== 0" class="album-art" src="{{ (currentTrack$ | async)?.imgUrl }}" />
 <div *ngIf="(currentTrack$ | async)?.id !== 0" class="current-track" >
-  <div class="playing">Playing track</div>
+  <span (mouseenter)="playingTrackHovered = true" (mouseleave)="playingTrackLeave()" class="playing">Playing track</span>
   <div class="track-info"><a routerLink="/track/{{(currentTrack$ | async)?.platform}}/{{(currentTrack$ | async)?.id}}">{{ trim((currentTrack$ | async)?.artist + " - " + (currentTrack$ | async)?.title) }}</a></div>
 </div>
 <div style="position: relative;
