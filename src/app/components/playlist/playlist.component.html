@@ -1,1 +1,2 @@
-<playlist-track-list [playlist]="playlist$ | async"></playlist-track-list>
+  <h2 *ngIf="(playlist$ | async).length">My playlist</h2>
+  <playlist-track-list [playlist]="playlist$ | async"></playlist-track-list>

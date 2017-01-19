@@ -23,18 +23,18 @@
            icon: true
           }"></i>
 
-          <div *ngIf="showUserDropdown" class="user-dropdown" style="position: absolute; left:-80px; top:38px; width: 170px; height: 80px; color: #ffffff; background-color: #000; opacity: 0.9; border-radius:5px;">
+          <div *ngIf="showUserDropdown" class="user-dropdown" style="position: absolute; left:-50px; top:38px; padding: 15px; color: #ffffff; background-color: #000; opacity: 0.9; border-radius:5px;">
 
             <div class="ui middle aligned list">
-              <div class="item">
-                <div class="content" style="padding-left:10px; padding-top:10px;">
+              <div class="item" style="padding-bottom: 15px;">
+                <div class="content">
                   <div class="header">
                     <a routerLink="/user" style="color: #ffffff;">Favorites/playlists</a>
                   </div>
                 </div>
               </div>
               <div class="item">
-                <div class="content" style="padding-left:10px; padding-top:10px;">
+                <div class="content">
                   <div class="header">
                     <a (click)="auth.logout()" style="color: #ffffff;">Log out</a>
                   </div>
@@ -61,13 +61,13 @@
           }"
         ></i>
 
-        <div *ngIf="showActionsDropdown" class="actions-dropdown" style="position: absolute; left:-50px; top:38px; width: 170px; height: 80px; color: #ffffff; background-color: #000; opacity: 0.9; border-radius:5px;">
+        <div *ngIf="showActionsDropdown" class="actions-dropdown" style="position: absolute; left:-35px; top:38px; padding: 15px; color: #ffffff; background-color: #000; opacity: 0.9; border-radius:5px; width: 167px;">
 
           <div class="ui middle aligned list">
             <div class="item">
-              <i class="large sound icon" style="padding-left:10px; padding-top:10px;"></i>
+              <i class="large sound icon"></i>
               <div class="content">
-                <div class="header" style="padding-top:10px">
+                <div class="header">
                   <a
                     routerLink="/threeD"
                     style="color: #ffffff;">
@@ -77,7 +77,7 @@
               </div>
             </div>
             <div class="item">
-              <i class="large github icon" style="padding-left:10px; padding-top:10px;"></i>
+              <i class="large github icon" style="padding-top:10px;"></i>
               <div class="content">
                 <div class="header" style="padding-top:10px">
                   <a
