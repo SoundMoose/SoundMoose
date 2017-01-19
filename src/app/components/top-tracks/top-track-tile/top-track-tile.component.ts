@@ -1,4 +1,12 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+  trigger,
+  state,
+  style,
+  transition,
+  animate
+} from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
 import { Store } from '@ngrx/store';
 import { Action } from '@ngrx/store';
@@ -6,6 +14,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
 
+import { Auth } from '../../../services/auth.service';
 import { AppStore } from './../../../models/appstore.model';
 import { Track } from '../../../models/track.model';
 import { Player } from '../../../models/player.model';
@@ -20,7 +29,23 @@ import { TracksState } from './../../../reducers/tracks.reducer';
   //changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'top-track-tile',
   styleUrls: ['../top-tracks.component.css', './top-track-tile.component.css'],
-  templateUrl: './top-track-tile.component.html'
+  templateUrl: './top-track-tile.component.html',
+  animations: [
+    trigger('fadeInOut', [
+      state('in', style({opacity: 1})),
+      transition('void => *', [
+        style({
+          opacity: 0,
+        }),
+        animate('0.2s ease-in')
+      ]),
+      transition('* => void', [
+        animate('0.2s 10 ease-out', style({
+          opacity: 0,
+        }))
+      ])
+    ])
+  ]
 })
 export class TopTrackTileComponent{
 
@@ -52,11 +77,14 @@ export class TopTrackTileComponent{
   favorites$;
   favoritesSubscription: Subscription;
 
-  constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router, private favoriteActions: FavoriteActions, private playlistActions: PlaylistActions) {
+  showAddedToPlaylist: boolean = false;
+  showFavoritedMessage: boolean = false;
+  showUnfavoritedMessage: boolean = false;
+  showLoginMessage: boolean = false;
+
+  constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router, private favoriteActions: FavoriteActions, private playlistActions: PlaylistActions, private auth: Auth) {
     // Grab the player stream from the store
     this.player$ = this.store$.select(s => s.player);
-
-
 
     // Grab the spinner stream
     this.spinner$ = this.store$.select(s => s.spinner);
@@ -111,15 +139,29 @@ export class TopTrackTileComponent{
   }
 
   toggleFavorite() {
+    if (!this.auth.authenticated()) {
+      this.showLoginMessage = true;
+      setTimeout(() => { this.showLoginMessage = false; }, 1000);
+    }
     this.isFavorited = !this.isFavorited;
     if (this.isFavorited) {
       this.store$.dispatch(this.favoriteActions.addFavorite(this.topTrack));
+      this.showFavoritedMessage = true;
+      setTimeout(() => { this.showFavoritedMessage = false; }, 1000);
     } else {
       this.store$.dispatch(this.favoriteActions.removeFavorite(this.topTrack));
+      this.showUnfavoritedMessage = true;
+      setTimeout(() => { this.showUnfavoritedMessage = false; }, 1000);
     }
   }
 
   addToPlaylist() {
+    if (!this.auth.authenticated()) {
+      this.showLoginMessage = true;
+      setTimeout(() => { this.showLoginMessage = false; }, 1000);
+    }
+    this.showAddedToPlaylist = true;
+    setTimeout(() => { this.showAddedToPlaylist = false; }, 1000);
     this.store$.dispatch(this.playlistActions.addTrack(this.topTrack));
   }
 }

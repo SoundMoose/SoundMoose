@@ -68,6 +68,11 @@ player-controls .icon:hover {
   color: #fff;
   cursor: pointer;
 }
+
+.bottom-icons .clickable.icon:hover {
+  text-shadow: 0 0 1px rgb(251, 189, 8), 0 0 1px rgb(251, 189, 8);
+}
+
 .footer .play.icon {
   transform: scale(1.8);
 }
