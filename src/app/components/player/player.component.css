@@ -24,3 +24,6 @@
   width: 50px;
   text-align: right;
 }
+.footer {
+  z-index: 9001;
+}

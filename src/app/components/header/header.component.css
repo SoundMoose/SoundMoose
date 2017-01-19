@@ -1,3 +1,6 @@
 #page-header {
   justify-content: space-between;
 }
+.page-header-container {
+  z-index: 9001;
+}
