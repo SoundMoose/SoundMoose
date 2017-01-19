@@ -30,10 +30,16 @@ export class ThreeDSphereComponent {
 
   private audio: any;
   private controls: any;
+  private reRender: boolean;
 
   constructor( private audioSrc: AudioStream, private store$: Store<AppStore> ) {
     this.audioCtx = audioSrc.audioCtx;
     this.audioSrcNode = audioSrc.audioSrcNode;
+    this.reRender = true;
+  }
+
+  ngOnDestroy() {
+    this.reRender = false;
   }
 
   ngOnInit(){
@@ -146,7 +152,6 @@ export class ThreeDSphereComponent {
     requestAnimationFrame(render);
 
     function render() {
-
       //////////////////////// Generate New Data ////////////////////
       context.audioSrc.frequencyAnalyser.getByteFrequencyData(frequencyData);
 
@@ -186,44 +191,45 @@ export class ThreeDSphereComponent {
 
       //////////////////////////////// Animate ///////////////////////////////
 
-				var time = Date.now() * 0.0001;
-				for ( var i = 0; i < scene.children.length; i ++ ) {
-					var object = scene.children[ i ];
-					if ( object instanceof THREE.Line ) {
-						object.rotation.y = time * ( i < 4 ? ( i + 1 + totalSum ) : - ( i + 1  + totalSum ) );
-						if ( i === 0 ) {
-              object.scale.x =
-              object.scale.y =
-              object.scale.z =
-              object.originalScale * getDatBass * (i/5+1) * (1 + 0.5 * Math.sin( 7*time ));
-            } else if ( i === 1 ) {
-              object.scale.x =
-              object.scale.y =
-              object.scale.z =
-              object.originalScale * getDatMid1 * (i/5+1) * (1 + 0.5 * Math.sin( 7*time ));
-            } else if ( i === 2 ) {
-              object.scale.x =
-              object.scale.y =
-              object.scale.z =
-              object.originalScale * getDatMid2 * (i/5+1) * (1 + 0.5 * Math.sin( 7*time ));
-            } else if ( i === 3 ) {
-              object.scale.x =
-              object.scale.y =
-              object.scale.z =
-              object.originalScale * getDatMid3 * (i/5+1) * (1 + 0.5 * Math.sin( 7*time ));
-            } else if ( i === 4 ) {
-              object.scale.x =
-              object.scale.y =
-              object.scale.z =
-              object.originalScale * getDatTreble * (i/5+1) * (1 + 0.5 * Math.sin( 7*time ));
-            }
-					}
+			var time = Date.now() * 0.0001;
+			for ( var i = 0; i < scene.children.length; i ++ ) {
+				var object = scene.children[ i ];
+				if ( object instanceof THREE.Line ) {
+					object.rotation.y = time * ( i < 4 ? ( i + 1 + totalSum ) : - ( i + 1  + totalSum ) );
+					if ( i === 0 ) {
+            object.scale.x =
+            object.scale.y =
+            object.scale.z =
+            object.originalScale * getDatBass * (i/5+1) * (1 + 0.5 * Math.sin( 7*time ));
+          } else if ( i === 1 ) {
+            object.scale.x =
+            object.scale.y =
+            object.scale.z =
+            object.originalScale * getDatMid1 * (i/5+1) * (1 + 0.5 * Math.sin( 7*time ));
+          } else if ( i === 2 ) {
+            object.scale.x =
+            object.scale.y =
+            object.scale.z =
+            object.originalScale * getDatMid2 * (i/5+1) * (1 + 0.5 * Math.sin( 7*time ));
+          } else if ( i === 3 ) {
+            object.scale.x =
+            object.scale.y =
+            object.scale.z =
+            object.originalScale * getDatMid3 * (i/5+1) * (1 + 0.5 * Math.sin( 7*time ));
+          } else if ( i === 4 ) {
+            object.scale.x =
+            object.scale.y =
+            object.scale.z =
+            object.originalScale * getDatTreble * (i/5+1) * (1 + 0.5 * Math.sin( 7*time ));
+          }
 				}
+			}
 
       ///////////////////////////// Re-Render Canvas ////////////////////////
-
-      renderer.render(scene, camera);
-      requestAnimationFrame(render);
+      if (context.reRender === true) {
+        renderer.render(scene, camera);
+        requestAnimationFrame(render);
+      }
     }
   }
 }
