@@ -1,9 +1,9 @@
-  <div *ngIf="trackDetails && trackDetails.commentCount" class="ui segment" style="margin-top: 20px; font-weight: bold;">
+  <div *ngIf="trackDetails && trackDetails.commentCount" class="ui segment" style="font-weight: bold; ">
    {{ (trackDetails | async)?.commentCount }} comments
   </div>
-  <div class="ui segment comments" style="width: 100%; font-size: 12px;">
+  <div class="ui segment comments" style="width: 100%; font-size: 12px; margin-top: 20px;">
    <div *ngFor="let comment of comments | async" style="width: 50%; display: flex; margin: 20px;">
-     <div style="width: 40px; margin-right: 20px;">
+     <div style="width: 40px; margin-right: 20px; ">
        <img [src]="comment.user.avatarUrl" [ngStyle]="{
          width: '40px',
          height: '40px',
