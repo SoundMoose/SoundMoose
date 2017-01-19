@@ -1,3 +1,5 @@
+<h2 *ngIf="(favorites$ | async).length">My favorites list</h2>
+
 <div class="overview ui container">
   <div *ngFor="let favorite of favorites$ | async">{{ favorite.artist }} - {{ favorite.title }}</div>
 </div>
