@@ -67,6 +67,7 @@ import { GamePlayerComponent } from './components/game/game-player/game-player.c
 import { SongQueueComponent } from './components/song-queue/song-queue.component';
 import { VisualizationControlComponent } from './components/player/visualization-control/visualization-control.component';
 import { HeaderComponent } from './components/header/header.component';
+import { CommentsComponent } from './components/track-detail/comments/comments.component';
 
 // 2d visualizations and audio controls deck
 import { AudioControlsComponent } from './components/audio-controls/audio-controls.component';
@@ -167,7 +168,8 @@ const store = compose(...metaReducers)({
     GameComponent,
     GamePlayerComponent,
     VisualizationControlComponent,
-    HeaderComponent
+    HeaderComponent,
+    CommentsComponent
   ],
   imports: [
     MomentModule,
