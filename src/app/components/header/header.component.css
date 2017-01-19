@@ -5,3 +5,11 @@
   z-index: 9001;
   box-shadow: 0 3px 10px #101010;
 }
+
+.header a {
+  color: #ddd;
+}
+
+.header:hover a {
+  color: #fff;
+}

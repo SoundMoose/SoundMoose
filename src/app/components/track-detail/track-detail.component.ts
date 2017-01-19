@@ -44,7 +44,6 @@ export class TrackDetailComponent implements OnInit {
     } else if (this.platform == 'spotify') {
       this.spotifyService.loadTrackDetails(trackId);
     }
-
   }
 
   ngOnDestroy() {

@@ -98,6 +98,7 @@ import { YoutubePipe } from './youtube.pipe';
 
 // Application wide providers
 const APP_PROVIDERS = [
+  Auth,
   FavoriteService,
   SpotifyService,
   LastfmService,
