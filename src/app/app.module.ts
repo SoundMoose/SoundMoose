@@ -64,7 +64,6 @@ import { UserComponent } from './components/user/user.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { GameComponent } from './components/game/game.component';
 import { GamePlayerComponent } from './components/game/game-player/game-player.component';
-import { SongQueueComponent } from './components/song-queue/song-queue.component';
 import { VisualizationControlComponent } from './components/player/visualization-control/visualization-control.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CommentsComponent } from './components/track-detail/comments/comments.component';
@@ -162,7 +161,6 @@ const store = compose(...metaReducers)({
     ThreeDFrequencyBarsComponent,
     ThreeDParticlesComponent,
     ThreeDSphereComponent,
-    SongQueueComponent,
     FavoritesComponent,
     UserComponent,
     GameComponent,
