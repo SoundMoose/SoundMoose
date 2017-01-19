@@ -5,10 +5,6 @@
   overflow: hidden;
 }
 
-.hover img:hover {
-  opacity: 0.5;
-}
-
 .hover:hover a {
   opacity: 1;
   top: 0;

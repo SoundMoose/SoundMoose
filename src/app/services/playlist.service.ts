@@ -86,7 +86,9 @@ export class PlaylistService {
   }
 
   updatePlaylist(playlistToUpdate: BackendPlaylist) {
-    this.http.put(`http://www.soundmoose.com:8000/api/playlists/${playlistToUpdate.id}/`, playlistToUpdate);
+    this.http.put(`http://www.soundmoose.com:8000/api/playlists/${playlistToUpdate.id}/`, playlistToUpdate)
+      .first()
+      .subscribe();
   }
 
   buildData(playlist: Playlist) {
