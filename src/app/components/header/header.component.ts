@@ -15,9 +15,9 @@ import { Auth } from '../../services/auth.service';
   selector: 'header',
   styleUrls: ['header.component.css'],
   templateUrl: 'header.component.html',
+  providers: [Auth]
 })
 export class HeaderComponent {
-  @Input() authService: Auth;
   toggleFrequencyOrWaveform$: Observable<boolean>;
   openDialogActive: boolean = false;
   saveDialogActive: boolean = false;
@@ -27,7 +27,7 @@ export class HeaderComponent {
   actionsHovering: boolean = false;
   userHovering: boolean = false;
 
-  constructor( private store$: Store<AppStore>, private AudioControlsActions: AudioControlsActions) {
+  constructor( private store$: Store<AppStore>, private AudioControlsActions: AudioControlsActions, private auth: Auth) {
     this.soundmooseUser$ = this.store$.select(s => s.soundmooseUser);
     this.toggleFrequencyOrWaveform$ = this.store$.select('audiocontrols')
       .map((audiocontrols: AudioControls) => audiocontrols.toggleFrequencyOrWaveform)

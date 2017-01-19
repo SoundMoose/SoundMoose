@@ -4,16 +4,16 @@
     <search></search>
     <div class="right-icons" [ngStyle]="{'margin':'8px'}">
 
-      <button style="color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; padding: 8px; top: -2px; position: relative;" class="ui primary button mini" (click)="authService.login()" *ngIf="!authService.authenticated()">Log In</button>
+      <button style="color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; padding: 8px; top: -2px; position: relative;" class="ui primary button mini" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
 
         <div
           style="display: inline-block; cursor: pointer;"
-          *ngIf="authService.authenticated()"
+          *ngIf="auth.authenticated()"
           (click)="showUserDropdown = !showUserDropdown"
           (mouseenter)="userHovering = true"
           (mouseleave)="userHovering = false"
         >
-          <img [src]="authService.userProfile.picture" alt="User avatar" style="width: 20px; height: 20px; border-radius: 50%; position: relative; left: -5px; top: 5px;"/><span style="margin-right: 5px; font-family: Interstate; font-size: 14px;" *ngIf="authService.userProfile">{{authService.userProfile['given_name']}}</span>
+          <img [src]="auth.userProfile.picture" alt="User avatar" style="width: 20px; height: 20px; border-radius: 50%; position: relative; left: -5px; top: 5px;"/><span style="margin-right: 5px; font-family: Interstate; font-size: 14px;" *ngIf="auth.userProfile">{{auth.userProfile['given_name']}}</span>
           <i [ngClass]="{
            grey: !userHovering,
            white: userHovering,
@@ -25,15 +25,14 @@
           <div *ngIf="showUserDropdown" class="user-dropdown" style="position: absolute; width: 250px; height: 100px; color: #fff; background-color: #000; opacity: 0.9; cursor: pointer;">
             <ul>
               <li><a routerLink="/user">Favorites/playlists</a></li>
-              <li><a routerLink="/threeD">Log out</a></li>
+              <li><a (click)="auth.logout()">Log out</a></li>
             </ul>
           </div>
         </div>
 
         <div
           style="display: inline-block; cursor: pointer;"
-          *ngIf="authService.authenticated()"
-          (click)="showUserDropdown = !showUserDropdown"
+          (click)="showActionsDropdown = !showActionsDropdown"
           (mouseenter)="actionsHovering = true"
           (mouseleave)="actionsHovering = false"
         >

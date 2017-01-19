@@ -177,15 +177,6 @@ currentlyPlaying: boolean;
     this.store$.dispatch(this.trackActions.togglePlayPause(this.track, this.tracksList));
   }
 
-  private getTrackTime(millis) {
-    let minutes = Math.floor(millis / 60000);
-    let seconds = +((millis % 60000) / 1000).toFixed(0);
-    if (seconds === 60) {
-      seconds = 0;
-      minutes++;
-    }
-    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-  }
 
   getCommentPosition(millis) {
     // 96% is all the way to the right
