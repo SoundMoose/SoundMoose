@@ -1,10 +1,10 @@
-import 'rxjs/add/operator/map';
-
 import { Action } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subscription} from 'rxjs/Subscription';
+
+import 'rxjs/add/operator/map';
 
 import { AppStore } from '../models/appstore.model';
 import { AudioControlsState } from '../reducers/audio-controls.reducer';

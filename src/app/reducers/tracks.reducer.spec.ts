@@ -1,10 +1,8 @@
-import tracksReducer from './tracks.reducer';
-
-import { Track } from '../models/track.model';
-
-import { TrackActions } from '../actions/track.actions';
-
 'use strict';
+
+import tracksReducer from './tracks.reducer';
+import { Track } from '../models/track.model';
+import { TrackActions } from '../actions/track.actions';
 
 describe('Tracks Reducer', () => {
 

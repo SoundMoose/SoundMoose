@@ -1,10 +1,11 @@
 import { Injectable }      from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
-import { auth0Key, auth0Domain } from '../config/superSecretKeys';
 import { Router } from '@angular/router';
-import 'rxjs/add/operator/take';
 import { Store } from '@ngrx/store';
 
+import 'rxjs/add/operator/take';
+
+import { auth0Key, auth0Domain } from '../config/superSecretKeys';
 import { AppStore } from '../models/appstore.model';
 import { SoundmooseUserActions } from '../actions/soundmoose-user.actions';
 

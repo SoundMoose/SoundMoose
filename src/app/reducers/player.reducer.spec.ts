@@ -1,14 +1,10 @@
-import playerReducer from './player.reducer';
+'use strict';
 
+import playerReducer from './player.reducer';
 import { Player } from '../models/player.model';
 import { Track } from '../models/track.model';
-
 import { PlayerActions } from '../actions/player.actions';
 import { TrackActions } from '../actions/track.actions';
-
-
-
-'use strict';
 
 describe('Player Reducer', () => {
 

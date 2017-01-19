@@ -1,8 +1,7 @@
-import audioControlsReducer from './audio-controls.reducer';
-
-import { AudioControlsActions } from '../actions/audio-controls.actions';
-
 'use strict';
+
+import audioControlsReducer from './audio-controls.reducer';
+import { AudioControlsActions } from '../actions/audio-controls.actions';
 
 describe('Audio-Controls Reducer', () => {
 

@@ -6,7 +6,6 @@ import { PlaylistState } from '../reducers/playlist.reducer';
 import { SpinnerState } from '../reducers/spinner.reducer';
 import { FavoritesState } from '../reducers/favorites.reducer';
 import { SoundmooseUser } from '../models/soundmoose-user.model';
-
 import { CommentsState } from '../reducers/comments.reducer';
 import { AudioControls } from './audio-controls.model'
 

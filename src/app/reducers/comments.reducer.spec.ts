@@ -1,6 +1,6 @@
-import commentsReducer from './comments.reducer';
-
 'use strict';
+
+import commentsReducer from './comments.reducer';
 
 describe('Comments Reducer', () => {
 

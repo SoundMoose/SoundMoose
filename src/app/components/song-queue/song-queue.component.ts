@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { state } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
