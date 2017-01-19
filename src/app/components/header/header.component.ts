@@ -36,4 +36,14 @@ export class HeaderComponent {
   toggleAudioControls() {
     this.store$.dispatch(this.AudioControlsActions.toggleVisualizersFreqWave());
   }
+
+  toggleUserDropdown() {
+    this.showActionsDropdown = false;
+    this.showUserDropdown = !this.showUserDropdown;
+  }
+
+  toggleActionDropdown() {
+    this.showUserDropdown = false;
+    this.showActionsDropdown = !this.showActionsDropdown;
+  }
 }
