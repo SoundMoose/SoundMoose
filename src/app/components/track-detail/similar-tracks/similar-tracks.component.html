@@ -1,4 +1,4 @@
-<div *ngIf="(similarTracks$ | async).length" class="ui segment" style="margin-top: 10px; margin-right: 20px; background: rgba(0,0,0,0.2);">
+<div *ngIf="(similarTracks$ | async)?.length" class="ui segment" style="margin-top: 10px; margin-right: 20px; background: rgba(0,0,0,0.2);">
    <p>Similar tracks <img src="assets/img/last-fm-xxl.png" style="width: 10px; height: 10px;" alt="Recommendations from last.fm" /></p>
 
     <ng-container *ngFor="let similarTrack of (similarTracks$ | async); let i = index">
