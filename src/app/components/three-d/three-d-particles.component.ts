@@ -30,10 +30,16 @@ export class ThreeDParticlesComponent {
 
   private audio: any;
   private controls: any;
+  private reRender: boolean;
 
   constructor( private audioSrc: AudioStream, private store$: Store<AppStore> ) {
     this.audioCtx = audioSrc.audioCtx;
     this.audioSrcNode = audioSrc.audioSrcNode;
+    this.reRender = true;
+  }
+
+  ngOnDestroy() {
+    this.reRender = false;
   }
 
   ngOnInit(){
@@ -158,8 +164,10 @@ export class ThreeDParticlesComponent {
 
       ///////////////////////////// Re-Render Canvas ////////////////////////
 
-      renderer.render(scene, camera);
-      requestAnimationFrame(render);
+      if (context.reRender === true) {
+        renderer.render(scene, camera);
+        requestAnimationFrame(render);
+      }
     }
   }
 }
