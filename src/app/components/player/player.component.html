@@ -1,6 +1,4 @@
-<div [@fadeInOut]="'in'" class="ui footer segment"
-  *ngIf="trackExists$ | async"
->
+<div [@fadeInOut]="'in'" class="ui footer segment" *ngIf="trackExists$ | async">
   <div class="ui container" style="min-width: 1127px">
     <player-controls></player-controls>
     <track-progress-container [progressContainerType]="'bottom'"></track-progress-container>
@@ -8,5 +6,4 @@
     <track-info></track-info>
     <visualization-control *ngIf="showVisualization$ | async"></visualization-control>
   </div>
-
 </div>
