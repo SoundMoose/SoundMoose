@@ -296,8 +296,17 @@ player {
   font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif
 }
 
+track-progress .md-slider-thumb {
+  transform: scale(.5);
+}
+
 .waveform canvas {
   position: absolute;
   top: 0px;
 }
 
+search i.search.icon {
+  transform: scale(1.2);
+  position: absolute;
+  top: 1px;
+}
