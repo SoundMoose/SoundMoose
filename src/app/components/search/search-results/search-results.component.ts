@@ -70,7 +70,6 @@ export class SearchResultsComponent {
 
   //////////////////// Howard look here!!!
   clickHandler(track, tracks) {
-    console.log("TRACK...", track, "TRACKS...", tracks);
     this.store$.dispatch(this.trackActions.togglePlayPause(track, tracks));
   }
 }
