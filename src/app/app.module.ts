@@ -65,6 +65,7 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
 import { GameComponent } from './components/game/game.component';
 import { GamePlayerComponent } from './components/game/game-player/game-player.component';
 import { SongQueueComponent } from './components/song-queue/song-queue.component';
+import { VisualizationControlComponent } from './components/player/visualization-control/visualization-control.component';
 
 // 2d visualizations and audio controls deck
 import { AudioControlsComponent } from './components/audio-controls/audio-controls.component';
@@ -163,7 +164,8 @@ const store = compose(...metaReducers)({
     FavoritesComponent,
     UserComponent,
     GameComponent,
-    GamePlayerComponent
+    GamePlayerComponent,
+    VisualizationControlComponent
   ],
   imports: [
     MomentModule,
