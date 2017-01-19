@@ -32,23 +32,23 @@
 /* Wobble Vertical */
 @-webkit-keyframes hvr-wobble-vertical {
   16.65% {
-    -webkit-transform: translateY(8px);
-    transform: translateY(8px);
+    -webkit-transform: translateY(3px);
+    transform: translateY(3px);
   }
 
   33.3% {
-    -webkit-transform: translateY(-6px);
-    transform: translateY(-6px);
+    -webkit-transform: translateY(-3px);
+    transform: translateY(-3px);
   }
 
   49.95% {
-    -webkit-transform: translateY(4px);
-    transform: translateY(4px);
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
   }
 
   66.6% {
-    -webkit-transform: translateY(-2px);
-    transform: translateY(-2px);
+    -webkit-transform: translateY(-1px);
+    transform: translateY(-1px);
   }
 
   83.25% {
@@ -64,23 +64,23 @@
 
 @keyframes hvr-wobble-vertical {
   16.65% {
-    -webkit-transform: translateY(8px);
-    transform: translateY(8px);
+    -webkit-transform: translateY(3px);
+    transform: translateY(3px);
   }
 
   33.3% {
-    -webkit-transform: translateY(-6px);
-    transform: translateY(-6px);
+    -webkit-transform: translateY(-3px);
+    transform: translateY(-3px);
   }
 
   49.95% {
-    -webkit-transform: translateY(4px);
-    transform: translateY(4px);
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
   }
 
   66.6% {
-    -webkit-transform: translateY(-2px);
-    transform: translateY(-2px);
+    -webkit-transform: translateY(-1px);
+    transform: translateY(-1px);
   }
 
   83.25% {
