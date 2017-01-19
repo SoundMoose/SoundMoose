@@ -1,45 +1,44 @@
 <div (mouseenter)="wrapperHovered = true" (mouseleave)="wrapperHovered = false" class="track-info-wrapper">
   <div (mouseenter)="wrapperHovered = true" [hidden]="!wrapperHovered" class="ui basic bottom pointing label song-queue-wrapper">
-    Up Next:
-      <div *ngFor="let song of songQueue; let i=index" >
-        <div
-            *ngIf="i > currentId && i < currentId + 4"
-            (click)="clickHandler(song, songQueue)">
-          <div class="track">
-            <div class="info">
-              <div class="title">
-                {{song.title}}
-              </div>
-              <div class="align">
-                <div>{{millisToMinutesSeconds(song.duration)}}</div>
-              </div>
+    <div class="up-next">Up Next</div>
+    <div *ngFor="let song of songQueue; let i=index" >
+      <div
+          *ngIf="i > currentId && i < currentId + 4"
+          (click)="clickHandler(song, songQueue)">
+        <div class="track">
+          <div class="info">
+            <div class="title">
+              {{song.title}}
+            </div>
+            <div class="align">
+              <div>{{millisToMinutesSeconds(song.duration)}}</div>
             </div>
           </div>
         </div>
       </div>
-  </div>
+    </div>
+</div>
 
-  <img *ngIf="(currentTrack$ | async)?.id !== 0" class="album-art" src="{{ (currentTrack$ | async)?.imgUrl }}" />
-  <div *ngIf="(currentTrack$ | async)?.id !== 0" class="current-track" >
-    <div class="playing">Playing track</div>
-    <div class="track-info"><a routerLink="/track/{{(currentTrack$ | async)?.platform}}/{{(currentTrack$ | async)?.id}}">{{ trim((currentTrack$ | async)?.artist + " - " + (currentTrack$ | async)?.title) }}</a></div>
-  </div>
-  <div style="position: relative;
-    right: -110px;
-    top: -5px;">
-   <a
-      *ngIf="isFavorited !== null"
-      (click)="toggleFavorite()"
+<img *ngIf="(currentTrack$ | async)?.id !== 0" class="album-art" src="{{ (currentTrack$ | async)?.imgUrl }}" />
+<div *ngIf="(currentTrack$ | async)?.id !== 0" class="current-track" >
+  <div class="playing">Playing track</div>
+  <div class="track-info"><a routerLink="/track/{{(currentTrack$ | async)?.platform}}/{{(currentTrack$ | async)?.id}}">{{ trim((currentTrack$ | async)?.artist + " - " + (currentTrack$ | async)?.title) }}</a></div>
+</div>
+<div style="position: relative;
+  right: -90px;
+  top: -5px;">
+ <a
+    *ngIf="isFavorited !== null"
+    (click)="toggleFavorite()"
+  >
+    <i
+      [ngClass]="{
+        icon: true,
+        heart: true,
+        empty: !isFavorited
+      }"
+      style="cursor: pointer; position: absolute; bottom: 17px; left: 60px; width: 110%; height: 110%;"
     >
-      <i
-        [ngClass]="{
-          icon: true,
-          heart: true,
-          empty: !isFavorited
-        }"
-        style="cursor: pointer; position: absolute; bottom: 20px; left: 60px;"
-      >
-      </i>
-    </a>
-  </div>
+    </i>
+  </a>
 </div>

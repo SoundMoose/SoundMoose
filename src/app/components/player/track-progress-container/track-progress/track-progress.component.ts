@@ -8,6 +8,7 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from 
 })
 export class TrackProgressComponent {
   @Input() progressMinutesSeconds: string;
+  @Input() hasBufferedProgress: boolean;
   @Input() multiplier: number;
   @Input() durationMinutesSeconds: string;
   @Input() bufferedRanges: number[][] | number[];
