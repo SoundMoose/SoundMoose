@@ -4,6 +4,6 @@
     <track-progress-container [progressContainerType]="'bottom'"></track-progress-container>
     <volume-control></volume-control>
     <track-info></track-info>
-    <visualization-control *ngIf="showVisualization$ | async"></visualization-control>
+    <visualization-control [@fadeInOut]="'in'" *ngIf="showVisualization$ | async"></visualization-control>
   </div>
 </div>
