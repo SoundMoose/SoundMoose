@@ -6,7 +6,6 @@
       *ngFor="let result of results$ | async"
       class="column"
     >
-                                              <!-- Howard look here!! -->
       <top-track-tile [topTrack]="result" (click)="clickHandler(result, searchResults)"></top-track-tile>
     </div>
   </div>

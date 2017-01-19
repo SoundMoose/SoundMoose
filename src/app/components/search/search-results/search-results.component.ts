@@ -68,7 +68,6 @@ export class SearchResultsComponent {
     this.store$.dispatch(this.searchActions.search(terms));
   }
 
-  //////////////////// Howard look here!!!
   clickHandler(track, tracks) {
     this.store$.dispatch(this.trackActions.togglePlayPause(track, tracks));
   }
