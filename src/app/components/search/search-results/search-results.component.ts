@@ -18,6 +18,7 @@ import {
   transition,
   animate
 } from '@angular/core';
+import { SearchState } from './../../../reducers/search.reducer';
 
 @Component({
   selector: 'search-results',
@@ -44,6 +45,7 @@ import {
 export class SearchResultsComponent {
 
   results$ : Observable<Track[]>;
+  searchResults: Track[];
   query: string;
 
   constructor(private store$: Store<AppStore>, private route: ActivatedRoute, private spotifyService: SpotifyService, private soundCloudService: SoundCloudService, private searchActions: SearchActions, private trackActions: TrackActions) {
@@ -53,6 +55,9 @@ export class SearchResultsComponent {
       // @todo figure out why this setTimeout is necessary
       window.setTimeout(() => this.search(this.query), 0);
     }
+
+    this.store$.select('search')
+      .subscribe((item: SearchState) => this.searchResults = item.results);
 
     // ensure all search services (soundcloud, spotify) are being loaded on the search results page
     let search$ = this.store$.select(s => s.search);
