@@ -1,3 +1,4 @@
+
 <div class="ui borderless main menu container page-header-container">
   <div id="page-header" class="ui container">
     <a routerLink="/home"><img class="logo" src="assets/img/logo.png"></a>
@@ -47,11 +48,35 @@
           }"
         ></i>
 
-        <div *ngIf="showActionsDropdown" class="actions-dropdown" style="position: absolute; width: 250px; height: 100px; color: #fff; background-color: #000; opacity: 0.9;">
-          <ul>
-            <li><a target="_blank" href="https://github.com/hrr20-over9000/SoundMoose">About</a></li>
-            <li><a routerLink="/threeD">3D experiments</a></li>
-          </ul>
+        <div *ngIf="showActionsDropdown" class="actions-dropdown" style="position: absolute; width: 250px; height: 100px; color: #ffffff; background-color: #000; opacity: 0.9;">
+
+          <div class="ui big middle aligned animated list">
+            <div class="item">
+              <i class="large sound icon" style="padding-left:10px; padding-top:10px;"></i>
+              <div class="content">
+                <div class="header" style="padding-top:10px">
+                  <a
+                    routerLink="/threeD"
+                    style="color: #ffffff;">
+                    3D experiments
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <i class="large github icon" style="padding-left:10px; padding-top:10px;"></i>
+              <div class="content">
+                <div class="header" style="padding-top:10px">
+                  <a
+                    target="_blank"
+                    href="https://github.com/hrr20-over9000/SoundMoose"
+                    style="color: #ffffff;">
+                    About
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
