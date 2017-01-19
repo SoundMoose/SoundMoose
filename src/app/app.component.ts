@@ -19,13 +19,7 @@ import { Auth } from './services/auth.service';
 
 export class AppComponent {
   toggleFrequencyOrWaveform$: Observable<boolean>;
-  openDialogActive: boolean = false;
-  saveDialogActive: boolean = false;
   soundmooseUser$: Observable<SoundmooseUser>;
-  showActionsDropdown: boolean = false;
-  showUserDropdown: boolean = false;
-  actionsHovering: boolean = false;
-  userHovering: boolean = false;
 
   constructor( private store$: Store<AppStore>, private AudioControlsActions: AudioControlsActions, private auth: Auth) {
     this.soundmooseUser$ = this.store$.select(s => s.soundmooseUser);
