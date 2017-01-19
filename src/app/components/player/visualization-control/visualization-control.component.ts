@@ -41,13 +41,10 @@ import { Player } from '../../../models/player.model';
 export class VisualizationControlComponent implements OnDestroy {
   toggleFrequencyOrWaveform: boolean;
   toggleFrequencyOrWaveformSubscription: Subscription;
-  showVisualization$: Observable<boolean>;
   showEqualizer: boolean;
   showEqualizerSubscription: Subscription;
 
   constructor(private playerService: PlayerService, private store$: Store<AppStore>, private audioControlActions: AudioControlsActions ) {
-    this.showVisualization$ = this.store$.select('player')
-      .map((playerStatus: Player) => playerStatus.showVisualization);
 
     this.showEqualizerSubscription = this.store$.select('audiocontrols')
       .map((audioControlsStatus: AudioControls) => audioControlsStatus.showEqualizer)

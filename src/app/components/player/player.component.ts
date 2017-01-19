@@ -41,9 +41,13 @@ import { Player } from '../../models/player.model';
 })
 export class PlayerComponent {
 
+  showVisualization$: Observable<boolean>;
   trackExists$: Observable<boolean>;
 
   constructor(private store$: Store<AppStore>) {
+    this.showVisualization$ = this.store$.select('player')
+      .map((playerStatus: Player) => playerStatus.showVisualization);
+
     this.trackExists$ = this.store$.select('player')
       .map((playerStatus: Player) => playerStatus.currentTrack.duration !== 0);
   }
