@@ -15,6 +15,7 @@ import { AudioStream } from '../../../audio-element';
 })
 
 export class WaveformVisualizerComponent implements OnInit, OnDestroy {
+  
   // Waveform Visualization
   waveformDataArray: any;
   waveformBufferLength: number;
@@ -28,10 +29,9 @@ export class WaveformVisualizerComponent implements OnInit, OnDestroy {
   waveformY: number;
   drawWaveformVisual: any;
   hasCanvas: boolean;
+
   // The setInterval timer ID.
   renderWaveInterval: number;
-  audioCtx: any;
-  audioSrcNode: any;
 
   constructor (private audioSrc: AudioStream, private store$: Store<AppStore>) { }
 
