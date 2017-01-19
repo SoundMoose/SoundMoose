@@ -3,4 +3,5 @@
 }
 .page-header-container {
   z-index: 9001;
+  box-shadow: 0 3px 10px #101010;
 }

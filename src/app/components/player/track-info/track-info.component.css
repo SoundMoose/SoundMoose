@@ -1,4 +1,3 @@
-
 .track-info-wrapper {
   position: relative;
   top: 0px;
@@ -9,33 +8,39 @@
   display: inline-block;
 }
 
-
 .song-queue-wrapper {
-  background: #404040;
+  background-color: #363636 !important;
   cursor: pointer;
   width: 280px;
-/*  height: 200px;*/
+  padding-left: 15px;
+  padding-top: 15px;
   opacity: 0.98;
-  box-shadow: 0 2px 4px black;
+  box-shadow: 0 2px 4px black !important;
+  opacity: 1;
+  position: relative;
+  top: 3px;
 }
 
 .track {
   margin-bottom: 5px;
-  background-color: #2E2E2E;
   padding: 5px 0;
   border-radius: 5px;
   display: flex;
   height: 31px;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 1.2em;
+  font-family: "Interstate";
 }
 
 .align {
-  width: 30%;
+  width: 35px;
   display: flex;
   justify-content: space-between;
 }
 
 .title {
-  width: 60%;
+  width: 80%;
 }
 
 .delete,
@@ -54,4 +59,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.up-next {
+   padding-bottom: 5px;
+   font-weight: bold;
+   font-family: "Interstate";
 }

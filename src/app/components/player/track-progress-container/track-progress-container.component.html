@@ -6,4 +6,5 @@
   [currentProgress]="currentProgress"
   (sliderChanged)="onSliderChanged($event)"
   (sliderStarted)="onSliderStarted($event)"
+  [hasBufferedProgress]="progressContainerType != 'detail'"
 ></track-progress>

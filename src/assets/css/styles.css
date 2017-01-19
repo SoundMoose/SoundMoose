@@ -109,7 +109,7 @@ player-controls .icon:hover {
   margin-left: 5px;
   position: relative;
   top: 7px;
-  width: 390px;
+  width: 370px;
   height: 20px;
   display: inline-block;
   cursor: pointer;
@@ -294,7 +294,9 @@ track-detail .comments,
 player {
   font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif
 }
+
 .waveform canvas {
   position: absolute;
   top: 0px;
 }
+
