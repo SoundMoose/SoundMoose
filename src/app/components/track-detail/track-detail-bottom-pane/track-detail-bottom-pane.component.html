@@ -11,7 +11,7 @@ background: linear-gradient(to left, #232526 , #414345); margin-top: 35px;">
           <game
             *ngIf="gameToggled && audioSrc"
             [audioSrc]="audioSrc"
-            [platform]="platform"
+            [platform]="track.platform"
             [trackId]="trackId"
           ></game>
           <!-- GAME -->
