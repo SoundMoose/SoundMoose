@@ -13,4 +13,11 @@ export class SoundmooseUserActions {
       payload: data
     };
   }
+
+  static LOGGED_OUT = '[Soundmoose user] Logged out';
+  loggedOut(): Action {
+    return {
+      type: SoundmooseUserActions.LOGGED_OUT
+    };
+  }
 }

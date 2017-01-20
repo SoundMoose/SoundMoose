@@ -27,7 +27,11 @@ export class HeaderComponent {
   actionsHovering: boolean = false;
   userHovering: boolean = false;
 
-  constructor( private store$: Store<AppStore>, private AudioControlsActions: AudioControlsActions, private auth: Auth) {
+  constructor(
+    private store$: Store<AppStore>,
+    private AudioControlsActions: AudioControlsActions,
+    private auth: Auth
+  ) {
     this.soundmooseUser$ = this.store$.select(s => s.soundmooseUser);
     this.toggleFrequencyOrWaveform$ = this.store$.select('audiocontrols')
       .map((audiocontrols: AudioControls) => audiocontrols.toggleFrequencyOrWaveform)
@@ -45,5 +49,9 @@ export class HeaderComponent {
   toggleActionsDropdown() {
     this.showUserDropdown = false;
     this.showActionsDropdown = !this.showActionsDropdown;
+  }
+
+  logout() {
+    this.auth.logout();
   }
 }

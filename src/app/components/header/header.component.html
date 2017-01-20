@@ -5,11 +5,11 @@
     <search></search>
     <div class="right-icons" [ngStyle]="{'margin':'8px', 'position':'relative'}">
 
-      <button style="color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; padding: 8px; top: -2px; position: relative;" class="ui primary button mini" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
+      <button style="color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; padding: 8px; top: -2px; position: relative;" class="ui primary button mini" (click)="auth.login()" *ngIf="(soundmooseUser$ | async)?.loggedIn === false">Log In</button>
 
         <div
           style="display: inline-block; cursor: pointer;"
-          *ngIf="auth.authenticated() && auth.userProfile"
+          *ngIf="(soundmooseUser$ | async)?.loggedIn === true && auth.userProfile"
           (click)="toggleUserDropdown()"
           (mouseenter)="userHovering = true"
           (mouseleave)="userHovering = false"
@@ -33,10 +33,10 @@
                   </div>
                 </div>
               </div>
-              <div class="item">
+              <div (click)="logout()" class="item">
                 <div class="content">
                   <div class="header">
-                    <a (click)="auth.logout()">Log out</a>
+                    <a>Log out</a>
                   </div>
                 </div>
               </div>
