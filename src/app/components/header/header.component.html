@@ -5,11 +5,16 @@
     <search></search>
     <div class="right-icons" [ngStyle]="{'margin':'8px', 'position':'relative'}">
 
-      <button style="color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; padding: 8px; top: -2px; position: relative;" class="ui primary button mini" (click)="auth.login()" *ngIf="(soundmooseUser$ | async)?.loggedIn === false">Log In</button>
+      <button
+        style="color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; padding: 8px; top: -2px; position: relative;"
+        class="ui primary button mini"
+        (click)="auth.login()"
+        *ngIf="auth.authenticated()=== false"
+      >Log In</button>
 
         <div
           style="display: inline-block; cursor: pointer;"
-          *ngIf="(soundmooseUser$ | async)?.loggedIn === true && auth.userProfile"
+          *ngIf="auth.authenticated() && auth.userProfile"
           (click)="toggleUserDropdown()"
           (mouseenter)="userHovering = true"
           (mouseleave)="userHovering = false"
