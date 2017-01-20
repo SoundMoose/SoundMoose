@@ -17,7 +17,7 @@
     <div *ngIf="showLoginMessage" [@fadeInOut]="'in'" style="position:absolute; background: #000; opacity: 0.85; padding: 7px;  bottom: 50px; left: 7px; z-index: 9002">Please log in to use playlists and favorites!</div>
     <!-- end todo -->
 
-    <div *ngIf="bottomIconHover" [@fadeInOut]="'in'" class="bottom-icon-gradient">
+    <div *ngIf="bottomIconHover" [@fadeInOutFast]="'in'" class="bottom-icon-gradient">
       <i [ngClass]="{
        big: true,
        icon: true,

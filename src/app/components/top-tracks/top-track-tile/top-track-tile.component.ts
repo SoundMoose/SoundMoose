@@ -44,6 +44,20 @@ import { TracksState } from './../../../reducers/tracks.reducer';
           opacity: 0,
         }))
       ])
+    ]),
+    trigger('fadeInOutFast', [
+      state('in', style({opacity: 1})),
+      transition('void => *', [
+        style({
+          opacity: 0,
+        }),
+        animate('0.02s ease-in')
+      ]),
+      transition('* => void', [
+        animate('0.02s 10 ease-out', style({
+          opacity: 0,
+        }))
+      ])
     ])
   ]
 })
