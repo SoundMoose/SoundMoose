@@ -118,6 +118,7 @@ export class TrackInfoComponent {
     if (!this.auth.authenticated()) {
       this.showLoginMessage = true;
       setTimeout(() => { this.showLoginMessage = false; }, 1000);
+      return;
     }
     this.isFavorited = !this.isFavorited;
     if (this.isFavorited) {
