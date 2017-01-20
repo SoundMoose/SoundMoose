@@ -1,26 +1,23 @@
-# SoundMoose - A Modern Media Platform
+# SoundMoose
 
 [![Build Status](https://travis-ci.org/hrr20-over9000/SoundMoose.svg?branch=master)](https://travis-ci.org/hrr20-over9000/SoundMoose)
 
-## Team
+## About
 
-  - __Product Owner__: Stefan Ruijsenaars
-  - __Scrum Master__: Howard Xue
-  - __Full Stack Engineers__: Doug Vaughn, Calvin Holloway
+[SoundMoose](http://www.soundmoose.com) is a non-commercial music platform where you can listen to and discover new music. Create an account to access saved playlists, add tracks to your favorites, and play a "Guess the song" game with your friends!
 
-## Table of Contents
+Our code is based on TypeScript, Angular 2, nrgx/store, Ruby, and Django. For audio and animations, we use Web Audio API and ThreeJS.
 
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
-1. [Team](#team)
-1. [Contributing](#contributing)
+All source code is available under the MIT license.
 
-## Requirements
+Many thanks to Last.fm, YouTube, Spotify, and SoundCloud for generously providing us with API access!
 
-- Node 4, 5, 6
+## Special thanks to
+
+  - Stefan Ruijsenaars
+  - Howard Xue
+  - Doug Vaughn
+  - Calvin Holloway
 
 ## Usage
 
