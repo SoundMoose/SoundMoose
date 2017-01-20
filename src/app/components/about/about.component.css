@@ -6,3 +6,12 @@ a {
 .icon {
   opacity: 0.8;
 }
+
+h1 {
+  font-family: "Interstate";
+  font-weight: normal;
+}
+p {
+  font-family: "Interstate";
+  font-weight: 100;
+}

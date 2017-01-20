@@ -8,6 +8,8 @@
 
 .header a {
   color: #ddd;
+  font-weight: 100;
+  font-family: "Interstate";
 }
 
 .header:hover a {
