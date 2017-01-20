@@ -1,5 +1,5 @@
 <div *ngIf="(similarArtists$ | async)?.length !== 0" class="ui segment" style="margin-right: 20px; background: rgba(0,0,0,0.2);">
-   <h3>Similar artists  <img src="assets/img/last-fm-xxl.png" style="width: 10px; height: 10px;" alt="Recommendations from last.fm" /></h3>
+   <p style="font-weight: normal;">Similar artists  <img src="assets/img/last-fm-xxl.png" style="width: 10px; height: 10px;" alt="Recommendations from last.fm" /></p>
 
     <ng-container *ngFor="let similarArtist of (similarArtists$ | async); let i = index">
       <div class="similar-artist" *ngIf="showAll || i < 5">
