@@ -1,6 +1,8 @@
 <div class="overview ui container">
-  <h3>Hello from Game Player!</h3>
-
-  <button (click)="playClip()">Play Clip!</button>
-  <iframe height="400" width="300" [src]="chatIframeUrl"></iframe>
+  <h3>Guess the song!</h3>
+  <div><button (click)="playClip()"class="ui primary button mini" style="margin-top: 10px; color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; font-weight: 100; padding: 8px;">Play Clip!</button></div>
+  <div>
+    <a [href]="chatIframeUrl" target="_blank">Guess the song here!</a>
+    <!--<iframe height="400" width="300" [src]="chatIframeUrl"></iframe>-->>
+  </div>
 </div>
