@@ -19,7 +19,7 @@
           (mouseenter)="userHovering = true"
           (mouseleave)="userHovering = false"
         >
-          <img [src]="auth.userProfile.picture" alt="User avatar" style="width: 20px; height: 20px; border-radius: 50%; position: relative; left: -5px; top: 5px;"/><span style="margin-right: 5px; font-family: Interstate; font-size: 14px;" *ngIf="auth.userProfile">{{auth.userProfile['given_name']}}</span>
+          <img [src]="auth.userProfile.picture" alt="User avatar" style="width: 20px; height: 20px; border-radius: 50%; position: relative; left: -5px; top: 5px;"/><span style="font-weight: 100; margin-right: 5px; margin-left: 4px; font-family: Interstate; font-size: 14px;" *ngIf="auth.userProfile">{{auth.userProfile['given_name']}}</span>
           <i [ngClass]="{
            grey: !userHovering,
            white: userHovering,

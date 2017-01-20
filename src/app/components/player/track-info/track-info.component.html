@@ -6,12 +6,12 @@
     *ngIf="songQueue.length && (playingTrackHovered  || songQueueHovered)"
     class="ui basic bottom pointing label song-queue-wrapper"
   >
-    <div class="up-next">Up Next</div>
+    <div class="up-next" style="font-weight: 100">Up Next</div>
     <div *ngFor="let song of songQueue; let i=index" >
       <div
           *ngIf="i > currentId && i < currentId + 4"
           (click)="clickHandler(song, songQueue)">
-        <div class="track">
+        <div class="track" style="font-weight: 100">
           <div class="info">
             <div class="title">
               {{song.title}}

@@ -1,45 +1,13 @@
-<div id="controlPanel">
-
-  <!-- <div class="three-d-selectors" (click)="changeVis('showThreeDFrequency')">
-    Frequency Bars
-  </div>
-
-  <div class="three-d-selectors" (click)="changeVis('showThreeDParticles')">
-    Blinky Dancers 2.0
-  </div>
-
-  <div class="three-d-selectors" (click)="changeVis('showThreeDSphere')">
-    Sphere
-  </div> -->
-
-
-  <div class="ui middle aligned animated list">
-    <div class="item">
-      <div class="content">
-        <div class="header three-d-selectors" (click)="changeVis('showThreeDFrequency')">Frequency Bars</div>
-      </div>
-    </div>
-    <div class="item">
-      <div class="content">
-        <div class="header three-d-selectors" (click)="changeVis('showThreeDParticles')">Blinky Dancers 2.0</div>
-      </div>
-    </div>
-    <div class="item">
-      <div class="content">
-        <div class="header three-d-selectors" (click)="changeVis('showThreeDSphere')">Sphere</div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <div id="hide" (click)="toggleControlPanel()">
-    <i *ngIf="showControlPanel"
-        class="grey chevron right icon"></i>
-
-    <i *ngIf="!showControlPanel"
-        class="yellow chevron left icon"></i>
-  </div>
+<div style="position: absolute; left: 30px; top: 80px; font-weight: 100; opacity: 0.8; font-size: 10px;">
+        <div class="header three-d-selectors" (click)="changeVis('showThreeDFrequency')">
+          <i class="icon cube big"></i>
+        </div>
+        <div class="header three-d-selectors" (click)="changeVis('showThreeDParticles')">
+          <i class="icon square big"></i>
+        </div>
+        <div class="header three-d-selectors" (click)="changeVis('showThreeDSphere')">
+          <i class="icon bullseye big"></i>
+        </div>
 </div>
 
 <three-d-frequencyBars
