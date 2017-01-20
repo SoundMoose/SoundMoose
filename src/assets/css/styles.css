@@ -215,7 +215,7 @@ player-controls .icon:hover {
   z-index: 1;
 }
 top-tracks .ui.selection.dropdown {
-  border: 1px solid #aaa;
+  /*border: 1px solid #aaa;*/
 }
 top-tracks .ui.selection.dropdown.active,
 top-tracks .ui.selection.active.dropdown .menu,
@@ -314,4 +314,9 @@ search i.search.icon {
   transform: scale(1.2);
   position: absolute;
   top: 1px;
+}
+
+.ui.selection.dropdown.active,
+.ui.selection.dropdown.visible {
+  z-index: 2001 !important;
 }
