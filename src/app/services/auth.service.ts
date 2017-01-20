@@ -89,12 +89,7 @@ export class Auth {
   }
 
   public logout() {
-    this.store.dispatch(this.soundmooseUserActions.setProfileData({
-      loggedIn: false,
-      userId: '',
-      name: '',
-      avatarUrl: ''
-    }));
+    this.store.dispatch(this.soundmooseUserActions.loggedOut());
     // Remove token from localStorage
     localStorage.removeItem('id_token');
     this.userProfile = undefined;
