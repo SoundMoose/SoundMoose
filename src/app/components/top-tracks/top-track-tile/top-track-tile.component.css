@@ -35,6 +35,8 @@ i.icons {
   display: inline-block;
   -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
   animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  position: relative;
+  bottom: -50px;
 }
 
 .spinner .bounce1 {
