@@ -10,3 +10,8 @@
   width: 400px;
   padding: 7px;
 }
+
+#search-container {
+  position:absolute;
+  left: 364px;
+}
