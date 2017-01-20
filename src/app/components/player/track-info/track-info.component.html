@@ -33,6 +33,9 @@
 <div style="position: relative;
   right: -90px;
   top: -5px;">
+    <div *ngIf="showFavoritedMessage" [@fadeInOut]="'in'" style="position:absolute; background: #000; opacity: 0.85; padding: 7px;  bottom: 50px; left: 7px; z-index: 9002">You favorited this track!</div>
+    <div *ngIf="showUnfavoritedMessage" [@fadeInOut]="'in'" style="position:absolute; background: #000; opacity: 0.85; padding: 7px;  bottom: 50px; left: 7px; z-index: 9002">You unfavorited this track!</div>
+    <div *ngIf="showLoginMessage" [@fadeInOut]="'in'" style="position:absolute; background: #000; opacity: 0.85; padding: 7px;  bottom: 50px; left: 7px; z-index: 9002">Please log in to use playlists and favorites!</div>
  <a
     *ngIf="isFavorited !== null"
     (click)="toggleFavorite()"

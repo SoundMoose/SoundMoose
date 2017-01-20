@@ -129,7 +129,7 @@ export class TopTrackTileComponent{
   goToDetail($event) {
     // Only go to detail page if we clicked outside of the play icon
     if ($event.target.tagName != 'I') {
-      this.router.navigate(['/track/soundcloud', this.topTrack.id]);
+      this.router.navigate(['/track/' + this.topTrack.platform, this.topTrack.id]);
     }
   }
 
@@ -142,6 +142,7 @@ export class TopTrackTileComponent{
     if (!this.auth.authenticated()) {
       this.showLoginMessage = true;
       setTimeout(() => { this.showLoginMessage = false; }, 1000);
+      return;
     }
     this.isFavorited = !this.isFavorited;
     if (this.isFavorited) {
@@ -159,6 +160,7 @@ export class TopTrackTileComponent{
     if (!this.auth.authenticated()) {
       this.showLoginMessage = true;
       setTimeout(() => { this.showLoginMessage = false; }, 1000);
+      return;
     }
     this.showAddedToPlaylist = true;
     setTimeout(() => { this.showAddedToPlaylist = false; }, 1000);
