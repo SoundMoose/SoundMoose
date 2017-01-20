@@ -2,16 +2,7 @@
   <div class="play-pause" (click)='clickHandler()'>
     <i class="play large icon"></i>
   </div>
-  <div
-    [ngClass]="{
-      info: true,
-      draggable: draggable,
-      grabbed: grabbed
-    }"
-    (mousedown)="grabbed = true"
-    (mouseup)="grabbed = false"
-    (mouseleave)="grabbed = false"
-  class="info">
+  <div class="info">
     <div class="title">{{track.title}}</div>
     <div class="align">
       <div>{{track.artist}}</div>
