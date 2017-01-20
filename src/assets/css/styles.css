@@ -75,7 +75,7 @@ player-controls .icon:hover {
 }
 
 .bottom-icons .clickable.icon:hover {
-  text-shadow: 0 0 1px rgb(251, 189, 8), 0 0 1px rgb(251, 189, 8);
+  text-shadow: 0 0 1px #999, 0 0 1px #999;
 }
 
 .footer .play.icon {
