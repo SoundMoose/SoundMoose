@@ -19,15 +19,15 @@ export class FavoriteService {
   userId: string;
 
   constructor(private http: Http, private store: Store<AppStore>, private favoriteActions : FavoriteActions) {
-    this.setFavoritesList();
+    // this.setFavoritesList();
     // skip(2) because we want to ignore first 2 events that come through this observable.
     // The first event is an emtpy object and the second is the initial object we recieve from the server.
-    this.favorites = this.store.select(s => s.favorites)
-      .skip(1)
-      .subscribe((favorites) => {
-        console.log('--- favorites store updated');
-        this.updateFavoritesList(favorites);
-      });
+    // this.favorites = this.store.select(s => s.favorites)
+    //   .skip(1)
+    //   .subscribe((favorites) => {
+    //     console.log('--- favorites store updated');
+    //     this.updateFavoritesList(favorites);
+    //   });
 
     this.store.select(s => s.soundmooseUser)
       .first()
@@ -62,7 +62,7 @@ export class FavoriteService {
 
   createFavoritesList() {
     console.log('CEATE NEW LIST');
-    this.http.put(`http://www.soundmoose.com:8000/api/favorites/${this.userId}/`, {
+    this.http.post(`http://www.soundmoose.com:8000/api/favorites/`, {
       'user_id': this.userId,
       'favorites': []
     })

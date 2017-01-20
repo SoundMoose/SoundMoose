@@ -34,3 +34,12 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.draggable:hover {
+  cursor: url(https://ssl.gstatic.com/ui/v1/icons/mail/images/2/openhand.cur), default !important;
+}
+
+.item {
+  cursor: url(https://ssl.gstatic.com/ui/v1/icons/mail/images/2/closedhand.cur), default !important;
+  background-color: yellow;
+}

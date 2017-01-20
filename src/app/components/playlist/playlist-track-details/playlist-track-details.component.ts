@@ -17,6 +17,8 @@ export class PlaylistTrackDetailsComponent {
   // Track info that is being passed in from the parent component.
   @Input() track: Track;
   @Input() playlist: Track[];
+  @Input() draggable: boolean;
+  grabbed: boolean = false;
 
   constructor(private store: Store<AppStore>, private playlistActions: PlaylistActions, private trackActions: TrackActions) {}
 
