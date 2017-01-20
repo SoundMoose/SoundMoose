@@ -11,11 +11,12 @@ import { AudioStream } from '../../../audio-element';
 @Component({
   //changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'visualizer-2D-waveform',
+  styleUrls: [ '../audio-controls.component.css' ],
   templateUrl: './waveform-visualizer.component.html'
 })
 
 export class WaveformVisualizerComponent implements OnInit, OnDestroy {
-  
+
   // Waveform Visualization
   waveformDataArray: any;
   waveformBufferLength: number;
@@ -66,10 +67,10 @@ export class WaveformVisualizerComponent implements OnInit, OnDestroy {
       context.drawWaveformVisual = requestAnimationFrame(context.drawWaveOscilliscope);
 
       let gradient = context.waveformCanvasCtx.createLinearGradient(0, 0, 0, context.waveformHEIGHT);
-      gradient.addColorStop(0, '#1B1B1B');
-      gradient.addColorStop(0.3, '#222222');
-      gradient.addColorStop(0.8, '#222222');
-      gradient.addColorStop(1, '#1B1B1B');
+      gradient.addColorStop(0, '#1A1A1A');
+      gradient.addColorStop(0.2, '#2E2E2E');
+      gradient.addColorStop(0.8, '#2E2E2E');
+      gradient.addColorStop(1, '#1A1A1A');
       context.waveformCanvasCtx.fillStyle = gradient;
       context.waveformCanvasCtx.fillRect(0, 0, context.waveformWIDTH, context.waveformHEIGHT);
 

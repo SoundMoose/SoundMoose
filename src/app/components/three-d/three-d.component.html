@@ -1,6 +1,6 @@
 <div id="controlPanel">
 
-  <div class="three-d-selectors" (click)="changeVis('showThreeDFrequency')">
+  <!-- <div class="three-d-selectors" (click)="changeVis('showThreeDFrequency')">
     Frequency Bars
   </div>
 
@@ -10,7 +10,27 @@
 
   <div class="three-d-selectors" (click)="changeVis('showThreeDSphere')">
     Sphere
+  </div> -->
+
+
+  <div class="ui middle aligned animated list">
+    <div class="item">
+      <div class="content">
+        <div class="header three-d-selectors" (click)="changeVis('showThreeDFrequency')">Frequency Bars</div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="content">
+        <div class="header three-d-selectors" (click)="changeVis('showThreeDParticles')">Blinky Dancers 2.0</div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="content">
+        <div class="header three-d-selectors" (click)="changeVis('showThreeDSphere')">Sphere</div>
+      </div>
+    </div>
   </div>
+
 
 
   <div id="hide" (click)="toggleControlPanel()">

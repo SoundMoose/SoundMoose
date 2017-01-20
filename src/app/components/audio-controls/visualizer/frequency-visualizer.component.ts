@@ -8,6 +8,7 @@ import { AudioStream } from '../../../audio-element';
 
 @Component({
   selector: 'visualizer-2D-frequency',
+  styleUrls: [ '../audio-controls.component.css' ],
   templateUrl: './frequency-visualizer.component.html'
 })
 export class FrequencyVisualizerComponent {
@@ -60,10 +61,10 @@ export class FrequencyVisualizerComponent {
       context.drawFrequencyVisual = requestAnimationFrame(context.drawFrequencyBars);
 
       let gradient = context.frequencyCanvasCtx.createLinearGradient(0, 0, 0, context.HEIGHT);
-      gradient.addColorStop(0, '#1B1B1B');
-      gradient.addColorStop(0.3, '#222222');
-      gradient.addColorStop(0.8, '#222222');
-      gradient.addColorStop(1, '#1B1B1B');
+      gradient.addColorStop(0, '#252525');
+      gradient.addColorStop(0.2, '#2E2E2E');
+      gradient.addColorStop(0.8, '#2E2E2E');
+      gradient.addColorStop(1, '#252525');
       context.frequencyCanvasCtx.fillStyle = gradient;
       context.frequencyCanvasCtx.fillRect(0, 0, context.WIDTH, context.HEIGHT);
 
