@@ -6,7 +6,7 @@
     <div class="right-icons" [ngStyle]="{'margin':'8px', 'position':'relative'}">
 
       <button
-        style="color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; padding: 8px; top: -2px; position: relative;"
+        style="color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; font-weight: 100; padding: 8px; top: -2px; position: relative;"
         class="ui primary button mini"
         (click)="auth.login()"
         *ngIf="auth.authenticated()=== false"

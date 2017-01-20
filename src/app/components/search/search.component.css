@@ -3,7 +3,8 @@
   border: 1px solid #ccc;
   font-size: 14px;
   margin-top: 10px;
-  font-family: Interstate;
+  font-family: "Interstate";
+  font-weight: 100;
   position: relative;
   top: -3px;
   width: 400px;

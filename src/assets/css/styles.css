@@ -1,6 +1,7 @@
 html, body {
   background-color: #1a1a1a;
   font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+  font-weight: 100;
   height: 100%;
 }
 [hidden] {
