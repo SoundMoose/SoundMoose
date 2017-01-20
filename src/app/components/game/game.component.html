@@ -12,11 +12,11 @@
   <h3>Start time: {{ millisToMinutesSeconds(start * 1000) }}</h3>
   <h3>End time: {{ millisToMinutesSeconds(end * 1000) }}</h3>
 
-  <button *ngIf="end && end > start" class="ui primary button mini" style="margin-top: 10px; color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; font-weight: 100; padding: 8px;" (click)="handlePreviewClick()">Preview excerpt and get link!</button>
+  <button *ngIf="end && end > start" class="ui primary button mini" style="margin-top: 10px; margin-bottom: 10px; color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; font-weight: 100; padding: 8px;" (click)="handlePreviewClick()">Preview excerpt and get link!</button>
 
   <div *ngIf="showLinks">
 
-    <p style="margin-top: 10px; margin-bottom: 10px;">Give this URL to your friends: <input type="text" name="link" value="{{absoluteGameUrl}}" /></p>
+    <p style="margin-top: 10px; margin-bottom: 10px;">Give this URL to your friends: <input type="text" name="link" style="color: #000" value="{{absoluteGameUrl}}" /></p>
 
     <a class="ui primary button mini" style="margin-top: 10px; color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; font-weight: 100; padding: 8px;" routerLink="{{relativeGameUrl}}">
       Go to Game
