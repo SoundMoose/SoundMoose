@@ -10,22 +10,30 @@
 >
 
   <div class="bottom-icons">
+    <!-- @todo factor this out into its own component -->
+    <div *ngIf="showAddedToPlaylist" [@fadeInOut]="'in'" style="position:absolute; background: #000; opacity: 0.85; padding: 7px;  bottom: 50px; left: 7px; z-index: 9002">Added to playlist!</div>
+    <div *ngIf="showFavoritedMessage" [@fadeInOut]="'in'" style="position:absolute; background: #000; opacity: 0.85; padding: 7px;  bottom: 50px; left: 7px; z-index: 9002">You favorited this track!</div>
+    <div *ngIf="showUnfavoritedMessage" [@fadeInOut]="'in'" style="position:absolute; background: #000; opacity: 0.85; padding: 7px;  bottom: 50px; left: 7px; z-index: 9002">You unfavorited this track!</div>
+    <div *ngIf="showLoginMessage" [@fadeInOut]="'in'" style="position:absolute; background: #000; opacity: 0.85; padding: 7px;  bottom: 50px; left: 7px; z-index: 9002">Please log in to use playlists and favorites!</div>
+    <!-- end todo -->
+
     <i [ngClass]="{
      big: true,
      icon: true,
      soundcloud: topTrack.platform == 'soundcloud',
      spotify: topTrack.platform == 'spotify'
     }" style="position: absolute; bottom: 20px; left: 10px;"></i>
-      <span >
+      <span>
         <i
-          *ngIf="isFavorited !== null"
+          *ngIf="isFavorited !== null && bottomIconHover"
           (click)="toggleFavorite()"
           [ngClass]="{
             big: true,
             icon: true,
             heart: true,
             'bottom-icons': true,
-            empty: !isFavorited
+            empty: !isFavorited,
+            clickable: true
           }"
           style="cursor: pointer; position: absolute; bottom: 20px; left: 60px;"
         >
@@ -36,8 +44,10 @@
             big: true,
             icon: true,
             'bottom-icons': true,
-            list: true
+            list: true,
+            clickable: true
           }"
+          *ngIf="bottomIconHover"
           style="cursor: pointer; position: absolute; bottom: 20px; left: 110px;"
         >
         </i>

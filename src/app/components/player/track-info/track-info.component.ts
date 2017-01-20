@@ -15,6 +15,7 @@ import { Track } from '../../../models/track.model';
 import { PlayerState } from '../../../reducers/player.reducer';
 import { AppStore } from '../../../models/appstore.model';
 import { Player } from '../../../models/player.model';
+import { Auth } from '../../../services/auth.service';
 import { Subscription} from 'rxjs/Subscription';
 
 import { TrackActions } from '../../../actions/track.actions';
@@ -55,8 +56,16 @@ export class TrackInfoComponent {
   isFavorited: boolean = null;
   favorites$;
   favoritesSubscription: Subscription;
+  showLoginMessage: boolean = false;
+  showFavoritedMessage: boolean = false;
+  showUnfavoritedMessage: boolean = false;
 
-  constructor (private store$: Store<AppStore>, private trackActions: TrackActions, private favoriteActions: FavoriteActions) {
+  constructor (
+    private store$: Store<AppStore>,
+    private trackActions: TrackActions,
+    private favoriteActions: FavoriteActions,
+    private auth: Auth
+  ) {
     this.player$ = this.store$.select(s => s.player);
     this.currentTrack$ = this.player$.map((item : PlayerState) => item.currentTrack);
 
@@ -104,12 +113,22 @@ export class TrackInfoComponent {
     this.store$.dispatch(this.trackActions.togglePlayPause(track, tracklist));
   }
 
+
   toggleFavorite() {
+    if (!this.auth.authenticated()) {
+      this.showLoginMessage = true;
+      setTimeout(() => { this.showLoginMessage = false; }, 1000);
+      return;
+    }
     this.isFavorited = !this.isFavorited;
     if (this.isFavorited) {
       this.store$.dispatch(this.favoriteActions.addFavorite(this.currentTrack));
+      this.showFavoritedMessage = true;
+      setTimeout(() => { this.showFavoritedMessage = false; }, 1000);
     } else {
       this.store$.dispatch(this.favoriteActions.removeFavorite(this.currentTrack));
+      this.showUnfavoritedMessage = true;
+      setTimeout(() => { this.showUnfavoritedMessage = false; }, 1000);
     }
   }
 

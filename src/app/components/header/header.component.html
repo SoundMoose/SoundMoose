@@ -5,7 +5,12 @@
     <search></search>
     <div class="right-icons" [ngStyle]="{'margin':'8px', 'position':'relative'}">
 
-      <button style="color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; padding: 8px; top: -2px; position: relative;" class="ui primary button mini" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
+      <button
+        style="color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; padding: 8px; top: -2px; position: relative;"
+        class="ui primary button mini"
+        (click)="auth.login()"
+        *ngIf="auth.authenticated()=== false"
+      >Log In</button>
 
         <div
           style="display: inline-block; cursor: pointer;"
@@ -29,14 +34,14 @@
               <div class="item" style="padding-bottom: 15px;">
                 <div class="content">
                   <div class="header">
-                    <a routerLink="/user" style="color: #ffffff;">Favorites/playlists</a>
+                    <a routerLink="/user">Favorites/playlists</a>
                   </div>
                 </div>
               </div>
-              <div class="item">
+              <div (click)="logout()" class="item">
                 <div class="content">
                   <div class="header">
-                    <a (click)="auth.logout()" style="color: #ffffff;">Log out</a>
+                    <a>Log out</a>
                   </div>
                 </div>
               </div>
@@ -69,8 +74,7 @@
               <div class="content">
                 <div class="header">
                   <a
-                    routerLink="/threeD"
-                    style="color: #ffffff;">
+                    routerLink="/threeD">
                     3D Experiments
                   </a>
                 </div>
@@ -82,8 +86,7 @@
                 <div class="header" style="padding-top:10px">
                   <a
                     target="_blank"
-                    href="https://github.com/hrr20-over9000/SoundMoose"
-                    style="color: #ffffff;">
+                    href="https://github.com/hrr20-over9000/SoundMoose">
                     About
                   </a>
                 </div>

@@ -15,6 +15,13 @@ export default function (state = initialState, action: Action): SoundmooseUser {
   switch (action.type) {
     case SoundmooseUserActions.SET_PROFILE_DATA:
       return action.payload;
+    case SoundmooseUserActions.LOGGED_OUT:
+      return {
+        loggedIn: false,
+        userId: '',
+        name: '',
+        avatarUrl: ''
+      };
     default:
       return state;
   }

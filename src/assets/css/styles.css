@@ -68,6 +68,11 @@ player-controls .icon:hover {
   color: #fff;
   cursor: pointer;
 }
+
+.bottom-icons .clickable.icon:hover {
+  text-shadow: 0 0 1px rgb(251, 189, 8), 0 0 1px rgb(251, 189, 8);
+}
+
 .footer .play.icon {
   transform: scale(1.8);
 }
@@ -210,7 +215,7 @@ player-controls .icon:hover {
   z-index: 1;
 }
 top-tracks .ui.selection.dropdown {
-  border: 1px solid #aaa;
+  /*border: 1px solid #aaa;*/
 }
 top-tracks .ui.selection.dropdown.active,
 top-tracks .ui.selection.active.dropdown .menu,
@@ -309,4 +314,9 @@ search i.search.icon {
   transform: scale(1.2);
   position: absolute;
   top: 1px;
+}
+
+.ui.selection.dropdown.active,
+.ui.selection.dropdown.visible {
+  z-index: 2001 !important;
 }

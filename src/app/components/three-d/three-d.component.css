@@ -29,3 +29,7 @@
     padding: 10px;
     cursor: pointer;
 }
+
+.three-d-selectors:hover {
+    color: #fff;
+}

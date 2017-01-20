@@ -58,6 +58,8 @@ import { TrackProgressComponent } from './components/player/track-progress-conta
 import { TrackProgressContainerComponent } from './components/player/track-progress-container/track-progress-container.component';
 import { TopTrackTileComponent } from './components/top-tracks/top-track-tile/top-track-tile.component';
 import { TrackDetailComponent } from './components/track-detail/track-detail.component';
+import { TrackDetailTopPaneComponent } from './components/track-detail/track-detail-top-pane/track-detail-top-pane.component';
+import { TrackDetailBottomPaneComponent } from './components/track-detail/track-detail-bottom-pane/track-detail-bottom-pane.component';
 import { SearchComponent } from './components/search/search.component';
 import { SearchResultsComponent } from './components/search/search-results/search-results.component';
 import { UserComponent } from './components/user/user.component';
@@ -91,10 +93,12 @@ import { PlayerActions } from './actions/player.actions';
 import { FavoriteActions } from './actions/favorite.actions';
 import { AudioControlsActions } from './actions/audio-controls.actions';
 import { PlaylistActions } from './actions/playlist.actions';
+import { TrackDetailsActions } from './actions/track-details.actions';
 import { YoutubePipe } from './youtube.pipe';
 
 // Application wide providers
 const APP_PROVIDERS = [
+  Auth,
   FavoriteService,
   SpotifyService,
   LastfmService,
@@ -110,7 +114,8 @@ const APP_PROVIDERS = [
   PlaylistService,
   PlaylistActions,
   SearchActions,
-  SoundmooseUserActions
+  SoundmooseUserActions,
+  TrackDetailsActions
 ];
 
 const metaReducers = (ENV !== 'production') ? [storeFreeze, combineReducers] : [combineReducers];
@@ -149,6 +154,8 @@ const store = compose(...metaReducers)({
     WaveformVisualizerComponent,
     EqualizerComponent,
     TrackDetailComponent,
+    TrackDetailTopPaneComponent,
+    TrackDetailBottomPaneComponent,
     SimilarArtistsComponent,
     SimilarTracksComponent,
     YoutubePipe,
