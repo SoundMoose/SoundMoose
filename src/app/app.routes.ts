@@ -5,6 +5,7 @@ import { SearchResultsComponent } from './components/search/search-results/searc
 import { ThreeDComponent } from './components/three-d/three-d.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
 import { UserComponent } from './components/user/user.component';
+import { AboutComponent } from './components/about/about.component';
 import { GamePlayerComponent } from './components/game/game-player/game-player.component';
 
 export const ROUTES: Routes = [
@@ -16,6 +17,7 @@ export const ROUTES: Routes = [
   { path: 'search/:query', component: SearchResultsComponent },
   { path: 'threeD', component: ThreeDComponent },
   { path: 'user', component: UserComponent},
+  { path: 'about', component: AboutComponent},
   { path: 'game/:platform/:trackId/:start/:end/:hostId', component: GamePlayerComponent },
   { path: '**', redirectTo: 'home'}
 
