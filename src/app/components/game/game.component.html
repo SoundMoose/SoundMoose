@@ -1,14 +1,25 @@
-<h3>Hi from game.</h3>
+<div class="ui segment" style="margin-top: 20px; margin-right: 20px; background: rgba(0,0,0,0.2);">
+  <h3>Guess the song!</h3>
 
-<input type="number" name="start" [(ngModel)]="start" />
-<input type="number" name="end" [(ngModel)]="end" />
+  <p>You're about to generate a link where you can play "Guess the song" with your friends!</p>
+  <p>To get started, load a song in the music player and press the "Start here"/"End here" buttton to mark beginning and end points.</p>
 
-<button (click)="handleClick()">Preview</button>
+  <button class="ui primary button mini" style="margin-top: 10px; color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; font-weight: 100; padding: 8px;" (click)="handleStartEndClick()">
+    <ng-container *ngIf="!started">Start here</ng-container>
+    <ng-container *ngIf="started">End here</ng-container>
+  </button>
 
-<h2>start {{start}}</h2>
-<h2>end {{end}}</h2>
+  <h3>Start time: {{ millisToMinutesSeconds(start * 1000) }}</h3>
+  <h3>End time: {{ millisToMinutesSeconds(end * 1000) }}</h3>
 
-<input type="text" name="link" value="{{absoluteGameUrl}}" />
-<a routerLink="{{relativeGameUrl}}">
-  Go to Game
-</a>
+  <button *ngIf="end && end > start" class="ui primary button mini" style="margin-top: 10px; margin-bottom: 10px; color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; font-weight: 100; padding: 8px;" (click)="handlePreviewClick()">Preview excerpt and get link!</button>
+
+  <div *ngIf="showLinks">
+
+    <p style="margin-top: 10px; margin-bottom: 10px;">Give this URL to your friends: <input type="text" name="link" style="color: #000" value="{{absoluteGameUrl}}" /></p>
+
+    <a class="ui primary button mini" style="margin-top: 10px; color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; font-weight: 100; padding: 8px;" routerLink="{{relativeGameUrl}}">
+      Go to Game
+    </a>
+  </div>
+</div>

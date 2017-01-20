@@ -7,7 +7,7 @@ background: linear-gradient(to left, #232526 , #414345); margin-top: 35px;">
 
 
           <!-- GAME -->
-          <button (click)="gameToggle()">Create Game</button>
+          <button class="ui primary button mini" style="margin-top: 10px; color: white; background:transparent; border: 1px solid #ddd; font-size: 14px; font-family: Interstate; font-weight: 100; padding: 8px;" (click)="gameToggle()">Create Game</button>
           <game
             *ngIf="gameToggled && audioSrc"
             [audioSrc]="audioSrc"
