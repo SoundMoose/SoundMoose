@@ -30,17 +30,22 @@ class Playlist(models.Model):
     def __unicode__(self):
         return '%s' % (self.user_id)
 
-
+# Same as Tracks just without an order.
 class Favorite(models.Model):
   track_id = models.CharField(max_length=50)
+  title = models.CharField(max_length=250)
+  artist = models.CharField(max_length=250)
+  img_url = models.CharField(max_length=250)
+  stream_url = models.CharField(max_length=250)
+  duration = models.IntegerField()
   platform = models.CharField(max_length=50)
 
   class Meta:
     verbose_name = "Favorite"
-    verbose_name_plural = "Favorite"
+    verbose_name_plural = "Favorites"
 
-  def __unicode__(self):
-    return '%s - %s' % (self.track_id, self.platform)
+    def __unicode__(self):
+      return '%s' % (self.title)
 
 class FavoritesList(models.Model):
   user_id = models.CharField(max_length=250, primary_key=True)
