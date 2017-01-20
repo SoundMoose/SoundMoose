@@ -17,41 +17,43 @@
     <div *ngIf="showLoginMessage" [@fadeInOut]="'in'" style="position:absolute; background: #000; opacity: 0.85; padding: 7px;  bottom: 50px; left: 7px; z-index: 9002">Please log in to use playlists and favorites!</div>
     <!-- end todo -->
 
-    <i [ngClass]="{
-     big: true,
-     icon: true,
-     soundcloud: topTrack.platform == 'soundcloud',
-     spotify: topTrack.platform == 'spotify'
-    }" style="position: absolute; bottom: 20px; left: 10px;"></i>
-      <span>
-        <i
-          *ngIf="isFavorited !== null && bottomIconHover"
-          (click)="toggleFavorite()"
-          [ngClass]="{
-            big: true,
-            icon: true,
-            heart: true,
-            'bottom-icons': true,
-            empty: !isFavorited,
-            clickable: true
-          }"
-          style="cursor: pointer; position: absolute; bottom: 20px; left: 60px;"
-        >
-        </i>
-        <i
-          (click)="addToPlaylist()"
-          [ngClass]="{
-            big: true,
-            icon: true,
-            'bottom-icons': true,
-            list: true,
-            clickable: true
-          }"
-          *ngIf="bottomIconHover"
-          style="cursor: pointer; position: absolute; bottom: 20px; left: 110px;"
-        >
-        </i>
-      </span>
+    <div *ngIf="bottomIconHover" [@fadeInOut]="'in'" class="bottom-icon-gradient">
+      <i [ngClass]="{
+       big: true,
+       icon: true,
+       soundcloud: topTrack.platform == 'soundcloud',
+       spotify: topTrack.platform == 'spotify'
+     }" style="position: absolute; bottom: 10px; left: 10px;"></i>
+        <span>
+          <i
+            *ngIf="isFavorited !== null && bottomIconHover"
+            (click)="toggleFavorite()"
+            [ngClass]="{
+              big: true,
+              icon: true,
+              heart: true,
+              'bottom-icons': true,
+              empty: !isFavorited,
+              clickable: true
+            }"
+            style="cursor: pointer; position: absolute; bottom: 10px; left: 60px;"
+          >
+          </i>
+          <i
+            (click)="addToPlaylist()"
+            [ngClass]="{
+              big: true,
+              icon: true,
+              'bottom-icons': true,
+              list: true,
+              clickable: true
+            }"
+            *ngIf="bottomIconHover"
+            style="cursor: pointer; position: absolute; bottom: 10px; left: 110px;"
+          >
+          </i>
+        </span>
+      </div>
 
   </div>
   <img class="album-art" src="{{topTrack.imgUrl}}">
