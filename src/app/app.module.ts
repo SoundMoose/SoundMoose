@@ -46,6 +46,7 @@ import { ROUTES } from './app.routes';
 
 // App is our top level component
 import { AppComponent } from './app.component';
+import { AboutComponent } from './components/about/about.component';
 import { TopTracksComponent } from './components/top-tracks/top-tracks.component';
 import { SimilarArtistsComponent } from './components/track-detail/similar-artists/similar-artists.component';
 import { SimilarTracksComponent } from './components/track-detail/similar-tracks/similar-tracks.component';
@@ -140,6 +141,7 @@ const store = compose(...metaReducers)({
   bootstrap: [ AppComponent ],
   declarations: [
     AppComponent,
+    AboutComponent,
     TopTracksComponent,
     PlayerComponent,
     PlayerControlsComponent,
