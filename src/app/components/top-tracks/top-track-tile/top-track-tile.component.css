@@ -61,3 +61,14 @@ i.icons {
     transform: scale(1.0);
   }
 }
+
+.bottom-icon-gradient {
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    bottom: 10px;
+
+    background: -webkit-linear-gradient(rgba(76,76,76,0) 0%, rgba(76,76,76,0.48) 48%, rgba(19,19,19,0.69) 69%, rgba(19,19,19,1) 100%);
+    background: -o-linear-gradient(rgba(76,76,76,0) 0%, rgba(76,76,76,0.48) 48%, rgba(19,19,19,0.69) 69%, rgba(19,19,19,1) 100%);
+    background: linear-gradient(rgba(76,76,76,0) 0%, rgba(76,76,76,0.48) 48%, rgba(19,19,19,0.69) 69%, rgba(19,19,19,1) 100%);
+}
