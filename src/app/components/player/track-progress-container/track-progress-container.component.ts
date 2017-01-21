@@ -38,20 +38,20 @@ export class TrackProgressContainerComponent implements OnInit, OnDestroy {
   // 'detail' or 'bottom'
   @Input() progressContainerType: string;
 
-  constructor (private playerService: PlayerService, private store$: Store<AppStore>, private route: ActivatedRoute,) {
+  constructor (private playerService: PlayerService, private store$: Store<AppStore>, private route: ActivatedRoute, ) {
   }
 
   ngOnInit() {
     // This component is used both on the detail page and in the bottom part of the page.
     // Split this out into two separate components if the logic becomes too convoluted.
     this.player$ = this.store$.select(s => s.player);
-    if (this.progressContainerType == 'detail') {
+    if (this.progressContainerType === 'detail') {
       this.playerSubscription = this.player$.subscribe((p) => {
-        if (p.currentTrack && this.route.snapshot.params['trackId'] == p.currentTrack.trackId) {
+        if (p.currentTrack && this.route.snapshot.params['trackId'] === p.currentTrack.trackId) {
           this.setPlayerInfo();
         }
       });
-    } else if (this.progressContainerType == 'bottom') {
+    } else if (this.progressContainerType === 'bottom') {
       this.setPlayerInfo();
     }
   }
@@ -76,7 +76,7 @@ export class TrackProgressContainerComponent implements OnInit, OnDestroy {
       }
       let currentProgressInMilliseconds = item * 1000;
       this.progressMinutesSeconds = this.millisToMinutesSeconds(currentProgressInMilliseconds);
-      this.currentProgress = Math.floor(((currentProgressInMilliseconds/this.duration)*1000)) * this.multiplier / 1000;
+      this.currentProgress = Math.floor(((currentProgressInMilliseconds / this.duration) * 1000)) * this.multiplier / 1000;
     });
     this.playerInfoSubscription = this.player$.subscribe((item) => {
       this.duration = +item.currentTrack.duration;
@@ -92,7 +92,7 @@ export class TrackProgressContainerComponent implements OnInit, OnDestroy {
       seconds = 0;
       minutes++;
     }
-    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
   }
 
   onSliderChanged(event) {

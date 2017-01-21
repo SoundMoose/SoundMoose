@@ -65,6 +65,6 @@ export class GameComponent implements OnInit {
       seconds = 0;
       minutes++;
     }
-    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
   }
 }

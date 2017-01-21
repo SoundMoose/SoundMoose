@@ -14,7 +14,7 @@ import { LastfmService } from './../../../services/lastfm.service';
   styleUrls: ['similar-artists.component.css']
 })
 export class SimilarArtistsComponent {
-  showAll : boolean = false;
+  showAll: boolean = false;
 
   @Input() currentArtist: string;
   similarArtists$: Observable<any>;

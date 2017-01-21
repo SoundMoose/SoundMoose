@@ -30,11 +30,11 @@ export class ThreeDComponent {
   }
 
   toggleControlPanel () {
-    var controlPanel = document.getElementById('controlPanel');
-    var actionBtn = document.getElementById('hide');
+    let controlPanel = document.getElementById('controlPanel');
+    let actionBtn = document.getElementById('hide');
 
-    var left = controlPanel.style.left;
-    if (left == '0px' || left == '') {
+    let left = controlPanel.style.left;
+    if (left === '0px' || left === '') {
       controlPanel.style.left = '-180px';
     } else {
       controlPanel.style.left = '0px';

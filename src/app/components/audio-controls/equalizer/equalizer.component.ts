@@ -11,16 +11,16 @@ import { AudioStream } from '../../../audio-element';
 import { AudioControlsActions } from '../../../actions/audio-controls.actions';
 
 @Component({
-  //changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'equalizer',
   styleUrls: [ './equalizer.component.css' ],
   templateUrl: './equalizer.component.html'
 })
 
 export class EqualizerComponent implements OnDestroy {
-  wrapperHovered : boolean = false;
+  wrapperHovered: boolean = false;
 
-  audioControls$ : Observable<AudioControls>;
+  audioControls$: Observable<AudioControls>;
 
   bandRange: number[];
   highGain: any;
@@ -84,8 +84,8 @@ export class EqualizerComponent implements OnDestroy {
   }
 
   midSlideHandler($event, i) {
-    let frequencyBandId = i+1;
-    this["midGain" + frequencyBandId] = $event.value;
+    let frequencyBandId = i + 1;
+    this['midGain' + frequencyBandId] = $event.value;
     this.store$.dispatch(this.AudioControlsActions.adjustMids($event.value, frequencyBandId));
   }
 

@@ -96,11 +96,11 @@ export default function (state = initialState, action: Action): AudioControlsSta
     }
     case AudioControlsActions.ADJUST_MIDS:  {
 
-      let bandName = "midBand" + action.payload.frequencyBandId;
+      let bandName = 'midBand' + action.payload.frequencyBandId;
       let newState = new Object();
       newState[bandName] = {
-        "gain": {
-          "value": action.payload.mids
+        'gain': {
+          'value': action.payload.mids
         }
       };
       return Object.assign({}, state, newState);

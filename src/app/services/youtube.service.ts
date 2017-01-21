@@ -9,7 +9,7 @@ import { youtubeApiKey } from '../config/superSecretKeys';
 
 @Injectable()
 export class YoutubeService {
-  constructor(private _http:Http, private store: Store<AppStore>) {
+  constructor(private _http: Http, private store: Store<AppStore>) {
   }
 
   searchYoutubeVideo(query) {

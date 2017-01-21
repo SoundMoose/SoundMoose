@@ -9,11 +9,11 @@ import { lastfmApiKey } from '../config/superSecretKeys';
 
 @Injectable()
 export class LastfmService {
-  constructor(private _http:Http, private store: Store<AppStore>) {
+  constructor(private _http: Http, private store: Store<AppStore>) {
   }
 
   getSimilarTracks(trackName, artistName) {
-    const queryUrl = 'http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist=' + encodeURIComponent(artistName)+ '&track='+ encodeURIComponent(trackName) + '&api_key='+lastfmApiKey+'&format=json';
+    const queryUrl = 'http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist=' + encodeURIComponent(artistName) + '&track=' + encodeURIComponent(trackName) + '&api_key=' + lastfmApiKey + '&format=json';
 
     return this._http.get(queryUrl)
       .map(res => res.json())
@@ -24,9 +24,9 @@ export class LastfmService {
       })
       .map(items => items.map(item => {
         return {
-          trackName :item.name,
+          trackName : item.name,
           artist: item.artist.name,
-          lastfmUrl :item.url,
+          lastfmUrl : item.url,
           image: item.image[1]['#text'],
           searchUrl: '/search/' + item.name + ' ' + item.artist.name
         };
@@ -34,7 +34,7 @@ export class LastfmService {
   }
 
   getSimilarArtists(artistName) {
-    const queryUrl =  'http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=' + encodeURIComponent(artistName)+ '&api_key='+lastfmApiKey+'&format=json';
+    const queryUrl =  'http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=' + encodeURIComponent(artistName) + '&api_key=' + lastfmApiKey + '&format=json';
     return this._http.get(queryUrl)
       .map(res => res.json())
       .map(item => {

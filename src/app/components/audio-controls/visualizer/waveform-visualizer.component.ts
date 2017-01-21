@@ -9,7 +9,7 @@ import { AudioStream } from '../../../audio-element';
 
 
 @Component({
-  //changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'visualizer-2D-waveform',
   styleUrls: [ '../audio-controls.component.css' ],
   templateUrl: './waveform-visualizer.component.html'
@@ -41,7 +41,7 @@ export class WaveformVisualizerComponent implements OnInit, OnDestroy {
     this.hasCanvas = false;
 
     this.waveformCanvas = document.getElementById('visualizerWaveformCanvas');
-    this.waveformCanvasCtx = this.waveformCanvas.getContext("2d");
+    this.waveformCanvasCtx = this.waveformCanvas.getContext('2d');
     this.waveformWIDTH = this.waveformCanvas.width;
     this.waveformHEIGHT = this.waveformCanvas.height;
     this.waveformCanvasCtx.clearRect(0, 0, this.waveformWIDTH, this.waveformHEIGHT);
@@ -49,7 +49,7 @@ export class WaveformVisualizerComponent implements OnInit, OnDestroy {
     this.waveformDataArray = new Uint8Array(this.waveformBufferLength);
 
     this.hasCanvas = true;
-    var that = this;
+    let that = this;
     this.renderWaveInterval = window.setInterval(function() {
       // that.waveformDataArray = that.audioSrc.waveformDataArray;
       that.drawWaveOscilliscope(that);
@@ -75,7 +75,7 @@ export class WaveformVisualizerComponent implements OnInit, OnDestroy {
       context.waveformCanvasCtx.fillRect(0, 0, context.waveformWIDTH, context.waveformHEIGHT);
 
       context.waveformCanvasCtx.lineWidth = 2;
-      context.waveformCanvasCtx.strokeStyle = 'rgb(173, 187, 194)';;
+      context.waveformCanvasCtx.strokeStyle = 'rgb(173, 187, 194)';
       context.waveformCanvasCtx.beginPath();
 
       context.sliceWidth = context.waveformWIDTH * 1.0 / context.waveformBufferLength;
@@ -84,7 +84,7 @@ export class WaveformVisualizerComponent implements OnInit, OnDestroy {
       for (let j = 0; j < context.waveformBufferLength; j++) {
 
         context.waveformV = context.waveformDataArray[j] / 128.0;
-        context.waveformY = context.waveformV * context.waveformHEIGHT/2;
+        context.waveformY = context.waveformV * context.waveformHEIGHT / 2;
 
         if (j === 0) {
           context.waveformCanvasCtx.moveTo(context.waveformX, context.waveformY);
@@ -94,7 +94,7 @@ export class WaveformVisualizerComponent implements OnInit, OnDestroy {
         context.waveformX += context.sliceWidth;
       }
 
-      context.waveformCanvasCtx.lineTo(context.waveformCanvas.width, context.waveformCanvas.height/2);
+      context.waveformCanvasCtx.lineTo(context.waveformCanvas.width, context.waveformCanvas.height / 2);
       context.waveformCanvasCtx.stroke();
     };
   };

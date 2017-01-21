@@ -76,7 +76,7 @@ export class PlayerActions {
   }
 
   static START_AUDIO_PLAYING = '[Player] Start <audio> playing';
-  startAudioPlaying(timerInfo : {}): Action {
+  startAudioPlaying(timerInfo: {}): Action {
     return {
       type: PlayerActions.START_AUDIO_PLAYING,
       payload: timerInfo  // <-- Do we need this?

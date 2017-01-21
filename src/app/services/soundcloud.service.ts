@@ -19,7 +19,7 @@ import { SearchActions } from '../actions/search.actions';
 @Injectable()
 export class SoundCloudService {
 
-  constructor(private _http:Http, private store: Store<AppStore>, private searchActions: SearchActions) {
+  constructor(private _http: Http, private store: Store<AppStore>, private searchActions: SearchActions) {
     this.store.select(s => s.search)
       .map(item => item.query)
       .debounceTime(400)

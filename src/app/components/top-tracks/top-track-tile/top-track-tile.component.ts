@@ -28,7 +28,7 @@ import { SpinnerState } from '../../../reducers/spinner.reducer';
 import { TracksState } from './../../../reducers/tracks.reducer';
 
 @Component({
-  //changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'top-track-tile',
   styleUrls: ['../top-tracks.component.css', './top-track-tile.component.css'],
   templateUrl: './top-track-tile.component.html',
@@ -119,7 +119,7 @@ export class TopTrackTileComponent implements OnInit, OnDestroy {
       .map((playerStatus: Player) => playerStatus.isPlaying && playerStatus.currentTrack.trackId === this.topTrack.trackId);
     // Map the player stream to see if the player is playing the current song
     this.selected$ = this.player$
-      .map((playerStatus: Player)=> playerStatus.currentTrack.trackId === this.topTrack.trackId);
+      .map((playerStatus: Player) => playerStatus.currentTrack.trackId === this.topTrack.trackId);
     // Map the spinner stream to see if the song is loading
     this.isLoading$ = this.spinner$
       .map((spinnerStatus: SpinnerState) => spinnerStatus.isLoadSpinning);
@@ -131,7 +131,7 @@ export class TopTrackTileComponent implements OnInit, OnDestroy {
       .subscribe(favorites => {
         let favorited = false;
         favorites.forEach((favorite) => {
-          if (favorite.trackId == this.topTrack.trackId && favorite.platform == this.topTrack.platform) {
+          if (favorite.trackId === this.topTrack.trackId && favorite.platform === this.topTrack.platform) {
             favorited = true;
           }
         });
@@ -153,7 +153,7 @@ export class TopTrackTileComponent implements OnInit, OnDestroy {
 
   goToDetail($event) {
     // Only go to detail page if we clicked outside of the play icon
-    if ($event.target.tagName != 'I') {
+    if ($event.target.tagName !== 'I') {
       this.router.navigate(['/track/' + this.topTrack.platform, this.topTrack.trackId]);
     }
   }

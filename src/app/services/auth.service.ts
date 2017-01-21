@@ -36,7 +36,7 @@ export class Auth {
       this.setUserProfile(JSON.parse(localStorage.getItem('profile')));
     }
     // Add callback for lock `authenticated` event
-    this.lock.on("authenticated", (authResult) => {
+    this.lock.on('authenticated', (authResult) => {
       localStorage.setItem('id_token', authResult.idToken);
       // Fetch profile information
       this.lock.getProfile(authResult.idToken, (error, profile) => {

@@ -34,7 +34,7 @@ export class FrequencyVisualizerComponent {
     this.hasfrequencyCanvas = false;
 
     this.frequencyCanvas = document.getElementById('visualizerFrequencyCanvas');
-    this.frequencyCanvasCtx = this.frequencyCanvas.getContext("2d");
+    this.frequencyCanvasCtx = this.frequencyCanvas.getContext('2d');
     this.WIDTH = this.frequencyCanvas.width;
     this.HEIGHT = this.frequencyCanvas.height;
     this.frequencyCanvasCtx.clearRect(0, 0, this.WIDTH, this.HEIGHT);
@@ -42,7 +42,7 @@ export class FrequencyVisualizerComponent {
     this.hasfrequencyCanvas = true;
 
     this.frequencyDataArray = new Uint8Array(this.audioSrc.frequencyAnalyser.frequencyBinCount);
-    var that = this;
+    let that = this;
     this.renderFreqInterval = window.setInterval(function() {
       // that.frequencyDataArray = that.audioSrc.frequencyDataArray;
       that.drawFrequencyBars(that);
@@ -74,8 +74,8 @@ export class FrequencyVisualizerComponent {
 
       for (let i = 0; i < context.frequencyBufferLength; i++) {
         context.barHeight = context.frequencyDataArray[i];
-        context.frequencyCanvasCtx.fillStyle = 'rgb('+ (context.barHeight+0) + ','+ (context.barHeight+0) + ','+ (context.barHeight+0) + ')';
-        context.frequencyCanvasCtx.fillRect(context.x, context.HEIGHT-context.barHeight/2, context.barWidth, context.barHeight/2);
+        context.frequencyCanvasCtx.fillStyle = 'rgb(' + (context.barHeight + 0) + ',' + (context.barHeight + 0) + ',' + (context.barHeight + 0) + ')';
+        context.frequencyCanvasCtx.fillRect(context.x, context.HEIGHT - context.barHeight / 2, context.barWidth, context.barHeight / 2);
         context.x += context.barWidth + 1;
       }
     }

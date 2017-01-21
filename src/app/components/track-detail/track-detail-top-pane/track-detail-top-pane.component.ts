@@ -14,8 +14,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-declare var $: any;
-declare var Waveform: any;
+declare let $: any;
+declare let Waveform: any;
 
 import { AppStore } from './../../../models/appstore.model';
 import { Track } from './../../../models/track.model';
@@ -83,7 +83,7 @@ export class TrackDetailTopPaneComponent implements OnInit {
     this.trackDetailsSubscription = this.trackDetails$.subscribe(item => {
       this.track = item.track;
       this.trackId = item.track.trackId;
-      if (this.track.platform == 'spotify') {
+      if (this.track.platform === 'spotify') {
         this.spotifyEmbedUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://embed.spotify.com/?uri=spotify:track:' + this.trackId);
       }
       this.largeArtworkUrl = item.largeArtworkUrl;
@@ -91,7 +91,7 @@ export class TrackDetailTopPaneComponent implements OnInit {
       if (item.created) {
         this.created = new Date(item.created).toISOString();
       }
-      if (this.waveformUrl != '') {
+      if (this.waveformUrl !== '') {
         this.getWaveform();
       }
     });
@@ -107,18 +107,18 @@ export class TrackDetailTopPaneComponent implements OnInit {
 
   getWaveform() {
     // https://github.com/soundcloud/waveformjs endpoint
-    $.getJSON("http://www.soundmoose.com:9292/w?callback=?", {
+    $.getJSON('http://www.soundmoose.com:9292/w?callback=?', {
       url: this.waveformUrl.replace(/^https:\/\//i, 'http://'),
     }, function(d){
-      var sound;
-      var waveform = new Waveform({
-        container: $(".waveform").get(0),
+      let sound;
+      let waveform = new Waveform({
+        container: $('.waveform').get(0),
         data: d
       });
-      var ctx = waveform.context;
-      var gradient = ctx.createLinearGradient(0, 0, 0, waveform.height);
-      gradient.addColorStop(0.0, "#FBBD08");
-      gradient.addColorStop(1.0, "#FF9A00");
+      let ctx = waveform.context;
+      let gradient = ctx.createLinearGradient(0, 0, 0, waveform.height);
+      gradient.addColorStop(0.0, '#FBBD08');
+      gradient.addColorStop(1.0, '#FF9A00');
       waveform.innerColor = gradient;
       waveform.redraw();
     });
@@ -140,10 +140,10 @@ export class TrackDetailTopPaneComponent implements OnInit {
     return relative + '%';
   }
 
-  private trim(string) {
-    var length = 100;
-    return string.length > length ?
-                    string.substring(0, length - 3) + "..." :
-                    string;
+  private trim(str) {
+    let length = 100;
+    return str.length > length ?
+                    str.substring(0, length - 3) + '...' :
+                    str;
   }
 }
