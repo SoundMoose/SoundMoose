@@ -28,7 +28,7 @@
 <img *ngIf="(currentTrack$ | async)?.id !== 0" class="album-art" src="{{ (currentTrack$ | async)?.imgUrl }}" />
 <div *ngIf="(currentTrack$ | async)?.id !== 0" class="current-track" >
   <span (mouseenter)="playingTrackHovered = true" (mouseleave)="playingTrackLeave()" class="playing">Playing track</span>
-  <div class="track-info"><a routerLink="/track/{{(currentTrack$ | async)?.platform}}/{{(currentTrack$ | async)?.id}}">{{ trim((currentTrack$ | async)?.artist + " - " + (currentTrack$ | async)?.title) }}</a></div>
+  <div class="track-info"><a routerLink="/track/{{(currentTrack$ | async)?.platform}}/{{(currentTrack$ | async)?.trackId}}">{{ trim((currentTrack$ | async)?.artist + " - " + (currentTrack$ | async)?.title) }}</a></div>
 </div>
 <div style="position: relative;
   right: -90px;
