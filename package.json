@@ -86,7 +86,7 @@
     "angular2-moment": "^1.1.0",
     "ansi-regex": "^2.0.0",
     "assets-webpack-plugin": "^3.4.0",
-    "auth0-lock": "^10.9.2",
+    "auth0-lock": "^10.10.1",
     "core-js": "^2.4.1",
     "hammerjs": "^2.0.8",
     "howler": "^2.0.2",
