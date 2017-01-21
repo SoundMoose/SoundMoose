@@ -25,7 +25,7 @@ export class PlayerService {
 
   currentTrack$: Observable<Track>;
   tracksList: Track[];
-  currentTrackId: number;
+  currentTrackId: string;
   audio: HTMLAudioElement;
   playingSubscription: Subscription;
   progressInfo: {};
@@ -80,7 +80,7 @@ export class PlayerService {
       .subscribe(() => this.store$.dispatch(playerActions.startAudioLoading()));
 
     this.currentTrack$
-      .subscribe(track => this.currentTrackId = track.id);
+      .subscribe(track => this.currentTrackId = track.trackId);
 
     this.currentTrack$
       .subscribe(item => this.play(item.streamUrl));
@@ -213,7 +213,7 @@ export class PlayerService {
     let currentIndex = this.tracksList.reduce((acc, cur, index) => {
       if (acc !== null) {
         return acc;
-      } else if (cur.id === this.currentTrackId) {
+      } else if (cur.trackId === this.currentTrackId) {
         return index;
       } else {
         return null;

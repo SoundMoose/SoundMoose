@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppStore } from '../../../models/appstore.model';
 import { PlaylistActions } from '../../../actions/playlist.actions';
 import { TrackActions } from '../../../actions/track.actions';
+import { FavoriteActions } from '../../../actions/favorite.actions';
 import { Track } from '../../../models/track.model';
 import { Playlist } from '../../../models/playlist.model';
 
@@ -17,8 +18,15 @@ export class PlaylistTrackDetailsComponent {
   // Track info that is being passed in from the parent component.
   @Input() track: Track;
   @Input() playlist: Track[];
+  // playlist or favorite
+  @Input() type: string;
 
-  constructor(private store: Store<AppStore>, private playlistActions: PlaylistActions, private trackActions: TrackActions) {}
+  constructor(
+    private store: Store<AppStore>,
+    private playlistActions: PlaylistActions,
+    private trackActions: TrackActions,
+    private favoriteActions: FavoriteActions
+  ) {}
 
   // Convert time in milliseconds to M:SS format.
   millisToMinutesSeconds(millis) {
@@ -34,7 +42,12 @@ export class PlaylistTrackDetailsComponent {
   }
 
   removeMe() {
-    this.store.dispatch(this.playlistActions.removeTrack(this.track.trackId, this.track.platform));
+    if (this.type == 'playlist') {
+      this.store.dispatch(this.playlistActions.removeTrack(this.track.trackId, this.track.platform));
+    } else if (this.type == 'favorite') {
+      this.store.dispatch(this.favoriteActions.removeFavorite(this.track.trackId, this.track.platform));
+    }
+
   }
 
   clickHandler() {

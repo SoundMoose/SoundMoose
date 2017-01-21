@@ -80,7 +80,6 @@ export class SpotifyService {
       .map(item => {
         return {
             track: {
-              id: item.id,
               title: item.name,
               artist: item.artists[0].name,
               imgUrl: item.album.images[0].url,
@@ -115,7 +114,6 @@ export class SpotifyService {
     this.spotifySearch(term, 'track')
       .map(data => data.tracks.items)
       .map(items => items.map(item => ({
-          id: item.id,
           title: item.name,
           artist: item.artists[0].name,
           imgUrl: item.album.images[0].url,

@@ -12,7 +12,6 @@ describe('Track-Details Reducer', () => {
   beforeEach(() => {
     state = {
       track: {
-        id: 0,
         title: '',
         artist: '',
         imgUrl: '',
@@ -38,7 +37,6 @@ describe('Track-Details Reducer', () => {
 
     track = {
       track: {
-        id: 1,
         title: 'Tacos',
         artist: 'Mexican Food',
         imgUrl: 'http://www.google.com',

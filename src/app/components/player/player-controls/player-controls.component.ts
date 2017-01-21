@@ -22,7 +22,7 @@ export class PlayerControlsComponent implements OnDestroy {
   player$: Observable<Player>;
   tracks$: Observable<Track[]>;
   isPlaying: boolean;
-  currentTrackId: number;
+  currentTrackId: string;
   repeatTrack: boolean;
   shuffleTracks: boolean;
   showVisualization: boolean;
@@ -36,7 +36,7 @@ export class PlayerControlsComponent implements OnDestroy {
     this.player$ = this.store$.select(s => s.player);
     this.playerSubscription = this.player$.subscribe((item) => {
       this.isPlaying = item.isPlaying;
-      this.currentTrackId = item.currentTrack.id;
+      this.currentTrackId = item.currentTrack.trackId;
       this.repeatTrack = item.repeatTrack;
       this.shuffleTracks = item.shuffleTracks;
       this.showVisualization = item.showVisualization;

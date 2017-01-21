@@ -8,7 +8,6 @@ export type TrackDetailsState = TrackDetails;
 
 const initialState: TrackDetailsState = {
   track: {
-    id: 0,
     title: '',
     artist: '',
     imgUrl: '',

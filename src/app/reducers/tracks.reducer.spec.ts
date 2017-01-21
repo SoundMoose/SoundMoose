@@ -15,7 +15,6 @@ describe('Tracks Reducer', () => {
 
     tracks = [
       {
-        id: 1,
         title: 'Tacos',
         artist: 'Mexican Food',
         imgUrl: 'http://www.google.com',
@@ -23,7 +22,6 @@ describe('Tracks Reducer', () => {
         duration: 123,
         platform: 'pizza'
       }, {
-        id: 2,
         title: 'Burritos',
         artist: 'Mexican Food',
         imgUrl: 'http://www.google.com',

@@ -14,6 +14,8 @@ export default function (state = initialState, action: Action): FavoritesState {
       return [...state, action.payload];
     case FavoriteActions.REMOVE_FAVORITE:
       return state.filter(item => item.platform !== action.payload.platform && item.trackId !== action.payload.trackId);
+    case FavoriteActions.LOAD_FAVORITES_LIST:
+      return action.payload;
     default:
       return state;
   }
