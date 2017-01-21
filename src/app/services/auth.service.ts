@@ -1,4 +1,5 @@
-import { Injectable }      from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -14,15 +15,23 @@ let Auth0 = require('auth0-js').WebAuth;
 
 @Injectable()
 export class Auth {
+  lock: any;
 
-  // Configure Auth0
-  lock = new Auth0Lock(auth0Key, auth0Domain, { redirect: false });
   auth0 = new Auth0({clientID: auth0Key, domain: auth0Domain});
 
   // Store profile object in auth class
   userProfile: {};
 
-  constructor(private router: Router, private store: Store<AppStore>, private soundmooseUserActions: SoundmooseUserActions) {
+  constructor(private router: Router, private store: Store<AppStore>, private soundmooseUserActions: SoundmooseUserActions, @Inject(DOCUMENT) private document: Document) {
+    // Configure Auth0
+    this.lock = new Auth0Lock(auth0Key, auth0Domain,  {
+      auth: {
+        autoParseHash: false,
+        responseType: 'token',
+        redirect: false
+      }
+    });
+
     // Set userProfile attribute if already saved profile
     if (this.authenticated()) {
       this.setUserProfile(JSON.parse(localStorage.getItem('profile')));
@@ -46,7 +55,7 @@ export class Auth {
       console.log(authResult);
     });
 
-    //this.handleRedirectWithHash();
+//    this.handleRedirectWithHash();
   }
 
   private setUserProfile(profile) {
@@ -57,24 +66,6 @@ export class Auth {
       name: profile.name,
       avatarUrl: profile.picture
     }));
-  }
-
-  private handleRedirectWithHash() {
-    // From https://github.com/auth0-samples/auth0-angularjs2-systemjs-sample/issues/40#issuecomment-265170465
-    this.router.events.take(1).subscribe(event => {
-      if (/access_token/.test(event.url) || /error/.test(event.url)) {
-
-        let authResult = this.auth0.parseHash(window.location.hash, (err) => console.log(err.error, err.errorDescription));
-
-        if (authResult && authResult.idToken) {
-          this.lock.emit('authenticated', authResult);
-        }
-
-        if (authResult && authResult.error) {
-          this.lock.emit('authorization_error', authResult);
-        }
-      }
-    });
   }
 
   public login() {
