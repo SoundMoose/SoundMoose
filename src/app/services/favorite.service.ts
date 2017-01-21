@@ -54,13 +54,13 @@ export class FavoriteService {
   }
 
   updateFavoritesList(favoriteList: FavoritesState) {
-    this.http.put(`http://127.0.0.1:8000/api/favorites/${this.userId}/`, this.buildData(favoriteList))
+    this.http.put(`http://www.soundmoose.com:8000/api/favorites/${this.userId}/`, this.buildData(favoriteList))
       .first()
       .map(res => res.json());
   }
 
   createFavoritesList() {
-    this.http.post(`http://127.0.0.1:8000/api/favorites/`, {
+    this.http.post(`http://www.soundmoose.com:8000/api/favorites/`, {
       'user_id': this.userId,
       'favorites': []
     })
@@ -72,7 +72,7 @@ export class FavoriteService {
   }
 
   setFavoritesList() {
-    this.http.get(`http://127.0.0.1:8000/api/favorites/?user_id=${this.userId}`)
+    this.http.get(`http://www.soundmoose.com:8000/api/favorites/?user_id=${this.userId}`)
       .first()
       .map(res => res.json())
       .subscribe(res => {
