@@ -214,7 +214,6 @@ export class PlayerService {
       if (acc !== null) {
         return acc;
       } else if (cur.id === this.currentTrackId) {
-      // } else if (cur.trackId === this.currentTrackId.toString()) {
         return index;
       } else {
         return null;
