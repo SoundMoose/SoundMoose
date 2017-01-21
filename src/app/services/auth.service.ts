@@ -16,7 +16,7 @@ let Auth0 = require('auth0-js').WebAuth;
 export class Auth {
 
   // Configure Auth0
-  lock = new Auth0Lock(auth0Key, auth0Domain, {});
+  lock = new Auth0Lock(auth0Key, auth0Domain, { redirect: false });
   auth0 = new Auth0({clientID: auth0Key, domain: auth0Domain});
 
   // Store profile object in auth class
