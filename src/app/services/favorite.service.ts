@@ -18,7 +18,7 @@ export class FavoriteService {
   favorites: Subscription;
   userId: string;
 
-  constructor(private http: Http, private store: Store<AppStore>, private favoriteActions : FavoriteActions) {
+  constructor(private http: Http, private store: Store<AppStore>, private favoriteActions: FavoriteActions) {
     // skip(2) because we want to ignore first 2 events that come through this observable.
     // The first event is an emtpy object and the second is the initial object we recieve from the server.
     this.favorites = this.store.select(s => s.favorites)
@@ -37,7 +37,7 @@ export class FavoriteService {
       })
   }
 
-  buildData(favoriteList : FavoritesState) {
+  buildData(favoriteList: FavoritesState) {
     let favorites = favoriteList.map((ele) => ({
       track_id: ele.trackId,
       title: ele.title,
@@ -76,7 +76,7 @@ export class FavoriteService {
       .first()
       .map(res => res.json())
       .subscribe(res => {
-        if (res.length == 0) {
+        if (res.length === 0) {
           this.createFavoritesList();
         } else {
           let favorites = res[0].favorites;

@@ -40,9 +40,9 @@ export class ThreeDFrequencyBarsComponent {
     this.reRender = false;
   }
 
-  ngOnInit(){
+  ngOnInit() {
     // scene/environmental variables
-    var scene,
+    let scene,
         ambientLight,
         pointLight,
         lightCrazyTime,
@@ -50,7 +50,7 @@ export class ThreeDFrequencyBarsComponent {
         renderer;
 
     // object/animation variables
-    var geometry,
+    let geometry,
         material1,
         material2,
         material3,
@@ -72,19 +72,19 @@ export class ThreeDFrequencyBarsComponent {
         mesh9,
         mesh10;
 
-    var context = this;
+    let context = this;
 
     ////////////////////// Audio Set Up /////////////////////////////
     /////////////////////////////////////////////////////////////////
     // this.audioSrcNode.frequencyAnalyser.smoothingTimeConstant = 1;
-    var frequencyData = new Uint8Array(this.audioSrc.frequencyAnalyser.frequencyBinCount);
+    let frequencyData = new Uint8Array(this.audioSrc.frequencyAnalyser.frequencyBinCount);
 
 
     ////////////////////// Renderer and Scene ///////////////////////
     /////////////////////////////////////////////////////////////////
-    var renderer: any = new THREE.WebGLRenderer(
+    renderer = new THREE.WebGLRenderer(
       {
-        canvas: <HTMLCanvasElement> document.getElementById("threeDCanvas"),
+        canvas: <HTMLCanvasElement> document.getElementById('threeDCanvas'),
         antialias: true,
         alpha: true
       }
@@ -92,7 +92,7 @@ export class ThreeDFrequencyBarsComponent {
 
     renderer.setClearColor( 0x000000, 0 );
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight-5); // -5 to keep from showing scroll bar on right
+    renderer.setSize(window.innerWidth, window.innerHeight - 5); // -5 to keep from showing scroll bar on right
 
     // shadows for point light animation
     renderer.shadowMap.enabled = true;
@@ -111,10 +111,10 @@ export class ThreeDFrequencyBarsComponent {
 
     // update on resize: renderer size, aspect ratio and projection matrix
     window.addEventListener('resize', function () {
-        var WIDTH = window.innerWidth,
+        let WIDTH = window.innerWidth,
             HEIGHT = window.innerHeight;
 
-        renderer.setSize(WIDTH, HEIGHT-5); // -5 to keep from showing scroll bar on right
+        renderer.setSize(WIDTH, HEIGHT - 5); // -5 to keep from showing scroll bar on right
 
         camera.aspect = WIDTH / HEIGHT;
         camera.updateProjectionMatrix();
@@ -122,7 +122,7 @@ export class ThreeDFrequencyBarsComponent {
 
     //////////////// Orbit Controls - In Development ////////////////
     /////////////////////////////////////////////////////////////////
-    var OrbitControls = ThreeOrbitControls(THREE);
+    let OrbitControls = ThreeOrbitControls(THREE);
     this.controls = new OrbitControls(camera, renderer.domElement);
 
     /////////////////////////// LIGHTS //////////////////////////////
@@ -168,7 +168,7 @@ export class ThreeDFrequencyBarsComponent {
     mesh9 = new THREE.Mesh(geometry, material9);
     mesh10 = new THREE.Mesh(geometry, material10);
 
-    var zPosition = 0
+    let zPosition = 0
 
     mesh1.position.set(-450, 0, zPosition);
     mesh2.position.set(-350, 0, zPosition);
@@ -203,53 +203,53 @@ export class ThreeDFrequencyBarsComponent {
 
       ///////// Helper function to sum up portions of the data array
       function getDat(arr, startIdx, endIdx) {
-        var result = 0;
-        for (var i = startIdx; i <= endIdx; i++) {
+        let result = 0;
+        for (let i = startIdx; i <= endIdx; i++) {
           result += arr[i];
         }
         return result;
       }
 
-      var getDatBass = getDat(frequencyData, 0, 100);
-      var getDatMid1 = getDat(frequencyData, 100, 200);
-      var getDatMid2 = getDat(frequencyData, 200, 300);
-      var getDatMid3 = getDat(frequencyData, 300, 400);
-      var getDatMid4 = getDat(frequencyData, 400, 500);
-      var getDatMid5 = getDat(frequencyData, 500, 600);
-      var getDatMid6 = getDat(frequencyData, 600, 700);
-      var getDatMid7 = getDat(frequencyData, 700, 800);
-      var getDatMid8 = getDat(frequencyData, 800, 900);
-      var getDatTreble = getDat(frequencyData, 900, 1000);
+      let getDatBass = getDat(frequencyData, 0, 100);
+      let getDatMid1 = getDat(frequencyData, 100, 200);
+      let getDatMid2 = getDat(frequencyData, 200, 300);
+      let getDatMid3 = getDat(frequencyData, 300, 400);
+      let getDatMid4 = getDat(frequencyData, 400, 500);
+      let getDatMid5 = getDat(frequencyData, 500, 600);
+      let getDatMid6 = getDat(frequencyData, 600, 700);
+      let getDatMid7 = getDat(frequencyData, 700, 800);
+      let getDatMid8 = getDat(frequencyData, 800, 900);
+      let getDatTreble = getDat(frequencyData, 900, 1000);
 
-      var totalSum = getDatBass + getDatMid1 + getDatMid2 + getDatMid3 + getDatMid4 + getDatMid5 + getDatMid6 + getDatMid7 + getDatMid8 + getDatTreble;
+      let totalSum = getDatBass + getDatMid1 + getDatMid2 + getDatMid3 + getDatMid4 + getDatMid5 + getDatMid6 + getDatMid7 + getDatMid8 + getDatTreble;
 
       //////////////////////// Animate Color //////////////////////
-      var colorOffset = 50;
+      let colorOffset = 50;
 
-      var colorAdjBass = Math.round(getDatBass/150) + colorOffset;
-      var colorAdjMid1 = Math.round(getDatMid1/150) + colorOffset;
-      var colorAdjMid2 = Math.round(getDatMid2/150) + colorOffset;
-      var colorAdjMid3 = Math.round(getDatMid2/150) + colorOffset;
-      var colorAdjMid4 = Math.round(getDatMid4/150) + colorOffset;
-      var colorAdjMid5 = Math.round(getDatMid5/150) + colorOffset;
-      var colorAdjMid6 = Math.round(getDatMid6/150) + colorOffset;
-      var colorAdjMid7 = Math.round(getDatMid7/150) + colorOffset;
-      var colorAdjMid8 = Math.round(getDatMid8/150) + colorOffset;
-      var colorAdjTreble = Math.round(getDatTreble/150) + colorOffset;
+      let colorAdjBass = Math.round(getDatBass / 150) + colorOffset;
+      let colorAdjMid1 = Math.round(getDatMid1 / 150) + colorOffset;
+      let colorAdjMid2 = Math.round(getDatMid2 / 150) + colorOffset;
+      let colorAdjMid3 = Math.round(getDatMid2 / 150) + colorOffset;
+      let colorAdjMid4 = Math.round(getDatMid4 / 150) + colorOffset;
+      let colorAdjMid5 = Math.round(getDatMid5 / 150) + colorOffset;
+      let colorAdjMid6 = Math.round(getDatMid6 / 150) + colorOffset;
+      let colorAdjMid7 = Math.round(getDatMid7 / 150) + colorOffset;
+      let colorAdjMid8 = Math.round(getDatMid8 / 150) + colorOffset;
+      let colorAdjTreble = Math.round(getDatTreble / 150) + colorOffset;
 
       // mesh.material.color.setHex( adjment*0xff3300 );
       // mesh.material.color.set( color );
       // mesh.material.color.set( colorAdjment, colorAdjment, colorAdjment );
-      var colorString1 = 'rgb('+colorAdjBass+','+colorAdjBass+','+colorAdjBass+')';
-      var colorString2 = 'rgb('+colorAdjMid1+','+colorAdjMid1+','+colorAdjMid1+')';
-      var colorString3 = 'rgb('+colorAdjMid2+','+colorAdjMid2+','+colorAdjMid2+')';
-      var colorString4 = 'rgb('+colorAdjMid3+','+colorAdjMid3+','+colorAdjMid3+')';
-      var colorString5 = 'rgb('+colorAdjMid4+','+colorAdjMid4+','+colorAdjMid4+')';
-      var colorString6 = 'rgb('+colorAdjMid5+','+colorAdjMid5+','+colorAdjMid5+')';
-      var colorString7 = 'rgb('+colorAdjMid6+','+colorAdjMid6+','+colorAdjMid6+')';
-      var colorString8 = 'rgb('+colorAdjMid7+','+colorAdjMid7+','+colorAdjMid7+')';
-      var colorString9 = 'rgb('+colorAdjMid8+','+colorAdjMid8+','+colorAdjMid8+')';
-      var colorString10 = 'rgb('+colorAdjTreble+','+colorAdjTreble+','+colorAdjTreble+')';
+      let colorString1 = 'rgb(' + colorAdjBass + ',' + colorAdjBass + ',' + colorAdjBass + ')';
+      let colorString2 = 'rgb(' + colorAdjMid1 + ',' + colorAdjMid1 + ',' + colorAdjMid1 + ')';
+      let colorString3 = 'rgb(' + colorAdjMid2 + ',' + colorAdjMid2 + ',' + colorAdjMid2 + ')';
+      let colorString4 = 'rgb(' + colorAdjMid3 + ',' + colorAdjMid3 + ',' + colorAdjMid3 + ')';
+      let colorString5 = 'rgb(' + colorAdjMid4 + ',' + colorAdjMid4 + ',' + colorAdjMid4 + ')';
+      let colorString6 = 'rgb(' + colorAdjMid5 + ',' + colorAdjMid5 + ',' + colorAdjMid5 + ')';
+      let colorString7 = 'rgb(' + colorAdjMid6 + ',' + colorAdjMid6 + ',' + colorAdjMid6 + ')';
+      let colorString8 = 'rgb(' + colorAdjMid7 + ',' + colorAdjMid7 + ',' + colorAdjMid7 + ')';
+      let colorString9 = 'rgb(' + colorAdjMid8 + ',' + colorAdjMid8 + ',' + colorAdjMid8 + ')';
+      let colorString10 = 'rgb(' + colorAdjTreble + ',' + colorAdjTreble + ',' + colorAdjTreble + ')';
 
       mesh1.material.color.set(colorString1);
       mesh2.material.color.set(colorString2);
@@ -265,29 +265,29 @@ export class ThreeDFrequencyBarsComponent {
       /////////////////////// Animate Position //////////////////////
 
       ///////// Geometry methods: https://threejs.org/docs/#Reference/Core/Geometry
-      mesh1.scale.y = getDatBass/3000 + 1;
-      mesh2.scale.y = getDatMid1/3000 + 1;
-      mesh3.scale.y = getDatMid2/3000 + 1;
-      mesh4.scale.y = getDatMid3/3000 + 1;
-      mesh5.scale.y = getDatMid4/3000 + 1;
-      mesh6.scale.y = getDatMid5/3000 + 1;
-      mesh7.scale.y = getDatMid6/3000 + 1;
-      mesh8.scale.y = getDatMid7/3000 + 1;
-      mesh9.scale.y = getDatMid8/3000 + 1;
-      mesh10.scale.y = getDatTreble/3000 + 1;
+      mesh1.scale.y = getDatBass / 3000 + 1;
+      mesh2.scale.y = getDatMid1 / 3000 + 1;
+      mesh3.scale.y = getDatMid2 / 3000 + 1;
+      mesh4.scale.y = getDatMid3 / 3000 + 1;
+      mesh5.scale.y = getDatMid4 / 3000 + 1;
+      mesh6.scale.y = getDatMid5 / 3000 + 1;
+      mesh7.scale.y = getDatMid6 / 3000 + 1;
+      mesh8.scale.y = getDatMid7 / 3000 + 1;
+      mesh9.scale.y = getDatMid8 / 3000 + 1;
+      mesh10.scale.y = getDatTreble / 3000 + 1;
 
-      var zPosition = 0;
+      let zPosition = 0;
       ////////////// position stated as (x, y, z)
-      mesh1.position.set(-450, getDatBass/120 - 100, zPosition);
-      mesh2.position.set(-350, getDatMid1/120 - 100, zPosition);
-      mesh3.position.set(-250, getDatMid2/120 - 100, zPosition);
-      mesh4.position.set(-150, getDatMid3/120 - 100, zPosition);
-      mesh5.position.set(-50, getDatMid4/120 - 100, zPosition);
-      mesh6.position.set(50, getDatMid5/120 - 100, zPosition);
-      mesh7.position.set(150, getDatMid6/120 - 100, zPosition);
-      mesh8.position.set(250, getDatMid7/120 - 100, zPosition);
-      mesh9.position.set(350, getDatMid8/120 - 100, zPosition);
-      mesh10.position.set(450, getDatTreble/120 - 100, zPosition);
+      mesh1.position.set(-450, getDatBass / 120 - 100, zPosition);
+      mesh2.position.set(-350, getDatMid1 / 120 - 100, zPosition);
+      mesh3.position.set(-250, getDatMid2 / 120 - 100, zPosition);
+      mesh4.position.set(-150, getDatMid3 / 120 - 100, zPosition);
+      mesh5.position.set(-50, getDatMid4 / 120 - 100, zPosition);
+      mesh6.position.set(50, getDatMid5 / 120 - 100, zPosition);
+      mesh7.position.set(150, getDatMid6 / 120 - 100, zPosition);
+      mesh8.position.set(250, getDatMid7 / 120 - 100, zPosition);
+      mesh9.position.set(350, getDatMid8 / 120 - 100, zPosition);
+      mesh10.position.set(450, getDatTreble / 120 - 100, zPosition);
 
       mesh1.rotation.y += 0.01;
       mesh2.rotation.y += 0.01;

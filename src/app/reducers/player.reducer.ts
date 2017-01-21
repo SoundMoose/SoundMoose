@@ -36,7 +36,7 @@ export default function (state = initialState, action: Action): PlayerState {
       // check if songQueue === tracklist that was clicked
       if (state.songQueue !== action.payload[1]) {
 
-        var getCurrentTrackIndex = function() {
+        let getCurrentTrackIndex = function() {
           return action.payload[1].reduce((acc, cur, index) => {
             if (acc !== null) {
               return acc;
@@ -47,7 +47,7 @@ export default function (state = initialState, action: Action): PlayerState {
             }
           }, null);
         };
-        var idx = getCurrentTrackIndex();
+        let idx = getCurrentTrackIndex();
 
         // if not equal, assign songQueue to selected track list
         return Object.assign({}, state, {
@@ -65,7 +65,7 @@ export default function (state = initialState, action: Action): PlayerState {
         });
       } else {  // Change Track and keep playing.
 
-        var getCurrentTrackIndex = function() {
+        let getCurrentTrackIndex = function() {
           return action.payload[1].reduce((acc, cur, index) => {
             if (acc !== null) {
               return acc;
@@ -76,7 +76,7 @@ export default function (state = initialState, action: Action): PlayerState {
             }
           }, null);
         };
-        var idx = getCurrentTrackIndex();
+        let idx = getCurrentTrackIndex();
 
         return Object.assign({}, state, {
           isPlaying: true,

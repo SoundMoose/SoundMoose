@@ -43,7 +43,7 @@ import { SearchState } from './../../../reducers/search.reducer';
 })
 export class SearchResultsComponent {
 
-  results$ : Observable<Track[]>;
+  results$: Observable<Track[]>;
   searchResults: Track[];
   query: string;
 

@@ -52,7 +52,7 @@ export class SpotifyService {
   searchTerms$ = new Subject<string>();
   searchResults$: Observable<Track[]>;
 
-  constructor(private http:Http, private store: Store<AppStore>, private searchActions: SearchActions) {
+  constructor(private http: Http, private store: Store<AppStore>, private searchActions: SearchActions) {
     this.config = {
       clientId: spotifyClientId,
       redirectUri: 'http://localhost:3000/#/home',
@@ -156,7 +156,7 @@ export class SpotifyService {
   }
 
   private getTracks(tracks: string | Array<string>) {
-    var trackList = this.mountItemList(tracks);
+    let trackList = this.mountItemList(tracks);
     return this.api({
       method: 'get',
       url: `/tracks/`,
@@ -165,7 +165,7 @@ export class SpotifyService {
   }
 
   private toQueryString(obj: Object): string {
-    var parts = [];
+    let parts = [];
     for (let key in obj) {
       if (obj.hasOwnProperty(key)) {
         parts.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]));
@@ -175,8 +175,8 @@ export class SpotifyService {
   };
 
   private openDialog(uri, name, options, cb) {
-    var win = window.open(uri, name, options);
-    var interval = window.setInterval(() => {
+    let win = window.open(uri, name, options);
+    let interval = window.setInterval(() => {
       try {
         if (!win || win.closed) {
           window.clearInterval(interval);
@@ -188,7 +188,7 @@ export class SpotifyService {
   }
 
   private auth(isJson?: boolean): Object {
-    var auth = {
+    let auth = {
       'Authorization': 'Bearer ' + this.config.authToken
     };
     if (isJson) {
@@ -206,7 +206,7 @@ export class SpotifyService {
   }
 
   private mountItemList(items: string | Array<string>): Array<string> {
-    var itemList = Array.isArray(items) ? items : items.split(',');
+    let itemList = Array.isArray(items) ? items : items.split(',');
     itemList.forEach((value, index) => {
       itemList[index] = this.getIdFromUri(value);
     });

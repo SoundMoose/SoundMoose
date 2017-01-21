@@ -22,7 +22,7 @@ import { TrackActions } from '../../../actions/track.actions';
 import { FavoriteActions } from '../../../actions/favorite.actions';
 
 @Component({
-  //changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'track-info',
   styleUrls: [ './track-info.component.css' ],
   templateUrl: './track-info.component.html',
@@ -49,8 +49,8 @@ export class TrackInfoComponent {
   currentTrack$: Observable<Track>;
   currentTrack: Track;
   playerSubscription: Subscription;
-  playingTrackHovered : boolean = false;
-  songQueueHovered : boolean = false;
+  playingTrackHovered: boolean = false;
+  songQueueHovered: boolean = false;
   songQueue: Track[];
   currentId: number;
   isFavorited: boolean = null;
@@ -67,7 +67,7 @@ export class TrackInfoComponent {
     private auth: Auth
   ) {
     this.player$ = this.store$.select(s => s.player);
-    this.currentTrack$ = this.player$.map((item : PlayerState) => item.currentTrack);
+    this.currentTrack$ = this.player$.map((item: PlayerState) => item.currentTrack);
 
     this.favorites$ = this.store$.select(s => s.favorites);
 
@@ -82,7 +82,7 @@ export class TrackInfoComponent {
       .subscribe(favorites => {
         let favorited = false;
         favorites.forEach((favorite) => {
-          if (favorite.trackId == this.currentTrack.trackId && favorite.platform == this.currentTrack.platform) {
+          if (favorite.trackId === this.currentTrack.trackId && favorite.platform === this.currentTrack.platform) {
             favorited = true;
           }
         });
@@ -90,11 +90,9 @@ export class TrackInfoComponent {
       });
   }
 
-  private trim(string) {
-    var length = 40;
-    return string.length > length ?
-                    string.substring(0, length - 3) + "..." :
-                    string;
+  private trim( str ) {
+    let length = 40;
+    return str.length > length ? str.substring(0, length - 3) + '...' : str;
   }
 
   millisToMinutesSeconds(millis) {
@@ -106,7 +104,7 @@ export class TrackInfoComponent {
       minutes++;
     }
 
-    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
   }
 
   clickHandler(track, tracklist) {

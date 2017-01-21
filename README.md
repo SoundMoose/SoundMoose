@@ -79,3 +79,8 @@ python manage.py runserver 0.0.0.0:8000
 To manage Django server, visit http://138.197.88.233:8000/admin/
 
 To view API information, visit http://138.197.88.233:8000/api/
+
+Useful commands:
+
+netstat -lpn |grep :9292     <- django server port
+kill -9 PID                <- kill all at PID

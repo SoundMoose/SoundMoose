@@ -38,13 +38,13 @@ export class PlaylistTrackDetailsComponent {
       minutes++;
     }
 
-    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
   }
 
   removeMe() {
-    if (this.type == 'playlist') {
+    if (this.type === 'playlist') {
       this.store.dispatch(this.playlistActions.removeTrack(this.track.trackId, this.track.platform));
-    } else if (this.type == 'favorite') {
+    } else if (this.type === 'favorite') {
       this.store.dispatch(this.favoriteActions.removeFavorite(this.track.trackId, this.track.platform));
     }
 

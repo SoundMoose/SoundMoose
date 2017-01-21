@@ -17,7 +17,7 @@ import { AudioControls } from '../../models/audio-controls.model';
 import { AudioControlsActions } from '../../actions/audio-controls.actions';
 
 @Component({
-  //changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'audio-controls',
   styleUrls: [ './audio-controls.component.css' ],
   templateUrl: './audio-controls.component.html',

@@ -10,16 +10,16 @@ import { Player } from '../../../models/player.model';
 import { PlayerActions } from '../../../actions/player.actions';
 
 @Component({
-  //changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'volume-control',
   styleUrls: [ '../player.component.css' ],
   templateUrl: './volume-control.component.html'
 })
 export class VolumeControlComponent {
 
-  wrapperHovered : boolean = false;
+  wrapperHovered: boolean = false;
 
-  player$ : Observable<Player>;
+  player$: Observable<Player>;
   volume: number;
   isMuted: boolean;
   volumeBeforeMute: number;

@@ -38,10 +38,10 @@ export class TrackDetailComponent implements OnInit {
 
     let trackId = this.route.snapshot.params['trackId'];
     this.platform = this.route.snapshot.params['platform'];
-    if (this.platform == 'soundcloud') {
+    if (this.platform === 'soundcloud') {
       this.soundCloudService.loadTrackDetails(trackId);
       this.soundCloudService.loadComments(trackId);
-    } else if (this.platform == 'spotify') {
+    } else if (this.platform === 'spotify') {
       this.spotifyService.loadTrackDetails(trackId);
     }
   }

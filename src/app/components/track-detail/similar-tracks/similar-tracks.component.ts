@@ -15,7 +15,7 @@ import { LastfmService } from './../../../services/lastfm.service';
 })
 export class SimilarTracksComponent {
 
-  showAll : boolean = false;
+  showAll: boolean = false;
   @Input() currentTrack: string;
   @Input() currentArtist: string;
   similarTracks$: Observable<any>;

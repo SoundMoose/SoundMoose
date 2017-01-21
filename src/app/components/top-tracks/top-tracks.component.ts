@@ -21,7 +21,7 @@ import { AudioStream } from '../../audio-element';
 import { Track } from '../../models/track.model';
 
 
-declare var $: any;
+declare let $: any;
 
 @Component({
   selector: 'top-tracks',
@@ -50,36 +50,36 @@ export class TopTracksComponent implements OnInit {
   tracksList: Track[];
   genres = [
     ['all-music', 'All music'],
-    ['alternativerock','Alternative Rock'],
-    ['ambient','Ambient'],
-    ['classical','Classical'],
-    ['country','Country'],
-    ['danceedm','Dance & EDM'],
-    ['dancehall','Dancehall'],
-    ['deephouse','Deep House'],
-    ['disco','Disco'],
-    ['drumbass','Drum & Bass'],
-    ['dubstep','Dubstep'],
-    ['electronic','Electronic'],
-    ['folksingersongwriter','Folk & Singer-Songwriter'],
-    ['hiphoprap','Hip-hop & Rap'],
-    ['house','House'],
-    ['indie','Indie'],
-    ['jazzblues','Jazz & Blues'],
-    ['latin','Latin'],
-    ['metal','Metal'],
-    ['piano','Piano'],
-    ['pop','Pop'],
-    ['rbsoul','R&B & Soul'],
-    ['reggae','Reggae'],
-    ['reggaeton','Reggaeton'],
-    ['rock','Rock'],
-    ['soundtrack','Soundtrack'],
-    ['techno','Techno'],
-    ['trance','Trance'],
-    ['trap','Trap'],
-    ['triphop','Triphop'],
-    ['world','World']
+    ['alternativerock', 'Alternative Rock'],
+    ['ambient', 'Ambient'],
+    ['classical', 'Classical'],
+    ['country', 'Country'],
+    ['danceedm', 'Dance & EDM'],
+    ['dancehall', 'Dancehall'],
+    ['deephouse', 'Deep House'],
+    ['disco', 'Disco'],
+    ['drumbass', 'Drum & Bass'],
+    ['dubstep', 'Dubstep'],
+    ['electronic', 'Electronic'],
+    ['folksingersongwriter', 'Folk & Singer-Songwriter'],
+    ['hiphoprap', 'Hip-hop & Rap'],
+    ['house', 'House'],
+    ['indie', 'Indie'],
+    ['jazzblues', 'Jazz & Blues'],
+    ['latin', 'Latin'],
+    ['metal', 'Metal'],
+    ['piano', 'Piano'],
+    ['pop', 'Pop'],
+    ['rbsoul', 'R&B & Soul'],
+    ['reggae', 'Reggae'],
+    ['reggaeton', 'Reggaeton'],
+    ['rock', 'Rock'],
+    ['soundtrack', 'Soundtrack'],
+    ['techno', 'Techno'],
+    ['trance', 'Trance'],
+    ['trap', 'Trap'],
+    ['triphop', 'Triphop'],
+    ['world', 'World']
   ];
   currentGenre: string;
 
@@ -105,7 +105,7 @@ export class TopTracksComponent implements OnInit {
   }
 
   navigateToGenre(genre) {
-    if (!(this.route.snapshot.url[0].path == 'home' && genre == 'all-music')) {
+    if (!(this.route.snapshot.url[0].path === 'home' && genre === 'all-music')) {
       this.router.navigate(['/top_tracks', genre]);
       this.setCurrentGenre(genre);
     }

@@ -41,7 +41,7 @@ export class PlayerService {
   constructor(protected audioStream: AudioStream, private store$: Store<AppStore>, private playerActions: PlayerActions) {
     // this grabs the html audio element from the audio stream
     this.audio = audioStream.audioElement;
-    this.audio.crossOrigin = "anonymous"; // CORS :)
+    this.audio.crossOrigin = 'anonymous'; // CORS :)
 
     this.store$.select('tracks')
       .subscribe((item: Track[]) => this.tracksList = item);
@@ -72,7 +72,7 @@ export class PlayerService {
     this.playingSubscription = Observable.fromEvent(this.audio, 'playing')
       .subscribe(() => this.store$.dispatch(playerActions.startAudioPlaying({
         // Not currently used:
-        millisecondProgressWhenStartedPlaying: this.audio.currentTime*1000,
+        millisecondProgressWhenStartedPlaying: this.audio.currentTime * 1000,
         timestampWhenStartedPlaying: Date.now()
       })));
 
@@ -106,7 +106,7 @@ export class PlayerService {
 
     Observable.fromEvent(this.audio, 'progress')
       .subscribe(() => {
-        var ranges = [];
+        let ranges = [];
           for (let i = 0; i < this.audio.buffered.length; i ++) {
             ranges.push([
               this.audio.buffered.start(i) / this.audio.duration,
