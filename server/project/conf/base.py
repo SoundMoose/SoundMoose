@@ -16,7 +16,7 @@ sys.path.append(
 SECRET_KEY = 'a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
