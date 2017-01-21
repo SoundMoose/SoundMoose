@@ -50,7 +50,6 @@ export default function (state = initialState, action: Action): PlaylistState {
       let newState = Object.assign({}, state, {
         tracks: newTracks
       });
-      console.log('state has been changed for playlists, new tracks state = ', state.tracks);
       return newState;
     }
 
