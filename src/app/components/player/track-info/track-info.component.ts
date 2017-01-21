@@ -82,7 +82,7 @@ export class TrackInfoComponent {
       .subscribe(favorites => {
         let favorited = false;
         favorites.forEach((favorite) => {
-          if (favorite.id == this.currentTrack.id) {
+          if (favorite.trackId == this.currentTrack.trackId && favorite.platform == this.currentTrack.platform) {
             favorited = true;
           }
         });
@@ -126,7 +126,7 @@ export class TrackInfoComponent {
       this.showFavoritedMessage = true;
       setTimeout(() => { this.showFavoritedMessage = false; }, 1000);
     } else {
-      this.store$.dispatch(this.favoriteActions.removeFavorite(this.currentTrack));
+      this.store$.dispatch(this.favoriteActions.removeFavorite(this.currentTrack.trackId, this.currentTrack.platform));
       this.showUnfavoritedMessage = true;
       setTimeout(() => { this.showUnfavoritedMessage = false; }, 1000);
     }

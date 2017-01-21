@@ -47,7 +47,7 @@ export class TrackProgressContainerComponent implements OnInit, OnDestroy {
     this.player$ = this.store$.select(s => s.player);
     if (this.progressContainerType == 'detail') {
       this.playerSubscription = this.player$.subscribe((p) => {
-        if (p.currentTrack && this.route.snapshot.params['trackId'] == p.currentTrack.id) {
+        if (p.currentTrack && this.route.snapshot.params['trackId'] == p.currentTrack.trackId) {
           this.setPlayerInfo();
         }
       });

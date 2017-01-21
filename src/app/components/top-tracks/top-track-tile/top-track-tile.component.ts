@@ -5,7 +5,9 @@ import {
   state,
   style,
   transition,
-  animate
+  animate,
+  OnInit,
+  OnDestroy
 } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
 import { Store } from '@ngrx/store';
@@ -61,11 +63,10 @@ import { TracksState } from './../../../reducers/tracks.reducer';
     ])
   ]
 })
-export class TopTrackTileComponent{
+export class TopTrackTileComponent implements OnInit, OnDestroy {
 
   @Input()
   topTrack: Track = {
-    id: null,
     title: '',
     artist: '',
     imgUrl: '',
@@ -96,8 +97,18 @@ export class TopTrackTileComponent{
   showUnfavoritedMessage: boolean = false;
   showLoginMessage: boolean = false;
 
-  constructor(private trackActions: TrackActions, private store$: Store<AppStore>, private router: Router, private favoriteActions: FavoriteActions, private playlistActions: PlaylistActions, private auth: Auth) {
-    // Grab the player stream from the store
+  constructor(
+    private trackActions: TrackActions,
+    private store$: Store<AppStore>,
+    private router: Router,
+    private favoriteActions: FavoriteActions,
+    private playlistActions: PlaylistActions,
+    private auth: Auth
+  ) {
+  }
+
+  ngOnInit() {
+       // Grab the player stream from the store
     this.player$ = this.store$.select(s => s.player);
 
     // Grab the spinner stream
@@ -105,10 +116,10 @@ export class TopTrackTileComponent{
     this.favorites$ = this.store$.select(s => s.favorites);
     // Map the player stream to see if the player is playing
     this.currentlyPlaying$ = this.player$
-      .map((playerStatus: Player) => playerStatus.isPlaying && playerStatus.currentTrack.id === this.topTrack.id);
+      .map((playerStatus: Player) => playerStatus.isPlaying && playerStatus.currentTrack.trackId === this.topTrack.trackId);
     // Map the player stream to see if the player is playing the current song
     this.selected$ = this.player$
-      .map((playerStatus: Player)=> playerStatus.currentTrack.id === this.topTrack.id);
+      .map((playerStatus: Player)=> playerStatus.currentTrack.trackId === this.topTrack.trackId);
     // Map the spinner stream to see if the song is loading
     this.isLoading$ = this.spinner$
       .map((spinnerStatus: SpinnerState) => spinnerStatus.isLoadSpinning);
@@ -120,7 +131,7 @@ export class TopTrackTileComponent{
       .subscribe(favorites => {
         let favorited = false;
         favorites.forEach((favorite) => {
-          if (favorite.id == this.topTrack.id) {
+          if (favorite.trackId == this.topTrack.trackId && favorite.platform == this.topTrack.platform) {
             favorited = true;
           }
         });
@@ -143,7 +154,7 @@ export class TopTrackTileComponent{
   goToDetail($event) {
     // Only go to detail page if we clicked outside of the play icon
     if ($event.target.tagName != 'I') {
-      this.router.navigate(['/track/' + this.topTrack.platform, this.topTrack.id]);
+      this.router.navigate(['/track/' + this.topTrack.platform, this.topTrack.trackId]);
     }
   }
 
@@ -164,7 +175,7 @@ export class TopTrackTileComponent{
       this.showFavoritedMessage = true;
       setTimeout(() => { this.showFavoritedMessage = false; }, 1000);
     } else {
-      this.store$.dispatch(this.favoriteActions.removeFavorite(this.topTrack));
+      this.store$.dispatch(this.favoriteActions.removeFavorite(this.topTrack.trackId, this.topTrack.platform));
       this.showUnfavoritedMessage = true;
       setTimeout(() => { this.showUnfavoritedMessage = false; }, 1000);
     }

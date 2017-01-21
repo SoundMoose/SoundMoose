@@ -1,5 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
+import { Injectable } from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -22,7 +21,7 @@ export class Auth {
   // Store profile object in auth class
   userProfile: {};
 
-  constructor(private router: Router, private store: Store<AppStore>, private soundmooseUserActions: SoundmooseUserActions, @Inject(DOCUMENT) private document: Document) {
+  constructor(private router: Router, private store: Store<AppStore>, private soundmooseUserActions: SoundmooseUserActions) {
     // Configure Auth0
     this.lock = new Auth0Lock(auth0Key, auth0Domain,  {
       auth: {

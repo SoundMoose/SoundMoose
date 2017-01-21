@@ -65,7 +65,6 @@ export class SoundCloudService {
       .map(item => {
         return {
             track: {
-              id: item.id,
               title: item.title,
               artist: (item.publisher_metadata && item.publisher_metadata.artist) ? item.publisher_metadata.artist : item.user.username,
               imgUrl: item.artwork_url ? item.artwork_url.replace('large.jpg', 't200x200.jpg') : 'assets/img/SoundMooseSilver.png',

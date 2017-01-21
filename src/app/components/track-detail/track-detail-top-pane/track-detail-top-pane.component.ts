@@ -96,7 +96,7 @@ export class TrackDetailTopPaneComponent implements OnInit {
       }
     });
     this.storeSubscription = this.store$.select(s => s.player)
-      .map((playerStatus: PlayerState) => playerStatus.isPlaying && playerStatus.currentTrack.id === this.track.id)
+      .map((playerStatus: PlayerState) => playerStatus.isPlaying && playerStatus.currentTrack.trackId === this.track.trackId)
       .subscribe(item => this.currentlyPlaying = item);
 
     this.secondsSubscription = this.playerService.currentProgressInSeconds$.subscribe(item => {

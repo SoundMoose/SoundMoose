@@ -19,24 +19,25 @@ export class FavoriteService {
   userId: string;
 
   constructor(private http: Http, private store: Store<AppStore>, private favoriteActions : FavoriteActions) {
-    // this.setFavoritesList();
     // skip(2) because we want to ignore first 2 events that come through this observable.
     // The first event is an emtpy object and the second is the initial object we recieve from the server.
-    // this.favorites = this.store.select(s => s.favorites)
-    //   .skip(1)
-    //   .subscribe((favorites) => {
-    //     console.log('--- favorites store updated');
-    //     this.updateFavoritesList(favorites);
-    //   });
+    this.favorites = this.store.select(s => s.favorites)
+      .skip(1)
+      .subscribe((favorites) => {
+        this.updateFavoritesList(favorites);
+      });
 
     this.store.select(s => s.soundmooseUser)
+      .filter(soundmooseUser => !!soundmooseUser.userId)
       .first()
       .subscribe((soundmooseUser) => {
         this.userId = soundmooseUser.userId;
+        // This needs the userId to be set.
+        this.setFavoritesList();
       })
   }
 
-  buildData(favoriteList) {
+  buildData(favoriteList : FavoritesState) {
     let favorites = favoriteList.map((ele) => ({
       track_id: ele.trackId,
       title: ele.title,
@@ -44,7 +45,7 @@ export class FavoriteService {
       img_url: ele.imgUrl,
       stream_url: ele.streamUrl,
       duration: ele.duration,
-      platform: ele.platform
+      platform: ele.platform,
     }));
     return {
       user_id: this.userId,
@@ -53,15 +54,12 @@ export class FavoriteService {
   }
 
   updateFavoritesList(favoriteList: FavoritesState) {
-    console.log('UPDATE DATABASE', favoriteList);
     this.http.put(`http://www.soundmoose.com:8000/api/favorites/${this.userId}/`, this.buildData(favoriteList))
       .first()
-      .map(res => res.json())
-      .subscribe(res => console.log('-updated list', res));
+      .map(res => res.json());
   }
 
   createFavoritesList() {
-    console.log('CEATE NEW LIST');
     this.http.post(`http://www.soundmoose.com:8000/api/favorites/`, {
       'user_id': this.userId,
       'favorites': []
@@ -69,22 +67,29 @@ export class FavoriteService {
       .first()
       .map(res => res.json())
       .subscribe(res => {
-        console.log('-created list', res);
         this.store.dispatch(this.favoriteActions.loadFavoritesList(res.favorites))
       });
   }
 
   setFavoritesList() {
-    console.log('GET LIST');
     this.http.get(`http://www.soundmoose.com:8000/api/favorites/?user_id=${this.userId}`)
       .first()
       .map(res => res.json())
       .subscribe(res => {
-        console.log('-fetched list', res);
         if (res.length == 0) {
           this.createFavoritesList();
         } else {
-          this.store.dispatch(this.favoriteActions.loadFavoritesList(res));
+          let favorites = res[0].favorites;
+          let favoritesList = favorites.map(ele => ({
+            trackId: ele.track_id,
+            title: ele.title,
+            artist: ele.artist,
+            imgUrl: ele.img_url,
+            streamUrl: ele.stream_url,
+            duration: ele.duration,
+            platform: ele.platform
+          }));
+          this.store.dispatch(this.favoriteActions.loadFavoritesList(favoritesList));
         }
       });
   }

@@ -15,10 +15,10 @@ export class FavoriteActions {
   }
 
   static REMOVE_FAVORITE = '[Favorite] Remove Favorite';
-  removeFavorite(track: Track): Action {
+  removeFavorite(trackId: string, trackPlatform: string) : Action {
     return {
       type: FavoriteActions.REMOVE_FAVORITE,
-      payload: track
+      payload: { trackId, trackPlatform }
     };
   }
 

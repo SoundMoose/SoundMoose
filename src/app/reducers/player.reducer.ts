@@ -9,7 +9,6 @@ export type PlayerState = Player;
 const initialState: PlayerState = {
   isPlaying: false,
   currentTrack: {
-    id: 0,
     title: '',
     artist: '',
     imgUrl: '',
@@ -41,7 +40,7 @@ export default function (state = initialState, action: Action): PlayerState {
           return action.payload[1].reduce((acc, cur, index) => {
             if (acc !== null) {
               return acc;
-            } else if (cur.id === action.payload[0].id) {
+            } else if (cur.trackId === action.payload[0].trackId) {
               return index;
             } else {
               return null;
@@ -60,7 +59,7 @@ export default function (state = initialState, action: Action): PlayerState {
       }
 
       // Pause Track because we clicked the track that was already playing.
-      if (state.currentTrack.id === action.payload[0].id) {
+      if (state.currentTrack.trackId === action.payload[0].trackId) {
          return Object.assign({}, state, {
           isPlaying: !state.isPlaying,
         });
@@ -70,7 +69,7 @@ export default function (state = initialState, action: Action): PlayerState {
           return action.payload[1].reduce((acc, cur, index) => {
             if (acc !== null) {
               return acc;
-            } else if (cur.id === action.payload[0].id) {
+            } else if (cur.trackId === action.payload[0].trackId) {
               return index;
             } else {
               return null;
