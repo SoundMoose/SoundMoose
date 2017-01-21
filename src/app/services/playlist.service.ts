@@ -115,6 +115,7 @@ export class PlaylistService {
     return this.http.get(`http://www.soundmoose.com:8000/api/playlists/${playlist_id}/`)
       .map(res => res.json())
       .map(res => {
+        console.log('response = ', res);
         res.tracks.sort((a, b) => a.order - b.order);
         return {
           id: res.id,
