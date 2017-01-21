@@ -18,7 +18,6 @@ describe('Player Reducer', () => {
       isPlaying: false,
       // currentTime: 0,
       currentTrack: {
-        id: 0,
         title: '',
         artist: '',
         imgUrl: '',
@@ -42,7 +41,6 @@ describe('Player Reducer', () => {
 
     tracks = [
       {
-        id: 1,
         title: 'Tacos',
         artist: 'Mexican Food',
         imgUrl: 'http://www.google.com',
@@ -51,7 +49,6 @@ describe('Player Reducer', () => {
         platform: 'abc',
         trackId: '0'
       }, {
-        id: 2,
         title: 'Burritos',
         artist: 'Mexican Food',
         imgUrl: 'http://www.google.com',
