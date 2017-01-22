@@ -52,7 +52,15 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## Screenshots
 
+
+![](Screenshots/screenshot1.png)        |  ![](Screenshots/screenshot2.png)
+:--------------------------------------:|:-------------------------:
+![](Screenshots/recording-spheres.gif)  |  ![](Screenshots/recording-frequencyBars.gif)
+
 ![Main Page](Screenshots/screenshot1.png)
+
 ![Track Details](Screenshots/screenshot2.png)
+
 ![3D Experiments](Screenshots/recording-spheres.gif)
+
 ![3D Experiments](Screenshots/recording-frequencyBars.gif)
