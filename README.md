@@ -19,6 +19,12 @@ Many thanks to Last.fm, YouTube, Spotify, and SoundCloud for generously providin
   - Doug Vaughn
   - Calvin Holloway
 
+  ![Main Page](Screenshots/screenshot1.png)
+  ![Track Details](Screenshots/screenshot2.png)
+  ![3D Experiments](Screenshots/recording-spheres.png)
+  ![3D Experiments](Screenshots/recording-frequencyBars.png)
+
+
 ## Usage
 
 Fork/Clone this repo, create a branch and hack away! Feel free to create a pull request with any suggested changes or bug-fixes.
