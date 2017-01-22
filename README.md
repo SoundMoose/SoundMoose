@@ -21,8 +21,8 @@ Many thanks to Last.fm, YouTube, Spotify, and SoundCloud for generously providin
 
   ![Main Page](Screenshots/screenshot1.png)
   ![Track Details](Screenshots/screenshot2.png)
-  ![3D Experiments](Screenshots/recording-spheres.png)
-  ![3D Experiments](Screenshots/recording-frequencyBars.png)
+  ![3D Experiments](Screenshots/recording-spheres.gif)
+  ![3D Experiments](Screenshots/recording-frequencyBars.gif)
 
 
 ## Usage
