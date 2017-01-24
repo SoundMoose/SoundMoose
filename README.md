@@ -1,6 +1,6 @@
 # SoundMoose
 
-[![Build Status](https://travis-ci.org/SoundMoose/SoundMoose.svg?branch=master)
+[![Build Status](https://travis-ci.org/SoundMoose/SoundMoose.svg?branch=master)]
 
 ## About
 
